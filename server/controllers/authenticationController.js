@@ -5,7 +5,6 @@ const bcrypt = require("bcryptjs");
 
 // ------------------- Sing in -----------------------
 exports.SignIn = async (req,res)=>{
-	console.log("hit");
 
 	var {name,email,password,cpassword} = req.body;
 
