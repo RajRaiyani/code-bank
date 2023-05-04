@@ -10,10 +10,14 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
 const authentication = require("./routes/authentication");
+const admin = require("./routes/admin");
 const home = require("./routes/home");
+const test = require("./routes/test");
 
-app.use("/api",home);
+app.use("/api/v1/",home);
 app.use("/api/v1/authentication",authentication);
+app.use("/api/v1/admin",admin);
+app.use("/api/v1/test",test);
 
 module.exports = app;
 
