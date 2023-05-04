@@ -3,7 +3,8 @@ const mongoose = require("mongoose");
 const schema = new mongoose.Schema({
 	number:{
 		type:Number,
-		required:[true,"try another number"]
+		required:[true,"try another number"],
+		unique:[true,"alrady exist"]
 	},
 	question:String,
 	likes: Number,
