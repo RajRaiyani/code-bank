@@ -8,7 +8,7 @@ const isAdminLoggedIn = (req,res,next)=>{
 	}
 
 	try{
-		var payLoad = jwt.verify(adminToken,process.env.owner_token_key);
+		var payLoad = jwt.verify(adminToken,process.env.ADMIN_TOKEN_KEY);
 		req.user_id=payLoad.user_id;
 		next();
 	}catch (error){

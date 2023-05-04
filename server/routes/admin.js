@@ -1,8 +1,10 @@
 const express = require("express");
 const router  = express.Router();
 
-const {addQuestion}  = require("./../controllers/admin/questionController");
+const isLoggedin = require("./../middlewares/isLoggedIn");
+const {addQuestion, deleteQuestion}  = require("./../controllers/admin/questionController");
 
-router.route("/question/add").post(addQuestion)
+router.route("/question/add").post(isLoggedin,addQuestion)
+router.route("/question/delete").delete(deleteQuestion);
 
 module.exports = router;

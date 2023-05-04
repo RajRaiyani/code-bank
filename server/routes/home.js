@@ -6,4 +6,5 @@ const {GetAllQuestions, GetOneQuestions} = require("./../controllers/homeControl
 router.route("/question").get(GetAllQuestions);
 router.route("/question/:id").get(GetOneQuestions);
 
+
 module.exports = router;

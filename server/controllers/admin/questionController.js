@@ -3,8 +3,13 @@ const Question = require("./../../models/question");
 const Solution = require("./../../models/solution");
 
 
-exports.addQuestion = async (req,res)=>{
 
+
+
+
+// ==========================================================================
+
+exports.addQuestion = async (req,res)=>{
 
 	var {number,question,categories,level,solutions} = req.body;
 	
@@ -27,3 +32,19 @@ exports.addQuestion = async (req,res)=>{
 
 	res.json({status:"ok",data});
 }
+
+//==========================================================================
+
+exports.deleteQuestion = async (req,res)=>{
+
+	try{
+		await Solution.deleteMany({question_id:req.body.question_id});
+		await Question.deleteOne({_id:req.body.question_id});
+		res.json({status:"ok"});
+
+	}catch(error){
+		return res.json({status:"X",message:"something went wrong..",error});
+	}
+}
+
+//==========================================================================

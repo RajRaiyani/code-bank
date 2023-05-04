@@ -10,7 +10,7 @@ const isLoggedIn = (req, res, next) => {
 	}
 	
 	try {
-		var payLoad = jwt.verify(token, process.env.token_key);
+		var payLoad = jwt.verify(token, process.env.TOKEN_KEY);
 		req.user_id = payLoad.user_id;
 		next();
 	} catch (e) {
