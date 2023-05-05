@@ -14,7 +14,7 @@ const AdminApp = (props) => {
         if (!cookie.get("token")) {
             console.log(cookie.get("token"))
             console.log("harshil");
-            navigate("/");
+            navigate("/login");
         }
     }, [navigate]);
 
@@ -39,7 +39,7 @@ const AdminApp = (props) => {
                             <div className="list-group mt-5">
                                 <Link to="/admin/user/mangeUser" className="list-group-item text-center p-4 fs-5 list-group-item-action" data-bs-dismiss="offcanvas">Mange Student</Link>
                                 <Link to="/admin/MangeAdmin" className="list-group-item text-center p-4 fs-5 list-group-item-action" data-bs-dismiss="offcanvas">Mange Admin</Link>
-                                <Link to="/owner/item" className="list-group-item text-center p-4 fs-5 list-group-item-action" data-bs-dismiss="offcanvas">Food Items</Link>
+                                <Link to="/admin/Program/Addprogram" className="list-group-item text-center p-4 fs-5 list-group-item-action" data-bs-dismiss="offcanvas">Add question</Link>
                             </div>
 
 

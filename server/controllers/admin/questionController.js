@@ -10,7 +10,6 @@ const Solution = require("./../../models/solution");
 // ==========================================================================
 
 exports.addQuestion = async (req,res)=>{
-
 	var {number,question,categories,level,solutions} = req.body;
 	
 	if(!(number && question && categories && level && solutions)){
