@@ -3,6 +3,8 @@ const Question = require("./../models/question");
 const Solution = require("./../models/solution");
 
 
+
+//======================================================
 exports.GetAllQuestions = async (req,res) => {
 	try{
 		var data = await Question.find({},{categories:0});
@@ -13,6 +15,7 @@ exports.GetAllQuestions = async (req,res) => {
 	res.json({status:"ok",data});
 }
 
+//=================================================
 
 exports.GetOneQuestions = async (req,res) => {
 	try{
