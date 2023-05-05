@@ -87,9 +87,12 @@ const AdminAddProgram = () => {
 			<table className="table table-light border text-center">
 				<thead>
 					<tr>
-						<th>Number</th>
-						<th>Name</th>
-						<th>Price</th>
+						<th>Program Number</th>
+						<th>Program Question</th>
+						<th>Program categories</th>
+						<th>Program level</th>
+						<th>Program solutions</th>
+
 					</tr>
 				</thead>
 				{/* <tbody>

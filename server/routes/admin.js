@@ -1,7 +1,6 @@
 const express = require("express");
 const router  = express.Router();
 
-
 const isAdminLoggedIn = require("./../middlewares/isLoggedIn");
 const {addQuestion, deleteQuestion}  = require("./../controllers/admin/questionController");
 
