@@ -13,7 +13,6 @@ const App = ()=>{
 			<Header />
 			<Hero />
 			<QuestionData></QuestionData>
-
 			<Footer />
 		</>
 	)
