@@ -14,7 +14,6 @@ var QuestionDatach = () => {
 			}
 		}).then(res => res.json())
 			.then(res => {
-				console.log(res.data)
 				if (res.status === "ok") {
 					setGetdata(res.data);
 				}

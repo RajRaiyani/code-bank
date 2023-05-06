@@ -11,7 +11,6 @@ const AdminAddProgram = () => {
 			return (
 				<tr key={program._id}>
 					<td className="py-3">{program.number}</td>
-					{/* <td className="py-3">{program.level}</td> */}
 					{program.level === "esay"?(
 						<td className="py-3 text-success">{program.level}</td>
 					):(
