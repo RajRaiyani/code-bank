@@ -1,11 +1,16 @@
+import { Navigate } from "react-router-dom";
 import QuestionDatach from "../Hooks/QuestionData";
 import "../index.css"
 
-const QuestionData=()=>{
+const QuestionData=(props)=>{
 
 	const [data1, setData1]=QuestionDatach();
     function data(){
-        console.log("hii");
+		if(props.isUserLogin)
+        {console.log("hii");}
+		else{
+			Navigate('/user')
+		}
     }
 
 	function GetDataF() {

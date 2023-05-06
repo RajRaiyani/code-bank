@@ -32,56 +32,56 @@ const appRouter = createBrowserRouter([
     path: "/",
     element: <App />,
   },
+  {
+    path: "/admin",
+    element: <Adminapp />,
+    children: [
       {
-        path: "/admin",
-        element:<Adminapp />,
+        path: "MangeAdmin",
+        element: <AdminCrud />
+      },
+      {
+        path: "Program",
         children: [
           {
-            path:"MangeAdmin",
-            element:<AdminCrud />
+            path: "",
+            element: <AdminProgram />
           },
           {
-            path: "Program",
-            children: [
-              {
-                path: "",
-                element: <AdminProgram />
-              },
-              {
-                path: "Addprogram",
-                element: <AdminAddProgram />
-              }
-              ,
-              {
-                path: "EditProgram/:id",
-                element: <EditProgram />
-              }
-            ]
-            ,
+            path: "Addprogram",
+            element: <AdminAddProgram />
           }
           ,
           {
-            path: "User",
-            children: [
-              {
-                path: "",
-                element: <AdminSeeComments />
-    
-              },
-              {
-                path: "MangeUser",
-                element: <AdminAddUser />
-              }
-            ]
+            path: "EditProgram/:id",
+            element: <EditProgram />
+          }
+        ]
+        ,
+      }
+      ,
+      {
+        path: "HandleUSer",
+        children: [
+          {
+            path: "",
+            element: <AdminSeeComments />
+
+          },
+          {
+            path: "MangeUser",
+            element: <AdminAddUser />
           }
         ]
       }
+    ]
+  }
 
-    
-  
 
-  
-  
+
+
+
+
 
 
 ])
