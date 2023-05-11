@@ -16,6 +16,8 @@ import EditProgram from './pages/admin/ManageProgram/AdminEditProgram';
 import AdminSeeComments from './pages/admin/ManageUser/AdminSeeComments';
 import AdminAddUser from './pages/admin/ManageUser/AdminAddUser';
 import AdminCrud from './pages/admin/ManageAdmin/AdminCrud';
+import UserApp from './pages/Users/Userapp';
+import Try from './try';
 
 
 
@@ -74,8 +76,17 @@ const appRouter = createBrowserRouter([
           }
         ]
       }
+
     ]
-  }
+  },
+  {
+    path:"/User",
+    element:<UserApp/>
+    },
+    {
+      path:"/try",
+      element:<Try/>
+    }
 
 
 

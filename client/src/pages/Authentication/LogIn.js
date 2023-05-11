@@ -2,7 +2,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import cookie from "js-cookie";
 
-const LogIn = () => {
+const LogIn = (props) => {
+	const [role, setRole] = useState("user");
+
+	function handleCheckboxChange(event) {
+		setRole(event.target.value);
+	}
 	const [data, setData] = useState({ email: "", password: "" });
 	const [message, setMessage] = useState("");
 	var navigate = useNavigate();
@@ -15,7 +20,7 @@ const LogIn = () => {
 
 	function sendData(e) {
 		e.preventDefault();
-		fetch("http://localhost:3007/api/v1/authentication/LogIn", {
+		fetch("http://localhost:3007/api/v1/authentication/adminlogin", {
 			method: "POST",
 			headers: {
 				'Content-Type': 'application/json'
@@ -25,7 +30,7 @@ const LogIn = () => {
 			.then((res) => {
 				if (res.status === "ok") {
 					cookie.set("token", res.token);
-					navigate("/admin");
+					navigate("/user");
 				}
 				setMessage(res.message)
 
@@ -33,6 +38,27 @@ const LogIn = () => {
 			.catch((e) => {
 				console.log(e);
 			})
+
+		// e.preventDefault();
+		// fetch("http://localhost:3007/api/v1/authentication/AdminLogIn", {
+		// 	method: "POST",
+		// 	headers: {
+		// 		'Content-Type': 'application/json'
+		// 	},
+		// 	body: JSON.stringify(data)
+		// }).then((res) => (res.json()))
+		// 	.then((res) => {
+		// 		if (res.status === "ok") {
+		// 			cookie.set("token", res.token);
+		// 			navigate("/user");
+		// 		}
+		// 		setMessage(res.message)
+
+		// 	})
+		// 	.catch((e) => {
+		// 		console.log(e);
+		// 	})	
+
 	}
 
 	return (
@@ -49,6 +75,32 @@ const LogIn = () => {
 					<label className="form-label">Password</label>
 					<input className="form-control" placeholder="Password" type="password" name="password"
 						onChange={handleData}></input>
+					<div className="pt-2">
+						<label>
+							<input
+								type="radio"
+
+								value="admin"
+								name="try"
+								onChange={handleCheckboxChange}
+								class="form-label"
+							/>
+							<span class="form-label"> admin</span><br>
+							</br>
+							<input
+								type="radio"
+
+								value="user"
+								name="try"
+								onChange={handleCheckboxChange}
+								class="form-label"
+								checked
+							/>
+							<span class="form-label"> user</span><br>
+							</br>
+							<h1>{role}</h1>
+						</label>
+					</div>
 
 					<div className="d-flex p-2 justify-content-between align-items-center">
 						<button className="btn btn-primary m-2"
@@ -56,8 +108,6 @@ const LogIn = () => {
 						<Link to="/signin">don't have an account?</Link>
 					</div>
 				</form>
-
-
 			</div>
 		</>
 	);
