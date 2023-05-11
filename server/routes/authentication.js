@@ -6,6 +6,6 @@ const { SignIn, LogIn, AdminLogIn } = require("../controllers/authenticationCont
 
 router.route("/SignIn").post(SignIn);
 router.route("/LogIn").post(LogIn);
-router.route("/AdminLogIn").post(AdminLogIn);
+
 
 module.exports = router;

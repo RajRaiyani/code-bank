@@ -5,7 +5,10 @@ const schema = new mongoose.Schema({
 	name:String,
 	email:String,
 	password:String,
-	role:String
+	role:{
+		type:String,
+		default:"user"
+	}
 })
 
 schema.pre("save", async function(next){
