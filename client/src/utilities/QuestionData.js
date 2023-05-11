@@ -9,7 +9,7 @@ const QuestionData=(props)=>{
 		if(props.isUserLogin)
         {console.log("hii");}
 		else{
-			Navigate('/user')
+			console.log("helllo")
 		}
     }
 
