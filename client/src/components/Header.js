@@ -1,44 +1,14 @@
 
 import { Link } from "react-router-dom";
-import cookie from "js-cookie";
 
 const Header = (props) => {
+	
 
-	function IfLogged() {
-		if (!props.isLoggedIn) {
-			return (
-				<li className="nav-item">
-					<Link to="/login">
-						<button className="btn btn-outline-secondary ms-2" type="button">Log in/Sign in</button>
-					</Link>
-				</li>
-			);
-		} else {
-			return (
-				<>
-					<li className="nav-item dropdown">
-						<button className="btn px-4 fw-bolder rounded-pill btn-outline-success mx-3 " data-bs-toggle="dropdown" aria-expanded="false">
-							{props.name.charAt(0).toUpperCase()}
-						</button>
-						<ul className="dropdown-menu">
-							<li><button onClick={removeToken} className="dropdown-item">Log out</button></li>
-						</ul>
-					</li>
-				</>
-			)
 
-		}
-
-	}
-
-	function removeToken() {
-		cookie.remove("token");
-		props.setLogInStatus(false);
-	}
-
+	
 
 	return (
-		<nav className="navbar navbar-expand-lg bg-body-tertiary">
+		<nav className="navbar navbar-expand-lg bg-body-tertiary border-bottom border-dark">
 			<div className="container-fluid">
 				<Link to="/" className="navbar-brand text-dark">Code Bank</Link>
 
@@ -66,7 +36,11 @@ const Header = (props) => {
 							<Link to="/contact" className="nav-link text-dark" href="#">Contact</Link>
 						</li>
 
-						<IfLogged />
+						<li className="nav-item">
+					<Link to="/login">
+						<button className="btn btn-outline-secondary ms-2" type="button">Log in/Sign in</button>
+					</Link>
+				</li>
 
 					</ul>
 
