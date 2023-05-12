@@ -9,7 +9,7 @@ const isAdminLoggedIn = (req,res,next)=>{
 
 	try{
 		var payLoad = jwt.verify(adminToken,process.env.ADMIN_TOKEN_KEY);
-		req.user_id=payLoad.user_id;
+		req.admin_id=payLoad.user_id;
 		next();
 	}catch (error){
 		return res.json({status:"Te",message:"Token is expired",error});
