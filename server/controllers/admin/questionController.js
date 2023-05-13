@@ -5,8 +5,6 @@ const Solution = require("./../../models/solution");
 
 
 
-
-
 // ==========================================================================
 
 exports.addQuestion = async (req,res)=>{
@@ -78,3 +76,5 @@ exports.editQuestion = async (req,res)=>{
 		res.json({status:"X",message:error.message,error});
 	}
 }
+
+// ===========================================================================
