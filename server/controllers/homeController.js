@@ -12,7 +12,7 @@ exports.GetAllQuestions = async (req,res) => {
 		return res.json({status:"X",message:"something went wrong."})
 	}
 
-	res.json({status:"ok",data});
+	res.json({status:"OK",data});
 }
 
 //=================================================
@@ -25,5 +25,5 @@ exports.GetOneQuestions = async (req,res) => {
 		return res.json({status:"X",message:"something went wrong."})
 	}
 	
-	res.json({status:"ok",data:{...data._doc,solutions}});
+	res.json({status:"OK",data:{...data._doc,solutions}});
 }
