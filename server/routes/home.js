@@ -1,10 +1,12 @@
 const express = require("express");
 const router  = express.Router();
 
-const {GetAllQuestions, GetOneQuestions} = require("./../controllers/homeController");
+const isLoggedIn = require("./../middlewares/isLoggedIn");
+const {getAllQuestions,getOneQuestion,getAllUsers} = require("./../controllers/homeController");
 
-router.route("/question").get(GetAllQuestions);
-router.route("/question/:id").get(GetOneQuestions);
+router.route("/question").get(getAllQuestions);
+router.route("/question/:id").get(isLoggedIn,getOneQuestion);
+router.route("/user").get(getAllUsers);
 
 
 module.exports = router;

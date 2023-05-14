@@ -51,14 +51,8 @@ exports.LogIn = async (req,res)=>{
 
 	if(await bcrypt.compare(password,data.password)){
 
-		var token;
-		if(data.role === "admin"){
-			token = jwt.sign({admin_id:data._id,email:data.email},process.env.ADMIN_TOKEN_KEY,{expiresIn:"5h"});
-			res.json({status:"OK",role:"admin",token});
-		}else{
-			token = jwt.sign({user_id:data._id,email},process.env.TOKEN_KEY,{expiresIn:"5h"});
-			res.json({status:"OK",role:"user",token});
-		}
+		var token = jwt.sign({user_id:data._id,email,role:data.role},process.env.TOKEN_KEY,{expiresIn:"5h"});
+		res.json({status:"OK",role:data.role,token});
 		
 	}else{
 		res.json({status:"INVALID",message:"password is invalid."});
