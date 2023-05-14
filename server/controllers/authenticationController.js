@@ -39,7 +39,9 @@ exports.LogIn = async (req,res)=>{
 	var {email,password} = req.body;
 
 	if(!(email && password)){
+
 		return res.json({status:"MISSING_FIELD",message:"all fileds are required."});
+
 	}
 
 	var data = await User.findOne({email});

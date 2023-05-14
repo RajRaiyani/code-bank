@@ -1,41 +1,30 @@
-import React, { useState } from 'react';
-import './index.css'
+import { useEffect, useState } from "react";
+import cookie from "js-cookie";
 
-function Try() {
-    const [isChecked, setIsChecked] = useState(false);
+var Try = () => {
+	
 
-    function handleCheckboxChange(event) {
-        setIsChecked(event.target.value);
-    }
+	const [getdata, setGetdata] = useState([]);
 
-    return (
-        <div>
-            <label>
-                <input
-                    type="radio"
-
-                    value="admin"
-                    name="try"
-                    onChange={handleCheckboxChange}
-                    class="btn btn btn-secondary"
-                />
-                <b>admin</b>
-
-                <input
-                    type="radio"
-                    value="user"
-                    name="try"
-                    onChange={handleCheckboxChange}
-                />
-                <b>user</b>
-
-
-
-            </label>
-            <p>here is {isChecked}</p>
-        </div>
-
-    );
+	useEffect(() => {
+		fetch("http://localhost:3007/api/v1/home/question", {
+			method: "GET",
+			headers: {
+				'Content-Type': 'application/json',
+				"token": cookie.get("token")
+			}
+		}).then(res => res.json())
+			.then(res => {
+				if (res.status === "ok") {
+					setGetdata(res.data);
+				}
+			})
+			.catch(e => console.log("error : " + e));
+	}, []);
+	return(
+        <> {getdata}</>
+        
+    )
 }
 
 export default Try;
