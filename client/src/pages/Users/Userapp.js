@@ -1,6 +1,34 @@
+import { useEffect } from "react";
+import Cookies from "js-cookie";
+import { Outlet, useNavigate } from "react-router-dom";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+import { useState } from "react";
 const UserApp=()=>{
+    var navigate = useNavigate();
+	// const [data,setData] = useState({});
+
+	const [isLoggedIn,setLogInStatus] = useState(false);
+
+
+    
+    useEffect(() => {
+        if (!Cookies.get("userToken")) {
+            navigate("/login");
+        }
+        else{
+            setLogInStatus(true); 
+        }
+
+    }, [navigate]);
     return(
-        <h1>this is user page</h1>
+        <>
+			<Header isLoggedIn={isLoggedIn}  setLogInStatus={setLogInStatus}/>
+        <Outlet></Outlet>
+			<Footer />
+            
+
+        </>
     )
 }
 export default UserApp;
