@@ -40,7 +40,7 @@ exports.LogIn = async (req,res)=>{
 	var {email,password} = req.body;
 
 	if(!(email && password)){
-		return res.json({status:"Fr",message:"all fileds are required."});
+		return res.json({status:"MISSING",message:"all fileds are required."});
 	}
 
 	var data = await User.findOne({email});

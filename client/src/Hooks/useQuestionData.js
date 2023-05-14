@@ -3,7 +3,6 @@ import cookie from "js-cookie";
 
 var QuestionDatach = () => {
 	
-
 	const [getdata, setGetdata] = useState([]);
 
 	useEffect(() => {
@@ -15,13 +14,15 @@ var QuestionDatach = () => {
 			}
 		}).then(res => res.json())
 			.then(res => {
-				if (res.status === "ok") {
+				if (res.status === "OK") {
 					setGetdata(res.data);
+				}
+				else{
+					console.log(res);
 				}
 			})
 			.catch(e => console.log("error : " + e));
 	}, []);
-
 	return [getdata , setGetdata];
 }
 

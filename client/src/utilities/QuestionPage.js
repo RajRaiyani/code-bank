@@ -16,7 +16,8 @@ const Question=()=>{
 			}
 		}).then(res => res.json())
 			.then(res => {
-				if (res.status === "ok") {
+				console.log(res)
+				if (res.status === "OK") {
                     setGetdata(res.data);
 				}
 			})

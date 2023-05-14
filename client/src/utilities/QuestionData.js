@@ -6,10 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const QuestionData=()=>{
 	const navigate=useNavigate();
-	const [p_id,setP_id]=useState();
 	const [data1, setData1]=QuestionDatach();
-	console.log(data1);
-	
 	function checkNavigate(props){
 		if(!Cookies.get("userToken"))
 		{
@@ -17,10 +14,10 @@ const QuestionData=()=>{
 		}
 		else
 		{
-			navigate("/user/question/"+props)
+			navigate("/user/question/"+props);
 		}
 	}
-		
+	
 		
 
 
@@ -28,6 +25,7 @@ const QuestionData=()=>{
 		return data1.map(program => {
 			return (
 				<tr onClick={()=>{checkNavigate(program._id)}} className="QuestionBox">
+					
 					<td className="py-3">{program.number}</td>
 					{program.level === "esay"?(
 						<td className="py-3 text-success">{program.level}</td>
