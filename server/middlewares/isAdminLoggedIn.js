@@ -2,17 +2,22 @@ const jwt = require("jsonwebtoken");
 
 const isAdminLoggedIn = (req,res,next)=>{
 	
-	var adminToken = req.headers.token || req.body.token;
-	if(!adminToken){
+	var token = req.headers.token || req.body.token;
+	if(!token){
 		return res.json({status:"Tm",message:"Token is missing."});
 	}
 
 	try{
-		var payLoad = jwt.verify(adminToken,process.env.ADMIN_TOKEN_KEY);
-		req.admin_id=payLoad.user_id;
-		next();
+		var payLoad = jwt.verify(token,process.env.ADMIN_TOKEN_KEY);
+		req.user_id=payLoad.user_id;
+		if(payLoad.role === "admin"){
+			next();
+		}else{
+			return res.json({status:"ACCESSDENIED",message:"Not an Admin."})
+		}
+		
 	}catch (error){
-		return res.json({status:"Te",message:"Token is expired",error});
+		return res.json({status:"Te",message:"Token has been expired",error});
 	}
 	
 }

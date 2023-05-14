@@ -13,8 +13,8 @@ const isLoggedIn = (req, res, next) => {
 		var payLoad = jwt.verify(token, process.env.TOKEN_KEY);
 		req.user_id = payLoad.user_id;
 		next();
-	} catch (e) {
-		return res.json({ status: "Te" , message:"Token is expired.",e});
+	} catch (error) {
+		return res.json({ status: "Te" , message:"Token has been expired.",error});
 	}
 
 
