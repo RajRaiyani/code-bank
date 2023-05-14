@@ -6,6 +6,8 @@ const User = require("./../models/user");
 
 
 //======================================================
+
+
 exports.getAllQuestions = async (req,res) => {
 	console.log("hit question");
 	try{
@@ -32,7 +34,7 @@ exports.getOneQuestion = async (req,res) => {
 	res.json({status:"OK",data:{...data._doc,solutions}});
 }
 
-//======================================================
+//==================== All Users =================================
 
 exports.getAllUsers = async (req,res) => {
 

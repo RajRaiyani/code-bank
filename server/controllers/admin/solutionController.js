@@ -7,7 +7,7 @@ exports.addSolution = async (req,res) => {
 
 		try{
 			if(! await Question.exists({_id:question_id})){
-				return res.json({status:"NOTEXIST",message:"no any question exists for this solution."})
+				return res.json({status:"NOT_EXIST",message:"no any question exists for this solution."})
 			}
 			var data = await Solution.create({question_id,language,code});
 			res.json({status:"OK",data});
@@ -38,7 +38,7 @@ exports.editSolution = async (req,res) => {
 	
 	try{
 		var data = await Solution.findOne({_id:solution_id});
-		if(!data) return res.json({status:"NOTEXIST",message:"solution doesn't exist"});
+		if(!data) return res.json({status:"NOT_EXIST",message:"solution doesn't exist"});
 	}catch(error){
 		res.json({status:"X",message:"something went wrong while updating solution (1)",error});
 	}

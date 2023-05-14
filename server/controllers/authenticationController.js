@@ -8,7 +8,7 @@ exports.SignIn = async (req,res)=>{
 	var {name,email,password,cpassword} = req.body;
 
 	if(!(name && email && password && cpassword)){
-		return res.json({status:"MISSING",messgae:"all fildes are required."});
+		return res.json({status:"MISSING_FIELD",messgae:"all fildes are required."});
 	}
 
 	if(cpassword !== password){
@@ -22,8 +22,7 @@ exports.SignIn = async (req,res)=>{
 	try{
 		var data = await User.create({name,email,password});
 	}catch(error){
-		console.log("something went wrong in saving user...");
-		res.json({status:"X",error});
+		return res.json({status:"X",message:"something went wrong in creating User",error});
 	}
 	
 
@@ -40,13 +39,15 @@ exports.LogIn = async (req,res)=>{
 	var {email,password} = req.body;
 
 	if(!(email && password)){
-		return res.json({status:"MISSING",message:"all fileds are required."});
+
+		return res.json({status:"MISSING_FIELD",message:"all fileds are required."});
+
 	}
 
 	var data = await User.findOne({email});
 
 	if(!data){
-		return res.json({status:"NOTEXIST",message:"User does not exist"});
+		return res.json({status:"NOT_EXIST",message:"User does not exist"});
 	}
 
 	if(await bcrypt.compare(password,data.password)){
@@ -55,7 +56,7 @@ exports.LogIn = async (req,res)=>{
 		res.json({status:"OK",role:data.role,token});
 		
 	}else{
-		res.json({status:"INVALID",message:"password is invalid."});
+		res.json({status:"INVALID_PW",message:"password is invalid."});
 	}
 }
 
