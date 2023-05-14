@@ -11,7 +11,7 @@ exports.addQuestion = async (req,res)=>{
 	var {number,question,categories,level,solutions} = req.body;
 	
 	if(!(number && question && categories && level && solutions)){
-		return res.json({status:"MISSING",message:"all fileds are required."});
+		return res.json({status:"MISSING_FIELD",message:"all fileds are required."});
 	}
 
 	if(await Question.exists({number})){
@@ -51,11 +51,11 @@ exports.editQuestion = async (req,res)=>{
 
 	var {question_id,number,question,categories,level} = req.body;
 
-	if(!question_id) return res.json({status:"M",message:"question id is required."});
+	if(!question_id) return res.json({status:"MISSING",message:"question id is required."});
 	
 	var data = await Question.findOne({_id:question_id});
 
-	if(!data) return res.json({status:"NOTEXIST",message:"Question does not exist."});
+	if(!data) return res.json({status:"NOT_EXIST",message:"Question does not exist."});
 
 	if(number != data.number){
 		if(await Question.exists({number})){

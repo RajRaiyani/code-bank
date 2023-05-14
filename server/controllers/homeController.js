@@ -6,6 +6,8 @@ const User = require("./../models/user");
 
 
 //======================================================
+
+
 exports.getAllQuestions = async (req,res) => {
 	try{
 		var data = await Question.find({},{categories:0});
@@ -29,7 +31,7 @@ exports.getOneQuestion = async (req,res) => {
 	res.json({status:"OK",data:{...data._doc,solutions}});
 }
 
-//======================================================
+//==================== All Users =================================
 
 exports.getAllUsers = async (req,res) => {
 

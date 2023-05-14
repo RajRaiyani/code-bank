@@ -6,7 +6,7 @@ const {getAllQuestions,getOneQuestion,getAllUsers} = require("./../controllers/h
 
 router.route("/question").get(getAllQuestions);
 router.route("/question/:id").get(isLoggedIn,getOneQuestion);
-router.route("/user").get(getAllUsers);
+router.route("/user").get(isLoggedIn,getAllUsers);
 
 
 module.exports = router;

@@ -6,7 +6,7 @@ const isLoggedIn = (req, res, next) => {
 	var token = req.headers.token || req.body.token;
 
 	if (!token) {
-		return res.json({ status: "Tm",message:"Token is messing." });
+		return res.json({ status: "MISSING_TOKEN",message:"Token is messing." });
 	}
 	
 	try {
@@ -14,7 +14,7 @@ const isLoggedIn = (req, res, next) => {
 		req.user_id = payLoad.user_id;
 		next();
 	} catch (error) {
-		return res.json({ status: "Te" , message:"Token has been expired.",error});
+		return res.json({ status: "EXPIRED_TOKEN" , message:"Token has been expired.",error});
 	}
 
 
