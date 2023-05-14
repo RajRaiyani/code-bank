@@ -1,22 +1,33 @@
-import { Navigate } from "react-router-dom";
-import QuestionDatach from "../Hooks/QuestionData";
-import "../index.css"
+import { useEffect, useState } from "react";
+import QuestionDatach from "../Hooks/useQuestionData";
+import "../index.css";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
-const QuestionData=(props)=>{
-
+const QuestionData=()=>{
+	const navigate=useNavigate();
+	const [p_id,setP_id]=useState();
 	const [data1, setData1]=QuestionDatach();
-    function data(){
-		if(props.isUserLogin)
-        {console.log("hii");}
-		else{
-			console.log("helllo")
+	console.log(data1);
+	
+	function checkNavigate(props){
+		if(!Cookies.get("userToken"))
+		{
+			navigate("login");
 		}
-    }
+		else
+		{
+			navigate("/user/question/"+props)
+		}
+	}
+		
+		
+
 
 	function GetDataF() {
 		return data1.map(program => {
 			return (
-				<tr key={program._id} onClick={data} className="QuestionBox">
+				<tr onClick={()=>{checkNavigate(program._id)}} className="QuestionBox">
 					<td className="py-3">{program.number}</td>
 					{program.level === "esay"?(
 						<td className="py-3 text-success">{program.level}</td>
@@ -50,7 +61,7 @@ const QuestionData=(props)=>{
 					
 				</table>
 			</div>
-            </>
+        </>
     )
 }
 export default QuestionData;

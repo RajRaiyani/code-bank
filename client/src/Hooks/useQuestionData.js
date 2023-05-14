@@ -3,10 +3,11 @@ import cookie from "js-cookie";
 
 var QuestionDatach = () => {
 	
+
 	const [getdata, setGetdata] = useState([]);
 
 	useEffect(() => {
-		fetch("http://localhost:3007/api/v1/question", {
+		fetch("http://localhost:3007/api/v1/home/question", {
 			method: "GET",
 			headers: {
 				'Content-Type': 'application/json',
@@ -20,6 +21,7 @@ var QuestionDatach = () => {
 			})
 			.catch(e => console.log("error : " + e));
 	}, []);
+
 	return [getdata , setGetdata];
 }
 

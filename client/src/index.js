@@ -18,6 +18,7 @@ import AdminAddUser from './pages/admin/ManageUser/AdminAddUser';
 import AdminCrud from './pages/admin/ManageAdmin/AdminCrud';
 import UserApp from './pages/Users/Userapp';
 import Try from './try';
+import Question from './utilities/QuestionPage';
 
 
 
@@ -80,13 +81,19 @@ const appRouter = createBrowserRouter([
     ]
   },
   {
-    path:"/User",
-    element:<UserApp/>
-    },
-    {
-      path:"/try",
-      element:<Try/>
-    }
+    path: "/User",
+    element: <UserApp />,
+    children: [
+      {
+        path: "/User/Question/:id",
+        element: <Question />
+      }
+    ]
+  },
+  {
+    path: "/try",
+    element: <Try />
+  }
 
 
 
