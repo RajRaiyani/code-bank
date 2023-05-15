@@ -25,23 +25,23 @@ const LogIn = (props) => {
 		}).then((res) => (res.json()))
 			.then((res) => {
 
-				if (res.status === "ok") {
-				if(res.role==="user")
-				{
-
-					
-					cookie.set("userToken",res.token,{
-						expires: new Date().getTime() + 2 * 1000,
-					  });
-					cookie.set("token", res.token);
-					navigate("/user");
-				}
-				else{
-					cookie.set("token", res.token);
-					navigate("/admin");
-				}
-				}
-				setMessage(res.message)
+				if (res.status === "OK") {
+					if(res.role==="user")
+					{
+	
+						
+						cookie.set("userToken",res.token,{
+							expires: new Date().getTime() + 2 * 1000,
+						  });
+						cookie.set("token", res.token);
+						navigate("/user/home");
+					}
+					else{
+						cookie.set("token", res.token);
+						navigate("/admin");
+					}
+					}
+					setMessage(res.message)
 
 			})
 			.catch((e) => {

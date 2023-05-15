@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react";
 import QuestionDatach from "../Hooks/useQuestionData";
 import "../index.css";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 
-const QuestionData=()=>{
+const AllQuestion=()=>{
 	const navigate=useNavigate();
 	const [data1, setData1]=QuestionDatach();
 	function checkNavigate(props){
@@ -24,7 +23,7 @@ const QuestionData=()=>{
 	function GetDataF() {
 		return data1.map(program => {
 			return (
-				<tr onClick={()=>{checkNavigate(program._id)}} className="QuestionBox">
+				<tr key={program._id}onClick={()=>{checkNavigate(program._id)}} className="QuestionBox">
 					
 					<td className="py-3">{program.number}</td>
 					{program.level === "esay"?(
@@ -62,4 +61,4 @@ const QuestionData=()=>{
         </>
     )
 }
-export default QuestionData;
+export default AllQuestion;

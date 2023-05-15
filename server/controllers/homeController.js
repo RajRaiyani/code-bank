@@ -9,10 +9,8 @@ const User = require("./../models/user");
 
 
 exports.getAllQuestions = async (req,res) => {
-	console.log("hit question");
 	try{
 		var data = await Question.find({},{categories:0});
-		console.log(data);
 	}catch(error){
 		return res.json({status:"X",message:"something went wrong."})
 	}
@@ -23,7 +21,6 @@ exports.getAllQuestions = async (req,res) => {
 //=================================================
 
 exports.getOneQuestion = async (req,res) => {
-	console.log("hit");
 	try{
 		var data = await Question.findOne({_id:req.params.id},{});
 		var solutions = await Solution.find({question_id:req.params.id},{question_id:0});
