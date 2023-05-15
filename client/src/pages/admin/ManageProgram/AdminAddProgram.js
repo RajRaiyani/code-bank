@@ -1,32 +1,25 @@
-import {  useState } from "react";
+import { useEffect, useState } from "react";
 import cookie from "js-cookie";
 import QuestionDatach from "../../../Hooks/useQuestionData";
+import AllQuestion from "../../../utilities/AllQuestion";
 
 const AdminAddProgram = () => {
+	const [status,setStatus]=useState("true");
+	const [data1, setData1] = QuestionDatach();
+	const [inputValue, setInputValue] = useState('');
+	const [arrayValues, setArrayValues] = useState([]);
 
-	const [data1, setData1]=QuestionDatach();
+	const handleInputChange = (event) => {
+		setInputValue(event.target.value);
+	};
 
-	function GetDataF() {
-		return data1.map(program => {
-			return (
-				<tr key={program._id}>
-					<td className="py-3">{program.number}</td>
-					{program.level === "esay"?(
-						<td className="py-3 text-success">{program.level}</td>
-					):(
-						(program.level==="hard")?(
-							<td className="py-3 text-danger">{program.level}</td>
-						):(
-							<td className="py-3 text-warning">{program.level}</td>
-						)
-						
-					)}
-					<td className="py-3">{program.question}</td>
-					
-				</tr>
-			);
-		})
-	}
+	const handleAddToArray = () => {
+		if (inputValue !== '') {
+			setArrayValues([...arrayValues, inputValue]);
+			setInputValue('');
+		}
+	};
+
 
 
 	// add question 
@@ -49,8 +42,8 @@ const AdminAddProgram = () => {
 		}).then(res => res.json())
 			.then(res => {
 
-				if (res.status === "ok") {
-					setData1([...data1,res.data]);
+				if (res.status === "OK") {
+					setData1([...data1, res.data]);
 					setData({ number: "", question: "", catagory: [{}], level: "", solution: [{ language: "", code: "" }] });
 				}
 				else {
@@ -66,9 +59,13 @@ const AdminAddProgram = () => {
 	return (
 		<>
 			<div className="d-flex justify-content-between">
-				
+
 				<button type="button" className="btn btn-outline-success m-5 fs-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
 					Add +
+				</button>
+
+				<button type="button" className="btn btn-outline-success m-5 fs-4" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+					Add catagory+
 				</button>
 			</div>
 
@@ -86,20 +83,26 @@ const AdminAddProgram = () => {
 						</div>
 						<div className="modal-body">
 							<label className="form-label">Program Number</label>
-							<input type="text" className="form-control border-dark mb-2" placeholder="Item Number" name="number"
+							<input type="text" className="form-control border-dark mb-2" placeholder="Program Number" name="number"
 								onChange={handleData} value={data.number} />
 							<label className="form-label">Program question</label>
-							<input type="text" className="form-control border-dark mb-2" placeholder="Item Name" name="question"
+							<input type="text" className="form-control border-dark mb-2" placeholder="Program Name" name="question"
 								onChange={handleData} value={data.question} />
-							<label className="form-label">Program Name</label>
-							<input type="text" className="form-control border-dark mb-2" placeholder="Item Name" name="categories"
-								onChange={handleData} value={data.categories} />
-							<label className="form-label">Item Name</label>
+							<label className="form-label">Program categories</label>
+							<br></br>
+							<div>
+									{arrayValues.map((value, index) => (
+										<li key={index}>{value}</li>
+									))}
+							</div>
 
-							<input type="text" className="form-control border-dark mb-2" placeholder="Item Name" name="level"
+							<input type="text" className="form-control border-dark mb-2" placeholder="Program categories" name="categories"
+								onChange={handleData} value={data.categories} />
+							<label className="form-label">Program level</label>
+							<input type="text" className="form-control border-dark mb-2" placeholder="Program level" name="level"
 								onChange={handleData} value={data.level} />
-							<label className="form-label">categories</label>
-							<input type="text" className="form-control border-dark" placeholder="categories" name="solutions"
+							<label className="form-label">Program solutions</label>
+							<input type="text" className="form-control border-dark" placeholder="program solution" name="solutions"
 								onChange={handleData} value={data.solutions} />
 
 
@@ -111,20 +114,39 @@ const AdminAddProgram = () => {
 					</div>
 				</div>
 			</div>
-			<div className="container-sm">
-				<table className="table table-light border text-center">
-					<thead>
-						<tr>
-							<th>Program Number</th>
-							<th>Program level</th>
-							<th>Program Question</th>
 
-						</tr>
-					</thead>
-					<tbody><GetDataF/></tbody>
-					
-				</table>
+
+			{/* add catagories */}
+			<div className="modal fade" id="exampleModal1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div className="modal-dialog">
+					<div className="modal-content">
+						<div className="modal-header">
+
+							<h1 className="modal-title fs-5" id="exampleModalLabel">
+								Add catagory<br />
+							</h1>
+							<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div className="modal-body">
+							<div>
+								<input type="text" value={inputValue} onChange={handleInputChange} />
+								<button onClick={handleAddToArray}>Add to Array</button>
+								<ul>
+									{arrayValues.map((value, index) => (
+										<li key={index}>{value}</li>
+									))}
+								</ul>
+							</div>
+						</div>
+						<div className="modal-footer">
+							<button type="button" className="btn btn-primary"
+								 data-bs-dismiss="modal">Back</button>
+						</div>
+
+					</div>
+				</div>
 			</div>
+			<AllQuestion  status={status}/>
 
 		</>
 
