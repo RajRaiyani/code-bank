@@ -1,7 +1,7 @@
 import '../App.css';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
-import QuestionData from '../utilities/QuestionData';
+import AllQuestion from '../utilities/AllQuestion';
 import Hero from './Hero/Hero';
 
 
@@ -12,7 +12,7 @@ const App = ()=>{
 		<>
 			<Header />
 			<Hero />
-			<QuestionData></QuestionData>
+			<AllQuestion />
 			<Footer />
 		</>
 	)

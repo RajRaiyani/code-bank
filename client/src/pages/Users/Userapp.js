@@ -24,7 +24,8 @@ const UserApp=()=>{
     return(
         <>
 			<Header isLoggedIn={isLoggedIn}  setLogInStatus={setLogInStatus}/>
-        <Outlet></Outlet>
+        <Outlet>
+        </Outlet>
 			<Footer />
             
 
