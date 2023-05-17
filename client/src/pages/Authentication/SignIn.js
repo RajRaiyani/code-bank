@@ -32,7 +32,7 @@ const SignIn = () => {
         }).then((res) => res.json())
             .then((res) => {
                 
-            if (res.status === "ok") {
+            if (res.status === "OK") {
                     navigate("/login")
                     return;
                 } else {

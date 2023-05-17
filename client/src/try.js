@@ -1,28 +1,19 @@
 import { useEffect, useState } from "react";
 import cookie from "js-cookie";
+import { faObjectUngroup } from "@fortawesome/free-solid-svg-icons";
 
 var Try = () => {
 	
 
-	const [getdata, setGetdata] = useState([]);
-
-	useEffect(() => {
-		fetch("http://localhost:3007/api/v1/home/question", {
-			method: "GET",
-			headers: {
-				'Content-Type': 'application/json',
-				"token": cookie.get("token")
-			}
-		}).then(res => res.json())
-			.then(res => {
-				if (res.status === "ok") {
-					setGetdata(res.data);
-				}
-			})
-			.catch(e => console.log("error : " + e));
-	}, []);
+	function main(){
+		console.log("main")
+	}
+	function sub(e){
+		e.stopPropagation();
+		console.log("sub")
+	}
 	return(
-        <> {getdata}</>
+        <div onClick={main}>clicke me <button onClick={sub}>hit</button></div>
         
     )
 }

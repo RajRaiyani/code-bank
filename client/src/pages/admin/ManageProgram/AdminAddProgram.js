@@ -36,7 +36,7 @@ const AdminAddProgram = () => {
 			method: "POST",
 			headers: {
 				'Content-Type': 'application/json',
-				"token": cookie.get("token")
+				"token": cookie.get("adminToken")
 			},
 			body: JSON.stringify(data)
 		}).then(res => res.json())
