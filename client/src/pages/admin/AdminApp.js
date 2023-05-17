@@ -11,9 +11,7 @@ const AdminApp = (props) => {
    
 
     useEffect(() => {
-        if (!cookie.get("token")) {
-            console.log(cookie.get("token"))
-            console.log("harshil");
+        if (!cookie.get("adminToken")) {
             navigate("/login");
         }
     }, [navigate]);

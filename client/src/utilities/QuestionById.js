@@ -18,7 +18,7 @@ const QuestionByID=()=>{
 			method: "GET",
 			headers: {
 				'Content-Type': 'application/json',
-				"token": Cookies.get("token")
+				"token": Cookies.get("userToken")
 			}
 		}).then(res => res.json())
 			.then(res => {
@@ -26,6 +26,7 @@ const QuestionByID=()=>{
 					setGetdata(res.data);
 				}
 				else if (res.status === "EXPIRED_TOKEN") {
+					console.log("hii");
 					navigate("/login");
 				}
 				else {

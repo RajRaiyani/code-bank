@@ -14,12 +14,13 @@ import AdminProgram from './pages/admin/ManageProgram/AdminAllProgram';
 import AdminAddProgram from './pages/admin/ManageProgram/AdminAddProgram';
 import EditProgram from './pages/admin/ManageProgram/AdminEditProgram';
 import AdminSeeComments from './pages/admin/ManageUser/AdminSeeComments';
-import AdminAddUser from './pages/admin/ManageUser/AdminAddUser';
+import AdminUser from './pages/admin/ManageUser/AdminUser';
 import AdminCrud from './pages/admin/ManageAdmin/AdminCrud';
 import UserApp from './pages/Users/Userapp';
 import Try from './try';
 import Question from './utilities/QuestionById';
 import UserHome from './pages/Users/UserHome';
+import Adminhome from './pages/admin/AdminHome';
 
 
 
@@ -40,6 +41,10 @@ const appRouter = createBrowserRouter([
     path: "/admin",
     element: <Adminapp />,
     children: [
+      {
+        path:"",
+        element:<Adminhome/>
+      },
       {
         path: "MangeAdmin",
         element: <AdminCrud />
@@ -74,7 +79,7 @@ const appRouter = createBrowserRouter([
           },
           {
             path: "MangeUser",
-            element: <AdminAddUser />
+            element: <AdminUser />
           }
         ]
       }

@@ -24,20 +24,18 @@ const LogIn = (props) => {
 			body: JSON.stringify(data)
 		}).then((res) => (res.json()))
 			.then((res) => {
-
 				if (res.status === "OK") {
 					if(res.role==="user")
 					{
-	
-						
 						cookie.set("userToken",res.token,{
-							expires: new Date().getTime() + 2 * 1000,
+							expires: new Date().getTime() + 2 * 1000*3600,
 						  });
-						cookie.set("token", res.token);
 						navigate("/user/home");
 					}
-					else{
-						cookie.set("token", res.token);
+					if(res.role==="admin"){
+						cookie.set("adminToken",res.token,{
+							expires: new Date().getTime() + 2 * 1000*3600,
+						  });
 						navigate("/admin");
 					}
 					}
