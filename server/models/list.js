@@ -1,9 +1,8 @@
 const mongoose = require("mongoose");
 
 const schema = new mongoose.Schema({
-	listNumber:Number,
-	categories:[String],
-	languages:[String],
+	listName:String,
+	list:[String],
 })
 
 module.exports = mongoose.model("list",schema);
