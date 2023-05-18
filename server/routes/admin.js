@@ -6,6 +6,7 @@ const {getAllQuestions, getOneQuestion} = require("./../controllers/homeControll
 const {addQuestion, deleteQuestion,editQuestion}  = require("./../controllers/admin/questionController");
 const { addSolution, deleteSolution, editSolution } = require("./../controllers/admin/solutionController");
 const { getOneUser, changeRole, deleteUser } = require("../controllers/admin/userController");
+const { createList, addInList, removeFromeList, deleteList } = require("../controllers/admin/listController");
 
 
 
@@ -26,6 +27,17 @@ router.route("/question/:id").get(isAdminLoggedIn,getOneQuestion)
 router.route("/solution/add").post(isAdminLoggedIn,addSolution);
 router.route("/solution/delete").delete(isAdminLoggedIn,deleteSolution);
 router.route("/solution/edit").put(isAdminLoggedIn,editSolution);
+
+
+router.route("/list/create/:name").post(isAdminLoggedIn,createList);
+router.route("/list/alter/:name/add/:item").put(isAdminLoggedIn,addInList);
+router.route("/list/alter/:name/remove/:item").put(isAdminLoggedIn,removeFromeList);
+router.route("/list/delete/:name").delete(isAdminLoggedIn,deleteList);
+
+
+
+
+
 
 
 
