@@ -2,8 +2,11 @@ import { useEffect, useState } from "react";
 import cookie from "js-cookie";
 import QuestionDatach from "../../../Hooks/useQuestionData";
 import AllQuestion from "../../../utilities/AllQuestion";
+import CreateList from "../../List/createList";
 
 const AdminAddProgram = () => {
+
+	const [createListMessage , steCreateListMessage]=CreateList("java");
 	const [status,setStatus]=useState("true");
 	const [data1, setData1] = QuestionDatach();
 	const [inputValue, setInputValue] = useState('');
@@ -146,7 +149,7 @@ const AdminAddProgram = () => {
 					</div>
 				</div>
 			</div>
-			<AllQuestion  status={status}/>
+			{createListMessage}
 
 		</>
 

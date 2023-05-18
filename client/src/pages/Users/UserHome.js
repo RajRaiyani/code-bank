@@ -5,7 +5,7 @@ const UserHome=()=>{
         
         <>
         <div className="container">
-            <div className="text-secondary p-5" ><h6>Welcome to Code Bank</h6></div>adsf
+            <div className="text-secondary p-5" ><h6>Welcome to Code Bank</h6></div>
             <AllQuestion></AllQuestion>
         </div>
         </>
