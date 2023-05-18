@@ -38,9 +38,9 @@ const AdminUser = () => {
 			if (e.role === "admin") {
 				return (<tr key={e._id} className="QuestionBox">
 
-					<td className="py-3 text-success">{e.name}</td>
-					<td className="py-3">{e.email}</td>
-					<td className="py-3 text-primary">{e.role}</td>
+					<td className="py-3">{e.name}</td>
+					<td className="py-3 text-success">{e.email}</td>
+					<td className="py-3 text-danger">{e.role}</td>
 
 					<td>
 						<button type="button" className="btn btn-outline-danger position-absolute"  onClick={() => { deleteF(e._id) }}  >DELETE</button>
@@ -62,8 +62,8 @@ const AdminUser = () => {
 			if (e.role === "user") {
 				return (<tr key={e._id} className="QuestionBox">
 
-					<td className="py-3 text-success">{e.name}</td>
-					<td className="py-3">{e.email}</td>
+					<td className="py-3 ">{e.name}</td>
+					<td className="py-3 text-success">{e.email}</td>
 					<td className="py-3 text-primary">{e.role}</td>
 
 					<td>
