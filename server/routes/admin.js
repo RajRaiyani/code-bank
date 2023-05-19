@@ -29,8 +29,8 @@ router.route("/solution/delete").delete(isAdminLoggedIn,deleteSolution);
 router.route("/solution/edit").put(isAdminLoggedIn,editSolution);
 
 
-router.route("/list/create/:name").post(isAdminLoggedIn,createList);
-router.route("/list/alter/:name/add/:item").put(isAdminLoggedIn,addInList);
+router.route("/list/create/:name").post(createList);
+router.route("/list/alter/:name/add/:item").put(addInList);
 router.route("/list/alter/:name/remove/:item").put(isAdminLoggedIn,removeFromeList);
 router.route("/list/delete/:name").delete(isAdminLoggedIn,deleteList);
 
