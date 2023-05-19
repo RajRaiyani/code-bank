@@ -43,10 +43,10 @@ const AdminUser = () => {
 					<td className="py-3 text-danger">{e.role}</td>
 
 					<td>
-						<button type="button" className="btn btn-outline-danger position-absolute"  onClick={() => { deleteF(e._id) }}  >DELETE</button>
+						<button type="button" className="btn btn-outline-danger position-absolute" onClick={() => { deleteF(e._id) }}  >DELETE</button>
 					</td>
 					<td>
-						<button type="button" className="btn btn-outline-primary position-absolute"  onClick={() => { changerole(e._id) }} >edit</button>
+						<button type="button" className="btn btn-outline-primary position-absolute" onClick={() => { changerole(e._id) }} >edit</button>
 					</td>
 				</tr>)
 			}
@@ -67,10 +67,10 @@ const AdminUser = () => {
 					<td className="py-3 text-primary">{e.role}</td>
 
 					<td>
-						<button type="button" className="btn btn-outline-danger position-absolute" onClick={() => { deleteF(e._id) }}  >DELETE</button>
+						<button type="button" className="btn btn-outline-danger " onClick={() => { deleteF(e._id) }}  >DELETE</button>
 					</td>
 					<td>
-						<button type="button" className="btn btn-outline-primary position-absolute"  onClick={() => { changerole(e._id) }} >edit</button>
+						<button type="button" className="btn btn-outline-primary " onClick={() => { changerole(e._id) }} >edit</button>
 					</td>
 				</tr>)
 			}

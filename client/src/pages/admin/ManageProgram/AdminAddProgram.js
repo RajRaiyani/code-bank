@@ -1,16 +1,16 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import cookie from "js-cookie";
+import { Link } from "react-router-dom";
 import QuestionDatach from "../../../Hooks/useQuestionData";
 import AllQuestion from "../../../utilities/AllQuestion";
-import CreateList from "../../List/createList";
 
 const AdminAddProgram = () => {
 
-	const [createListMessage , steCreateListMessage]=CreateList("java");
-	const [status,setStatus]=useState("true");
+	const [status, setStatus] = useState("true");
 	const [data1, setData1] = QuestionDatach();
 	const [inputValue, setInputValue] = useState('');
 	const [arrayValues, setArrayValues] = useState([]);
+
 
 	const handleInputChange = (event) => {
 		setInputValue(event.target.value);
@@ -22,7 +22,6 @@ const AdminAddProgram = () => {
 			setInputValue('');
 		}
 	};
-
 
 
 	// add question 
@@ -64,12 +63,19 @@ const AdminAddProgram = () => {
 			<div className="d-flex justify-content-between">
 
 				<button type="button" className="btn btn-outline-success m-5 fs-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
-					Add +
+					Add Question+
 				</button>
-
-				<button type="button" className="btn btn-outline-success m-5 fs-4" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+				<Link to="/admin/Program/MangeCatagory">
+				<button type="button" className="btn btn-outline-success m-5 fs-4">
 					Add catagory+
 				</button>
+				</Link>
+
+				<Link to="/admin/Program/MangeLanguage">
+				<button type="button" className="btn btn-outline-success m-5 fs-4">
+					Add language+
+				</button>
+				</Link>
 			</div>
 
 
@@ -94,9 +100,9 @@ const AdminAddProgram = () => {
 							<label className="form-label">Program categories</label>
 							<br></br>
 							<div>
-									{arrayValues.map((value, index) => (
-										<li key={index}>{value}</li>
-									))}
+								{arrayValues.map((value, index) => (
+									<li key={index}>{value}</li>
+								))}
 							</div>
 
 							<input type="text" className="form-control border-dark mb-2" placeholder="Program categories" name="categories"
@@ -143,13 +149,12 @@ const AdminAddProgram = () => {
 						</div>
 						<div className="modal-footer">
 							<button type="button" className="btn btn-primary"
-								 data-bs-dismiss="modal">Back</button>
+								data-bs-dismiss="modal">Back</button>
 						</div>
 
 					</div>
 				</div>
 			</div>
-			{createListMessage}
 
 		</>
 
