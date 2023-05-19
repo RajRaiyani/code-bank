@@ -15,12 +15,14 @@ import AdminAddProgram from './pages/admin/ManageProgram/AdminAddProgram';
 import EditProgram from './pages/admin/ManageProgram/AdminEditProgram';
 import AdminSeeComments from './pages/admin/ManageUser/AdminSeeComments';
 import AdminUser from './pages/admin/ManageUser/AdminUser';
-import AdminCrud from './pages/admin/ManageAdmin/AdminCrud';
 import UserApp from './pages/Users/Userapp';
 import Try from './try';
 import Question from './utilities/QuestionById';
 import UserHome from './pages/Users/UserHome';
 import Adminhome from './pages/admin/AdminHome';
+import CreateList from './pages/List/createList';
+import MangeCatagroy from './pages/admin/ManageProgram/MangeCatagory/AddDeleteCatagrory';
+import MangeLanguge from './pages/admin/ManageProgram/MangeLanguage/AddDeleteLanguage';
 
 
 
@@ -45,10 +47,7 @@ const appRouter = createBrowserRouter([
         path:"",
         element:<Adminhome/>
       },
-      {
-        path: "MangeAdmin",
-        element: <AdminCrud />
-      },
+      
       {
         path: "Program",
         children: [
@@ -61,6 +60,14 @@ const appRouter = createBrowserRouter([
             element: <AdminAddProgram />
           }
           ,
+          {
+            path:"MangeCatagory",
+            element:<MangeCatagroy/>
+          },
+          {
+            path:"MangeLanguage",
+            element:<MangeLanguge/>
+          },
           {
             path: "EditProgram/:id",
             element: <EditProgram />
@@ -80,7 +87,8 @@ const appRouter = createBrowserRouter([
           {
             path: "MangeUser",
             element: <AdminUser />
-          }
+          },
+         
         ]
       }
 
@@ -102,7 +110,7 @@ const appRouter = createBrowserRouter([
   },
   {
     path: "/try",
-    element: <Try />
+    element: <CreateList />
   }
 
 

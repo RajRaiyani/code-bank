@@ -5,10 +5,10 @@ const { useEffect, useState } = require("react")
 
 const CreateList=(props)=>{
     const navigate=useNavigate();
-    const [message,setMessage]=useState();
+    const [message,setMessage]=useState("catagory");
  
     useEffect(()=>{
-        fetch("http://localhost:3007/api/v1/admin/list/create/"+props, {
+        fetch("http://localhost:3007/api/v1/admin/list/create/language", {
 			method: "POST",
 			headers: {
 				'Content-Type': 'application/json',
@@ -23,13 +23,15 @@ const CreateList=(props)=>{
 					navigate("/login");
 				}
 				else {
-					setMessage(res.message)
+					setMessage(res.message);
 				}
 			})
 			.catch(e => console.log("error : " + e));
 
     })
-    return [message,setMessage];
+    return (
+		<>
+		{message}</>);
 }
 
 export default CreateList;
