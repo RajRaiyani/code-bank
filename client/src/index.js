@@ -10,21 +10,21 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 //all for admin
 import Adminapp from './pages/admin/AdminApp';
-import AdminProgram from './pages/admin/ManageProgram/AdminAllProgram';
-import AdminAddProgram from './pages/admin/ManageProgram/AdminAddProgram';
+import AdminAddProgram from './pages/admin/ManageProgram/AdminMangeProgram';
 import EditProgram from './pages/admin/ManageProgram/AdminEditProgram';
 import AdminSeeComments from './pages/admin/ManageUser/AdminSeeComments';
 import AdminUser from './pages/admin/ManageUser/AdminUser';
 import UserApp from './pages/Users/Userapp';
-import Try from './try';
 import Question from './utilities/QuestionById';
 import UserHome from './pages/Users/UserHome';
 import Adminhome from './pages/admin/AdminHome';
 import CreateList from './pages/List/createList';
-import MangeCatagroy from './pages/admin/ManageProgram/MangeCatagory/AddDeleteCatagrory';
-import MangeLanguge from './pages/admin/ManageProgram/MangeLanguage/AddDeleteLanguage';
+import MangeLanguge from './pages/admin/utilities/AddDeleteLanguage';
 
-import AddQuestion from "./RP/AddQuestion";
+import AddQuestion from "./pages/admin/ManageProgram/AddQuestion";
+import MangeCatagroy from './pages/admin/utilities/AddDeleteCatagrory.js';
+import QuestionByIDAdmin from './pages/admin/ManageProgram/AdminQuestionId';
+import AddSolution from './pages/admin/ManageProgram/AddSolution';
 
 
 
@@ -57,13 +57,19 @@ const appRouter = createBrowserRouter([
       {
         path: "Program",
         children: [
+         
           {
             path: "",
-            element: <AdminProgram />
+            element: <AdminAddProgram />
+          }
+          ,
+          {
+            path: "AddQuestion",
+            element: <AddQuestion />
           },
           {
-            path: "Addprogram",
-            element: <AdminAddProgram />
+            path: "Addsolution/:id",
+            element: <AddSolution />
           }
           ,
           {
@@ -77,6 +83,11 @@ const appRouter = createBrowserRouter([
           {
             path: "EditProgram/:id",
             element: <EditProgram />
+          }
+          ,
+          {
+            path: ":id",
+            element: <QuestionByIDAdmin />
           }
         ]
         ,

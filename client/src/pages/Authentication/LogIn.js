@@ -36,6 +36,9 @@ const LogIn = (props) => {
 						cookie.set("adminToken",res.token,{
 							expires: new Date().getTime() + 2 * 1000*3600,
 						  });
+						  cookie.set("userToken",res.token,{
+							expires: new Date().getTime() + 2 * 1000*3600,
+						  });
 						navigate("/admin");
 					}
 					}

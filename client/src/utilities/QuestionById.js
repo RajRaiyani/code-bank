@@ -11,8 +11,6 @@ const QuestionByID=()=>{
 	const [message, setMessage] = useState("");
 	const navigate = useNavigate();
 
-
-   
 	useEffect(() => {
 		fetch("http://localhost:3007/api/v1/home/question/"+id, {
 			method: "GET",

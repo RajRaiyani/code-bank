@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 const AddQuestion = () => {
 
-
+	var [Message ,setMessage]=useState("");
 	var [data, setData] = useState({});
 	var [categories, setCategories] = useState([]);
 	var [languages, setLanguages] = useState([]);
@@ -14,7 +14,7 @@ const AddQuestion = () => {
 	// fetching 2 lists "language","categories"
 	// 1 -----------------
 	useEffect(() => {
-		fetch("http://localhost:3007/api/v1/home/list/get/categories", {
+		fetch("http://localhost:3007/api/v1/home/list/get/catagory", {
 			method: "GET",
 			headers: {
 				'Content-Type': 'application/json'
@@ -107,6 +107,7 @@ const AddQuestion = () => {
 					window.alert("done");
 				}else{
 					console.log(res);
+					setMessage(res.Message);
 				}
 			})
 			.catch((e) => {
@@ -116,7 +117,10 @@ const AddQuestion = () => {
 
 	return (
 		<>
+		{Message}
+
 			<form>
+
 				<input type="number" name="number" placeholder="question number" onChange={handleChange} />
 				<input type="text" name="question" placeholder="question" onChange={handleChange} /><br />
 
@@ -136,6 +140,8 @@ const AddQuestion = () => {
 				<input type="submit" onClick={submit} />
 
 			</form>
+		<h1> hiii</h1>
+
 		</>
 	);
 }
