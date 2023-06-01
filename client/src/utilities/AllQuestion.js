@@ -44,9 +44,10 @@ const AllQuestion = () => {
             </div>
           </div> */}
 
-          <tr>
+          <tr className="p-4">
             <th>{program.number}</th>
-            <td>{program.level}</td>
+
+            <td>{program.question}</td>
             {program.level === "Easy" ? (
               <td className="text-success">{program.level}</td>
             ) : program.level === "hard" ? (
@@ -94,14 +95,15 @@ const AllQuestion = () => {
       <table className="table table-striped table-bordered">
         <thead>
           <tr>
-            <th scope="col" className="col-sm-2">
+            <th scope="col" className="col-sm-1">
               Number
             </th>
-            <th scope="col" className="col-sm-2">
-              Level
-            </th>
-            <th scope="col" className="col-sm-7">
+
+            <th scope="col" className="col-sm-9">
               Question
+            </th>
+            <th scope="col" className="col-sm-1">
+              Level
             </th>
             <th scope="col" className="col-sm-2">
               Like
