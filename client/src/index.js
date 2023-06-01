@@ -24,9 +24,15 @@ import CreateList from './pages/List/createList';
 import MangeCatagroy from './pages/admin/ManageProgram/MangeCatagory/AddDeleteCatagrory';
 import MangeLanguge from './pages/admin/ManageProgram/MangeLanguage/AddDeleteLanguage';
 
+import AddQuestion from "./RP/AddQuestion";
+
 
 
 const appRouter = createBrowserRouter([
+  {
+    path:"/rp",
+    element:<AddQuestion />
+  },
   {
     path: "/LogIn",
     element: <LogIn />
