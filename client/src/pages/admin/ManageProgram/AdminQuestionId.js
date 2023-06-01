@@ -1,11 +1,10 @@
 import { useEffect ,useState } from 'react';
-import { useParams ,useNavigate} from 'react-router-dom';
+import { useParams ,useNavigate , Link} from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { faHeart, faShare } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-
-const QuestionByID=()=>{
+const QuestionByIDAdmin=()=>{
     const { id } = useParams();
     const [getdata, setGetdata] = useState([]);
 	const [message, setMessage] = useState("");
@@ -67,11 +66,22 @@ const QuestionByID=()=>{
 					<div className='pt-2'><b>Question</b> :{getdata.question}</div>
 
 				</div>
+				
+				<button type="button" className="btn btn-outline-success m-5 fs-4" onClick={()=>{console.log(getdata)}}>
+					check Data+
+					</button>
 
+			</div>
 
+			<div>
+			<Link to={"/admin/program/Addsolution/" + id } >
+					<button type="button" className="btn btn-outline-success m-5 fs-4">
+					Add Solution+
+					</button>
+				</Link>
 			</div>
 		</>
 	)
 						}
 
-export default QuestionByID;
+export default QuestionByIDAdmin;

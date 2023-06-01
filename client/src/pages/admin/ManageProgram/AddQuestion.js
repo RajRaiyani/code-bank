@@ -1,15 +1,14 @@
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
-
-
+import { useNavigate } from "react-router-dom";
 
 const AddQuestion = () => {
+	var navigate=useNavigate();
 
-	var [Message ,setMessage]=useState("");
+	var [Message, setMessage] = useState("");
 	var [data, setData] = useState({});
 	var [categories, setCategories] = useState([]);
 	var [languages, setLanguages] = useState([]);
-
 
 	// fetching 2 lists "language","categories"
 	// 1 -----------------
@@ -55,9 +54,6 @@ const AddQuestion = () => {
 			})
 	}, [])
 
-
-
-
 	// ======== maping components ==============
 	function Categories() {
 		return categories.map(e => (
@@ -66,17 +62,12 @@ const AddQuestion = () => {
 			</label>
 		));
 	}
-
 	function Languages() {
 		return languages.map(e => (
 			<option key={e} value={e}>{e}</option>
 		))
 	}
 	// ==========================================
-
-
-
-
 	function handleChange(e) {
 		setData({ ...data, [e.target.name]: e.target.value });
 	}
@@ -90,58 +81,49 @@ const AddQuestion = () => {
 		})
 		setCategories(updatedList);
 	}
-
 	function submit(e) {
 		e.preventDefault();
-		let tempForCategories = categories.filter(e=>e.isChecked).map(e=>e.value);
+		let tempForCategories = categories.filter(e => e.isChecked).map(e => e.value);
 		fetch("http://localhost:3007/api/v1/admin/question/add", {
 			method: "POST",
 			headers: {
 				'Content-Type': 'application/json',
-				'token':Cookies.get("adminToken")
+				'token': Cookies.get("adminToken")
 			},
-			body: JSON.stringify({number:data.number,question:data.question,categories:tempForCategories,level:data.level,solutions:[{language:data.language,code:data.code}]})
+			body: JSON.stringify({ number: data.number, question: data.question, categories: tempForCategories, level: data.level, solutions: [{ language: data.language, code: data.code }] })
 		}).then((res) => (res.json()))
 			.then((res) => {
 				if (res.status === "OK") {
-					window.alert("done");
-				}else{
-					console.log(res);
-					setMessage(res.Message);
+
+					if (window.confirm("add this program sucess")) {
+						navigate("/admin/program")
+					  }
+				} else {
+					setMessage(res.message);
 				}
 			})
 			.catch((e) => {
 				console.log(e);
 			})
 	}
-
 	return (
 		<>
-		{Message}
-
+			<span className="text-danger">{Message}</span>
 			<form>
-
 				<input type="number" name="number" placeholder="question number" onChange={handleChange} />
 				<input type="text" name="question" placeholder="question" onChange={handleChange} /><br />
-
 				<Categories />
 				<br />
-
 				<input type="radio" name="level" value="Hard" onChange={handleChange} /><span>Hard</span><br />
 				<input type="radio" name="level" value="Easy" onChange={handleChange} /><span>Easy</span><br />
 				<input type="radio" name="level" value="Medium" onChange={handleChange} /><span>Medium</span><br /><br />
 				<hr />
-
 				<select name="language" value={data.language} onChange={handleChange}>
 					<Languages />
 				</select><br />
 				<input type="text" name="code" placeholder="<code>" onChange={handleChange} />
-
 				<input type="submit" onClick={submit} />
-
 			</form>
-		<h1> hiii</h1>
-
 		</>
 	);
 }

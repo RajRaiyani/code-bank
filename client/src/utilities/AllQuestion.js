@@ -44,7 +44,7 @@ const AllQuestion = () => {
             </div>
           </div> */}
 
-          <tr>
+          <tr onClick={()=>{checkNavigate(program._id)}}>
             <th>{program.number}</th>
             <td>{program.level}</td>
             {program.level === "Easy" ? (

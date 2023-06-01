@@ -36,7 +36,8 @@ const AdminApp = (props) => {
                         <div className="d-flex flex-column justify-content-between" style={{ height: "100%" }}>
                             <div className="list-group mt-5">
                                 <Link to="/admin/HandleUSer/mangeUser" className="list-group-item text-center p-4 fs-5 list-group-item-action" data-bs-dismiss="offcanvas">Mange Student</Link>
-                                <Link to="/admin/Program/Addprogram" className="list-group-item text-center p-4 fs-5 list-group-item-action" data-bs-dismiss="offcanvas">Add question</Link>
+                                <Link to="/admin/Program" className="list-group-item text-center p-4 fs-5 list-group-item-action" data-bs-dismiss="offcanvas">Mange Question</Link>
+
                             </div>
 
 
