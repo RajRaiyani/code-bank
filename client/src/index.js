@@ -10,7 +10,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 //all for admin
 import Adminapp from './pages/admin/AdminApp';
-import AdminAddProgram from './pages/admin/ManageProgram/AdminMangeProgram';
+// import AdminAddProgram from './pages/admin/ManageProgram/AdminMangeProgram';
 import EditProgram from './pages/admin/ManageProgram/AdminEditProgram';
 import AdminSeeComments from './pages/admin/ManageUser/AdminSeeComments';
 import AdminUser from './pages/admin/ManageUser/AdminUser';
@@ -24,15 +24,14 @@ import MangeLanguge from './pages/admin/utilities/AddDeleteLanguage';
 import AddQuestion from "./pages/admin/ManageProgram/AddQuestion";
 import MangeCatagroy from './pages/admin/utilities/AddDeleteCatagrory.js';
 import QuestionByIDAdmin from './pages/admin/ManageProgram/AdminQuestionId';
-import AddSolution from './pages/admin/ManageProgram/AddSolution';
-
+import AdminAddProgram from './pages/admin/ManageProgram/AdminMangeProgram';
 
 
 const appRouter = createBrowserRouter([
-  {
-    path:"/rp",
-    element:<AddQuestion />
-  },
+  // {
+  //   path:"/rp",
+  //   element:<AddQuestion />
+  // },
   {
     path: "/LogIn",
     element: <LogIn />
@@ -60,18 +59,16 @@ const appRouter = createBrowserRouter([
          
           {
             path: "",
-            element: <AdminAddProgram />
+            element: <AdminAddProgram/>
           }
           ,
           {
             path: "AddQuestion",
             element: <AddQuestion />
           },
-          {
-            path: "Addsolution/:id",
-            element: <AddSolution />
-          }
-          ,
+          
+      
+          
           {
             path:"MangeCatagory",
             element:<MangeCatagroy/>
