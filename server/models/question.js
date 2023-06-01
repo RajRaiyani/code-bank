@@ -7,12 +7,15 @@ const schema = new mongoose.Schema({
 		unique:true
 	},
 	question:String,
-	likes: Number,
 	categories:[String],
+	likes:{
+		type:Number,
+		default:0	
+	},
 	level:{
 		type:String,
 		enum:["Hard","Medium","Easy"]
-	}
+	},
 })
 
 module.exports = mongoose.model("question",schema);
