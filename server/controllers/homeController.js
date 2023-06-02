@@ -1,6 +1,7 @@
 // const mongoose = require("mongoose");
 const Question = require("./../models/question");
 const Solution = require("./../models/solution");
+const Comment = require("./../models/comment");
 const User = require("./../models/user");
 const List = require("./../models/list");
 const Like = require("./../models/like");
@@ -29,13 +30,22 @@ exports.getOneQuestion = async (req,res) => {
 		if(!data) return res.json({status:"NOT_EXIST",message:"question does not exist."});
 
 		var solutions = await Solution.find({question_id:req.params.id},{question_id:0});
+		var comments = (await Comment.find({question_id:req.params.id}).populate({path:"user_id",select:"_id name"}));
+		comments = comments.map(element =>{
+			element = element._doc;
+			element.user = element.user_id;
+			delete element.user_id;
+			return element;
+		})
 		
 	}catch(error){
 		return res.json({status:"X",message:"something went wrong.",error})
 	}
 	
-	res.json({status:"OK",data:{...data._doc,solutions}});
+	res.json({status:"OK",data:{...data._doc,solutions,comments}});
 }
+
+//=======================================================
 
 exports.likeQuestion = async (req,res) => {
 	var question_id = req.params.id;
@@ -63,6 +73,22 @@ exports.likeQuestion = async (req,res) => {
 	}
 	res.json({status:"OK",like});
 	
+}
+
+//===================================
+exports.commentOnQuestion = async (req,res)=>{
+	var data = req.body.data;
+	var question_id = req.params.id;
+	var user_id = req.user_id;
+	if(!(question_id && user_id && data)){
+		return res.json({status:"MISSING_FIELD",message:"either question Id or user Id is missing."});
+	}
+	try{
+		var data = await Comment.create({user_id,question_id,data});
+		res.json({status:"OK",data});
+	}catch(error){
+		return res.json({status:"X",message:"something went wrong while commenting on question.",error})
+	}
 }
 
 
