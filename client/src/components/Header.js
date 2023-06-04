@@ -45,7 +45,7 @@ const Header = (props) => {
   }
 
   return (
-    <nav className="navbar navbar-expand-lg bg-body-tertiary border-bottom border-dark">
+    <nav className="navbar navbar-expand-lg bg-body-tertiary border-bottom border-dark mb-4">
       <div className="container-fluid">
         <Link to="/" className="navbar-brand text-dark">
           Code Bank

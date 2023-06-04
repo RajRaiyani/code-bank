@@ -99,7 +99,7 @@ const UserHome = () => {
   return (
     <>
       <div className="container">
-        <div className=" d-flex justify-content-between pt-3 pb-2">
+        <div className=" d-flex justify-content-between pb-2">
           <div className=" d-flex justify-content-start gap-2">
             <GetLevel />
             <GetCatagary />
@@ -108,9 +108,8 @@ const UserHome = () => {
             <SearchBtn />
           </div>
         </div>
-
-        <AllQuestion></AllQuestion>
       </div>
+      <AllQuestion></AllQuestion>
     </>
   );
 };
