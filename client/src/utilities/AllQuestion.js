@@ -17,7 +17,6 @@ const AllQuestion = () => {
       navigate("/user/question/" + id);
     }
   }
-  console.log(dataforpop.number);
 
   function GetDataF() {
     return data1.map((program) => {
@@ -44,13 +43,18 @@ const AllQuestion = () => {
             </div>
           </div> */}
 
-          <tr className="p-4">
+          <tr
+            key={program._id}
+            onClick={() => {
+              checkNavigate(program._id);
+            }}
+          >
             <th>{program.number}</th>
 
             <td>{program.question}</td>
             {program.level === "Easy" ? (
               <td className="text-success">{program.level}</td>
-            ) : program.level === "hard" ? (
+            ) : program.level === "Hard" ? (
               <td className="text-danger">{program.level}</td>
             ) : (
               <td className="text-warning ">{program.level}</td>
@@ -91,29 +95,30 @@ const AllQuestion = () => {
         </div>
         
       </div> */}
+      <div className="container">
+        <table className="table table-striped table-bordered table-hover">
+          <thead>
+            <tr>
+              <th scope="col" className="col-sm-1">
+                Number
+              </th>
 
-      <table className="table table-striped table-bordered">
-        <thead>
-          <tr>
-            <th scope="col" className="col-sm-1">
-              Number
-            </th>
-
-            <th scope="col" className="col-sm-9">
-              Question
-            </th>
-            <th scope="col" className="col-sm-1">
-              Level
-            </th>
-            <th scope="col" className="col-sm-2">
-              Like
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <GetDataF />
-        </tbody>
-      </table>
+              <th scope="col" className="col-sm-9">
+                Question
+              </th>
+              <th scope="col" className="col-sm-1">
+                Level
+              </th>
+              <th scope="col" className="col-sm-2">
+                Like
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <GetDataF />
+          </tbody>
+        </table>
+      </div>
 
       {/* <div className="container-sm">
         <table className="table table-light border text-center">

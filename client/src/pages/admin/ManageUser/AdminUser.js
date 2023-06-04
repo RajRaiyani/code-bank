@@ -34,7 +34,6 @@ const AdminUser = () => {
 
 	function DataprintAdmin() {
 		return tempdata.map(e => {
-			console.log(e);
 			if (e.role === "admin") {
 				return (<tr key={e._id} className="QuestionBox">
 
@@ -58,7 +57,6 @@ const AdminUser = () => {
 
 	function DataprintUSer() {
 		return tempdata.map(e => {
-			console.log(e)
 			if (e.role === "user") {
 				return (<tr key={e._id} className="QuestionBox">
 
@@ -132,9 +130,8 @@ const AdminUser = () => {
 			}
 		}).then(res => res.json())
 			.then(res => {
-				console.log("hit")
 				if (res.status === "OK") {
-					settempdata(tempdata.filter((e) => e._id != id));
+					settempdata(tempdata.filter((e) => e._id !==id));
 				}
 				else if (res.status === "EXPIRED_TOKEN") {
 					navigate("/login");
