@@ -13,7 +13,7 @@ const Like = require("./../models/like");
 
 exports.getAllQuestions = async (req,res) => {
 	try{
-		var data = await Question.find({},{categories:0});
+		var data = await Question.find({},{categories:0}).sort({number:1});
 	}catch(error){
 		return res.json({status:"X",message:"something went wrong."})
 	}
