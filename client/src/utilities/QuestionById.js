@@ -24,7 +24,6 @@ const QuestionByID=()=>{
 					setGetdata(res.data);
 				}
 				else if (res.status === "EXPIRED_TOKEN") {
-					console.log("hii");
 					navigate("/login");
 				}
 				else {
@@ -35,6 +34,31 @@ const QuestionByID=()=>{
 			.catch(e => console.log("error : " + e));
 
 	},[id]);
+
+	function checklike()
+	{
+	
+		fetch("http://localhost:3007/api/v1/home/question/"+id+"/like", {
+			method: "PUT",
+			headers: {
+				'Content-Type': 'application/json',
+				"token": Cookies.get("userToken")
+			}
+		}).then(res => res.json())
+			.then(res => {
+				if (res.status === "OK") {
+					console.log(res.like)
+				}
+				else if (res.status === "EXPIRED_TOKEN") {
+					navigate("/login");
+				}
+				else {
+					setMessage(res.message)
+					console.log(res);
+				}
+			})
+			.catch(e => console.log("error : " + e));
+	}
 
     
     
@@ -67,7 +91,9 @@ const QuestionByID=()=>{
 					<div className='pt-2'><b>Question</b> :{getdata.question}</div>
 
 				</div>
-
+						<button onClick={()=>{checklike()}}>
+hit me please deady
+						</button>
 
 			</div>
 		</>
