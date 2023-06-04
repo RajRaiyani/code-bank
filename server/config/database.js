@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-mongoose.set('strictQuery', true);
+mongoose.set("strictQuery", true);
 
 exports.connect = () =>{
 	var connectionString = process.env.CONNECTION_STRING_ATLAS
