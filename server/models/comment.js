@@ -1,9 +1,17 @@
 const mongoose = require("mongoose");
 
 const schema = new mongoose.Schema({
-	user:mongoose.Schema.Types.ObjectId,
+	user_id:{
+		type: mongoose.Schema.Types.ObjectId,
+		ref:"user"
+	},
 	question_id:mongoose.Schema.Types.ObjectId,
-	data:String
+	data:String,
+	date:{
+		type : Date,
+		require : true,
+		default : Date.now
+	}
 })
 
 module.exports = mongoose.model("comment",schema);
