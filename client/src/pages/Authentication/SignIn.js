@@ -8,7 +8,7 @@ const SignIn = () => {
     var navigate = useNavigate();
 
     const [data, setData] = useState({
-        name: "",
+        username: "",
         email: "",
         password: "",
         cpassword: "",

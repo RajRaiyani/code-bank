@@ -82,10 +82,10 @@ const AdminAddProgram = () => {
 
 					<tr key={program._id} onClick={() => { checkNavigate(program._id) }} className="QuestionBox">
 						<td className="py-3">{program.number}</td>
-						{program.level === "esay" ? (
+						{program.level === "Easy" ? (
 							<td className="py-3 text-success">{program.level}</td>
 						) : (
-							(program.level === "hard") ? (
+							(program.level === "Hard") ? (
 								<td className="py-3 text-danger">{program.level}</td>
 							) : (
 								<td className="py-3 text-warning">{program.level}</td>
@@ -145,7 +145,8 @@ const AdminAddProgram = () => {
 							<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
 						<div className="modal-body">
-							{dataforpop.number}
+							Problem No:-<b>{dataforpop.number}</b><br></br>
+							Program Question:-<b>{dataforpop.question}</b>
 						</div>
 						<div className="modal-footer">
 							<button type="button" className="btn btn-primary" onClick={() => { DeleteData(dataforpop._id) }}
@@ -194,10 +195,10 @@ const AdminAddProgram = () => {
 				<table className="table table-light border text-center">
 					<thead>
 						<tr>
-							<th>Program Number</th>
-							<th>Program level</th>
-							<th>Program Question</th>
-							<td><b>Delete Options</b></td>
+							<th>Problem Number</th>
+							<th>Problem level</th>
+							<th>Problem Question</th>
+							<td><b>Delete Problem</b></td>
 
 
 

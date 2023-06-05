@@ -91,7 +91,7 @@ const MangeCatagroy = () => {
             {message}
 
             <div>
-                <input type="text" value={inputValue} onChange={handleInputChange} />
+                <input type="text" value={inputValue} onChange={handleInputChange}  />
                 <button onClick={AddtoCatagory}>Add to catagories</button>
             </div>
             <div className="container-sm">

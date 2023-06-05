@@ -1,13 +1,17 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import Cookies from "js-cookie";
-import { faHeart, faShare } from "@fortawesome/free-solid-svg-icons";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { coldarkCold } from "react-syntax-highlighter/dist/esm/styles/prism";
 const QuestionByIDAdmin = () => {
   const { id } = useParams();
   const [getdata, setGetdata] = useState([]);
   const [message, setMessage] = useState("");
+  const [isComments, setIsComments] = useState(false);
+  const [getLanguage, setLanguage] = useState("javascript");
+  const [cmessage, setcmessage] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -33,54 +37,264 @@ const QuestionByIDAdmin = () => {
       .catch((e) => console.log("error : " + e));
   }, [id]);
 
-  return (
-    <>
-      <div>
-        <div className="ps-2">
-          <button type="button" className="btn btn-outline-secondary">
-            Description
+  const codeString = `
+  	num += 1
+   	e.stopPropagation();
+    console.log("sub");
+	console.log("main");
+  `;
+
+  function SelectLanguage() {
+    return (
+      <>
+        <select
+          className="form-select"
+          value={getLanguage}
+          onChange={(e) => {
+            setLanguage(e.target.value);
+          }}
+        >
+          <option value="java">java</option>
+          <option value="python">python</option>
+          <option value="javascript">javascript</option>
+        </select>
+      </>
+    );
+  }
+
+  function GetComment() {
+   
+    return (
+      <>
+        <div className="d-flex flex-start">
+          <img
+            className="rounded-circle shadow-1-strong me-3"
+            src="/images/profile.png"
+            alt="avatar"
+            width="40"
+            height="40"
+          />
+          <div>
+            <input
+              type="text"
+              value={cmessage}
+              onChange={handleInputChange}
+              rows={4}
+              style={{ backgroundColor: "#fff" }}
+              placeholder="Message"
+            ></input>
+          </div>
+        </div>
+        <div className="d-flex gap-2  justify-content-end w-100">
+          <button type="button" className="btn btn-primary btn-sm">
+            Post comment
+
+          </button>
+          <button type="button" className="btn btn-outline-primary btn-sm">
+            Cancel
           </button>
         </div>
-        <div className="text-danger">{message}</div>
 
-        <div className="p-2 ">
-          <b>{getdata.number} Question Name</b>
-        </div>
-        <div className="ps-2 pt-1">
-          {getdata.level === "esay" ? (
-            <span className="py-3 text-success">{getdata.level}</span>
-          ) : getdata.level === "hard" ? (
-            <span className="py-3 text-danger">{getdata.level}</span>
-          ) : (
-            <span className="py-3 text-warning">{getdata.level}</span>
-          )}
-
-          <span className="ps-5">
-            <FontAwesomeIcon icon={faHeart} /> ,
-            <span className="text-secondary"> Likes count </span>
-            <span className="text-secondary ps-5">
-              {" "}
-              <FontAwesomeIcon icon={faShare} />
-              share button
-            </span>
-          </span>
-          <hr style={{ width: "70%" }}></hr>
-          <div className="pt-2">
-            <b>Question</b> :{getdata.question}
+        <div className="d-flex flex-start align-items-center">
+          <img
+            className="rounded-circle shadow-1-strong me-3"
+            src="/images/profile.png"
+            alt="avatar"
+            width="40"
+            height="40"
+          />
+          <div>
+            <h6 className="fw-bold text-primary mb-1">
+              Utasv Raj Harshil Savan
+            </h6>
+            <p className="text-muted small mb-0">Top Growth - Jul 2022</p>
           </div>
         </div>
 
-        <button
-          type="button"
-          className="btn btn-outline-success m-5 fs-4"
-          onClick={() => {
-            console.log(getdata);
-          }}
-        >
-          check Data+
-        </button>
+        <p className="mt-3 mb-2 pb-2">
+
+
+
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip consequat.
+        </p>
+      </>
+    );
+  }
+
+  function GetQuestionData() {
+    return (
+      <>
+        {/* Here is short problem statement  */}
+        <div>
+          <h4>
+            <b className="lead-font-size">{getdata.number} Question Name</b>
+          </h4>
+        </div>
+
+        {/* Here is question level and like of that particular question */}
+        <div className="d-flex justify-content-between">
+          <div>
+            {getdata.level === "esay" ? (
+              <h5 className="text-success">{getdata.level}</h5>
+            ) : getdata.level === "hard" ? (
+              <h5 className=" text-danger">{getdata.level}</h5>
+            ) : (
+              <h5 className="text-warning">{getdata.level}</h5>
+            )}
+          </div>
+          <div>
+            <h5>
+              <FontAwesomeIcon icon={faHeart} className="text-danger" />
+              <span className="mx-1">123</span>
+            </h5>
+          </div>
+        </div>
+        <hr style={{ marginTop: "0rem" }}></hr>
+
+        {/* Here is full question */}
+        <div>
+          <p>
+            {getdata.question}Lorem ipsum dolor sit amet, consectetur adipiscing
+            elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+            aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+            laboris nisi ut aliquip consequat.
+          </p>
+
+        </div>
+      </>
+    );
+  }
+
+  function GetSolution() {
+    return (
+      <>
+        <SyntaxHighlighter language={getLanguage} style={coldarkCold}>
+          {codeString}
+        </SyntaxHighlighter>
+      </>
+    );
+  }
+
+  const handleInputChange = (event) => {
+    setcmessage(event.target.value);
+  };
+
+  return (
+    <>
+      <div className="container d-flex  gap-4">
+        <div className=" w-50">
+          {/* There is two btn one for description and one for comments
+          <div className="d-flex justify-content-start gap-2 mb-3">
+            <div>
+              <button
+                className={`btn btn-outline-secondary ${
+                  isComments === false ? "active" : ""
+                }`}
+                onClick={() => setIsComments(false)}
+              >
+                Description
+              </button>
+            </div>
+            <div>
+              <button
+                className={`btn btn-outline-secondary ${
+                  isComments === true ? "active" : ""
+                }`}
+                onClick={() => setIsComments(true)}
+              >
+                Comments
+              </button>
+            </div>
+          </div>
+          <div className="text-danger">{message}</div>
+          {isComments === true ? <GetComment /> : <GetQuestionData />} */}
+          <GetQuestionData />
+          
+          <div className="GetCommenet">
+         
+      <>
+        <div className="d-flex flex-start">
+          <img
+            className="rounded-circle shadow-1-strong me-3"
+            src="/images/profile.png"
+            alt="avatar"
+            width="40"
+            height="40"
+          />
+          <div>
+            <textarea
+              type="text"
+              value={cmessage}
+              onChange={handleInputChange}
+              rows={5}
+              cols={50}
+              style={{ backgroundColor: "#fff" }}
+              placeholder="Message"
+            ></textarea>
+          </div>
+        </div>
+        <div className="d-flex gap-2  justify-content-end w-100">
+          <button type="button" className="btn btn-primary btn-sm" onClick={console.console.log(("hiii"))}>
+            Post comment
+
+          </button>
+          <button type="button" className="btn btn-outline-primary btn-sm">
+            Cancel
+          </button>
+        </div>
+
+        <div className="d-flex flex-start align-items-center">
+          <img
+            className="rounded-circle shadow-1-strong me-3"
+            src="/images/profile.png"
+            alt="avatar"
+            width="40"
+            height="40"
+          />
+          <div>
+            <h6 className="fw-bold text-primary mb-1">
+              Utasv Raj Harshil Savan
+            </h6>
+            <p className="text-muted small mb-0">Top Growth - Jul 2022</p>
+          </div>
+        </div>
+
+        <p className="mt-3 mb-2 pb-2">
+
+
+
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip consequat.
+        </p>
+      </>
+    
+          </div>
+          
+
+
+        </div>
+        <div className="w-50 ">
+          <div>
+            <SelectLanguage />
+          </div>
+          <GetSolution />
+        </div>
       </div>
 
+      <button
+        type="button"
+        className="btn btn-outline-success m-5 fs-4 mb-0"
+        onClick={() => {
+          console.log(getdata);
+        }}
+      >
+        check Data+
+      </button>
       <div>
         <Link to={"/admin/program/Addsolution/" + id}>
           <button type="button" className="btn btn-outline-success m-5 fs-4">
@@ -88,7 +302,10 @@ const QuestionByIDAdmin = () => {
           </button>
         </Link>
       </div>
+
+
     </>
+
   );
 };
 

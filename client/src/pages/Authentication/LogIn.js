@@ -61,7 +61,7 @@ const LogIn = (props) => {
 				<div className="text-danger">{message}</div>
 				<form>
 					<label className="form-label">Email</label>
-					<input className="form-control" placeholder="Email" type="email" name="email"
+					<input className="form-control" placeholder="Email or UserName" type="text" name="email"
 						onChange={handleData}></input>
 
 					<label className="form-label">Password</label>
