@@ -1,64 +1,99 @@
 const User = require("../models/user");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-
+const validator = require("./../utility/validation/validator");
 
 // ------------------- Sing in -----------------------
-exports.SignIn = async (req,res)=>{
-	var {name,email,password,cpassword} = req.body;
+exports.SignIn = async (req, res) => {
+  var { username, email, password, cpassword } = req.body;
 
-	if(!(name && email && password && cpassword)){
-		return res.json({status:"MISSING_FIELD",messgae:"all fildes are required."});
-	}
+  if (!(username && email && password && cpassword))
+    return res.json({
+      status: "MISSING_FIELD",
+      messgae: "all fildes are required.",
+    });
 
-	if(cpassword !== password){
-		return res.json({status:"Pm",message:"confirm password should match."});
-	}
+  if (cpassword !== password)
+    return res.json({
+      status: "OTHER",
+      message: "confirm password should match.",
+    });
 
-	if(await User.findOne({email})){
-		return res.json({status:"EXISTS",message:"User allrady exist."});
-	}
-	
-	try{
-		var data = await User.create({name,email,password});
-	}catch(error){
-		return res.json({status:"X",message:"something went wrong in creating User",error});
-	}
-	
+  if (await User.findOne({ $or: [{ username }, { email }] }))
+    return res.json({
+      status: "EXISTS",
+      message: "either username of email allrady exist.",
+    });
 
-	data.password = undefined;
+  if (!validator.validate("username", username))
+    return res.json({
+      status: "INVALID",
+      message: "username is Invalid",
+      description: validator.info("username").description,
+    });
+  if (!validator.validate("email", email))
+    return res.json({
+      status: "INVALID",
+      message: "Email is Invalid.",
+      description: validator.info("email").description,
+    });
 
-	res.json({status:"OK",data});
-}
+  try {
+    var data = await User.create({ username, email, password });
+  } catch (error) {
+    return res.json({
+      status: "X",
+      message: "something went wrong in creating User",
+      error,
+    });
+  }
 
+  data.password = undefined;
 
+  res.json({ status: "OK", data });
+};
 
 // ------------------------ Log in ---------------------------
-exports.LogIn = async (req,res)=>{
 
-	var {email,password} = req.body;
+exports.LogIn = async (req, res) => {
+  var { email, password } = req.body;
 
-	if(!(email && password)){
+  if (!(email && password)) {
+    return res.json({
+      status: "MISSING_FIELD",
+      message: "all fileds are required.",
+    });
+  }
 
-		return res.json({status:"MISSING_FIELD",message:"all fileds are required."});
+  try {
+    var data = await User.findOne({ $or: [{ username: email }, { email }] });
 
-	}
+    if (!data) {
+      return res.json({ status: "NOT_EXIST", message: "User does not exist" });
+    }
 
-	var data = await User.findOne({email});
+    if (await bcrypt.compare(password, data.password)) {
 
-	if(!data){
-		return res.json({status:"NOT_EXIST",message:"User does not exist"});
-	}
+      var token = jwt.sign(
+        { user_id: data._id, email: data.email, role: data.role },
+        process.env.TOKEN_KEY,
+        { expiresIn: "10h" }
+      );
 
-	if(await bcrypt.compare(password,data.password)){
+      res.json({ status: "OK", role: data.role, token });
 
-		var token = jwt.sign({user_id:data._id,email,role:data.role},process.env.TOKEN_KEY,{expiresIn:"5h"});
-		res.json({status:"OK",role:data.role,token});
-		
-	}else{
-		res.json({status:"INVALID_PW",message:"password is invalid."});
-	}
-}
+    } else {
+
+      res.json({ status: "INVALID_PW", message: "password is invalid." });
+      
+    }
+  } catch (error) {
+    return res.json({
+      status: "X",
+      message: "something went wrong while User Login",
+      error,
+    });
+  }
+};
 
 // =============================================================
-
