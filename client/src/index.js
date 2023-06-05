@@ -118,10 +118,7 @@ const appRouter = createBrowserRouter([
       },
     ],
   },
-  {
-    path: "/try",
-    element: <Try />,
-  },
+  
 ]);
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<RouterProvider router={appRouter}></RouterProvider>);
