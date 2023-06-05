@@ -44,29 +44,6 @@ const QuestionByID = () => {
 	console.log("main");
   `;
 
-<<<<<<< HEAD
-	useEffect(() => {
-		fetch("http://localhost:3007/api/v1/home/question/"+id, {
-			method: "GET",
-			headers: {
-				'Content-Type': 'application/json',
-				"token": Cookies.get("userToken")
-			}
-		}).then(res => res.json())
-			.then(res => {
-				if (res.status === "OK") {
-					setGetdata(res.data);
-				}
-				else if (res.status === "EXPIRED_TOKEN") {
-					navigate("/login");
-				}
-				else {
-					setMessage(res.message)
-					console.log(res);
-				}
-			})
-			.catch(e => console.log("error : " + e));
-=======
   function SelectLanguage() {
     return (
       <>
@@ -84,7 +61,6 @@ const QuestionByID = () => {
       </>
     );
   }
->>>>>>> main
 
   function GetComment() {
     return (
@@ -116,41 +92,6 @@ const QuestionByID = () => {
           </button>
         </div>
 
-<<<<<<< HEAD
-	function checklike()
-	{
-	
-		fetch("http://localhost:3007/api/v1/home/question/"+id+"/like", {
-			method: "PUT",
-			headers: {
-				'Content-Type': 'application/json',
-				"token": Cookies.get("userToken")
-			}
-		}).then(res => res.json())
-			.then(res => {
-				if (res.status === "OK") {
-					console.log(res.like)
-				}
-				else if (res.status === "EXPIRED_TOKEN") {
-					navigate("/login");
-				}
-				else {
-					setMessage(res.message)
-					console.log(res);
-				}
-			})
-			.catch(e => console.log("error : " + e));
-	}
-
-    
-    
-    return(
-        <>
-			<div>
-				<div className='ps-2'>
-					<button type="button" className="btn btn-outline-secondary">Description</button></div>
-				<div className="text-danger">{message}</div>
-=======
         <div className="d-flex flex-start align-items-center">
           <img
             className="rounded-circle shadow-1-strong me-3"
@@ -166,7 +107,6 @@ const QuestionByID = () => {
             <p className="text-muted small mb-0">Top Growth - Jul 2022</p>
           </div>
         </div>
->>>>>>> main
 
         <p className="mt-3 mb-2 pb-2">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -208,12 +148,6 @@ const QuestionByID = () => {
         </div>
         <hr style={{ marginTop: "0rem" }}></hr>
 
-<<<<<<< HEAD
-				</div>
-						<button onClick={()=>{checklike()}}>
-hit me please deady
-						</button>
-=======
         {/* Here is full question */}
         <div>
           <p>
@@ -236,7 +170,6 @@ hit me please deady
       </>
     );
   }
->>>>>>> main
 
   return (
     <>
