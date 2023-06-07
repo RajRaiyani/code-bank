@@ -30,7 +30,7 @@ exports.getOneQuestion = async (req,res) => {
 		if(!data) return res.json({status:"NOT_EXIST",message:"question does not exist."});
 
 		var solutions = await Solution.find({question_id:req.params.id},{question_id:0});
-		var comments = (await Comment.find({question_id:req.params.id}).populate({path:"user_id",select:"_id name"}));
+		var comments = (await Comment.find({question_id:req.params.id}).populate({path:"user_id",select:"_id username"}));
 		comments = comments.map(element =>{
 			element = element._doc;
 			element.user = element.user_id;

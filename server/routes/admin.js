@@ -7,6 +7,7 @@ const {addQuestion, deleteQuestion,editQuestion}  = require("./../controllers/ad
 const { addSolution, deleteSolution, editSolution } = require("./../controllers/admin/solutionController");
 const { getOneUser, changeRole, deleteUser } = require("../controllers/admin/userController");
 const { createList, addInList, removeFromeList, deleteList } = require("../controllers/admin/listController");
+const { deleteComment } = require("../controllers/admin/commentController");
 
 
 
@@ -27,6 +28,9 @@ router.route("/question/:id").get(isAdminLoggedIn,getOneQuestion)
 router.route("/solution/add").post(isAdminLoggedIn,addSolution);
 router.route("/solution/delete").delete(isAdminLoggedIn,deleteSolution);
 router.route("/solution/edit").put(isAdminLoggedIn,editSolution);
+
+
+router.route("/comment/delete").delete(isAdminLoggedIn,deleteComment);
 
 
 router.route("/list/create/:name").post(createList);
