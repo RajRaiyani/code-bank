@@ -17,8 +17,9 @@ const AdminApp = (props) => {
       path: "/admin/Program",
     },
     {
-      text: "Admin Profile",
+      text: "Switch As a User",
       icon: "images/user.svg",
+      path:"/user/home"
     },
     {
       text: "Messages",
@@ -190,7 +191,7 @@ const AdminApp = (props) => {
             </div>
           </div>
         </div>
-        <div>{Outlet}</div>
+        <Outlet></Outlet>
       </div>
     </>
   );

@@ -10,11 +10,15 @@ const QuestionByID = () => {
   const { id } = useParams();
   const [getdata, setGetdata] = useState([]);
   const [message, setMessage] = useState("");
+  const [comment , setc]=useState([]);
   const [isComments, setIsComments] = useState(false);
+  const [commentmessage , setcomment]=useState("");
+  const [rescomment ,setresponse ]=useState("");
   const [getLanguage, setLanguage] = useState("javascript");
   const navigate = useNavigate();
 
   useEffect(() => {
+  
     fetch("http://localhost:3007/api/v1/home/question/" + id, {
       method: "GET",
       headers: {
@@ -26,8 +30,9 @@ const QuestionByID = () => {
       .then((res) => {
         if (res.status === "OK") {
           setGetdata(res.data);
+          setc(getdata.comments);
+
         } else if (res.status === "EXPIRED_TOKEN") {
-          console.log("hii");
           navigate("/login");
         } else {
           setMessage(res.message);
@@ -61,10 +66,46 @@ const QuestionByID = () => {
       </>
     );
   }
+ 
 
   function GetComment() {
+    function SendComment()
+    {
+      fetch("http://localhost:3007/api/v1/home/question/" +id+"/comment", {
+			method: "POST",
+			headers: {
+				'Content-Type': 'application/json',
+        'Token': Cookies.get("userToken")
+			},
+			body: JSON.stringify({data:commentmessage})
+		}).then((res) => (res.json()))
+			.then((res) => {
+				if (res.status === "OK") {
+					setresponse("comment send succesfully");
+
+          setcomment("");
+         
+      
+					}else if (res.status === "EXPIRED_TOKEN") {
+            navigate("/login");
+          } else {
+            setresponse(res.message);
+          }
+          setTimeout(() => {
+            setresponse('');
+          }, 2000);
+
+			})
+			.catch((e) => {
+				console.log(e);
+			})
+
+    }
+    
     return (
       <>
+      
+    <div className="text-primary">{rescomment}</div>
         <div className="d-flex flex-start">
           <img
             className="rounded-circle shadow-1-strong me-3"
@@ -73,25 +114,32 @@ const QuestionByID = () => {
             width="40"
             height="40"
           />
+          
           <div className="form-outline  w-100 mb-2">
-            <textarea
+            <input
               className="form-control"
+              autoFocus="autoFocus"
+              value={commentmessage}
+              onChange={(e)=>{setcomment(e.target.value)}}
               id="textAreaExample"
               rows="4"
               style={{ backgroundColor: "#fff" }}
               placeholder="Message"
-            ></textarea>
+            ></input>
           </div>
         </div>
         <div className="d-flex gap-2  justify-content-end w-100">
-          <button type="button" className="btn btn-primary btn-sm">
+          <button type="button" className="btn btn-primary btn-sm" onClick={SendComment}>
             Post comment
           </button>
-          <button type="button" className="btn btn-outline-primary btn-sm">
+          <button type="button" className="btn btn-outline-primary btn-sm" onClick={()=>{setcomment("")}}>
             Cancel
           </button>
         </div>
 
+    {getdata.comments.map((e)=>{
+      <h1>hii</h1>
+    })}
         <div className="d-flex flex-start align-items-center">
           <img
             className="rounded-circle shadow-1-strong me-3"
@@ -203,7 +251,7 @@ const QuestionByID = () => {
         </div>
         <div className="w-50 ">
           <div>
-            <SelectLanguage />
+            <SelectLanguage  />
           </div>
           <GetSolution />
         </div>
