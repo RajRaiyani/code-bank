@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { coldarkCold } from "react-syntax-highlighter/dist/esm/styles/prism";
 import "../App.css";
+import LikeButton from "./likebutton";
 const QuestionByID = () => {
   const { id } = useParams();
   const [getdata, setGetdata] = useState([]);
@@ -189,8 +190,8 @@ const QuestionByID = () => {
           </div>
           <div>
             <h5>
-              <FontAwesomeIcon icon={faHeart} className="text-danger" />
-              <span className="mx-1">123</span>
+             <LikeButton status="true" nolike={getdata.likes}></LikeButton>
+             <span className="mx-1">{getdata.likes}</span>
             </h5>
           </div>
         </div>
@@ -208,6 +209,7 @@ const QuestionByID = () => {
       </>
     );
   }
+  console.log(getdata)
 
   function GetSolution() {
     return (
