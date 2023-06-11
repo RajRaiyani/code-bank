@@ -2,8 +2,9 @@ import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+
 const AddQuestion = () => {
-	var navigate=useNavigate();
+	var navigate = useNavigate();
 
 	var [Message, setMessage] = useState("");
 	var [data, setData] = useState({});
@@ -56,11 +57,22 @@ const AddQuestion = () => {
 
 	// ======== maping components ==============
 	function Categories() {
-		return categories.map(e => (
-			<label key={e.id}>
-				<input type="checkbox" checked={e.isChecked} onChange={() => { handleChangeInCategories(e.id) }} />{e.value}
-			</label>
-		));
+		return categories.map((e) => (
+      <label
+        key={e.id}
+        style={{ paddingRight: "1rem" }}
+        className="display_block"
+      >
+        <input
+          type="checkbox"
+          checked={e.isChecked}
+          onChange={() => {
+            handleChangeInCategories(e.id);
+          }}
+        />
+        <span style={{ marginLeft: "0.5rem" }}>{e.value}</span>
+      </label>
+    ));
 	}
 	function Languages() {
 		return languages.map(e => (
@@ -97,7 +109,7 @@ const AddQuestion = () => {
 
 					if (window.confirm("add this program sucess")) {
 						navigate("/admin/program")
-					  }
+					}
 				} else {
 					setMessage(res.message);
 				}
@@ -107,9 +119,8 @@ const AddQuestion = () => {
 			})
 	}
 	return (
-		<>
-			<span className="text-danger">{Message}</span>
-			<form>
+    <div className="overflow-auto w-100" style={{ height: "100vh" }}>
+      {/* <form>
 				<input type="number" name="number" placeholder="question number" onChange={handleChange} />
 				<input type="text" name="question" placeholder="question" onChange={handleChange} /><br />
 				<Categories />
@@ -123,9 +134,99 @@ const AddQuestion = () => {
 				</select><br />
 				<input type="text" name="code" placeholder="<code>" onChange={handleChange} />
 				<input type="submit" onClick={submit} />
-			</form>
-		</>
-	);
+			</form> */}
+      <div className="container " style={{ marginTop: "2rem" }}>
+        <h1>Add Question</h1>
+        <h3 className="text-danger">{Message}</h3>
+        <form className="mb-4">
+          <div class="mb-3">
+            <label for="formGroupExampleInput" class="form-label">
+              Enter a Question number :
+            </label>
+            <input
+              type="number"
+              class="form-control"
+              id="formGroupExampleInput"
+              placeholder="Enter a number"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="formGroupExampleInput" class="form-label">
+              Enter a Question :
+            </label>
+            <textarea
+              rows={4}
+              class="form-control"
+              id="formGroupExampleInput"
+              placeholder="Enter a Question"
+            />
+          </div>
+          <div class="mb-3">
+            <label class="form-label" style={{ display: "block" }}>
+              Select Topic :
+            </label>
+            <Categories />
+          </div>
+          <div className="mb-3">
+            <label class="form-label" style={{ display: "block" }}>
+              Select level :
+            </label>
+            <div className="d-flex gap-2 display_block">
+              <input
+                type="radio"
+                name="level"
+                value="Hard"
+                onChange={handleChange}
+              />
+              <span className="xs-ml-0">Hard</span>
+              <br />
+              <input
+                type="radio"
+                name="level"
+                value="Easy"
+                onChange={handleChange}
+              />
+              <span className="xs-ml-0">Easy</span>
+              <br />
+              <input
+                type="radio"
+                name="level"
+                value="Medium"
+                onChange={handleChange}
+              />
+              <span className="xs-ml-0">Medium</span>
+            </div>
+          </div>
+          <div className="mb-3">
+            <label class="form-label" style={{ display: "block" }}>
+              Select Language :
+            </label>
+            <select
+              name="language"
+              value={data.language}
+              onChange={handleChange}
+            >
+              <Languages />
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="formGroupExampleInput" class="form-label">
+              Enter a Solution :
+            </label>
+            <textarea
+              rows={4}
+              class="form-control"
+              id="formGroupExampleInput"
+              placeholder="Enter Solution"
+            />
+          </div>
+          <button type="submit" class="btn btn-primary " onClick={submit}>
+            Submit
+          </button>
+        </form>
+      </div>
+    </div>
+  );
 }
 
 export default AddQuestion;
