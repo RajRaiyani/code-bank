@@ -26,7 +26,6 @@ exports.getAllQuestions = async (req,res) => {
 exports.getOneQuestion = async (req,res) => {
 	try{
 		var data = await Question.findOne({_id:req.params.id},{});
-
 		if(!data) return res.json({status:"NOT_EXIST",message:"question does not exist."});
 
 		var solutions = await Solution.find({question_id:req.params.id},{question_id:0});
@@ -37,12 +36,14 @@ exports.getOneQuestion = async (req,res) => {
 			delete element.user_id;
 			return element;
 		})
+		var isLiked = false;
+		if(await Like.findOne({user_id:req.user_id,question_id:req.params.id}))isLiked = true;
 		
 	}catch(error){
 		return res.json({status:"X",message:"something went wrong.",error})
 	}
 	
-	res.json({status:"OK",data:{...data._doc,solutions,comments}});
+	res.json({status:"OK",data:{...data._doc,isLiked,solutions,comments}});
 }
 
 //=======================================================
