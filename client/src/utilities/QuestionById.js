@@ -128,7 +128,7 @@ const QuestionByID = () => {
             ></input>
           </div>
         </div>
-        <div className="d-flex gap-2  justify-content-end w-100">
+        <div className="d-flex gap-2 mb-2  justify-content-end w-100">
           <button type="button" className="btn btn-primary btn-sm" onClick={SendComment}>
             Post comment
           </button>
@@ -221,8 +221,8 @@ const QuestionByID = () => {
 
   return (
     <>
-      <div className="container d-flex  gap-4">
-        <div className=" w-50">
+      <div className="container d-flex  gap-4  display_block">
+        <div className=" w-50 xs_width">
           {/* There is two btn one for description and one for comments */}
           <div className="d-flex justify-content-start gap-2 mb-3">
             <div>
@@ -249,9 +249,9 @@ const QuestionByID = () => {
           <div className="text-danger">{message}</div>
           {isComments === true ? <GetComment /> : <GetQuestionData />}
         </div>
-        <div className="w-50 ">
+        <div className="w-50 xs_width ">
           <div>
-            <SelectLanguage  />
+            <SelectLanguage />
           </div>
           <GetSolution />
         </div>

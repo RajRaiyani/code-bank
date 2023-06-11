@@ -79,3 +79,18 @@ select.form-control:focus {
     transform: rotate(360deg);
   }
 }
+@media only screen and (max-width: 600px) {
+  .display_block {
+    display: block !important;
+  }
+  .xs_width{
+    width: 100% !important;
+  }
+  .display_none{
+    display: none !important;
+  }
+  .xs-ml-0{
+    margin-left: 0.5rem;
+    
+  }
+}

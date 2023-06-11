@@ -1,9 +1,9 @@
 
-import { useState } from "react";
+import { useState ,useRef } from "react";
 
 import "../../../index.css";
 import Cookies from "js-cookie";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, } from "react-router-dom";
 import QuestionDatach from "../../../Hooks/useQuestionData";
 
 const AdminAddProgram = () => {
@@ -12,6 +12,9 @@ const AdminAddProgram = () => {
 	const [data1, setData1] = QuestionDatach();
 	const [message, setMessage] = useState("");
 	var [data, setData] = useState({ language: "", code: "" });
+	const windoWidth = useRef(window.innerWidth);
+
+	
 
 	function checkNavigate(id) {
 
@@ -72,37 +75,44 @@ const AdminAddProgram = () => {
 	function GetDataF() {
 		return data1.map(program => {
 			return (
-
-
-
-				<>
-
-
-
-
-					<tr key={program._id} onClick={() => { checkNavigate(program._id) }} className="QuestionBox">
-						<td className="py-3">{program.number}</td>
-						{program.level === "esay" ? (
-							<td className="py-3 text-success">{program.level}</td>
-						) : (
-							(program.level === "hard") ? (
-								<td className="py-3 text-danger">{program.level}</td>
-							) : (
-								<td className="py-3 text-warning">{program.level}</td>
-							)
-
-						)}
-						<td className="py-3">{program.question}</td>
-						<td><button type="button" className="btn btn-outline-danger position-absolute" data-bs-toggle="modal" data-bs-target="#exampleModal2" onClick={(e) => { e.stopPropagation(); assigendata(program) }} >DELETE</button></td>
-
-					</tr>
-
-
-
-
-
-				</>
-			);
+        <>
+          <tr
+            key={program._id}
+            onClick={() => {
+              checkNavigate(program._id);
+            }}
+            className="QuestionBox"
+          >
+            <td className="py-3 align-middle">{program.number}</td>
+            {program.level === "Easy" ? (
+              <td className="py-3 text-success align-middle">
+                {program.level}
+              </td>
+            ) : program.level === "Hard" ? (
+              <td className="py-3 text-danger align-middle">{program.level}</td>
+            ) : (
+              <td className="py-3 text-warning align-middle">
+                {program.level}
+              </td>
+            )}
+            <td className="py-3 align-middle">{program.question}</td>
+            <td className="align-middle">
+              <button
+                type="button"
+                className="btn btn-outline-danger"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal2"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  assigendata(program);
+                }}
+              >
+                DELETE
+              </button>
+            </td>
+          </tr>
+        </>
+      );
 		})
 	}
 
@@ -112,106 +122,154 @@ const AdminAddProgram = () => {
 
 	// ============================
 	return (
-		<>
+    <>
+      <div
+        className="overflow-scroll"
+        style={{ height: "100vh", width: "95%" }}
+      >
+        <div className="d-flex justify-content-between display_block ">
+          <Link to="/admin/Program/AddQuestion">
+            <button type="button" className="btn btn-outline-success m-5 fs-4">
+              Add Question+
+            </button>
+          </Link>
+          <Link to="/admin/Program/MangeCatagory">
+            <button type="button" className="btn btn-outline-success m-5 fs-4">
+              Add catagory+
+            </button>
+          </Link>
 
+          <Link to="/admin/Program/MangeLanguage">
+            <button type="button" className="btn btn-outline-success m-5 fs-4">
+              Add language+
+            </button>
+          </Link>
+        </div>
+        {/* delete pop op */}
+        <div
+          className="modal fade"
+          id="exampleModal2"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h1 className="modal-title fs-5" id="exampleModalLabel">
+                  DELETE QUESTION
+                  <br />
+                </h1>
+                <button
+                  type="button"
+                  className="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div className="modal-body">{dataforpop.number}</div>
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={() => {
+                    DeleteData(dataforpop._id);
+                  }}
+                >
+                  Confirm
+                </button>
 
-			<div className="d-flex justify-content-between">
-				<Link to="/admin/Program/AddQuestion">
-					<button type="button" className="btn btn-outline-success m-5 fs-4">
-					Add Question+
-					</button>
-				</Link>
-				<Link to="/admin/Program/MangeCatagory">
-					<button type="button" className="btn btn-outline-success m-5 fs-4">
-						Add catagory+
-					</button>
-				</Link>
+                <button
+                  type="button"
+                  className="btn btn-outline-primary"
+                  data-bs-dismiss="modal"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
 
-				<Link to="/admin/Program/MangeLanguage">
-					<button type="button" className="btn btn-outline-success m-5 fs-4">
-						Add language+
-					</button>
-				</Link>
-			</div>
-			{/* delete pop op */}
-			<div className="modal fade" id="exampleModal2" aria-labelledby="exampleModalLabel" aria-hidden="true">
-				<div className="modal-dialog">
-					<div className="modal-content">
-						<div className="modal-header">
+        {/* add solution pop op  */}
+        <div
+          className="modal fade"
+          id="exampleModal3"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h1 className="modal-title fs-5" id="exampleModalLabel">
+                  ADD SOLUTIONS
+                  <br />
+                  <div className="text-danger">{message}</div>
+                </h1>
+                <button
+                  type="button"
+                  className="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div className="modal-body">
+                <label className="form-label ps-0">chose language</label>
+                <input
+                  type="text"
+                  className="form-control border-dark mb-2"
+                  placeholder="Language"
+                  name="number"
+                  onChange={handleDatasolution}
+                  value={data.language}
+                />
+                <label className="form-label">code</label>
+                <input
+                  type="text"
+                  className="form-control border-dark mb-2"
+                  placeholder="code"
+                  name="question"
+                  onChange={handleDatasolution}
+                  value={data.code}
+                />
+              </div>
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  data-bs-dismiss="modal"
+                >
+                  ADD
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="container">
+          <table className="table table-striped table-bordered table-hover">
+            <thead>
+              <tr>
+                <th scope="col" className="col-sm-1">
+                  Number
+                </th>
 
-							<h1 className="modal-title fs-5" id="exampleModalLabel">
-								DELETE QUESTION<br />
-							</h1>
-							<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-						</div>
-						<div className="modal-body">
-							{dataforpop.number}
-						</div>
-						<div className="modal-footer">
-							<button type="button" className="btn btn-primary" onClick={() => { DeleteData(dataforpop._id) }}
-							>Confirm</button>
-
-							<button type="button" className="btn btn-outline-primary" data-bs-dismiss="modal">Close</button>
-						</div>
-
-					</div>
-				</div>
-			</div>
-
-
-			{/* add solution pop op  */}
-			<div className="modal fade" id="exampleModal3" aria-labelledby="exampleModalLabel" aria-hidden="true">
-				<div className="modal-dialog">
-					<div className="modal-content">
-						<div className="modal-header">
-
-							<h1 className="modal-title fs-5" id="exampleModalLabel">
-								ADD SOLUTIONS<br />
-								<div className="text-danger">{message}</div>
-
-							</h1>
-							<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-						</div>
-						<div className="modal-body">
-							<label className="form-label ps-0">chose language</label>
-							<input type="text" className="form-control border-dark mb-2" placeholder="Language" name="number"
-								onChange={handleDatasolution} value={data.language} />
-							<label className="form-label">code</label>
-							<input type="text" className="form-control border-dark mb-2" placeholder="code" name="question"
-								onChange={handleDatasolution} value={data.code} />
-						</div>
-						<div className="modal-footer">
-							<button type="button" className="btn btn-primary"
-								data-bs-dismiss="modal" >ADD</button>
-						</div>
-
-					</div>
-				</div>
-			</div>
-
-
-			<div className="container-sm">
-				<table className="table table-light border text-center">
-					<thead>
-						<tr>
-							<th>Program Number</th>
-							<th>Program level</th>
-							<th>Program Question</th>
-							<td><b>Delete Options</b></td>
-
-
-
-						</tr>
-					</thead>
-					<tbody><GetDataF /></tbody>
-
-				</table>
-			</div>
-			
-
-
-
-		</>
-	)
+                <th scope="col" className="col-sm-1">
+                  level
+                </th>
+                <th scope="col" className="col-sm-8">
+                  Question
+                </th>
+                <th scope="col" className="col-sm-2">
+                  <b>Delete Option</b>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <GetDataF />
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </>
+  );
 }
 export default AdminAddProgram;

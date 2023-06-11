@@ -5,7 +5,7 @@ import cookie from "js-cookie";
 import { faList, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const AdminApp = (props) => {
+const AdminApp = () => {
   var navigate = useNavigate();
 
   const [isExpanded, setExpendState] = useState(false);
@@ -90,8 +90,8 @@ const AdminApp = (props) => {
         <div
           className={
             isExpanded
-              ? "side-nav-container"
-              : "side-nav-container side-nav-container-NX"
+              ? "side-nav-container display_none"
+              : "side-nav-container side-nav-container-NX display_none"
           }
         >
           <div className="nav-upper">
@@ -121,7 +121,7 @@ const AdminApp = (props) => {
                 />
               </div>
             </div>
-             
+
             <div style={{ marginTop: "30px" }}>
               {menuItems.map((item, index) => (
                 <Link
