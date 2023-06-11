@@ -26,6 +26,7 @@ import MangeCatagroy from './pages/admin/utilities/AddDeleteCatagrory.js';
 import QuestionByIDAdmin from './pages/admin/ManageProgram/AdminQuestionId';
 import AdminAddProgram from './pages/admin/ManageProgram/AdminMangeProgram';
 import AddSolution from './pages/admin/ManageProgram/AddSolution';
+import Try from "./try";
 
 
 const appRouter = createBrowserRouter([
@@ -117,6 +118,10 @@ const appRouter = createBrowserRouter([
         element: <Question />,
       },
     ],
+  },
+  {
+    path:"/try",
+    element:<Try />
   },
   
 ]);
