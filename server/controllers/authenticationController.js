@@ -80,7 +80,7 @@ exports.LogIn = async (req, res) => {
         { expiresIn: "10h" }
       );
 
-      res.json({ status: "OK", role: data.role, token });
+      res.json({ status: "OK", role: data.role, token,username:data.username });
 
     } else {
 
