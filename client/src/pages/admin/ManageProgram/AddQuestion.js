@@ -96,6 +96,8 @@ const AddQuestion = () => {
 	function submit(e) {
 		e.preventDefault();
 		let tempForCategories = categories.filter(e => e.isChecked).map(e => e.value);
+    console.log({ number: data.number, question: data.question, categories: tempForCategories, level: data.level, solutions: [{ language: data.language, code: data.code }] })
+
 		fetch("http://localhost:3007/api/v1/admin/question/add", {
 			method: "POST",
 			headers: {
@@ -110,7 +112,11 @@ const AddQuestion = () => {
 					if (window.confirm("add this program sucess")) {
 						navigate("/admin/program")
 					}
-				} else {
+				}
+        else if (res.status === "EXPIRED_TOKEN") {
+          navigate("/login");
+      }
+       else {
 					setMessage(res.message);
 				}
 			})
@@ -140,14 +146,15 @@ const AddQuestion = () => {
         <h3 className="text-danger">{Message}</h3>
         <form className="mb-4">
           <div class="mb-3">
-            <label for="formGroupExampleInput" class="form-label">
+            <label for="formGroupExampleInput" class="form-label" >
               Enter a Question number :
             </label>
             <input
               type="number"
               class="form-control"
               id="formGroupExampleInput"
-              placeholder="Enter a number"
+              
+              name="number" placeholder="question number" onChange={handleChange}
             />
           </div>
           <div class="mb-3">
@@ -159,12 +166,14 @@ const AddQuestion = () => {
               class="form-control"
               id="formGroupExampleInput"
               placeholder="Enter a Question"
+              name="question"  onChange={handleChange}
             />
           </div>
           <div class="mb-3">
             <label class="form-label" style={{ display: "block" }}>
               Select Topic :
             </label>
+          
             <Categories />
           </div>
           <div className="mb-3">
@@ -206,6 +215,9 @@ const AddQuestion = () => {
               value={data.language}
               onChange={handleChange}
             >
+                <option disabled selected hidden>
+              select language
+            </option>
               <Languages />
             </select>
           </div>
@@ -217,7 +229,9 @@ const AddQuestion = () => {
               rows={4}
               class="form-control"
               id="formGroupExampleInput"
-              placeholder="Enter Solution"
+              
+              name="code" placeholder="<code>" onChange={handleChange}
+
             />
           </div>
           <button type="submit" class="btn btn-primary " onClick={submit}>

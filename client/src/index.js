@@ -95,11 +95,11 @@ const appRouter = createBrowserRouter([
         children: [
           {
             path: "",
-            element: <AdminSeeComments />,
+            element: < AdminUser />,
           },
           {
-            path: "MangeUser",
-            element: <AdminUser />,
+            path: "comments",
+            element: <AdminSeeComments/>,
           },
         ],
       },

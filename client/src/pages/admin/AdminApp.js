@@ -16,31 +16,17 @@ const AdminApp = () => {
       icon: "images/grid.svg",
       path: "/admin/Program",
     },
+   
+    {
+      text: "Mange User ",
+      icon: "images/settings.svg",
+      path : "/admin/HandleUSer"
+    }, 
     {
       text: "Switch As a User",
       icon: "images/user.svg",
       path:"/user/home"
-    },
-    {
-      text: "Messages",
-      icon: "images/message.svg",
-    },
-    {
-      text: "Analytics",
-      icon: "images/pie-chart.svg",
-    },
-    {
-      text: "File Manager",
-      icon: "images/folder.svg",
-    },
-    {
-      text: "Orders",
-      icon: "images/shopping-cart.svg",
-    },
-    {
-      text: "Settings",
-      icon: "images/settings.svg",
-    },
+    }
   ];
 
   useEffect(() => {
@@ -173,9 +159,10 @@ const AdminApp = () => {
                     srcset=""
                   />
                   <div className="nav-footer-info">
-                    <p style={{ fontSize: "18px", fontWeight: "900" }}>hrsu</p>
+                    <p style={{ fontSize: "18px", fontWeight: "900" }}>Master admin</p>
                     <p style={{ marginTop: "-15px", color: "gray" }}>
-                      Master admin
+                      
+                    Darshan University
                     </p>
                   </div>
                 </div>
