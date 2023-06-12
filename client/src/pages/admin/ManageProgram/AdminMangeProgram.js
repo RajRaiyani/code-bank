@@ -50,7 +50,6 @@ const AdminAddProgram = () => {
 			body: JSON.stringify({ question_id: props })
 		}).then(res => res.json())
 			.then(res => {
-				console.log(res)
 				if (res.status === "OK") {
 					setData1(data1.filter((element) => element._id !== props));
 				}
@@ -166,7 +165,11 @@ const AdminAddProgram = () => {
                   aria-label="Close"
                 ></button>
               </div>
-              <div className="modal-body">{dataforpop.number}</div>
+              <div className="modal-body">Question No:{dataforpop.number}</div>
+              <div className="modal-body">Question level:{dataforpop.level}</div>
+              <div className="modal-body">Question :{dataforpop.question}</div>
+
+
               <div className="modal-footer">
                 <button
                   type="button"

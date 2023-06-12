@@ -2,76 +2,83 @@ import AllQuestion from "../../utilities/AllQuestion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import "../../App.css";
+import { useEffect  ,useState} from "react";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 const UserHome = () => {
+  const Navigate=useNavigate();
+  const [message, setMessage] = useState();
+  const [arrayValues, setArrayValues] = useState([]);
+  const [level,setlevel]=useState("");
+  const [catagories , setCategories]=useState("");
+
+  useEffect(() => {
+    fetch("http://localhost:3007/api/v1/home/list/get/catagory", {
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json',
+            "token": Cookies.get("adminToken")
+        }
+    }).then(res => res.json())
+        .then(res => {
+            if (res.status === "OK") {
+                setArrayValues(res.data.list);
+            }
+            else if (res.status === "EXPIRED_TOKEN") {
+                Navigate("/login");
+            }
+            else {
+                setMessage(res.message);
+            }
+        })
+        .catch(e => console.log("error : " + e));
+
+}, [])
   function GetLevel() {
     return (
       <>
         <div className="dropdown">
-          <a
-            className="btn btn-light border dropdown-toggle"
-            href="#"
-            role="button"
-            id="dropdownMenuLink"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            Level
-          </a>
-
-          <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <li>
-              <a className="dropdown-item" href="#">
+          <select >
+          <option disabled selected hidden>
+              Level
+            </option>
+            <option className="text-danger" >
+              none
+              </option>
+              <option className=" text-success" >
                 Easy
-              </a>
-            </li>
-            <li>
-              <a className="dropdown-item" href="#">
-                hard
-              </a>
-            </li>
-            <li>
-              <a className="dropdown-item" href="#">
-                medium
-              </a>
-            </li>
-          </ul>
+              </option>
+              <option className="text-warning" >
+              Medium              </option>
+              <option className="text-danger" >
+              Hard
+              </option>
+              
+
+          </select>
         </div>
       </>
     );
   }
   function GetCatagary() {
+    console.log(arrayValues)
     return (
       <>
         <div className="dropdown">
-          <a
-            className="btn btn-light border dropdown-toggle"
-            href="#"
-            role="button"
-            id="dropdownMenuLink"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            Catagary
-          </a>
+          <select >
+          <option disabled selected hidden>
+              Categories
+            </option>
+            <option> none</option>
+            {arrayValues.map((value,index)=>{
+              return (
+                <option>{value}</option>
+              )
+            })}
+              
 
-          <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <li>
-              <a className="dropdown-item" href="#">
-                utsav
-              </a>
-            </li>
-            <li>
-              <a className="dropdown-item" href="#">
-                raj
-              </a>
-            </li>
-            <li>
-              <a className="dropdown-item" href="#">
-                harshil
-              </a>
-            </li>
-          </ul>
+          </select>
         </div>
       </>
     );
@@ -101,7 +108,8 @@ const UserHome = () => {
       <div className="container">
         <div className=" d-flex justify-content-between pb-2">
           <div className=" d-flex justify-content-start gap-2">
-            <GetLevel />
+          <div > <GetLevel /></div>
+            
             <GetCatagary />
           </div>
           <div>

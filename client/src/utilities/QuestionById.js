@@ -7,6 +7,7 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { coldarkCold } from "react-syntax-highlighter/dist/esm/styles/prism";
 import "../App.css";
 import LikeButton from "./likebutton";
+import PrintComment from "./printcomment";
 const QuestionByID = () => {
   const { id } = useParams();
   const [getdata, setGetdata] = useState([]);
@@ -149,6 +150,7 @@ const QuestionByID = () => {
             width="40"
             height="40"
           />
+
           <div>
             <h6 className="fw-bold text-primary mb-1">
               Utasv Raj Harshil Savan
@@ -163,10 +165,10 @@ const QuestionByID = () => {
           minim veniam, quis nostrud exercitation ullamco laboris nisi ut
           aliquip consequat.
         </p>
+        <PrintComment  data={getdata.comments}/>
       </>
     );
   }
-
   function GetQuestionData() {
     return (
       <>
@@ -190,8 +192,8 @@ const QuestionByID = () => {
           </div>
           <div>
             <h5>
-             <LikeButton status="true" nolike={getdata.likes}></LikeButton>
-             <span className="mx-1">{getdata.likes}</span>
+             <LikeButton status={getdata.islike} nolike={getdata.likes}></LikeButton>
+             
             </h5>
           </div>
         </div>
@@ -209,8 +211,6 @@ const QuestionByID = () => {
       </>
     );
   }
-  console.log(getdata)
-
   function GetSolution() {
     return (
       <>

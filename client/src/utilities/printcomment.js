@@ -1,13 +1,22 @@
 import { useState } from "react";
 
 function PrintComment(props){
-    const [data , setdata]=useState([props.data]);
-    console.log(data);
+    const [data , setdata]=useState(props.data);
+console.log(data);
+  
 
     return(
         <>
-    
         
+    
+        {data.map((item, index) => (
+      <div key={index}>
+        <p>Question ID: {item.question_id}</p>
+
+        <p>Data: {item.data}</p>
+
+      </div>
+    ))}
     
          <div className="d-flex flex-start align-items-center">
           <img
