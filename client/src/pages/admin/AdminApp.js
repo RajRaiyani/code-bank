@@ -21,13 +21,7 @@ const AdminApp = () => {
       text: "Mange User ",
       icon: "images/settings.svg",
       path : "/admin/HandleUSer"
-    },
-    {
-      text: "Mange User Comments",
-      icon: "images/message.svg",
-      path:"/admin/HandleUSer/comments"
-    },
-   
+    }, 
     {
       text: "Switch As a User",
       icon: "images/user.svg",

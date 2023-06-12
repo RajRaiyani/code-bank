@@ -62,7 +62,6 @@ const UserHome = () => {
     );
   }
   function GetCatagary() {
-    console.log(arrayValues)
     return (
       <>
         <div className="dropdown">

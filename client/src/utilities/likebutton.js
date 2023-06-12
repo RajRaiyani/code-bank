@@ -12,6 +12,14 @@ function LikeButton(props) {
     const [nolike , setnolike]=useState(props.nolike);
     const handleLike = () => {
 
+        if(liked)
+        {
+            setnolike(nolike-1);
+        }
+        else
+        {
+            setnolike(nolike+1); 
+        }
         fetch("http://localhost:3007/api/v1/home/question/" + id + "/like", {
             method: "PUT",
             headers: {
@@ -31,11 +39,11 @@ function LikeButton(props) {
                 }
             })
             .catch((e) => console.log("error : " + e));
-        setLiked(!liked);
+       
     };
     return (
         <>
-            {liked === "true" ?
+            {liked === true ?
             <>
                 <div className="btn btn-outline-danger" onClick={handleLike}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">

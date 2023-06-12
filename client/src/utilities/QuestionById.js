@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
+import { AiOutlineDelete } from 'react-icons/ai';
+
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
@@ -8,41 +10,80 @@ import { coldarkCold } from "react-syntax-highlighter/dist/esm/styles/prism";
 import "../App.css";
 import LikeButton from "./likebutton";
 import PrintComment from "./printcomment";
-const QuestionByID = () => {
+const QuestionByID = (props) => {
   const { id } = useParams();
   const [getdata, setGetdata] = useState([]);
   const [message, setMessage] = useState("");
-  const [comment , setc]=useState([]);
+  const [solution, setsolution] = useState([]);
+  const [comment, setc] = useState([]);
   const [isComments, setIsComments] = useState(false);
-  const [commentmessage , setcomment]=useState("");
-  const [rescomment ,setresponse ]=useState("");
-  const [getLanguage, setLanguage] = useState("javascript");
+  const [status, setstatus] = useState("");
+  const [commentmessage, setcomment] = useState("");
+  const [cat, setcatagro] = useState([]);
+  const [rescomment, setresponse] = useState("");
   const navigate = useNavigate();
+  const [arrayValues, setArrayValues] = useState([]);
 
   useEffect(() => {
-  
-    fetch("http://localhost:3007/api/v1/home/question/" + id, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        token: Cookies.get("userToken"),
-      },
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        if (res.status === "OK") {
-          setGetdata(res.data);
-          setc(getdata.comments);
+    const fatch = async () => {
 
-        } else if (res.status === "EXPIRED_TOKEN") {
-          navigate("/login");
-        } else {
-          setMessage(res.message);
-          console.log(res);
-        }
+      fetch("http://localhost:3007/api/v1/home/question/" + id, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          token: Cookies.get("userToken"),
+        },
       })
-      .catch((e) => console.log("error : " + e));
-  }, [id]);
+        .then((res) => res.json())
+        .then((res) => {
+          if (res.status === "OK") {
+            setGetdata(res.data);
+            setc(res.data.comments);
+            setsolution(res.data.solutions);
+            setcatagro(res.data.categories);
+            setstatus(res.data.isLiked);
+
+          } else if (res.status === "EXPIRED_TOKEN") {
+            navigate("/login");
+          } else {
+            setMessage(res.message);
+            console.log(res);
+          }
+        })
+        .catch((e) => console.log("error : " + e));
+
+
+
+      fetch("http://localhost:3007/api/v1/home/list/get/language", {
+        method: "GET",
+        headers: {
+          'Content-Type': 'application/json',
+          "token": Cookies.get("adminToken")
+        }
+      }).then(res => res.json())
+        .then(res => {
+          if (res.status === "OK") {
+            setArrayValues(res.data.list);
+          }
+          else if (res.status === "EXPIRED_TOKEN") {
+            navigate("/login");
+          }
+          else {
+            setMessage(res.message);
+          }
+        })
+        .catch(e => console.log("error : " + e));
+
+
+    };
+    fatch();
+
+  }
+
+    , [id]);
+
+
+
 
   const codeString = `
   	num += 1
@@ -51,44 +92,40 @@ const QuestionByID = () => {
 	console.log("main");
   `;
 
-  function SelectLanguage() {
-    return (
-      <>
-        <select
-          className="form-select"
-          value={getLanguage}
-          onChange={(e) => {
-            setLanguage(e.target.value);
-          }}
-        >
-          <option value="java">java</option>
-          <option value="python">python</option>
-          <option value="javascript">javascript</option>
-        </select>
-      </>
-    );
-  }
- 
-
+  // function SelectLanguage() {
+  //   return (
+  //     <>
+  //       <select
+  //         className="form-select"
+  //         value={getLanguage}
+  //         onChange={(e) => {
+  //           setLanguage(e.target.value);
+  //         }}
+  //       >
+  //         <option value="java">java</option>
+  //         <option value="python">python</option>
+  //         <option value="javascript">javascript</option>
+  //       </select>
+  //     </>
+  //   );
+  // }
   function GetComment() {
-    function SendComment()
-    {
-      fetch("http://localhost:3007/api/v1/home/question/" +id+"/comment", {
-			method: "POST",
-			headers: {
-				'Content-Type': 'application/json',
-        'Token': Cookies.get("userToken")
-			},
-			body: JSON.stringify({data:commentmessage})
-		}).then((res) => (res.json()))
-			.then((res) => {
-				if (res.status === "OK") {
-					setresponse("comment send succesfully");
+    function SendComment() {
+      fetch("http://localhost:3007/api/v1/home/question/" + id + "/comment", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+          'Token': Cookies.get("userToken")
+        },
+        body: JSON.stringify({ data: commentmessage })
+      }).then((res) => (res.json()))
+        .then((res) => {
+          if (res.status === "OK") {
+            setresponse("comment send succesfully ");
+            setcomment("");
 
-          setcomment("");
-         
-      
-					}else if (res.status === "EXPIRED_TOKEN") {
+
+          } else if (res.status === "EXPIRED_TOKEN") {
             navigate("/login");
           } else {
             setresponse(res.message);
@@ -97,17 +134,17 @@ const QuestionByID = () => {
             setresponse('');
           }, 2000);
 
-			})
-			.catch((e) => {
-				console.log(e);
-			})
+        })
+        .catch((e) => {
+          console.log(e);
+        })
 
     }
-    
+
     return (
       <>
-      
-    <div className="text-primary">{rescomment}</div>
+
+        <div className="text-primary">{rescomment}</div>
         <div className="d-flex flex-start">
           <img
             className="rounded-circle shadow-1-strong me-3"
@@ -116,13 +153,13 @@ const QuestionByID = () => {
             width="40"
             height="40"
           />
-          
+
           <div className="form-outline  w-100 mb-2">
             <input
               className="form-control"
               autoFocus="autoFocus"
               value={commentmessage}
-              onChange={(e)=>{setcomment(e.target.value)}}
+              onChange={(e) => { setcomment(e.target.value) }}
               id="textAreaExample"
               rows="4"
               style={{ backgroundColor: "#fff" }}
@@ -134,48 +171,25 @@ const QuestionByID = () => {
           <button type="button" className="btn btn-primary btn-sm" onClick={SendComment}>
             Post comment
           </button>
-          <button type="button" className="btn btn-outline-primary btn-sm" onClick={()=>{setcomment("")}}>
+          <button type="button" className="btn btn-outline-primary btn-sm" onClick={() => { setcomment("") }}>
             Cancel
           </button>
         </div>
 
-    {getdata.comments.map((e)=>{
-      <h1>hii</h1>
-    })}
-        <div className="d-flex flex-start align-items-center">
-          <img
-            className="rounded-circle shadow-1-strong me-3"
-            src="/images/profile.png"
-            alt="avatar"
-            width="40"
-            height="40"
-          />
-
-          <div>
-            <h6 className="fw-bold text-primary mb-1">
-              Utasv Raj Harshil Savan
-            </h6>
-            <p className="text-muted small mb-0">Top Growth - Jul 2022</p>
-          </div>
-        </div>
-
-        <p className="mt-3 mb-2 pb-2">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip consequat.
-        </p>
-        <PrintComment  data={getdata.comments}/>
+        {getdata.comments.map((e) => {
+        })}
+        <PrintComment data={comment} />
       </>
     );
   }
   function GetQuestionData() {
+
     return (
       <>
         {/* Here is short problem statement  */}
         <div>
           <h4>
-            <b className="lead-font-size">{getdata.number} Question Name</b>
+            <b className="lead-font-size">{getdata.number} {getdata.question}</b>
           </h4>
         </div>
 
@@ -190,10 +204,20 @@ const QuestionByID = () => {
               <h5 className="text-warning">{getdata.level}</h5>
             )}
           </div>
+          {cat.map((e) => {
+            return (
+              <>
+                {e}
+              </>
+            )
+          })}
+          <div>
+
+          </div>
           <div>
             <h5>
-             <LikeButton status={getdata.islike} nolike={getdata.likes}></LikeButton>
-             
+              <LikeButton status={status} nolike={getdata.likes}></LikeButton>
+
             </h5>
           </div>
         </div>
@@ -202,23 +226,37 @@ const QuestionByID = () => {
         {/* Here is full question */}
         <div>
           <p>
-            {getdata.question}Lorem ipsum dolor sit amet, consectetur adipiscing
-            elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-            aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-            laboris nisi ut aliquip consequat.
+            {getdata.question}
           </p>
         </div>
       </>
     );
   }
   function GetSolution() {
+
     return (
       <>
-        <SyntaxHighlighter language={getLanguage} style={coldarkCold}>
-          {codeString}
-        </SyntaxHighlighter>
+        {
+          solution.map((e) => {
+            return (
+              <>
+                <div className="w-50 xs_width text-center border">{e.language}</div>
+                <div>
+                  <button
+                    type="button"
+                    className="btn btn-outline-danger ms-5" >Delete Solution</button>
+                </div>
+                <SyntaxHighlighter language={e.language} style={coldarkCold}>
+                  {e.code}
+                </SyntaxHighlighter>
+              </>
+            );
+
+          })
+        }
       </>
-    );
+    )
+
   }
 
   return (
@@ -229,9 +267,8 @@ const QuestionByID = () => {
           <div className="d-flex justify-content-start gap-2 mb-3">
             <div>
               <button
-                className={`btn btn-outline-secondary ${
-                  isComments === false ? "active" : ""
-                }`}
+                className={`btn btn-outline-secondary ${isComments === false ? "active" : ""
+                  }`}
                 onClick={() => setIsComments(false)}
               >
                 Description
@@ -239,9 +276,8 @@ const QuestionByID = () => {
             </div>
             <div>
               <button
-                className={`btn btn-outline-secondary ${
-                  isComments === true ? "active" : ""
-                }`}
+                className={`btn btn-outline-secondary ${isComments === true ? "active" : ""
+                  }`}
                 onClick={() => setIsComments(true)}
               >
                 Comments
@@ -252,9 +288,6 @@ const QuestionByID = () => {
           {isComments === true ? <GetComment /> : <GetQuestionData />}
         </div>
         <div className="w-50 xs_width ">
-          <div>
-            <SelectLanguage />
-          </div>
           <GetSolution />
         </div>
       </div>

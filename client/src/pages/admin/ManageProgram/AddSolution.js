@@ -81,12 +81,14 @@ const AddSolution = () => {
               Enter a Solution :
             </label>
           
-              <textarea
+              <input
 			  	rows={4}
                 className="form-control mb-3"
                 id="formGroupExampleInput"
-                placeholder="Enter a Solution"
-				onChange={handleChange}
+                type="text"
+          name="code"
+          placeholder="<code>"
+          onChange={handleChange}
               />
               <button className="btn btn-primary" onClick={submit}>
                 Add Solution
