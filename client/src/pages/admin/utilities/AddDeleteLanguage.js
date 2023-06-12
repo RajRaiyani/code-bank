@@ -87,43 +87,60 @@ const MangeLanguge = () => {
 
    
     return (
-        <>
-            {message}
+      <div className="overflow-auto w-100" style={{ height: "100vh" }}>
+        {/* {message}
 
-            <div>
-                <input type="text" value={inputValue} onChange={handleInputChange} />
-                <button onClick={AddtoCatagory}>Add to language</button>
+        <div>
+          <input type="text" value={inputValue} onChange={handleInputChange} />
+          <button onClick={AddtoCatagory}>Add to language</button>
+        </div> */}
+        <div className="container" style={{ marginTop: "2rem" }}>
+          <h1>Add Languages</h1>
+          <h3 className="text-danger">{message}</h3>
+          <div class="mb-3">
+            <label for="formGroupExampleInput" class="form-label">
+              Enter a Language :
+            </label>
+            <div className="d-flex gap-2">
+              <input
+                class="form-control"
+                id="formGroupExampleInput"
+                placeholder="Enter a Language"
+              />
+              <button className="btn btn-primary" onClick={AddtoCatagory}>
+                Add
+              </button>
             </div>
-            <div className="container-sm">
-				<table className="table table-light border text-center">
-					<thead>
-						<tr>
-							<th>catagories</th>
-							<th>Delete</th>
-							
-						</tr>
-					</thead>
-					<tbody>
-
-                    
-                    {arrayValues.map((value, index) => (
+          </div>
+          <table className="table border text-center table-striped table-bordered">
+            <thead>
+              <tr>
+                <th>catagories</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              {arrayValues.map((value, index) => (
                 <tr key={index} className="QuestionBox">
-                    <td >{value}</td>
-                    <td>
-                        <button className="btn-outline-danger" onClick={() => { deleteCatagory(value) }}> <AiOutlineDelete />   </button>
-
-
-                    </td>
+                  <td>{value}</td>
+                  <td>
+                    <button
+                      className="btn-outline-danger"
+                      onClick={() => {
+                        deleteCatagory(value);
+                      }}
+                    >
+                      {" "}
+                      <AiOutlineDelete />{" "}
+                    </button>
+                  </td>
                 </tr>
-            ))}
-                </tbody>
-
-				</table>
-			</div>
-
-            
-        </>
-    )
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    );
 }
 
 export default MangeLanguge;
