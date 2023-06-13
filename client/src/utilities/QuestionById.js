@@ -122,6 +122,12 @@ const QuestionByID = (props) => {
         .then((res) => {
           if (res.status === "OK") {
             setresponse("comment send succesfully ");
+            console.log(comment)
+            let temp = {...res.data}
+            temp.user = {_id:res.data.user_id,username:res.data.username};
+            temp.user_id = undefined;
+            temp.username = undefined;
+            setc([temp,...comment]);
             setcomment("");
 
 
