@@ -19,17 +19,16 @@ exports.addQuestion = async (req, res) => {
 	if (number) {
 		if (await Question.exists({ number }))
 			return res.json({ status: "EXIST", message: "this number already assigned." });
+		if(number>Storage.lastQuestionNumber)Storage.lastQuestionNumber=number;
 	}else{
 		Storage.lastQuestionNumber++;
 		number = Storage.lastQuestionNumber;
 	}
 
-
-
 	if (!Validator.validate("questionTitle", title))
 		return res.json({ status: "INVALID", message: "Question's Title is not valid" });
 
-	for (let sol in solutions) {
+	for (let sol of solutions) {
 		const { language, title, code } = sol;
 		if (!(language && title && code))
 			return res.json({ status: "MISSING_FIELD", message: "all fileds are required in solutions." });
@@ -41,7 +40,7 @@ exports.addQuestion = async (req, res) => {
 
 	try {
 		var data = await Question.create({ number, title, question, categories, level });
-		for (let sol in solutions) {
+		for (let sol of solutions) {
 			await Solution.create({ question_id: data._id, language: sol.language, title: sol.title, code: sol.code });
 		}
 	} catch (error) {
