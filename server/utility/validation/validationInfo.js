@@ -5,7 +5,15 @@ const validationInfo = {
 	},
 	email:{
 		pattern : /^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$/,
-		description : "it should look like xyz@abc.coin"
+		description : "Email should look like xyz@abc.coin"
+	},
+	questionTitle:{
+		pattern : /^.{5,70}$/,
+		description : "Title can contain 5 to 70 characters only."
+	},
+	solutionTitle:{
+		pattern : /^.{5,50}$/,
+		description : "Title can contain 5 to 50 characters only."
 	}
 }
 

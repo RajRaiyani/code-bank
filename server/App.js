@@ -1,7 +1,14 @@
+
+// Configuration
 require("dotenv").config();
-const cors = require("cors");
 require("./config/database").connect();
+require("./utility/memory/storage").reloade(); // get the storage ready.
+
+
+
+// Main Imports
 const express = require("express");
+const cors = require("cors");
 
 
 const app = express();
@@ -9,6 +16,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Routes
 const authentication = require("./routes/authentication");
 const admin = require("./routes/admin");
 const home = require("./routes/home");
