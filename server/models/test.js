@@ -1,10 +1,15 @@
 const mongoose = require("mongoose");
 
 const schema = new mongoose.Schema({
-	name:String,
-	email:String,
-	password:String,
-	role:String
+	number:{
+		type:String,
+		required:[true,"hello this is required too...."]
+	},
+	name:{
+		type:String,
+		required:[true,"hello this is requried..."]
+	},
+	
 })
 
 
