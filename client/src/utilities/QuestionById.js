@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
-import { AiOutlineDelete } from 'react-icons/ai';
-
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
@@ -12,6 +10,7 @@ import LikeButton from "./likebutton";
 import PrintComment from "./printcomment";
 const QuestionByID = (props) => {
   const { id } = useParams();
+  const [temp,settemp]=useState([]);
   const [getdata, setGetdata] = useState([]);
   const [message, setMessage] = useState("");
   const [solution, setsolution] = useState([]);
@@ -82,33 +81,6 @@ const QuestionByID = (props) => {
 
     , [id]);
 
-
-
-
-  const codeString = `
-  	num += 1
-   	e.stopPropagation();
-    console.log("sub");
-	console.log("main");
-  `;
-
-  // function SelectLanguage() {
-  //   return (
-  //     <>
-  //       <select
-  //         className="form-select"
-  //         value={getLanguage}
-  //         onChange={(e) => {
-  //           setLanguage(e.target.value);
-  //         }}
-  //       >
-  //         <option value="java">java</option>
-  //         <option value="python">python</option>
-  //         <option value="javascript">javascript</option>
-  //       </select>
-  //     </>
-  //   );
-  // }
   function GetComment() {
     function SendComment() {
       fetch("http://localhost:3007/api/v1/home/question/" + id + "/comment", {
@@ -122,6 +94,11 @@ const QuestionByID = (props) => {
         .then((res) => {
           if (res.status === "OK") {
             setresponse("comment send succesfully ");
+            let temp = {...res.data}
+            temp.user = {_id:res.data.user_id,username:res.data.username};
+            temp.user_id = undefined;
+            temp.username = undefined;
+            setc([temp,...comment]);
             setcomment("");
 
 
@@ -241,11 +218,7 @@ const QuestionByID = (props) => {
             return (
               <>
                 <div className="w-50 xs_width text-center border">{e.language}</div>
-                <div>
-                  <button
-                    type="button"
-                    className="btn btn-outline-danger ms-5" >Delete Solution</button>
-                </div>
+                
                 <SyntaxHighlighter language={e.language} style={coldarkCold}>
                   {e.code}
                 </SyntaxHighlighter>
