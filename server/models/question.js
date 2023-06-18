@@ -6,7 +6,13 @@ const schema = new mongoose.Schema({
 		required:true,
 		unique:true
 	},
-	question:String,
+	title:{
+		type:String,
+		required:[true,"Question's Title is needed."]
+	},
+	question:{
+		type:String,
+	},
 	categories:[String],
 	likes:{
 		type:Number,
