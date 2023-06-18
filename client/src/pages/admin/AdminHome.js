@@ -3,7 +3,7 @@
 const Adminhome = () => {
 	return(
 		<>
-		<h1>welcome to admint page</h1>
+		<h1>welcome to admin page</h1>
 		</>
 	)
 }

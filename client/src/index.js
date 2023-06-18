@@ -30,10 +30,10 @@ import Try from "./try";
 
 
 const appRouter = createBrowserRouter([
-  // {
-  //   path:"/rp",
-  //   element:<AddQuestion />
-  // },
+  {
+    path:"/try",
+    element:<Try />
+  },
   {
     path: "/LogIn",
     element: <LogIn />,

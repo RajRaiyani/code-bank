@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 mongoose.set("strictQuery", true);
 
 exports.connect = () =>{
-	var connectionString = process.env.CONNECTION_STRING;
+	var connectionString = process.env.CONNECTION_STRING_ATLAS;
 	
 	mongoose.connect(connectionString).then(()=>{
 		if(connectionString.includes("localhost")){

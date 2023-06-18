@@ -12,6 +12,7 @@ const UserHome = () => {
   const [arrayValues, setArrayValues] = useState([]);
   const [level,setlevel]=useState("");
   const [catagories , setCategories]=useState("");
+  
 
   useEffect(() => {
     fetch("http://localhost:3007/api/v1/home/list/get/catagory", {
@@ -39,19 +40,19 @@ const UserHome = () => {
     return (
       <>
         <div className="dropdown">
-          <select >
+          <select value={level} onChange={(e)=>{setlevel(e.target.value)}}>
           <option disabled selected hidden>
               Level
             </option>
-            <option className="text-danger" >
+            <option className="text-danger" value="">
               none
               </option>
-              <option className=" text-success" >
+              <option className=" text-success" value="Easy" >
                 Easy
               </option>
-              <option className="text-warning" >
+              <option className="text-warning"  value="Medium">
               Medium              </option>
-              <option className="text-danger" >
+              <option className="text-danger" value="Hard">
               Hard
               </option>
               
@@ -61,11 +62,15 @@ const UserHome = () => {
       </>
     );
   }
+  function FIlterdata()
+  {
+
+  }
   function GetCatagary() {
     return (
       <>
         <div className="dropdown">
-          <select >
+          <select value={catagories} onChange={(e)=>{setCategories(e.target.value)}}>
           <option disabled selected hidden>
               Categories
             </option>
@@ -116,7 +121,7 @@ const UserHome = () => {
           </div>
         </div>
       </div>
-      <AllQuestion></AllQuestion>
+      <AllQuestion level={level} catagories={catagories}></AllQuestion>
     </>
   );
 };

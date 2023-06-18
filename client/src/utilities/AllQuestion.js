@@ -4,7 +4,8 @@ import "../index.css";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 
-const AllQuestion = () => {
+function AllQuestion  (props) {
+
   const navigate = useNavigate();
 
   const [dataforpop, setdatapop] = useState("");
@@ -17,32 +18,17 @@ const AllQuestion = () => {
       navigate("/user/question/" + id);
     }
   }
+  const filterdata = props.level ? data1.filter((e) => e.level === props.level) : data1;
+  // const filterdata1=props.catagories ? filterdata.filter((e)=>)
+
+  console.log(filterdata);
+  console.log(data1);
 
   function GetDataF() {
-    return data1.map((program) => {
+
+    return filterdata.map((program) => {
       return (
         <>
-          {/* <div
-            className="container mt-1 table-striped border mt-2"
-            key={program._id}
-            onClick={() => {
-              checkNavigate(program._id);
-            }}
-          >
-            <div className="row justify-content-start table-striped table-hover">
-              <div className="col-sm-1  p-2">{program.number}</div>
-              {program.level === "Easy" ? (
-                <div className="col-sm-1 text-success p-2">{program.level}</div>
-              ) : program.level === "hard" ? (
-                <div className="col-sm-1 text-danger p-2">{program.level}</div>
-              ) : (
-                <div className="col-sm-1 text-warning p-2">{program.level}</div>
-              )}
-              <div className="col-sm-7 p-2">{program.question}</div>
-              <div className="col-sm-3 p-2">{program.likes} Like</div>
-            </div>
-          </div> */}
-
           <tr
             key={program._id}
             onClick={() => {
@@ -83,6 +69,9 @@ const AllQuestion = () => {
       );
     });
   }
+
+
+  
   // ============================
   return (
     <>
