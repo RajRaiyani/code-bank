@@ -250,17 +250,20 @@ const QuestionByID = (props) => {
 				console.log(e);
 			})
     }
+
     return (
       <>
         {
           solution.map((e) => {
+            
             return (
               <>
-                <div className="w-50 xs_width text-center border">{e.language}
-                
-                  <button
+                <div className="w-50 xs_width text-center border ">{e.language}
+                <button
                     type="button"
                     className="btn btn-outline-danger ms-5" onClick={()=>{deleteitem(e._id)}}>Delete Solution</button>
+                <div className="p-0">Title :{e.title}</div>
+                 
                     </div>
                 <SyntaxHighlighter language={e.language} style={coldarkCold}>
                   {e.code}

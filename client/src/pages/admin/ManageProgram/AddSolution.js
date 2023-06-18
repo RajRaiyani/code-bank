@@ -42,7 +42,7 @@ const AddSolution = () => {
 				'Content-Type': 'application/json',
 				"token": Cookies.get("adminToken")
 			},
-			body: JSON.stringify({question_id:data.question_id , language:data.language , code:data.code})
+			body: JSON.stringify({question_id:data.question_id , language:data.language , code:data.code , title:data.title})
 		}).then((res) => (res.json()))
 			.then((res) => {
 				if (res.status === "OK") {
@@ -76,6 +76,22 @@ const AddSolution = () => {
             </option>
             <Languages />
           </select>
+
+		  <label for="formGroupExampleInput" class="form-label">
+              Enter a Tile :
+            </label>
+          
+              <input
+			  	rows={4}
+                className="form-control mb-3"
+                id="formGroupExampleInput"
+                type="text"
+          name="title"
+          placeholder="brute force approach"
+          onChange={handleChange}
+              />
+
+
           <div class="mb-3">
             <label for="formGroupExampleInput" class="form-label">
               Enter a Solution :
@@ -90,9 +106,11 @@ const AddSolution = () => {
           placeholder="<code>"
           onChange={handleChange}
               />
+			  
               <button className="btn btn-primary" onClick={submit}>
                 Add Solution
               </button>
+			  
            
           </div>
         </div>
