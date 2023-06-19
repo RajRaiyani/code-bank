@@ -1,31 +1,40 @@
 
-var Storage ={
-	language:["java","python","c","c++"]
+// var Storage ={
+// 	language:["java","python","c","c++"]
+// }
+
+var language = "java";
+var arr = [{language:"python"}];
+for(let val of arr){
+	let {language} = val;
+	console.log(language);
 }
 
-var validateLanguage=function(...languages){
-	let isValid = true;
-	for(let lan of languages){
-		console.log(lan)
-		let isPresent = false;
-		for (let val of Storage.language) {
-			console.log(val)
-			if (lan === val) {
-				isPresent = true;
-				break;
-			}
-		}
-		if(!isPresent){
-			isValid = false;
-			break;
-		}
-	}
+
+
+// var validateLanguage=function(...languages){
+// 	let isValid = true;
+// 	for(let lan of languages){
+// 		console.log(lan)
+// 		let isPresent = false;
+// 		for (let val of Storage.language) {
+// 			console.log(val)
+// 			if (lan === val) {
+// 				isPresent = true;
+// 				break;
+// 			}
+// 		}
+// 		if(!isPresent){
+// 			isValid = false;
+// 			break;
+// 		}
+// 	}
 	
-	return isValid;
-}
+// 	return isValid;
+// }
 
 
-console.log(validateLanguage("python","jsdava"))
+// console.log(validateLanguage("python","jsdava"))
 
 
 
