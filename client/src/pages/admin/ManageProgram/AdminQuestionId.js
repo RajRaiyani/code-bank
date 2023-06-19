@@ -92,23 +92,7 @@ const QuestionByID = (props) => {
 	console.log("main");
   `;
 
-  // function SelectLanguage() {
-  //   return (
-  //     <>
-  //       <select
-  //         className="form-select"
-  //         value={getLanguage}
-  //         onChange={(e) => {
-  //           setLanguage(e.target.value);
-  //         }}
-  //       >
-  //         <option value="java">java</option>
-  //         <option value="python">python</option>
-  //         <option value="javascript">javascript</option>
-  //       </select>
-  //     </>
-  //   );
-  // }
+ 
   function GetComment() {
     function SendComment() {
       fetch("http://localhost:3007/api/v1/home/question/" + id + "/comment", {
@@ -121,11 +105,15 @@ const QuestionByID = (props) => {
       }).then((res) => (res.json()))
         .then((res) => {
           if (res.status === "OK") {
-            // setc([...comment,res.data]);
-
-            console.log(res.data)
             setresponse("comment send succesfully ");
+            let temp = {...res.data}
+            temp.user = {_id:res.data.user_id,username:res.data.username};
+            temp.user_id = undefined;
+            temp.username = undefined;
+            setc([temp,...comment]);
             setcomment("");
+
+
 
 
           } else if (res.status === "EXPIRED_TOKEN") {
@@ -262,17 +250,20 @@ const QuestionByID = (props) => {
 				console.log(e);
 			})
     }
+
     return (
       <>
         {
           solution.map((e) => {
+            
             return (
               <>
-                <div className="w-50 xs_width text-center border">{e.language}
-                
-                  <button
+                <div className="w-50 xs_width text-center border ">{e.language}
+                <button
                     type="button"
                     className="btn btn-outline-danger ms-5" onClick={()=>{deleteitem(e._id)}}>Delete Solution</button>
+                <div className="p-0">Title :{e.title}</div>
+                 
                     </div>
                 <SyntaxHighlighter language={e.language} style={coldarkCold}>
                   {e.code}

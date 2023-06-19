@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 
-const AddQuestion = () => {
+function AddQuestion(props){
+
 	var navigate = useNavigate();
 
 	var [Message, setMessage] = useState("");
@@ -14,7 +15,7 @@ const AddQuestion = () => {
 	// fetching 2 lists "language","categories"
 	// 1 -----------------
 	useEffect(() => {
-		fetch("http://localhost:3007/api/v1/home/list/get/catagory", {
+		fetch("http://localhost:3007/api/v1/home/list/get/category", {
 			method: "GET",
 			headers: {
 				'Content-Type': 'application/json'
@@ -96,7 +97,7 @@ const AddQuestion = () => {
 	function submit(e) {
 		e.preventDefault();
 		let tempForCategories = categories.filter(e => e.isChecked).map(e => e.value);
-    console.log({ number: data.number, question: data.question, categories: tempForCategories, level: data.level, solutions: [{ language: data.language, code: data.code }] })
+    console.log({ number: data.number, question: data.question, categories: tempForCategories,tile:data.title, level: data.level, solutions: [{ language: data.language, code: data.code,title:data.solutiontitle }] })
 
 		fetch("http://localhost:3007/api/v1/admin/question/add", {
 			method: "POST",
@@ -104,7 +105,7 @@ const AddQuestion = () => {
 				'Content-Type': 'application/json',
 				'token': Cookies.get("adminToken")
 			},
-			body: JSON.stringify({ number: data.number, question: data.question, categories: tempForCategories, level: data.level, solutions: [{ language: data.language, code: data.code }] })
+			body: JSON.stringify({ number: data.number, question: data.question, categories: tempForCategories, title:data.title, level: data.level, solutions: [{ language: data.language, code: data.code ,title:data.solutiontitle}] })
 		}).then((res) => (res.json()))
 			.then((res) => {
 				if (res.status === "OK") {
@@ -158,6 +159,17 @@ const AddQuestion = () => {
             />
           </div>
           <div class="mb-3">
+          <label for="formGroupExampleInput" class="form-label">
+              Enter a Question Title :
+            </label>
+            <input
+              class="form-control"
+              id="formGroupExampleInput"
+              
+              name="title" placeholder="Add number" onChange={handleChange}
+
+            />
+
             <label for="formGroupExampleInput" class="form-label">
               Enter a Question :
             </label>
@@ -221,7 +233,17 @@ const AddQuestion = () => {
               <Languages />
             </select>
           </div>
+         
           <div class="mb-3">
+
+          <label for="formGroupExampleInput" class="form-label">
+              Enter a Title :
+            </label>
+            <input
+              class="form-control"
+              id="formGroupExampleInput"
+              name="solutiontitle" placeholder="brute force approach" onChange={handleChange}
+            />
             <label for="formGroupExampleInput" class="form-label">
               Enter a Solution :
             </label>
@@ -229,9 +251,7 @@ const AddQuestion = () => {
               rows={4}
               class="form-control"
               id="formGroupExampleInput"
-              
               name="code" placeholder="<code>" onChange={handleChange}
-
             />
           </div>
           <button type="submit" class="btn btn-primary " onClick={submit}>
