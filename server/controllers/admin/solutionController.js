@@ -42,7 +42,7 @@ exports.deleteSolution = async (req, res) => {
 	try {
 
 		await Solution.deleteOne({ _id: solution_id });
-		res.json({ status: "OK", data })
+		res.json({ status: "OK" })
 
 	} catch (error) {
 		res.json({ status: "X", message: "something went wrong while deleting solution", error });
