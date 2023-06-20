@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import cookie from "js-cookie";
+import { username } from "../../../../server/utility/validation/validationInfo";
 
 const LogIn = (props) => {
 
@@ -25,14 +26,18 @@ const LogIn = (props) => {
 		}).then((res) => (res.json()))
 			.then((res) => {
 				if (res.status === "OK") {
+					
 					if(res.role==="user")
 					{
+					
 						cookie.set("userToken",res.token,{
 							expires: new Date().getTime() + 2 * 1000*3600,
 						  });
+						cookie.set("username",username);
 						navigate("/user/home");
 					}
 					if(res.role==="admin"){
+						cookie.set("username","admin");
 						cookie.set("adminToken",res.token,{
 							expires: new Date().getTime() + 2 * 1000*3600,
 						  });
