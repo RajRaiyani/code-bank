@@ -14,7 +14,7 @@ const { username } = require("../utility/validation/validationInfo");
 
 exports.getAllQuestions = async (req, res) => {
 	try {
-		var data = await Question.find({}, { categories: 0 }).sort({ number: 1 });
+		var data = await Question.find({}).sort({ number: 1 });
 	} catch (error) {
 		return res.json({ status: "X", message: "something went wrong." })
 	}
