@@ -1,8 +1,14 @@
+const util = require("util");
+
 
 // Configuration
 require("dotenv").config();
-require("./config/database").connect();
-require("./utility/memory/storage").reloade(); // get the storage ready.
+const Storage = require("./utility/memory/storage");
+require("./config/database").connect(()=>Storage.reloade());
+
+
+
+
 
 
 

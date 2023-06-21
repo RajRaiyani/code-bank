@@ -3,12 +3,9 @@
 // 	language:["java","python","c","c++"]
 // }
 
-var language = "java";
-var arr = [{language:"python"}];
-for(let val of arr){
-	let {language} = val;
-	console.log(language);
-}
+
+var arr = [3,3,5,2,1,3,5,6,2,3,5,2];
+console.log([...new Set(arr)]);
 
 
 

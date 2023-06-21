@@ -13,18 +13,10 @@ exports.addSolution = async (req, res) => {
 	try {
 		if (! await Question.exists({ _id: question_id }))
 			return res.json({ status: "NOT_EXIST", message: "No question exists for this solution." });
+
 		if (!Validator.validate("solutionTitle", title))
 			return res.json({ status: "INVALID", message: "Solution's Title is not valid." });
-
-		let isValidLanguage = false;
-		for (let val of Storage.language) {
-			if (val === language) {
-				isValidLanguage = true;
-				break;
-			}
-		}
-		
-		if (!isValidLanguage)
+		if (!Validator.validateLanguage(language))
 			return res.json({ status: "INVALID", message: "Solution's Language is not valid." });
 
 		var data = await Solution.create({ question_id, language, title, code });
@@ -40,12 +32,10 @@ exports.deleteSolution = async (req, res) => {
 	if (!solution_id) return res.json({ status: "MISSING", message: "solution_id is missing." });
 
 	try {
-
 		await Solution.deleteOne({ _id: solution_id });
 		res.json({ status: "OK" })
-
 	} catch (error) {
-		res.json({ status: "X", message: "something went wrong while deleting solution", error });
+		res.json({ status: "X", message: "something went wrong while deleting one solution", error });
 	}
 }
 
@@ -68,13 +58,8 @@ exports.editSolution = async (req, res) => {
 		data.title = title;
 	}
 	if (language) {
-		let isValidLanguage = false;
-		for (let val of Storage.language) {
-			if (val === language) {
-				isValidLanguage = true;
-				break;
-			}
-		}
+		if (!Validator.validateLanguage(language))
+			return res.json({ status: "INVALID", message: "Solution's Language is not valid." });
 		data.language = language;
 	}
 	if (code) data.code = code;
