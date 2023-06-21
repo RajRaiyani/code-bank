@@ -1,8 +1,11 @@
 const mongoose = require("mongoose");
 mongoose.set("strictQuery", true);
 
-exports.connect = () =>{
-	var connectionString = process.env.CONNECTION_STRING_ATLAS;
+
+
+
+exports.connect = (callback) =>{
+	var connectionString = process.env.CONNECTION_STRING;
 	
 	mongoose.connect(connectionString).then(()=>{
 		if(connectionString.includes("localhost")){
@@ -18,6 +21,8 @@ exports.connect = () =>{
 				"ATLAS"
 				);
 		}
+
+		if(callback)callback();
 		
 	}).catch((error)=>{
 		console.log("\x1b[41m","database connection faild.","\x1b[0m"+"\n");
