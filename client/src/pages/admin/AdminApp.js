@@ -72,7 +72,7 @@ const AdminApp = () => {
             </nav>
             <Outlet />
             <Footer></Footer> */}
-      <div className="d-flex gap-3" style={{ backgroundColor: " #DFE5EF" }}>
+      <div className="d-flex gap-3 bg-white" >
         <div
           className={
             isExpanded

@@ -151,7 +151,7 @@ const AdminUser = () => {
 
 	return (
 		<>
-			<div className="container-sm">
+			<div className="container m-2">
 				<table className="table table-light border text-center">
 					<thead>
 						<tr>

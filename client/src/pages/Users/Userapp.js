@@ -4,30 +4,28 @@ import { Outlet, useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import { useState } from "react";
-const UserApp=()=>{
+const UserApp = () => {
     var navigate = useNavigate();
-	// const [data,setData] = useState({});
+    // const [data,setData] = useState({});
 
-	const [isLoggedIn,setLogInStatus] = useState(false);
+    const [isLoggedIn, setLogInStatus] = useState(false);
 
-
-    
     useEffect(() => {
         if (!Cookies.get("userToken")) {
             navigate("/login");
         }
-        else{
-            setLogInStatus(true); 
+        else {
+            setLogInStatus(true);
         }
 
     }, [navigate]);
-    return(
+    return (
         <>
-			<Header isLoggedIn={isLoggedIn}  setLogInStatus={setLogInStatus}/>
-        <Outlet>
-        </Outlet>
-			<Footer />
-            
+            <Header isLoggedIn={isLoggedIn} setLogInStatus={setLogInStatus} />
+            <Outlet>
+            </Outlet>
+            <Footer />
+
 
         </>
     )

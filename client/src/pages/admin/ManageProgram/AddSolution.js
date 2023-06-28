@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams ,Link} from "react-router-dom";
 import Cookies from "js-cookie";
 const AddSolution = () => {
     const { id } = useParams();
@@ -47,6 +47,7 @@ const AddSolution = () => {
 			.then((res) => {
 				if (res.status === "OK") {
 					setMessage("add solution succesfully");
+          
 				} else {
 					console.log(res);
 					setMessage(res.message);
@@ -106,10 +107,10 @@ const AddSolution = () => {
           placeholder="<code>"
           onChange={handleChange}
               />
-			  
               <button className="btn btn-primary" onClick={submit}>
                 Add Solution
               </button>
+           
 			  
            
           </div>
