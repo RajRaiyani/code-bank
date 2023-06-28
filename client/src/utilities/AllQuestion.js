@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState ,useEffect } from "react";
 import QuestionDatach from "../Hooks/useQuestionData";
 import "../index.css";
 import Cookies from "js-cookie";
@@ -7,9 +7,22 @@ import { useNavigate } from "react-router-dom";
 function AllQuestion  (props) {
 
   const navigate = useNavigate();
+ 
 
   const [dataforpop, setdatapop] = useState("");
   const [data1, setData1] = QuestionDatach();
+  const [level,setlevel]=useState("");
+  useEffect(() => {
+  //   if(Cookies.get("adminToken"))
+  //   {
+  //     navigate("/admin")
+  //   }
+  //  else
+    if (Cookies.get("userToken")) {
+      navigate("/user/home");
+    }
+   
+  }, [navigate]);
 
   function checkNavigate(id) {
     if (!Cookies.get("userToken")) {
@@ -18,11 +31,36 @@ function AllQuestion  (props) {
       navigate("/user/question/" + id);
     }
   }
-  const filterdata = props.level ? data1.filter((e) => e.level === props.level) : data1;
+
+  function GetLevel() {
+    return (
+      <>
+        <div className="dropdown">
+          <select value={level} onChange={(e)=>{setlevel(e.target.value)}}>
+          <option disabled selected hidden>
+              Level
+            </option>
+            <option className="text-danger" value="">
+              none
+              </option>
+              <option className=" text-success" value="Easy" >
+                Easy
+              </option>
+              <option className="text-warning"  value="Medium">
+              Medium              </option>
+              <option className="text-danger" value="Hard">
+              Hard
+              </option>
+              
+
+          </select>
+        </div>
+      </>
+    );
+  }
+  var filterdata = props.level ? data1.filter((e) => e.level === props.level) : data1;
   // const filterdata1=props.catagories ? filterdata.filter((e)=>)
 
-  console.log(filterdata);
-  console.log(data1);
 
   function GetDataF() {
 

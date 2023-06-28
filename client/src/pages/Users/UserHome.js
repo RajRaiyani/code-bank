@@ -15,7 +15,7 @@ const UserHome = () => {
   
 
   useEffect(() => {
-    fetch("http://localhost:3007/api/v1/home/list/get/catagory", {
+    fetch("http://localhost:3007/api/v1/home/list/get/category", {
         method: "GET",
         headers: {
             'Content-Type': 'application/json',
@@ -62,10 +62,7 @@ const UserHome = () => {
       </>
     );
   }
-  function FIlterdata()
-  {
-
-  }
+  
   function GetCatagary() {
     return (
       <>

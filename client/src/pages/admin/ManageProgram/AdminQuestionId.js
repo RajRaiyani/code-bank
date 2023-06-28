@@ -134,6 +134,7 @@ const QuestionByID = (props) => {
 
     return (
       <>
+      <div className="container"></div>
 
         <div className="text-primary">{rescomment}</div>
         <div className="d-flex flex-start">
@@ -240,6 +241,7 @@ const QuestionByID = (props) => {
 				}
 				else {
 					setMessage(res.message);
+          console.log(res);
 				}
         setTimeout(() => {
           setMessage('');
@@ -283,8 +285,8 @@ const QuestionByID = (props) => {
     
     
 
-      <div className="container d-flex  gap-4  display_block">
-        <div className=" w-50 xs_width">
+      <div className="container mt-5 d-flex  gap-4  display_block ">
+        <div className="w-50 xs_width">
           {/* There is two btn one for description and one for comments */}
           <div className="d-flex justify-content-start gap-2 mb-3">
             <div>
