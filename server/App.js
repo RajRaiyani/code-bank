@@ -1,5 +1,3 @@
-const util = require("util");
-
 
 // Configuration
 require("dotenv").config();
