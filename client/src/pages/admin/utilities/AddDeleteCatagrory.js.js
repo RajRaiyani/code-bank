@@ -60,7 +60,7 @@ const MangeCatagroy = () => {
 
 
     const AddtoCatagory = () => {
-      console.log(inputValue);
+
         fetch("http://localhost:3007/api/v1/admin/list/alter/category/add/" + inputValue, {
             method: "PUT",
             headers: {
