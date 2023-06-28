@@ -14,7 +14,7 @@ const MangeCatagroy = () => {
     };
 
     useEffect(() => {
-        fetch("http://localhost:3007/api/v1/home/list/get/catagory", {
+        fetch("http://localhost:3007/api/v1/home/list/get/category", {
             method: "GET",
             headers: {
                 'Content-Type': 'application/json',
@@ -37,7 +37,7 @@ const MangeCatagroy = () => {
     }, [])
 
     function deleteCatagory(props) {
-        fetch("http://localhost:3007/api/v1/admin/list/alter/catagory/remove/" + props, {
+        fetch("http://localhost:3007/api/v1/admin/list/alter/category/remove/" + props, {
             method: "PUT",
             headers: {
                 'Content-Type': 'application/json',
@@ -60,7 +60,7 @@ const MangeCatagroy = () => {
 
 
     const AddtoCatagory = () => {
-        fetch("http://localhost:3007/api/v1/admin/list/alter/catagory/add/" + inputValue, {
+        fetch("http://localhost:3007/api/v1/admin/list/alter/category/add/" + inputValue, {
             method: "PUT",
             headers: {
                 'Content-Type': 'application/json',
