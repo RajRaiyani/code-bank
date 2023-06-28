@@ -2,19 +2,23 @@ const Info = require("./validationInfo");
 const Storage = require("./../memory/storage");
 
 const validator = {
-	validate : function(property,value) {
-		if(!Info[property])return false;
-		if(Info[property].pattern.test(value))return true;
+	validate: function (property, value) {
+		if (!Info[property]) return false;
+		if (Info[property].pattern.test(value)) return true;
 		return false;
 	},
-	info : function(property){
-		if(!Info[property])return;
+	info: function (property) {
+		if (!Info[property]) return;
 		return Info[property];
 	},
-	
-	validateLanguage:function(...languages){
+	validateLevel: function (level) {
+		if (level === "Hard" || level === "Medium" || level === "Easy") return true;
+		return false;
+	},
+
+	validateLanguage: function (...languages) {
 		let isValid = true;
-		for(let lan of languages){
+		for (let lan of languages) {
 			let isPresent = false;
 			for (let val of Storage.language) {
 				if (lan === val) {
@@ -22,32 +26,31 @@ const validator = {
 					break;
 				}
 			}
-			if(!isPresent){
+			if (!isPresent) {
 				isValid = false;
 				break;
 			}
 		}
-		
+
 		return isValid;
 	},
 
-
-	validateCategory:function(...categories){
+	validateCategory: function (...categories) {
 		let isValid = true;
-		for(let lan of categories){
+		for (let cat of categories) {
 			let isPresent = false;
 			for (let val of Storage.category) {
-				if (lan === val) {
+				if (cat === val) {
 					isPresent = true;
 					break;
 				}
 			}
-			if(!isPresent){
+			if (!isPresent) {
 				isValid = false;
 				break;
 			}
 		}
-		
+
 		return isValid;
 	}
 }

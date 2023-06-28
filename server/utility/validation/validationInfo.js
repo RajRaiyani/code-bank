@@ -7,6 +7,10 @@ const validationInfo = {
 		pattern : /^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$/,
 		description : "Email should look like xyz@abc.coin"
 	},
+	question:{
+		pattern:/^.{8,}$/,
+		description:"Question atlist contains 7 charachters."
+	},
 	questionTitle:{
 		pattern : /^.{5,70}$/,
 		description : "Title can contain 5 to 70 characters only."

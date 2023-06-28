@@ -16,8 +16,14 @@ exports.addQuestion = async (req, res) => {
 	if (!(title && question && categories && level && solutions) || solutions.length === 0)
 		return res.json({ status: "MISSING_FIELD", message: "all fileds are required." });
 
+	categories = [...new Set(categories)];
+
+	if (!Validator.validate("question", question))
+		return res.json({ status: "INVALID", message: "Question is not valid" });
 	if (!Validator.validate("questionTitle", title))
 		return res.json({ status: "INVALID", message: "Question's Title is not valid" });
+	if (!Validator.validateLevel(level))
+		return res.json({ status: "INVALID", message: "Question's level is not valid" });
 	if (!Validator.validateCategory(...categories))
 		return res.json({ status: "INVALID", message: "Question's categories are not valid" });
 
@@ -79,28 +85,51 @@ exports.editQuestion = async (req, res) => {
 
 	if (!question_id) return res.json({ status: "MISSING", message: "question id is required." });
 
-	var data = await Question.findOne({ _id: question_id });
+	try {
 
-	if (!data) return res.json({ status: "NOT_EXIST", message: "Question does not exist." });
+		var data = await Question.findOne({ _id: question_id });
+		if (!data) return res.json({ status: "NOT_EXIST", message: "Question does not exist." });
 
-	if (number && number != data.number) {
-		if (await Question.exists({ number })) {
-			return res.json({ status: "EXIST", message: "this number is already assigned." })
+		if (number && number != data.number) {
+			if (await Question.exists({ number })) {
+				return res.json({ status: "EXIST", message: "this number already assigned." })
+			}
+			data.number = number;
 		}
+
+	} catch (error) {
+		res.json({ status: "X", message: "somethin went wrong while updating question (1).", error });
 	}
 
-	if (question) data.question = question;
-	if (title) data.title = title;
-	if (number) data.number = number;
-	if (categories) data.categories = categories;
-	if (level) data.level = level;
-
-
 	try {
+
+		if (question && question !== data.question) {
+			if (!Validator.validate("question", question))
+				return res.json({ status: "INVALID", message: "Question is not valid" });
+			data.question = question;
+		}
+		if (title && title !== data.title) {
+			if (!Validator.validate("questionTitle", title))
+				return res.json({ status: "INVALID", message: "Question's Title is not valid" });
+			data.title = title;
+		}
+		if (categories) {
+			categories = [...new Set(categories)];
+			if (!Validator.validateCategory(...categories))
+				return res.json({ status: "INVALID", message: "Question's categories are not valid" });
+			data.categories = categories;
+		}
+		if (level && level !== data.level) {
+			if (!Validator.validateLevel(level))
+				return res.json({ status: "INVALID", message: "Question's level is not valid" });
+			data.level = level;
+		}
+
 		await data.save();
+
 		res.json({ status: "OK", data });
 	} catch (error) {
-		res.json({ status: "X", message: error.message, error });
+		res.json({ status: "X", message: "somethin went wrong while updating question (2).", error });
 	}
 }
 
