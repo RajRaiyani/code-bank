@@ -24,7 +24,7 @@ const Header = (props) => {
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              {/* {props.name.charAt(0).toUpperCase()} */}user name
+              {/* {props.name.charAt(0).toUpperCase()} */}{Cookies.get("username")}
             </button>
             <ul className="dropdown-menu">
               <li>
@@ -45,7 +45,7 @@ const Header = (props) => {
   }
 
   return (
-    <nav className="navbar navbar-expand-lg bg-body-tertiary border-bottom border-dark mb-4">
+    <nav className="navbar navbar-expand-lg  border-bottom border-dark mb-4">
       <div className="container-fluid">
         <Link to="/" className="navbar-brand text-dark">
           Code Bank
