@@ -106,6 +106,8 @@ const MangeLanguge = () => {
                 class="form-control"
                 id="formGroupExampleInput"
                 placeholder="Enter a Language"
+                value={inputValue}
+                onChange={(e)=>{setInputValue(e.target.value)}}
               />
               <button className="btn btn-primary" onClick={AddtoCatagory}>
                 Add

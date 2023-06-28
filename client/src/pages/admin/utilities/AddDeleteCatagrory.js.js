@@ -134,6 +134,8 @@ const MangeCatagroy = () => {
                 class="form-control"
                 id="formGroupExampleInput"
                 placeholder="Enter a Category"
+                value={inputValue}
+                onChange={(e)=>{setInputValue(e.target.value)}}
               />
               <button className="btn btn-primary" onClick={AddtoCatagory}>
                 Add
