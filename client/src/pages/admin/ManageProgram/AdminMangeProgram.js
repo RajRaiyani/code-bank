@@ -12,24 +12,14 @@ const AdminAddProgram = () => {
 	const [data1, setData1] = QuestionDatach();
 	const [message, setMessage] = useState("");
 	var [data, setData] = useState({ language: "", code: "" });
-	const windoWidth = useRef(window.innerWidth);
-
-	
-
 	function checkNavigate(id) {
-
 		if (!Cookies.get("adminToken")) {
 			navigate("login");
 		}
 		else {
 			navigate("/admin/Program/" + id);
 		}
-
-
 	}
-
-
-
 	function assigendata(props) {
 		setdatapop(props);
 	}
@@ -63,13 +53,6 @@ const AdminAddProgram = () => {
 			})
 
 	}
-
-
-
-
-
-
-
 
 	function GetDataF() {
 		return data1.map(program => {
@@ -114,11 +97,6 @@ const AdminAddProgram = () => {
       );
 		})
 	}
-
-
-
-
-
 	// ============================
 	return (
     <>

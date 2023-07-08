@@ -40,10 +40,6 @@ function PrintComment(props){
     
         {data.map((item, index) => (
       <div key={index}>
-
-
-
-
         <div className="d-flex flex-start align-items-center">
           <img
             className="rounded-circle shadow-1-strong me-3"
@@ -69,11 +65,7 @@ function PrintComment(props){
         </p>
           
       </div>
-
-
     ))}
-    
-         
         </>
     )
 }

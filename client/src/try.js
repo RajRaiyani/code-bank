@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import "./sideNavBar.css";
-import { faList, faXmark } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Try = () => {
   const [isExpanded, setExpendState] = useState(false);

@@ -9,9 +9,6 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 //all for admin
 import Adminapp from "./pages/admin/AdminApp";
-// import AdminAddProgram from './pages/admin/ManageProgram/AdminMangeProgram';
-import EditProgram from "./pages/admin/ManageProgram/AdminEditProgram";
-import AdminSeeComments from "./pages/admin/ManageUser/AdminSeeComments";
 import AdminUser from "./pages/admin/ManageUser/AdminUser";
 import UserApp from "./pages/Users/Userapp";
 import Question from "./utilities/QuestionById";
@@ -75,10 +72,6 @@ const appRouter = createBrowserRouter([
             element: <MangeLanguge />,
           },
           {
-            path: "EditProgram/:id",
-            element: <EditProgram />,
-          },
-          {
             path: ":id",
             element: <QuestionByIDAdmin />,
           },
@@ -96,11 +89,7 @@ const appRouter = createBrowserRouter([
           {
             path: "",
             element: < AdminUser />,
-          },
-          {
-            path: "comments",
-            element: <AdminSeeComments/>,
-          },
+          }
         ],
       },
     ],

@@ -1,15 +1,18 @@
 import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
+import Logo from "./Logo";
+import "../css/components.css"
+import {GiHamburgerMenu} from "react-icons/gi"
 
 const Header = (props) => {
   var navigate = useNavigate();
   function IfLogged() {
     if (!props.isLoggedIn) {
       return (
-        <li className="nav-item">
+        <li >
           <Link to="/login">
-            <button className="btn btn-outline-secondary ms-2" type="button">
+            <button className="btn btn-outline-secondary secondary-color mx-2 header-btn" type="button">
               Log in/Sign in
             </button>
           </Link>
@@ -18,13 +21,14 @@ const Header = (props) => {
     } else {
       return (
         <>
-          <li className="nav-item dropdown">
+          <li className="dropdown">
             <button
-              className="btn px-4 fw-bolder rounded-pill btn-outline-success mx-3 "
+              className="btn px-4 fw-bolder rounded-pill btn-outline-success mx-3 header-btn"
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              {/* {props.name.charAt(0).toUpperCase()} */}{Cookies.get("username")}
+              {/* {props.name.charAt(0).toUpperCase()} */}
+              {Cookies.get("username")}
             </button>
             <ul className="dropdown-menu">
               <li>
@@ -48,11 +52,11 @@ const Header = (props) => {
     <nav className="navbar navbar-expand-lg  border-bottom border-dark mb-4">
       <div className="container-fluid">
         <Link to="/" className="navbar-brand text-dark">
-          Code Bank
+          <Logo />
         </Link>
 
         <button
-          className="navbar-toggler"
+          className="navbar-toggler outline-none"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarNavDropdown"
@@ -60,7 +64,7 @@ const Header = (props) => {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span className="navbar-toggler-icon" />
+          <GiHamburgerMenu className="secondary-color" />
         </button>
 
         <div
@@ -68,28 +72,16 @@ const Header = (props) => {
           id="navbarNavDropdown"
         >
           <ul className="navbar-nav">
-            <li className="nav-item">
-              <Link
-                to="/"
-                className="nav-link text-dark"
-                aria-current="page"
-                href="#"
-              >
-                Home
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/about" className="nav-link text-dark" href="#">
+            <li className="nav-items">
+              <Link to="/about" className="nav-link secondary-color" href="#">
                 About
               </Link>
             </li>
-            <li className="nav-item">
-              <Link to="/contact" className="nav-link text-dark" href="#">
+            <li className="nav-items">
+              <Link to="/contact" className="nav-link secondary-color" href="#">
                 Contact
               </Link>
             </li>
-
-            <li className="nav-item"></li>
             <IfLogged />
           </ul>
         </div>
