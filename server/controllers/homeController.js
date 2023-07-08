@@ -6,6 +6,8 @@ const User = require("./../models/user");
 const List = require("./../models/list");
 const Like = require("./../models/like");
 const { username } = require("../utility/validation/validationInfo");
+const searchQuestions = require("./../utility/searching/searchQuestions");
+
 
 
 
@@ -13,13 +15,22 @@ const { username } = require("../utility/validation/validationInfo");
 
 
 exports.getAllQuestions = async (req, res) => {
-	try {
-		var data = await Question.find({}).sort({ number: 1 });
-	} catch (error) {
-		return res.json({ status: "X", message: "something went wrong." })
+	var {filter} = req.body;
+	if(!filter){
+
+		try {
+			var data = await Question.find({}).sort({ number: 1 });
+		} catch (error) {
+			return res.json({ status: "X", message: "something went wrong." })
+		}
+	
+		return res.json({ status: "OK", data });
 	}
 
-	res.json({ status: "OK", data });
+	var data = await searchQuestions(filter.searchString);
+
+	res.json({status:"OK",data});
+
 }
 
 //================================================================
