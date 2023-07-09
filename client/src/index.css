@@ -1,9 +1,10 @@
 /* NX = not expanded */
 :root {
-	--primary: #0091ff;
+	--primary: #7cc529;
 	--dark: #061b28;
 	--gray: #756388;
 	--light: #ffffff;
+  --secondary: #503524;
 }
 body {
   margin: 0;
@@ -19,6 +20,26 @@ code {
     monospace;
 }
 
+/* comman css */
+.secondary-color{
+  color: var(--secondary);
+}
+.primary-color{
+  color: var(--primary);
+}
+.primary-bg{
+background-color: var(--primary);
+}
+.secondary-bg{
+  background-color: var(--secondary);
+}
+.border-color{
+  border-color: var(--secondary);
+  opacity: 0.5;
+}
+.border-radius-15{
+ border-radius: 10px !important;
+}
 .QuestionBox{
   transition: all 0.2s ease-in-out;
 }
@@ -36,6 +57,11 @@ code {
   height: 20px;
   margin-right: 10px;
   outline: none;
+}
+
+button:focus{
+  outline: none;
+
 }
 
 

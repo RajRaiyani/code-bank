@@ -1,12 +1,9 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate , Link } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import Cookies from "js-cookie";
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { coldarkCold } from "react-syntax-highlighter/dist/esm/styles/prism";
 import "../../../App.css";
-import { AiOutlineDelete } from 'react-icons/ai';
 
 import LikeButton from "../../../utilities/likebutton";
 import PrintComment from "../../../utilities/printcomment";
@@ -17,7 +14,7 @@ const QuestionByID = (props) => {
   const [solution, setsolution] = useState([]);
   const [comment, setc] = useState([]);
   const [isComments, setIsComments] = useState(false);
-  const [status, setstatus]=useState("");
+  const [status, setstatus] = useState("");
   const [commentmessage, setcomment] = useState("");
   const [cat, setcatagro] = useState([]);
   const [rescomment, setresponse] = useState("");
@@ -83,16 +80,6 @@ const QuestionByID = (props) => {
     , [id]);
 
 
-
-
-  const codeString = `
-  	num += 1
-   	e.stopPropagation();
-    console.log("sub");
-	console.log("main");
-  `;
-
- 
   function GetComment() {
     function SendComment() {
       fetch("http://localhost:3007/api/v1/home/question/" + id + "/comment", {
@@ -106,16 +93,12 @@ const QuestionByID = (props) => {
         .then((res) => {
           if (res.status === "OK") {
             setresponse("comment send succesfully ");
-            let temp = {...res.data}
-            temp.user = {_id:res.data.user_id,username:res.data.username};
+            let temp = { ...res.data }
+            temp.user = { _id: res.data.user_id, username: res.data.username };
             temp.user_id = undefined;
             temp.username = undefined;
-            setc([temp,...comment]);
+            setc([temp, ...comment]);
             setcomment("");
-
-
-
-
           } else if (res.status === "EXPIRED_TOKEN") {
             navigate("/login");
           } else {
@@ -129,12 +112,10 @@ const QuestionByID = (props) => {
         .catch((e) => {
           console.log(e);
         })
-
     }
-
     return (
       <>
-      <div className="container"></div>
+        <div className="container"></div>
 
         <div className="text-primary">{rescomment}</div>
         <div className="d-flex flex-start">
@@ -196,10 +177,10 @@ const QuestionByID = (props) => {
               <h5 className="text-warning">{getdata.level}</h5>
             )}
           </div>
-          {cat.map((e)=>{
-            return(
+          {cat.map((e) => {
+            return (
               <>
-              {e}
+                {e}
               </>
             )
           })}
@@ -225,48 +206,47 @@ const QuestionByID = (props) => {
     );
   }
   function GetSolution() {
-    function deleteitem(id){
+    function deleteitem(id) {
       fetch("http://localhost:3007/api/v1/admin/solution/delete/", {
-			method: "DELETE",
-			headers: {
-				'Content-Type': 'application/json',
-				"token": Cookies.get("adminToken")
-			},
-			body: JSON.stringify({ solution_id: id })
-		}).then(res => res.json())
-			.then(res => {
-				if (res.status === "OK") {
-          setsolution(solution.filter((item,index) => item._id !== id));
-          setMessage("solution delete succesfully");
-				}
-				else {
-					setMessage(res.message);
-          console.log(res);
-				}
-        setTimeout(() => {
-          setMessage('');
-        }, 2000);
+        method: "DELETE",
+        headers: {
+          'Content-Type': 'application/json',
+          "token": Cookies.get("adminToken")
+        },
+        body: JSON.stringify({ solution_id: id })
+      }).then(res => res.json())
+        .then(res => {
+          if (res.status === "OK") {
+            setsolution(solution.filter((item, index) => item._id !== id));
+            setMessage("solution delete succesfully");
+          }
+          else {
+            setMessage(res.message);
+            console.log(res);
+          }
+          setTimeout(() => {
+            setMessage('');
+          }, 2000);
 
-			})
-			.catch((e) => {
-				console.log(e);
-			})
+        })
+        .catch((e) => {
+          console.log(e);
+        })
     }
 
     return (
       <>
         {
           solution.map((e) => {
-            
+
             return (
               <>
                 <div className="w-50 xs_width text-center border ">{e.language}
-                <button
+                  <button
                     type="button"
-                    className="btn btn-outline-danger ms-5" onClick={()=>{deleteitem(e._id)}}>Delete Solution</button>
-                <div className="p-0">Title :{e.title}</div>
-                 
-                    </div>
+                    className="btn btn-outline-danger ms-5" onClick={() => { deleteitem(e._id) }}>Delete Solution</button>
+                  <div className="p-0">Title :{e.title}</div>
+                </div>
                 <SyntaxHighlighter language={e.language} style={coldarkCold}>
                   {e.code}
                 </SyntaxHighlighter>
@@ -279,12 +259,8 @@ const QuestionByID = (props) => {
     )
 
   }
-
   return (
     <>
-    
-    
-
       <div className="container mt-5 d-flex  gap-4  display_block ">
         <div className="w-50 xs_width">
           {/* There is two btn one for description and one for comments */}
@@ -316,13 +292,11 @@ const QuestionByID = (props) => {
         </div>
       </div>
       <Link to={"/admin/program/Addsolution/" + id}>
-<button type="button" className="btn btn-outline-success m-5 fs-4">
-  Add Solution+
-</button>
-</Link>
+        <button type="button" className="btn btn-outline-success m-5 fs-4">
+          Add Solution+
+        </button>
+      </Link>
     </>
-
-    
   );
 };
 
