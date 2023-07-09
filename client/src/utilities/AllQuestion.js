@@ -1,17 +1,19 @@
-import { useState ,useEffect } from "react";
+import { useState, useEffect } from "react";
 import QuestionDatach from "../Hooks/useQuestionData";
 import "../index.css";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
+import "../css/components.css"
+import LikeButton from "./likebutton";
+import GetLevel from "../components/GetLevel";
+import GetCatagary from "../components/GetCategory";
+import SearchBtn from "../components/Search";
 
-function AllQuestion  (props) {
 
+function AllQuestion(props) {
   const navigate = useNavigate();
- 
-
-  const [dataforpop, setdatapop] = useState("");
   const [data1, setData1] = QuestionDatach();
-  const [level,setlevel]=useState("");
+  const[level , setlevel]=useState("");
   useEffect(() => {
     if (Cookies.get("userToken")) {
       navigate("/user/home");
@@ -26,62 +28,71 @@ function AllQuestion  (props) {
     }
   }
 
-  var filterdata = props.level ? data1.filter((e) => e.level === props.level) : data1;
+  var filterdata = level ? data1.filter((e) => e.level === level) : data1;
   function GetDataF() {
 
     return filterdata.map((program) => {
       return (
         <>
-          <tr
+          <div
+            className="Question_box"
             key={program._id}
             onClick={() => {
               checkNavigate(program._id);
             }}
           >
-            <th>{program.number}</th>
-            <td>{program.question}</td>
-            {program.level === "Easy" ? (
-              <td className="text-success">{program.level}</td>
-            ) : program.level === "Hard" ? (
-              <td className="text-danger">{program.level}</td>
-            ) : (
-              <td className="text-warning ">{program.level}</td>
-            )}
-            <td>{program.likes} Like</td>
-          </tr>
+            <div style={{ padding: "0.5rem" }}>
+              <span style={{ flex: "1", float: 'left', paddingRight: "0.5rem" }}> <b>{program.number}</b></span>
+              <div style={{}}> {program.title}
+                <span style={{ float: "right", }}>
+                  <LikeButton status={program} nolike={program.likes}></LikeButton>
+                </span></div>
+              {program.level === "Easy" ? (
+                <>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="
+#7CC529" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                    <circle cx="8" cy="8" r="8" />
+                  </svg>
+                  <span style={{ paddingLeft: "0.5rem" }}>{program.level}</span>
+                </>
+              ) : program.level === "Hard" ? (<>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="
+                #E47171" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                  <circle cx="8" cy="8" r="8" />
+                </svg>
+                <span style={{ paddingLeft: "0.5rem" }}>{program.level}</span>
+              </>
+              ) : (
+                <>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="
+                #FFB444" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                    <circle cx="8" cy="8" r="8" />
+                  </svg>
+                  <span style={{ paddingLeft: "0.5rem" }}>{program.level}</span>
+                </>
+              )}
+              
+            </div>
+          </div>
         </>
       );
     });
   }
-
-
-  
-  // ============================
   return (
     <>
-      <div className="container">
-        <table className="table table-striped table-bordered table-hover">
-          <thead>
-            <tr>
-              <th scope="col" className="col-sm-1">
-                Number
-              </th>
+      <div className="Container">
+        <div style={{display:"flex" , justifyContent:"space-between"}}>
 
-              <th scope="col" className="col-sm-9">
-                Question
-              </th>
-              <th scope="col" className="col-sm-1">
-                Level
-              </th>
-              <th scope="col" className="col-sm-2">
-                Like
-              </th>
-            </tr>
-          </thead>
-          <tbody>
+        
+      <GetLevel level={level} setlevel={setlevel}/>
+      <GetCatagary />
+<SearchBtn data={data1} setData={setData1}> </SearchBtn>
+</div>
+        <div className="raw">
+          <div className="col-md-8 main_box col-xs-12 col-sm-10" >
             <GetDataF />
-          </tbody>
-        </table>
+          </div>
+        </div>
       </div>
     </>
   );
