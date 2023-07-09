@@ -15,11 +15,11 @@ const searchQuestions = require("./../utility/searching/searchQuestions");
 
 
 exports.getAllQuestions = async (req, res) => {
-	var { filter } = req.body;
+	var { search } = req.query;
 
 	try {
-		if (filter && filter.searchString.length>0)
-			var data = await searchQuestions(filter.searchString);
+		if (search && search.length>0)
+			var data = await searchQuestions(decodeURIComponent(search));
 		else
 			var data = await Question.find({}).sort({ number: 1 });
 
