@@ -12,8 +12,7 @@ function SearchBtn(props) {
         props.setData(data1);
        }
        else{
-       
-            fetch("http://localhost:3007/api/v1/home/question", {
+            fetch(`http://localhost:3007/api/v1/home/question?search=${encodeURIComponent(event.target.value)}`, {
                 method: "GET",
                 headers: {
                     'Content-Type': 'application/json',
@@ -35,6 +34,7 @@ function SearchBtn(props) {
       
     return (
       <>
+      <div>
         <div className="input-group">
           <div >
             <input
@@ -48,6 +48,7 @@ function SearchBtn(props) {
           <button type="button" class="btn btn-primary">
             <FontAwesomeIcon icon={faMagnifyingGlass} />
           </button>
+        </div>
         </div>
       </>
     );

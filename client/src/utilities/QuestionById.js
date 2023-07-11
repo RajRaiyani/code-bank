@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { coldarkCold } from "react-syntax-highlighter/dist/esm/styles/prism";
 import "../App.css";
@@ -10,7 +8,6 @@ import LikeButton from "./likebutton";
 import PrintComment from "./printcomment";
 const QuestionByID = (props) => {
   const { id } = useParams();
-  const [temp,settemp]=useState([]);
   const [getdata, setGetdata] = useState([]);
   const [message, setMessage] = useState("");
   const [solution, setsolution] = useState([]);
@@ -50,9 +47,6 @@ const QuestionByID = (props) => {
           }
         })
         .catch((e) => console.log("error : " + e));
-
-
-
       fetch("http://localhost:3007/api/v1/home/list/get/language", {
         method: "GET",
         headers: {
@@ -72,8 +66,6 @@ const QuestionByID = (props) => {
           }
         })
         .catch(e => console.log("error : " + e));
-
-
     };
     fatch();
 
@@ -100,8 +92,6 @@ const QuestionByID = (props) => {
             temp.username = undefined;
             setc([temp,...comment]);
             setcomment("");
-
-
           } else if (res.status === "EXPIRED_TOKEN") {
             navigate("/login");
           } else {
@@ -115,12 +105,9 @@ const QuestionByID = (props) => {
         .catch((e) => {
           console.log(e);
         })
-
     }
-
     return (
       <>
-
         <div className="text-primary">{rescomment}</div>
         <div className="d-flex flex-start">
           <img
@@ -169,7 +156,6 @@ const QuestionByID = (props) => {
             <b className="lead-font-size">{getdata.number} {getdata.question}</b>
           </h4>
         </div>
-
         {/* Here is question level and like of that particular question */}
         <div className="d-flex justify-content-between">
           <div>
@@ -194,12 +180,10 @@ const QuestionByID = (props) => {
           <div>
             <h5>
               <LikeButton status={status} nolike={getdata.likes}></LikeButton>
-
             </h5>
           </div>
         </div>
         <hr style={{ marginTop: "0rem" }}></hr>
-
         {/* Here is full question */}
         <div>
           <p>
@@ -210,7 +194,6 @@ const QuestionByID = (props) => {
     );
   }
   function GetSolution() {
-
     return (
       <>
         {

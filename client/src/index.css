@@ -63,5 +63,8 @@ button:focus{
   outline: none;
 
 }
-
-
+@media (max-width: 600px) {
+  .display-none {
+    display: none !important;
+  }
+}

@@ -97,7 +97,6 @@ function AddQuestion(props){
 	function submit(e) {
 		e.preventDefault();
 		let tempForCategories = categories.filter(e => e.isChecked).map(e => e.value);
-    console.log({ number: data.number, question: data.question, categories: tempForCategories,tile:data.title, level: data.level, solutions: [{ language: data.language, code: data.code,title:data.solutiontitle }] })
 
 		fetch("http://localhost:3007/api/v1/admin/question/add", {
 			method: "POST",
@@ -127,21 +126,7 @@ function AddQuestion(props){
 	}
 	return (
     <div className="overflow-auto w-100" style={{ height: "100vh" }}>
-      {/* <form>
-				<input type="number" name="number" placeholder="question number" onChange={handleChange} />
-				<input type="text" name="question" placeholder="question" onChange={handleChange} /><br />
-				<Categories />
-				<br />
-				<input type="radio" name="level" value="Hard" onChange={handleChange} /><span>Hard</span><br />
-				<input type="radio" name="level" value="Easy" onChange={handleChange} /><span>Easy</span><br />
-				<input type="radio" name="level" value="Medium" onChange={handleChange} /><span>Medium</span><br /><br />
-				<hr />
-				<select name="language" value={data.language} onChange={handleChange}>
-					<Languages />
-				</select><br />
-				<input type="text" name="code" placeholder="<code>" onChange={handleChange} />
-				<input type="submit" onClick={submit} />
-			</form> */}
+
       <div className="container " style={{ marginTop: "2rem" }}>
         <h1>Add Question</h1>
         <h3 className="text-danger">{Message}</h3>
