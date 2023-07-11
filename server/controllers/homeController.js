@@ -6,6 +6,8 @@ const User = require("./../models/user");
 const List = require("./../models/list");
 const Like = require("./../models/like");
 const { username } = require("../utility/validation/validationInfo");
+const searchQuestions = require("./../utility/searching/searchQuestions");
+
 
 
 
@@ -13,13 +15,20 @@ const { username } = require("../utility/validation/validationInfo");
 
 
 exports.getAllQuestions = async (req, res) => {
+	var { search } = req.query;
+
 	try {
-		var data = await Question.find({}).sort({ number: 1 });
+		if (search && search.length>0)
+			var data = await searchQuestions(decodeURIComponent(search));
+		else
+			var data = await Question.find({}).sort({ number: 1 });
+
 	} catch (error) {
 		return res.json({ status: "X", message: "something went wrong." })
 	}
 
-	res.json({ status: "OK", data });
+	return res.json({ status: "OK", data });
+
 }
 
 //================================================================
@@ -86,12 +95,12 @@ exports.commentOnQuestion = async (req, res) => {
 		return res.json({ status: "MISSING_FIELD", message: "either question Id or user Id is missing." });
 	}
 	try {
-		var user = await User.findOne({_id:user_id},{username:1,_id:0});
+		var user = await User.findOne({ _id: user_id }, { username: 1, _id: 0 });
 		if (!username)
 			return res.json({ status: "NOT_EXIST", message: "User does not exist." });
 		var result = await Comment.create({ user_id, question_id, data });
 
-		res.json({ status: "OK",data:{...result._doc,username:user.username}});
+		res.json({ status: "OK", data: { ...result._doc, username: user.username } });
 	} catch (error) {
 		return res.json({ status: "X", message: "something went wrong while commenting on question.", error })
 	}

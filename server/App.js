@@ -1,10 +1,8 @@
-const util = require("util");
-
 
 // Configuration
 require("dotenv").config();
 const Storage = require("./utility/memory/storage");
-require("./config/database").connect(()=>Storage.reloade());
+require("./config/database").connect(async ()=>await Storage.reloade());
 
 
 

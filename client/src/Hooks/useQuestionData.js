@@ -10,7 +10,7 @@ var QuestionDatach = () => {
 			method: "GET",
 			headers: {
 				'Content-Type': 'application/json',
-				"token": cookie.get("token")
+				"token": cookie.get("userToken")
 			}
 		}).then(res => res.json())
 			.then(res => {

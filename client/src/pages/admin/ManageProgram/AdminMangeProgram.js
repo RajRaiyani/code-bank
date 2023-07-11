@@ -30,7 +30,6 @@ const AdminAddProgram = () => {
 	}
 
 	function DeleteData(props) {
-
 		fetch("http://localhost:3007/api/v1/admin/question/delete/", {
 			method: "DELETE",
 			headers: {
