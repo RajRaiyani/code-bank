@@ -33,12 +33,10 @@
     color: white !important;
     border-color: var(--primary) !important;
 }
-<<<<<<< HEAD
 .username-btn, .username-btn:hover{
     border-color: var(--primary);
     color: var(--primary);
 }
-=======
 .Container
 {
     margin: 1rem ;
@@ -59,4 +57,3 @@
     background-color: white;
     height: fit-content;
 }
->>>>>>> main
