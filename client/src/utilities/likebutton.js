@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 function LikeButton(props) {
-    
     const navigate = useNavigate();
     const { id } = useParams();
 
@@ -39,7 +38,6 @@ function LikeButton(props) {
                 }
             })
             .catch((e) => console.log("error : " + e));
-       
     };
     return (
         <>

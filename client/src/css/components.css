@@ -33,3 +33,7 @@
     color: white !important;
     border-color: var(--primary) !important;
 }
+.username-btn, .username-btn:hover{
+    border-color: var(--primary);
+    color: var(--primary);
+}

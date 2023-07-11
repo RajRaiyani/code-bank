@@ -10,9 +10,6 @@ const LogIn = (props) => {
   const [data, setData] = useState({ email: "", password: "" });
   const [message, setMessage] = useState("");
   var navigate = useNavigate();
-  const validateEmail = () => {
-    
-  };
 
   function handleData(e) {
     var name = e.target.name;
@@ -69,7 +66,9 @@ const LogIn = (props) => {
           <Logo />
         </div>
         <h3 className="text-center fw-bold secondary-color pb-2">Log In</h3>
-        <div className="text-danger">{message}</div>
+        <form onSubmit={sendData}>
+        <div className="text-danger text-center fs-5">{message}</div>
+        
         <div className="px-4 pb-3">
           <label
             for="exampleInputEmail1"
@@ -85,6 +84,7 @@ const LogIn = (props) => {
             placeholder="Email"
             name="email"
             onChange={handleData}
+            required
           />
         </div>
         <div className="px-4 pb-4">
@@ -101,18 +101,19 @@ const LogIn = (props) => {
             name="password"
             placeholder="password"
             onChange={handleData}
+            required
           />
         </div>
         <div className="px-4 pb-4">
-          <button
-            type="button"
+          <input
+          type="submit"
             className="btn primary-bg w-100 fw-bold border-radius-15"
             style={{ color: "white" }}
-            onClick={sendData}
-          >
-            Log In
-          </button>
+            value="Log In"
+          />
+          
         </div>
+        </form>
         <div className="pb-3">
           <span className="pl-3">Don't have an account ? </span>
           <Link to="/signin" className="register-text">

@@ -23,7 +23,7 @@ const Header = (props) => {
         <>
           <li className="dropdown">
             <button
-              className="btn px-4 fw-bolder rounded-pill btn-outline-success mx-3 header-btn"
+              className="btn px-4 fw-bolder mx-3 username-btn"
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
