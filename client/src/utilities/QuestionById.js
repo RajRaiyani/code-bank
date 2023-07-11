@@ -6,12 +6,23 @@ import { coldarkCold } from "react-syntax-highlighter/dist/esm/styles/prism";
 import "../App.css";
 import LikeButton from "./likebutton";
 import PrintComment from "./printcomment";
-const QuestionByID = (props) => {
+import useGetQuestionDataById from "../Hooks/useGetQuestionDataById"
+import addComment from "./addComment";
+
+const QuestionByID =   (props) => {
+  
   const { id } = useParams();
+<<<<<<< HEAD
   const [getdata, setGetdata] = useState([]);
+=======
+
+  //all the data store in data varible
+  const [getdata, setData,error,setError] =  useGetQuestionDataById(id);
+  // const [getdata, setGetdata] = useState([]);
+>>>>>>> main
   const [message, setMessage] = useState("");
   const [solution, setsolution] = useState([]);
-  const [comment, setc] = useState([]);
+  // const [comments, setc] = useState([]);
   const [isComments, setIsComments] = useState(false);
   const [status, setstatus] = useState("");
   const [commentmessage, setcomment] = useState("");
@@ -19,7 +30,9 @@ const QuestionByID = (props) => {
   const [rescomment, setresponse] = useState("");
   const navigate = useNavigate();
   const [arrayValues, setArrayValues] = useState([]);
+  const [res, setres] = useState();
 
+<<<<<<< HEAD
   useEffect(() => {
     const fatch = async () => {
 
@@ -106,6 +119,19 @@ const QuestionByID = (props) => {
           console.log(e);
         })
     }
+=======
+  // console.log(getdata)
+  console.log(getdata.solutions)
+
+  function GetComment() {
+    async function SendComment() {
+
+      var [res,cdata] = await addComment(id,commentmessage,() => navigate("/login"));
+
+    }
+    
+
+>>>>>>> main
     return (
       <>
         <div className="text-primary">{rescomment}</div>
@@ -140,9 +166,9 @@ const QuestionByID = (props) => {
           </button>
         </div>
 
-        {getdata.comments.map((e) => {
-        })}
-        <PrintComment data={comment} />
+        {/* {getdata.comments.map((e) => {
+        })} */}
+        <PrintComment data={getdata.comments} />
       </>
     );
   }
@@ -197,7 +223,7 @@ const QuestionByID = (props) => {
     return (
       <>
         {
-          solution.map((e) => {
+          getdata.solutions.map((e) => {
             return (
               <>
                 <div className="w-50 xs_width text-center border">{e.language}</div>
@@ -252,3 +278,38 @@ const QuestionByID = (props) => {
 };
 
 export default QuestionByID;
+
+
+    //   console.log("%c"+commentmessage,"color:red")
+    //   fetch("http://localhost:3007/api/v1/home/question/" + id + "/comment", {
+    //     method: "POST",
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //       'Token': Cookies.get("userToken")
+    //     },
+    //     body: JSON.stringify({ data: commentmessage })
+    //   }).then((res) => (res.json()))
+    //     .then((res) => {
+    //       if (res.status === "OK") {
+    //         setresponse("comment send succesfully ");
+    //         let temp = {...res.data}
+    //         temp.user = {_id:res.data.user_id,username:res.data.username};
+    //         temp.user_id = undefined;
+    //         temp.username = undefined;
+    //         setc([temp,...comment]);
+    //         setcomment("");
+    //       } else if (res.status === "EXPIRED_TOKEN") {
+    //         navigate("/login");
+    //       } else {
+    //         setresponse(res.message);
+    //       }
+    //       setTimeout(() => {
+    //         setresponse('');
+    //       }, 2000);
+
+    //     })
+    //     .catch((e) => {
+    //       console.log(e);
+    //     })
+
+    // }

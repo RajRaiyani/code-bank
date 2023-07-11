@@ -35,7 +35,6 @@ const AddSolution = () => {
 	}
 	function submit()
 	{
-
 		fetch("http://localhost:3007/api/v1/admin/solution/add", {
 			method: "POST",
 			headers: {
@@ -57,10 +56,8 @@ const AddSolution = () => {
 				console.log(e);
 			})
 	}
-
     return (
       <div className="overflow-auto w-100" style={{ height: "100vh" }}>
-        {/* {message}  */}
         <div className="container " style={{ marginTop: "2rem" }}>
           <h1>Add solution</h1>
           <h3 className="text-danger">{message}</h3>
@@ -77,11 +74,9 @@ const AddSolution = () => {
             </option>
             <Languages />
           </select>
-
 		  <label for="formGroupExampleInput" class="form-label">
               Enter a Tile :
             </label>
-          
               <input
 			  	rows={4}
                 className="form-control mb-3"
@@ -91,8 +86,6 @@ const AddSolution = () => {
           placeholder="brute force approach"
           onChange={handleChange}
               />
-
-
           <div class="mb-3">
             <label for="formGroupExampleInput" class="form-label">
               Enter a Solution :
@@ -110,20 +103,8 @@ const AddSolution = () => {
               <button className="btn btn-primary" onClick={submit}>
                 Add Solution
               </button>
-           
-			  
-           
           </div>
         </div>
-{/* 
-        <br />
-        <input
-          type="text"
-          name="code"
-          placeholder="<code>"
-          onChange={handleChange}
-        />
-        <input type="submit" onClick={submit} /> */}
       </div>
     );
 }
