@@ -12,16 +12,10 @@ import addComment from "./addComment";
 const QuestionByID =   (props) => {
   
   const { id } = useParams();
-<<<<<<< HEAD
-  const [getdata, setGetdata] = useState([]);
-=======
-
   //all the data store in data varible
   const [getdata, setData,error,setError] =  useGetQuestionDataById(id);
   // const [getdata, setGetdata] = useState([]);
->>>>>>> main
   const [message, setMessage] = useState("");
-  const [solution, setsolution] = useState([]);
   // const [comments, setc] = useState([]);
   const [isComments, setIsComments] = useState(false);
   const [status, setstatus] = useState("");
@@ -29,97 +23,7 @@ const QuestionByID =   (props) => {
   const [cat, setcatagro] = useState([]);
   const [rescomment, setresponse] = useState("");
   const navigate = useNavigate();
-  const [arrayValues, setArrayValues] = useState([]);
-  const [res, setres] = useState();
 
-<<<<<<< HEAD
-  useEffect(() => {
-    const fatch = async () => {
-
-      fetch("http://localhost:3007/api/v1/home/question/" + id, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          token: Cookies.get("userToken"),
-        },
-      })
-        .then((res) => res.json())
-        .then((res) => {
-          if (res.status === "OK") {
-            setGetdata(res.data);
-            setc(res.data.comments);
-            setsolution(res.data.solutions);
-            setcatagro(res.data.categories);
-            setstatus(res.data.isLiked);
-
-          } else if (res.status === "EXPIRED_TOKEN") {
-            navigate("/login");
-          } else {
-            setMessage(res.message);
-            console.log(res);
-          }
-        })
-        .catch((e) => console.log("error : " + e));
-      fetch("http://localhost:3007/api/v1/home/list/get/language", {
-        method: "GET",
-        headers: {
-          'Content-Type': 'application/json',
-          "token": Cookies.get("adminToken")
-        }
-      }).then(res => res.json())
-        .then(res => {
-          if (res.status === "OK") {
-            setArrayValues(res.data.list);
-          }
-          else if (res.status === "EXPIRED_TOKEN") {
-            navigate("/login");
-          }
-          else {
-            setMessage(res.message);
-          }
-        })
-        .catch(e => console.log("error : " + e));
-    };
-    fatch();
-
-  }
-
-    , [id]);
-
-  function GetComment() {
-    function SendComment() {
-      fetch("http://localhost:3007/api/v1/home/question/" + id + "/comment", {
-        method: "POST",
-        headers: {
-          'Content-Type': 'application/json',
-          'Token': Cookies.get("userToken")
-        },
-        body: JSON.stringify({ data: commentmessage })
-      }).then((res) => (res.json()))
-        .then((res) => {
-          if (res.status === "OK") {
-            setresponse("comment send succesfully ");
-            let temp = {...res.data}
-            temp.user = {_id:res.data.user_id,username:res.data.username};
-            temp.user_id = undefined;
-            temp.username = undefined;
-            setc([temp,...comment]);
-            setcomment("");
-          } else if (res.status === "EXPIRED_TOKEN") {
-            navigate("/login");
-          } else {
-            setresponse(res.message);
-          }
-          setTimeout(() => {
-            setresponse('');
-          }, 2000);
-
-        })
-        .catch((e) => {
-          console.log(e);
-        })
-    }
-=======
   // console.log(getdata)
   console.log(getdata.solutions)
 
@@ -131,7 +35,6 @@ const QuestionByID =   (props) => {
     }
     
 
->>>>>>> main
     return (
       <>
         <div className="text-primary">{rescomment}</div>
@@ -205,7 +108,7 @@ const QuestionByID =   (props) => {
           </div>
           <div>
             <h5>
-              <LikeButton status={status} nolike={getdata.likes}></LikeButton>
+              <LikeButton status={getdata.status} nolike={getdata.likes}></LikeButton>
             </h5>
           </div>
         </div>
@@ -227,13 +130,11 @@ const QuestionByID =   (props) => {
             return (
               <>
                 <div className="w-50 xs_width text-center border">{e.language}</div>
-                
                 <SyntaxHighlighter language={e.language} style={coldarkCold}>
                   {e.code}
                 </SyntaxHighlighter>
               </>
             );
-
           })
         }
       </>
