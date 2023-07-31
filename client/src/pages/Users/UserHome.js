@@ -1,11 +1,6 @@
 import AllQuestion from "../../utilities/AllQuestion";
 
 const UserHome = () => {
-  
- 
-
-
-
   return (
     <>
       <div className="container">

@@ -1,6 +1,7 @@
 import Cookies from "js-cookie";
 import { useState , useEffect } from "react";
 import { Navigate } from "react-router-dom";
+import "../css/components.css"
 function GetCatagary(props) {
   const [catagories , setCategories]=useState("");
   const [arrayValues, setArrayValues] = useState([]);
@@ -29,11 +30,11 @@ function GetCatagary(props) {
     return (
       <>
         <div className="dropdown">
-          <select value={catagories} onChange={(e)=>{setCategories(e.target.value)}}>
+          <select value={catagories} onChange={(e)=>{setCategories(e.target.value)}} className="level-categories" >
           <option disabled selected hidden>
               Categories
             </option>
-            <option> none</option>
+            <option> Categories</option>
             {arrayValues.map((value,index)=>{
               return (
                 <option>{value}</option>

@@ -12,12 +12,10 @@ import addComment from "./addComment";
 const QuestionByID =   (props) => {
   
   const { id } = useParams();
-
   //all the data store in data varible
   const [getdata, setData,error,setError] =  useGetQuestionDataById(id);
   // const [getdata, setGetdata] = useState([]);
   const [message, setMessage] = useState("");
-  const [solution, setsolution] = useState([]);
   // const [comments, setc] = useState([]);
   const [isComments, setIsComments] = useState(false);
   const [status, setstatus] = useState("");
@@ -25,8 +23,6 @@ const QuestionByID =   (props) => {
   const [cat, setcatagro] = useState([]);
   const [rescomment, setresponse] = useState("");
   const navigate = useNavigate();
-  const [arrayValues, setArrayValues] = useState([]);
-  const [res, setres] = useState();
 
   // console.log(getdata)
   console.log(getdata.solutions)
@@ -41,7 +37,6 @@ const QuestionByID =   (props) => {
 
     return (
       <>
-
         <div className="text-primary">{rescomment}</div>
         <div className="d-flex flex-start">
           <img
@@ -90,7 +85,6 @@ const QuestionByID =   (props) => {
             <b className="lead-font-size">{getdata.number} {getdata.question}</b>
           </h4>
         </div>
-
         {/* Here is question level and like of that particular question */}
         <div className="d-flex justify-content-between">
           <div>
@@ -114,13 +108,11 @@ const QuestionByID =   (props) => {
           </div>
           <div>
             <h5>
-              <LikeButton status={status} nolike={getdata.likes}></LikeButton>
-
+              <LikeButton status={getdata.status} nolike={getdata.likes}></LikeButton>
             </h5>
           </div>
         </div>
         <hr style={{ marginTop: "0rem" }}></hr>
-
         {/* Here is full question */}
         <div>
           <p>
@@ -131,7 +123,6 @@ const QuestionByID =   (props) => {
     );
   }
   function GetSolution() {
-
     return (
       <>
         {
@@ -139,13 +130,11 @@ const QuestionByID =   (props) => {
             return (
               <>
                 <div className="w-50 xs_width text-center border">{e.language}</div>
-                
                 <SyntaxHighlighter language={e.language} style={coldarkCold}>
                   {e.code}
                 </SyntaxHighlighter>
               </>
             );
-
           })
         }
       </>

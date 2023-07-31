@@ -8,9 +8,6 @@ async function addComment(id,commentmessage,callback){
     let response = false;
     let newComment = "";
     
-    console.log("%c"+id,"color:orange")
-    console.log("%c"+commentmessage,"color:orange")
-    console.log("%c"+callback,"color:orange")
 
 
 
