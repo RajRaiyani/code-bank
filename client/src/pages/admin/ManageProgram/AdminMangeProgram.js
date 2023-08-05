@@ -10,7 +10,7 @@ import AdminProgram from "./Program";
 
 const AdminAddProgram = () => {
   const navigate = useNavigate();
-  const [dataforpop, setdatapop] = useState("")
+  const [dataforpop, setdatapop] = useState("");
   const [data1, setData1] = QuestionDatach();
   const [message, setMessage] = useState("");
   function checkNavigate(id) {
@@ -49,53 +49,7 @@ const AdminAddProgram = () => {
 
   }
 
-  function GetDataF() {
-    return data1.map(program => {
-      return (
-        <>
-         <div className="col-md-12 main_box col-sm-10">
-
-
-          <div
-            key={program._id}
-            onClick={() => {
-              checkNavigate(program._id);
-            }}
-            className="QuestionBox"
-          >
-            <div className="py-3 align-middle">{program.number}</div>
-            {program.level === "Easy" ? (
-              <div className="py-3 text-success align-middle">
-                {program.level}
-              </div>
-            ) : program.level === "Hard" ? (
-              <div className="py-3 text-danger align-middle">{program.level}</div>
-            ) : (
-              <div className="py-3 text-warning align-middle">
-                {program.level}
-              </div>
-            )}
-            <div className="py-3 align-middle">{program.question}</div>
-            <div className="align-middle">
-              <button
-                type="button"
-                className="btn btn-outline-danger"
-                data-bs-toggle="modal"
-                data-bs-target="#exampleModal2"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  assigendata(program);
-                }}
-              >
-                DELETE
-              </button>
-            </div>
-          </div>
-          </div>
-        </>
-      );
-    })
-  }
+  
   // ============================
   return (
     <>
@@ -122,83 +76,15 @@ const AdminAddProgram = () => {
           </Link>
         </div>
         {/* delete pop op */}
-        <div
-          className="modal fade"
-          id="exampleModal2"
-          aria-labelledby="exampleModalLabel"
-          aria-hidden="true"
-        >
-          <div className="modal-dialog">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h1 className="modal-title fs-5" id="exampleModalLabel">
-                  DELETE QUESTION
-                  <br />
-                </h1>
-                <button
-                  type="button"
-                  className="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
-              </div>
-              <div className="modal-body">Question No:{dataforpop.number}</div>
-              <div className="modal-body">Question level:{dataforpop.level}</div>
-              <div className="modal-body">Question :{dataforpop.question}</div>
+        
 
 
-              <div className="modal-footer">
-                <button
-                  type="button"
-                  className="btn btn-primary"
-                  onClick={() => {
-                    DeleteData(dataforpop._id);
-                  }}
-                >
-                  Confirm
-                </button>
-
-                <button
-                  type="button"
-                  className="btn btn-outline-primary"
-                  data-bs-dismiss="modal"
-                >
-                  Close
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* add solution pop op  */}
         <div className="container">
-          {/* <table className="table table-striped table-bordered table-hover">
-            <thead>
-              <tr>
-                <th scope="col" className="col-sm-1">
-                  Number
-                </th>
 
-                <th scope="col" className="col-sm-1">
-                  level
-                </th>
-                <th scope="col" className="col-sm-8">
-                  Question
-                </th>
-                <th scope="col" className="col-sm-2">
-                  <b>Delete Option</b>
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <GetDataF />
-            </tbody>
-          </table> */}
-         
-<AdminProgram/>
+
+          <AdminProgram />
         </div>
       </div>
-      {/* <AllQuestion/> */}
     </>
   );
 }

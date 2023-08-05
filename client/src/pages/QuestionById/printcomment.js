@@ -35,36 +35,45 @@ function PrintComment(props){
 
     return(
         <>
+        
+
+
+			
+
+			<div class="commentBox mt-3">
+
+				
           <div className="text-primary">{message}</div>
     
         {data.map((item, index) => (
       <div key={index}>
-        <div className="d-flex flex-start align-items-center">
-          <img
-            className="rounded-circle shadow-1-strong me-3"
-            src="/images/profile.png"
-            alt="avatar"
-            width="40"
-            height="40"
-          />
-          <div>
-            <h6 className="fw-bold text-primary mb-1">
-            {item.user.username}
+        
+        <div class="comment-card m-3 border border-color-main rounded p-3">
+					<div class="d-flex justify-content-between">
+						<div><span class="fs-5 px-2 py-1 userName-coin">{item.user.username[0]}</span> {item.user.username}</div>
+            <p className="text-muted small mb-0">{item.date}</p>
+
+					</div>
+					<div class="pt-3">
+          {item.data}
+						
+					</div>
+				</div>
+
             {status ==="admin" ?
           <><button
           type="button"
           className="btn btn-outline-danger ms-5" onClick={()=>{deleteitem(item._id)}}><AiOutlineDelete /></button></>:<></>}
-            </h6>
-            <p className="text-muted small mb-0">{item.date}</p>
-          </div>
-        </div>
+          
 
         <p className="mt-3 mb-2 pb-2">
-          {item.data}
+          
         </p>
           
       </div>
     ))}
+			</div>
+
         </>
     )
 }

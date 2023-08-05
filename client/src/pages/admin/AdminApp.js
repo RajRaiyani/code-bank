@@ -42,7 +42,7 @@ const AdminApp = () => {
 
   return (
     <>
-      <div className="d-flex gap-3 bg-white">
+      <div className="d-flex text-white  bg-white">
         <div
           className={
             isExpanded
@@ -82,7 +82,7 @@ const AdminApp = () => {
                 <Link
                   to={item.path}
                   key={index}
-                  className={`text-uppercase text-color-light d-flex ${isExpanded
+                  className={`text-uppercase text-white d-flex ${isExpanded
                       ? "justify-content-start pl-2 gap-2"
                       : "justify-content-center my-3 p-2"
                     } align-items-center nav-item`}

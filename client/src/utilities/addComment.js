@@ -1,7 +1,7 @@
 import Cookies from "js-cookie";
 
 
-async function addComment(id,commentmessage,callback){
+function addComment(id,commentmessage,setcomment,callback){
 
 
 
@@ -24,7 +24,9 @@ fetch("http://localhost:3007/api/v1/home/question/" + id + "/comment", {
             if (res.status === "OK") {
                 response = true;
                 newComment = res.data;
-                console.log(res.data);
+                setcomment("")
+                console.log(res.data)
+
             } else if (res.status === "EXPIRED_TOKEN") {
                callback();
             } 

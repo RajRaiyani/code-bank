@@ -126,13 +126,13 @@ const MangeCatagroy = () => {
         <div className="container " style={{ marginTop: "2rem" }}>
           <h1>Add Categories</h1>
           <h3 className="text-danger">{message}</h3>
-          <div class="mb-3">
-            <label for="formGroupExampleInput" class="form-label">
+          <div className="mb-3">
+            <label for="formGroupExampleInput" className="form-label">
               Enter a Category :
             </label>
             <div className="d-flex gap-2">
               <input
-                class="form-control"
+                className="form-control"
                 id="formGroupExampleInput"
                 placeholder="Enter a Category"
                 value={inputValue}
