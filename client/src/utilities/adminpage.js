@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate , Link} from "react-router-dom";
 import Cookies from "js-cookie";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { coldarkCold } from "react-syntax-highlighter/dist/esm/styles/prism";
@@ -12,7 +12,7 @@ import GetQuestionData from "../pages/QuestionById/Discription";
 import GetC from "../pages/QuestionById/comment";
 import { get } from "mongoose";
 
-const QuestionByID =   (props) => {
+const QuestionByIDAdmin1 =   (props) => {
   
   const { id } = useParams();
   const [getdata, setData,error,setError] =  useGetQuestionDataById(id);
@@ -20,8 +20,19 @@ const QuestionByID =   (props) => {
   const [isComments, setIsComments] = useState(false);
   const [commentmessage, setcomment] = useState("");
   const [rescomment, setresponse] = useState("");
-  const [ solution , setSolution]=useState(getdata.solutions);
+  const [solution, setsolution] = useState([]);
   const navigate = useNavigate();
+
+  useEffect(()=>{
+  setsolution(getdata.solutions);
+
+  if(!Cookies.get("adminToken"))
+  {
+    navigate("/login");
+  }
+
+  })
+  console.log(solution);
   const username=Cookies.get("username")
 
   function GetComment() {
@@ -66,6 +77,33 @@ const QuestionByID =   (props) => {
   }
   
   function GetSolution() {
+    function deleteitem(id) {
+      fetch("http://localhost:3007/api/v1/admin/solution/delete/", {
+        method: "DELETE",
+        headers: {
+          'Content-Type': 'application/json',
+          "token": Cookies.get("adminToken")
+        },
+        body: JSON.stringify({ solution_id: id })
+      }).then(res => res.json())
+        .then(res => {
+          if (res.status === "OK") {
+            setsolution(solution.filter((item) => item._id !== id));
+            setMessage("solution delete succesfully");
+          }
+          else {
+            setMessage(res.message);
+            console.log(res);
+          }
+          setTimeout(() => {
+            setMessage('');
+          }, 2000);
+
+        })
+        .catch((e) => {
+          console.log(e);
+        })
+    }
     return (
       <>
 			<div class="solutionBox p-4 mt-3">
@@ -76,6 +114,9 @@ const QuestionByID =   (props) => {
               <div class="solution-card p-3 rounded-3 my-4">
 					<div class="d-flex justify-content-between">
 						<div class="solution-title p-2 rounded">{e.title}
+            <button
+                    type="button"
+                    className="btn btn-outline-danger ms-5" onClick={() => { deleteitem(e._id) }}>Delete Solution</button>
             </div>
 						<div class="text-color-main fs-3">&#x26A3;</div>
 					</div>
@@ -119,10 +160,18 @@ const QuestionByID =   (props) => {
         </div>
         <div className="w-50 xs_width ">
           <GetSolution />
+
+          <Link to={"/admin/program/Addsolution/" + id}>
+        <button type="button" className="btn btn-outline-success m-5 fs-4">
+          Add Solution+
+        </button>
+      </Link>
         </div>
+
+
       </div>
     </>
   );
 };
 
-export default QuestionByID;
+export default QuestionByIDAdmin1;

@@ -93,7 +93,7 @@ function AllQuestion(props) {
           </div>
           <div className="col-md-4 col-xs-12 col-sm-2 d-flex display-none " >
             <div className="ml-5 mb-5 mt-0 flex-column align-items-center justify-content-center rounded-circle circle mb-3 mb-sm-0 custom-circle" >
-              <span className="number" style={{ fontSize: "4rem", color: "#503524" }}>42</span>
+              <span className="number" style={{ fontSize: "4rem", color: "#503524" }}>{data1.length}</span>
             </div>
             <div className="label-container mt-4" style={{ fontSize: "1.2rem", marginLeft: "1rem" }}>
               <span style={{ marginLeft: "-0.5rem" }}>

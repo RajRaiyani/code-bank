@@ -21,7 +21,7 @@ function AdminProgram(props) {
         if (!Cookies.get("adminToken")) {
             navigate("login");
         } else {
-            navigate("/user/question/" + id);
+            navigate("/user/" + id);
         }
     }
     function DeleteData(props) {

@@ -24,6 +24,7 @@ import QuestionByIDAdmin from './pages/admin/ManageProgram/AdminQuestionId';
 import AdminAddProgram from './pages/admin/ManageProgram/AdminMangeProgram';
 import AddSolution from './pages/admin/ManageProgram/AddSolution';
 import Try from "./try";
+import QuestionByIDAdmin1 from "./utilities/adminpage";
 
 
 const appRouter = createBrowserRouter([
@@ -51,6 +52,7 @@ const appRouter = createBrowserRouter([
         path: "",
         element: <Adminhome />,
       },
+      
 
       {
         path: "Program",
@@ -59,6 +61,7 @@ const appRouter = createBrowserRouter([
             path: "",
             element: <AdminAddProgram />,
           },
+        
           {
             path: "AddQuestion",
             element: <AddQuestion />,
@@ -101,6 +104,10 @@ const appRouter = createBrowserRouter([
       {
         path: "home",
         element: <UserHome></UserHome>,
+      },
+      {
+        path:":id",
+        element:<QuestionByIDAdmin1/>
       },
       {
         path: "/User/Question/:id",
