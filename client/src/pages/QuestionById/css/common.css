@@ -1,0 +1,21 @@
+
+
+.bg-color-main{
+	background-color: #7cc529;
+}
+.text-color-main{
+	color: #7cc529;
+}
+
+.border-color-main{
+	border-color: #7cc529 !important;
+}
+
+.border-cancel-end{
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+}
+.border-cancel-start{
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+}

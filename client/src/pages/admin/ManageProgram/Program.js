@@ -6,11 +6,9 @@ import "../../../css/components.css"
 
 import QuestionDatach from "../../../Hooks/useQuestionData";
 import SearchBtn from "../../../components/Search";
-import LikeButton from "../../../utilities/likebutton";
 import GetCatagary from "../../../components/GetCategory";
 import GetLevel from "../../../components/GetLevel";
 import { AiOutlineDelete } from 'react-icons/ai';
-
 
 function AdminProgram(props) {
     const navigate = useNavigate();
@@ -19,15 +17,11 @@ function AdminProgram(props) {
     const [dataforpop, setdatapop] = useState("");
     const [message, setMessage] = useState("");
 
-
-
-
     function checkNavigate(id) {
         if (!Cookies.get("adminToken")) {
             navigate("login");
         } else {
-            navigate("/admin/Program/" + id);
-
+            navigate("/user/question/" + id);
         }
     }
     function DeleteData(props) {
@@ -95,23 +89,20 @@ function AdminProgram(props) {
                                 Delete <AiOutlineDelete />
                             </button>
                         </div>
-
                                 </span></div>
                             <div>
-
-
 
                                 {program.level === "Easy" ? (
                                     <>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="
-#7CC529" class="bi bi-circle-fill" viewBox="0 0 16 16">
+#7CC529" className="bi bi-circle-fill" viewBox="0 0 16 16">
                                             <circle cx="8" cy="8" r="8" />
                                         </svg>
                                         <span style={{ paddingLeft: "0.5rem" }}>{program.level}</span>
                                     </>
                                 ) : program.level === "Hard" ? (<>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="
-                #E47171" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                #E47171" className="bi bi-circle-fill" viewBox="0 0 16 16">
                                         <circle cx="8" cy="8" r="8" />
                                     </svg>
                                     <span style={{ paddingLeft: "0.5rem" }}>{program.level}</span>
@@ -119,7 +110,7 @@ function AdminProgram(props) {
                                 ) : (
                                     <>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="
-                #FFB444" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                #FFB444" className="bi bi-circle-fill" viewBox="0 0 16 16">
                                             <circle cx="8" cy="8" r="8" />
                                         </svg>
                                         <span style={{ paddingLeft: "0.5rem" }}>{program.level}</span>
@@ -128,9 +119,7 @@ function AdminProgram(props) {
                                 )}
                             </div>
 
-
                         </div>
-                        
                     </div>
 
                 </>

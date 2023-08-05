@@ -40,7 +40,7 @@ const LogIn = (props) => {
             navigate("/user/home");
           }
           if (res.role === "admin") {
-            cookie.set("username", "admin", {
+            cookie.set("username", res.username+" admin", {
               expires: new Date().getTime() + 2 * 1000 * 3600,
             });
             cookie.set("adminToken", res.token, {

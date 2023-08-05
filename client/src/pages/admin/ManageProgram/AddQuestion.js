@@ -131,50 +131,50 @@ function AddQuestion(props){
         <h1>Add Question</h1>
         <h3 className="text-danger">{Message}</h3>
         <form className="mb-4">
-          <div class="mb-3">
-            <label for="formGroupExampleInput" class="form-label" >
+          <div className="mb-3">
+            <label for="formGroupExampleInput" className="form-label" >
               Enter a Question number :
             </label>
             <input
               type="number"
-              class="form-control"
+              className="form-control"
               id="formGroupExampleInput"
               
               name="number" placeholder="question number" onChange={handleChange}
             />
           </div>
-          <div class="mb-3">
-          <label for="formGroupExampleInput" class="form-label">
+          <div className="mb-3">
+          <label for="formGroupExampleInput" className="form-label">
               Enter a Question Title :
             </label>
             <input
-              class="form-control"
+              className="form-control"
               id="formGroupExampleInput"
               
               name="title" placeholder="Add number" onChange={handleChange}
 
             />
 
-            <label for="formGroupExampleInput" class="form-label">
+            <label for="formGroupExampleInput" className="form-label">
               Enter a Question :
             </label>
             <textarea
               rows={4}
-              class="form-control"
+              className="form-control"
               id="formGroupExampleInput"
               placeholder="Enter a Question"
               name="question"  onChange={handleChange}
             />
           </div>
-          <div class="mb-3">
-            <label class="form-label" style={{ display: "block" }}>
+          <div className="mb-3">
+            <label className="form-label" style={{ display: "block" }}>
               Select Topic :
             </label>
           
             <Categories />
           </div>
           <div className="mb-3">
-            <label class="form-label" style={{ display: "block" }}>
+            <label className="form-label" style={{ display: "block" }}>
               Select level :
             </label>
             <div className="d-flex gap-2 display_block">
@@ -204,7 +204,7 @@ function AddQuestion(props){
             </div>
           </div>
           <div className="mb-3">
-            <label class="form-label" style={{ display: "block" }}>
+            <label className="form-label" style={{ display: "block" }}>
               Select Language :
             </label>
             <select
@@ -219,27 +219,27 @@ function AddQuestion(props){
             </select>
           </div>
          
-          <div class="mb-3">
+          <div className="mb-3">
 
-          <label for="formGroupExampleInput" class="form-label">
+          <label for="formGroupExampleInput" className="form-label">
               Enter a Title :
             </label>
             <input
-              class="form-control"
+              className="form-control"
               id="formGroupExampleInput"
               name="solutiontitle" placeholder="brute force approach" onChange={handleChange}
             />
-            <label for="formGroupExampleInput" class="form-label">
+            <label for="formGroupExampleInput" className="form-label">
               Enter a Solution :
             </label>
             <textarea
               rows={4}
-              class="form-control"
+              className="form-control"
               id="formGroupExampleInput"
               name="code" placeholder="<code>" onChange={handleChange}
             />
           </div>
-          <button type="submit" class="btn btn-primary " onClick={submit}>
+          <button type="submit" className="btn btn-primary " onClick={submit}>
             Submit
           </button>
         </form>

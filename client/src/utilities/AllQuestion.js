@@ -49,14 +49,14 @@ function AllQuestion(props) {
               {program.level === "Easy" ? (
                 <>
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="
-#7CC529" class="bi bi-circle-fill" viewBox="0 0 16 16">
+#7CC529" className="bi bi-circle-fill" viewBox="0 0 16 16">
                     <circle cx="8" cy="8" r="8" />
                   </svg>
                   <span style={{ paddingLeft: "0.5rem" }}>{program.level}</span>
                 </>
               ) : program.level === "Hard" ? (<>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="
-                #E47171" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                #E47171" className="bi bi-circle-fill" viewBox="0 0 16 16">
                   <circle cx="8" cy="8" r="8" />
                 </svg>
                 <span style={{ paddingLeft: "0.5rem" }}>{program.level}</span>
@@ -64,7 +64,7 @@ function AllQuestion(props) {
               ) : (
                 <>
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="
-                #FFB444" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                #FFB444" className="bi bi-circle-fill" viewBox="0 0 16 16">
                     <circle cx="8" cy="8" r="8" />
                   </svg>
                   <span style={{ paddingLeft: "0.5rem" }}>{program.level}</span>
@@ -98,19 +98,19 @@ function AllQuestion(props) {
             <div className="label-container mt-4" style={{ fontSize: "1.2rem", marginLeft: "1rem" }}>
               <span style={{ marginLeft: "-0.5rem" }}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="
-                #7CC529" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                #7CC529" className="bi bi-circle-fill" viewBox="0 0 16 16">
                   <circle cx="8" cy="8" r="8" />
                 </svg>&nbsp;&nbsp;Eassy<br />
               </span>
               <span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="
-                #FFB444" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                #FFB444" className="bi bi-circle-fill" viewBox="0 0 16 16">
                   <circle cx="8" cy="8" r="8" />
                 </svg>&nbsp;&nbsp;Medium
               </span ><br />
               <span style={{ marginLeft: "-0.3rem" }}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="
-                #E47171" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                #E47171" className="bi bi-circle-fill" viewBox="0 0 16 16">
                   <circle cx="8" cy="8" r="8" />
                 </svg>&nbsp;&nbsp;Hard
               </span><br />

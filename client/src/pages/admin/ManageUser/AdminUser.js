@@ -35,19 +35,19 @@ const AdminUser = () => {
 	function DataprintAdmin() {
 		return tempdata.map(e => {
 			if (e.role === "admin") {
-				return (<tr key={e._id} className="QuestionBox">
+				return (<div key={e._id} className=" main_box row">
 
-					<td className="py-3">{e.name}</td>
-					<td className="py-3 text-success">{e.email}</td>
-					<td className="py-3 text-danger">{e.role}</td>
+					<div className="py-3 col-2">{e.name}</div>
+					<div className="py-3 col-4 text-dark">{e.email}</div>
+					<div className="py-3 col-2 text-danger">{e.role}</div>
 
-					<td>
+					<div className="col-2">
 						<button type="button" className="btn btn-outline-danger position-absolute" onClick={() => { deleteF(e._id) }}  >DELETE</button>
-					</td>
-					<td>
+					</div>
+					<div className="col-2">
 						<button type="button" className="btn btn-outline-primary position-absolute" onClick={() => { changerole(e._id) }} >edit</button>
-					</td>
-				</tr>)
+					</div>
+				</div>)
 			}
 		})
 
@@ -58,19 +58,19 @@ const AdminUser = () => {
 	function DataprintUSer() {
 		return tempdata.map(e => {
 			if (e.role === "user") {
-				return (<tr key={e._id} className="QuestionBox">
+				return (<div key={e._id} className=" main_box row">
 
-					<td className="py-3 ">{e.name}</td>
-					<td className="py-3 text-success">{e.email}</td>
-					<td className="py-3 text-primary">{e.role}</td>
+				<div className="py-3 col-2">{e.name}</div>
+				<div className="py-3 col-4 text-dark">{e.email}</div>
+				<div className="py-3 col-2 text-primary">{e.role}</div>
 
-					<td>
-						<button type="button" className="btn btn-outline-danger " onClick={() => { deleteF(e._id) }}  >DELETE</button>
-					</td>
-					<td>
-						<button type="button" className="btn btn-outline-primary " onClick={() => { changerole(e._id) }} >edit</button>
-					</td>
-				</tr>)
+				<div className="col-2">
+					<button type="button" className="btn btn-outline-danger position-absolute" onClick={() => { deleteF(e._id) }}  >DELETE</button>
+				</div>
+				<div className="col-2">
+					<button type="button" className="btn btn-outline-primary position-absolute" onClick={() => { changerole(e._id) }} >edit</button>
+				</div>
+			</div>)
 			}
 		})
 	}
@@ -152,25 +152,18 @@ const AdminUser = () => {
 	return (
 		<>
 			<div className="container m-2">
-				<table className="table table-light border text-center">
-					<thead>
-						<tr>
-							<th>User Name</th>
-							<th>User Email Addres </th>
-							<th>Admin/User</th>
-							<th>Delete </th>
-							<th>Edit</th>
-
-						</tr>
-					</thead>
-					<tbody>
+				<div className="row">
+							<div className="col-2">User Name</div>
+							<div className="col-4">User Email Addres </div>
+							<div className="col-2">Admin/User</div>
+							<div className="col-2">Delete </div>
+							<div className="col-2">Edit</div>
+							</div>
 						<DataprintAdmin />
 						<DataprintUSer></DataprintUSer>
-					</tbody>
 
 
 
-				</table>
 			</div>
 
 		</>

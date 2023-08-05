@@ -6,7 +6,7 @@ import { coldarkCold } from "react-syntax-highlighter/dist/esm/styles/prism";
 import "../../../App.css";
 
 import LikeButton from "../../../utilities/likebutton";
-import PrintComment from "../../../utilities/printcomment";
+import PrintComment from "../../QuestionById/printcomment";
 const QuestionByID = (props) => {
   const { id } = useParams();
   const [getdata, setGetdata] = useState([]);

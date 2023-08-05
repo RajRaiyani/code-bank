@@ -2,7 +2,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import QuestionDatach from "../Hooks/useQuestionData";
 import Cookies from "js-cookie";
-import { useEffect } from "react";
 
 function SearchBtn(props) {
     const [data1, setData1] = QuestionDatach();
@@ -18,7 +17,6 @@ function SearchBtn(props) {
                     'Content-Type': 'application/json',
                     "token": Cookies.get("userToken")
                 },
-                body:JSON.stringify({ filter:{searchstring:event.target.value}})
             }).then(res => res.json())
                 .then(res => {
                     if (res.status === "OK") {
@@ -40,12 +38,12 @@ function SearchBtn(props) {
             <input
               type="search"
               id="form1"
-              class="form-control"
+              className="form-control"
               placeholder="Search"
               onChange={handleInputChange}
             />
           </div>
-          <button type="button" class="btn btn-primary">
+          <button type="button" className="btn btn-primary">
             <FontAwesomeIcon icon={faMagnifyingGlass} />
           </button>
         </div>
