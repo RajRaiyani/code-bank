@@ -8,6 +8,7 @@ import MainApp from './Layouts/MainApp';
 
 import Home from './pages/Home';
 import LogIn from './pages/Authentication/LogIn';
+import QuestionById from './pages/QuestionById';
 
 
 
@@ -22,6 +23,10 @@ const appRouter = createBrowserRouter([
       {
         path:"/",
         element:<Home />
+      },
+      {
+        path:"/Question/:id",
+        element:<QuestionById />
       }
     ],
   },
