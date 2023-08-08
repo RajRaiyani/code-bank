@@ -14,11 +14,10 @@ export const QuestionCard = (props)=>{
 
 	function AdminControls(){
 		if(!props.admin)return(<></>);
-		var {deleteQuestion,editQuestion} = props.callBacks;
 		return(
 		<>
-			<MdOutlineDeleteForever onClick={deleteQuestion} className="text-red-500 text-3xl" />
-			<FiEdit onClick={editQuestion} className="text-2xl" />
+			<MdOutlineDeleteForever onClick={props.onDelete} className="text-red-500 text-3xl relative z-10" />
+			<FiEdit onClick={props.onEdit} className="text-2xl relative z-10" />
 		</>
 		)
 	}
