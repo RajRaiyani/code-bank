@@ -11,8 +11,6 @@ import LogIn from './pages/Authentication/LogIn';
 import QuestionById from './pages/QuestionById';
 
 
-
-
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 
@@ -20,9 +18,6 @@ const AdminApp = lazy(()=>import("./Layouts/AdminApp"));
 const Dashboard = lazy(()=>import("./pages/Admin/Dashboard/Dashboard"))
 const Question = lazy(()=>import("./pages/Admin/Question/Question"));
 const User = lazy(()=>import("./pages/Admin/User/User"));
-
-
-
 
 
 const appRouter = createBrowserRouter([
