@@ -3,7 +3,11 @@
 @tailwind utilities;
 
 
-@import url(./scss/variable.scss);
+@import "./scss/variable.scss";
+
+::selection{
+	background-color: #7cc52970;
+}
 
 
 
