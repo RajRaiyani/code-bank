@@ -28,6 +28,8 @@ const Home = () => {
 			</Link>
 			<QuestionCard className="my-3 gc-shadow-23" number="43" title="This is the sort title for question......." likes="3434" level="Easy" />
 		</div>
+
+		<Link to="admin">Admin</Link>
 		<QuestionCount className="m-4" />
 		
 	</>
