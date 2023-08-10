@@ -24,8 +24,8 @@ const Header = (props) => {
 
 	const Menu = () => (
 		<div className="text-sm flex justify-around items-center  ">
-			<Link ><div className="p-1 mx-3 gc-hover-text-green hover:scale-110 duration-300">About</div></Link>
-			<Link ><div className="p-1 mx-3 gc-hover-text-green hover:scale-110 duration-300">Contact</div></Link>
+			<Link to="/about"><div className="p-1 mx-3 gc-hover-text-green hover:scale-110 duration-300">About</div></Link>
+			<Link to="/contact"><div className="p-1 mx-3 gc-hover-text-green hover:scale-110 duration-300">Contact</div></Link>
 			{
 				!props.loginStatus ?
 					<Link to="/LogIn">
