@@ -9,6 +9,9 @@ const buttonStyle = {
 
 const commonClass = "flex justify-center w-full text-xl items-center m-2 bg-white rounded-md px-4 py-2 hover:bg-[#f2fbe8] border hover:border-[#7cc529] duration-200";
 
+
+// TODO change css
+
 const AdminSidebar = (props)=>{
 	
 
