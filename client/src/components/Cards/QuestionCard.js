@@ -28,11 +28,13 @@ export const QuestionCard = (props)=>{
 		if(questionLevel==="medium")return(<FaCircle className="text-orange-400" />);
 		if(questionLevel==="easy")return(<FaCircle className="gc-text-green" />);
 	}
+	
+	var titleClass = props.admin?"max-w-[80%]":"max-w-[90%]";
 
 	return(
-		<div className={"flex justify-between items-center border rounded-lg px-3 py-1 bg-white"+space+props.className} style={props.style}>
-			<div>
-				<div><span className="me-2 text-lg font-bold">{props.number}</span>{props.title}</div>
+		<div className={"flex max-w-[1000px] justify-between items-center border rounded-lg px-3 py-1 bg-white"+space+props.className} style={props.style}>
+			<div className={titleClass}>
+				<div className="truncate"><span className="me-2 text-lg font-bold">{props.number}</span>{props.title}</div>
 				<div className="text-sm flex items-center"><Level />&nbsp;Level</div>
 			</div>
 			<div className="text-center">
