@@ -3,39 +3,79 @@
 import { Link } from "react-router-dom";
 import { QuestionCard } from "../components/Cards/QuestionCard";
 import QuestionCount from "../components/Cards/QuestionCount";
+import useGetAllQuestions from "../hooks/useGetAllQuestions";
+import { useState } from "react";
+import useGetAllCategories from "../hooks/useGetAllCategories";
+const LevelFillter = (arg) => {	
 
-
-function editQuestion(e){
-	e.preventDefault();
-	console.log("edit");
+	return (
+		<>
+		<select className="border gc-border-green ms-4 mt-8 rounded-md text-lg" onChange={(e)=>{arg.setlevel(e.target.value)}} >
+			<option value="">Level</option>
+			<option value="Easy" >Easy</option>
+			<option value="Medium">Medium</option>
+			<option value="Hard">Hard</option>
+			</select>		</>
+	)
 }
-function deleteQuestion(e){
-	e.preventDefault();
-	console.log("delete");
-}
+const CategoryFillter = (arg) => {
+	const [Allcatagoies] = useGetAllCategories();
 
-
-
-const Home = () => {
 	return(
-	<>
-		<div className="w-2/3  mx-4 my-2 p-3 gc-shadow-25 rounded ">
-			<Link to="/Question/34234">
-			<QuestionCard className="my-3 gc-shadow-23" number="43" title="This is the sort title for question......." likes="3434" level="Easy" />
+		<>
+		<select className="border gc-border-green ms-4 mt-8 rounded-md text-lg" onChange={(e)=>{arg.setcategory(e.target.value)}} >
+		<option value="">Categories</option>
+			{Allcatagoies.map((data,index)=>{
+				return(
+					<option key={index} value={data}>{data}</option>
+				)
+			})}
+			</select>
+		</>
+	)
+}
+const Home = () => {
+	const [getAllData ] = useGetAllQuestions();
+	const [level, setlevel] = useState("");
+	const [category, setcategory] = useState("");
+	console.log(getAllData)
+	if(level!=="" && category!==""){
+	var filterdata = level && category ? getAllData.filter((e) => e.level === level && e.categories.includes(category)) : getAllData;
+	}
+	else if(level!==""){
+		 filterdata = level  ? getAllData.filter((e) => e.level === level ) : getAllData;
+
+	}
+	else
+	{
+		filterdata =  category ? getAllData.filter((e) =>  e.categories.includes(category)) : getAllData;
+	}
+
+	const printdata=filterdata.map((data,index)=>{
+	return(
+			<Link to={`/Question/${data._id}`} key={index}>
+			<QuestionCard className="my-3 gc-shadow-23" number={data.number} title={data.title} likes={data.likes} level={data.level} />
 			</Link>
-			<Link to="/Question/3423344">
+	);
+	})
+	return(
+		<>
+			<LevelFillter setlevel={setlevel}/>
+		<CategoryFillter setcategory={setcategory}/>
+		<div className="flex">
+
+		<div className="w-3/4  mx-4 my-2 p-3 gc-shadow-25 rounded ">
+		{printdata}
+		</div>
+		<QuestionCount className="m-4" />
+		</div>
+		{/* <Link to="/Question/3423344">
 			<QuestionCard onDelete={deleteQuestion} onEdit={editQuestion} admin={true} className="my-3 gc-shadow-23" number="43" title="This is the sort title for question......." likes="3434" level="hard" />
 			</Link>
 			<QuestionCard className="my-3 gc-shadow-23" number="43" title="This is the sort title for question......." likes="3434" level="Easy" />
-		</div>
 
-		<Link to="admin">Admin</Link>
-		<QuestionCount className="m-4" />
-		
-	</>
-
-	
-	);
+		<Link to="admin">Admin</Link> */}
+		</>
+	)
 }
-
 export default Home;
