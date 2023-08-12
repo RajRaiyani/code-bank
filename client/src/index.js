@@ -15,6 +15,8 @@ import QuestionById from './pages/QuestionById';
 import Contact from './pages/Contact/Contact';
 import About from './pages/About/About';
 
+import Exampal from './pages/Exampal';
+
 
 
 
@@ -46,7 +48,8 @@ const appRouter = createBrowserRouter([
       {path:"question",element:<Question />},
       {path:"user",element:<User />}
     ] 
-  }
+  },
+  {path:"/exampal",element:<Exampal />},
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
