@@ -25,6 +25,8 @@ const AdminApp = lazy(()=>import("./Layouts/AdminApp"));
 const Dashboard = lazy(()=>import("./pages/Admin/Dashboard/Dashboard"))
 const Question = lazy(()=>import("./pages/Admin/Question/Question"));
 const User = lazy(()=>import("./pages/Admin/User/User"));
+const AddEditQuestion = lazy(()=>import("./pages/Admin/Question/AddEditQuestion"));
+const AddEditSolution = lazy(()=>import("./pages/Admin/Question/Solution/AddEditSolution"));
 
 
 const appRouter = createBrowserRouter([
@@ -46,7 +48,11 @@ const appRouter = createBrowserRouter([
     children:[
       {path:"",element:<Dashboard />},
       {path:"question",element:<Question />},
-      {path:"user",element:<User />}
+      {path:"user",element:<User />},
+      {path:"question/add",element:<AddEditQuestion pageState="add" />},
+      {path:"question/:id/edit",element:<AddEditQuestion pageState="edit" />},
+      {path:"solution/add",element:<AddEditSolution pageState="add" />},
+      {path:"solution/:id/edit",element:<AddEditSolution pageState="edit" />},
     ] 
   },
   {path:"/exampal",element:<Exampal />},

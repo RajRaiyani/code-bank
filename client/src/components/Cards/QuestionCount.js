@@ -4,7 +4,7 @@ import {FaCircle} from "react-icons/fa"
 const QuestionCount = (props)=>{
 	let space = " ";
 	return(
-		<div className={"p-3 border gc-border-green w-fit flex rounded-xl items-center justify-around"+space+props.className}>
+		<div className={"p-3 border gc-border-green w-fit h-fit flex rounded-xl items-center justify-around"+space+props.className}>
 			<div className="ps-3 pe-5 text-5xl">
 				{props.count}
 			</div>
