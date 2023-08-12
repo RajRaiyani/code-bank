@@ -38,7 +38,9 @@ const Home = () => {
 	const [getAllData ] = useGetAllQuestions();
 	const [level, setlevel] = useState("");
 	const [category, setcategory] = useState("");
-	console.log(getAllData)
+	const Easy = getAllData.filter((e) => e.level === "Easy");
+	const Medium = getAllData.filter((e) => e.level === "Medium");
+	const Hard = getAllData.filter((e) => e.level === "Hard");
 	if(level!=="" && category!==""){
 	var filterdata = level && category ? getAllData.filter((e) => e.level === level && e.categories.includes(category)) : getAllData;
 	}
@@ -67,7 +69,7 @@ const Home = () => {
 		<div className="w-3/4  mx-4 my-2 p-3 gc-shadow-25 rounded ">
 		{printdata}
 		</div>
-		<QuestionCount className="m-4" />
+		<QuestionCount className="m-4" count={getAllData.length} Easy={Easy.length} Medium={Medium.length} Hard={Hard.length}/>
 		</div>
 		{/* <Link to="/Question/3423344">
 			<QuestionCard onDelete={deleteQuestion} onEdit={editQuestion} admin={true} className="my-3 gc-shadow-23" number="43" title="This is the sort title for question......." likes="3434" level="hard" />

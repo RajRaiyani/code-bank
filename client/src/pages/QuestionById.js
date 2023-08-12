@@ -45,8 +45,8 @@ const QuestionById = () => {
 	return (<>
 		<div className="md:flex my-2">
 			<div className="md:w-1/2 mx-4 my-2 p-4 rounded">
-				<button className={`btn rounded-l-lg  p-2 text-white ${togal === true ? "bg-[#7cc529]" : "hover:bg-[#7cc529] hover:text-white border gc-border-green text-black "} `} onClick={() => { settogal(true) }}>Discription</button>
-				<button className={`btn rounded-r-lg  p-2 ms-1 text-white ${togal === false ? "bg-[#7cc529]" : "hover:bg-[#7cc529] hover:text-white border gc-border-green text-black "} `} onClick={() => { settogal(false) }}>Comments</button>
+				<button className={`btn rounded-l-lg  p-2 text-white ${togal === true ? "bg-[#7cc529] border gc-border-green" : " gc-text-black hover:bg-[#7cc529] hover:text-white border gc-border-green   "} `} onClick={() => { settogal(true) }}>Discription</button>
+				<button className={`btn rounded-r-lg  p-2 ms-1 text-white ${togal === false ? "bg-[#7cc529] border gc-border-green" : "gc-text-black hover:bg-[#7cc529] hover:text-white border gc-border-green "} `} onClick={() => { settogal(false) }}>Comments</button>
 				{togal === true ? <Discription /> : <>Comments</>}
 			</div>
 			<div className="md:w-1/2 h-[85vh]  mx-4 my-2 p-4 rounded overflow-auto gc-shadow-25 ">{printSolution}</div>
