@@ -8,6 +8,12 @@
 .gc-text-black{
 	color: $gc-color-black;
 }
+.gc-bg-green{
+	background-color: $gc-color-green;
+}
+.gc-bg-black{
+	background-color: $gc-color-black;
+}
 
 .gc-hover-text-green:hover{
 	@apply gc-text-green;
@@ -32,8 +38,12 @@
 	@apply gc-border-black;
 }
 
-
-
+.gc-bg-green{
+	background-color: $gc-color-green;
+}
+.gc-hover-bg-green:hover{
+	@apply gc-bg-green;
+}
 
 .gc-shadow-25{
 	box-shadow: 0px 30px 60px -12px rgba(10, 90, 53, 0.25) inset, 0px 18px 36px -18px rgba(0, 20, 0, 0.30) inset;
@@ -51,4 +61,8 @@
 }
 .gc-shadow-70{
 	box-shadow: rgba(17, 57, 26, 0.1) 0px 4px 16px, rgba(17, 57, 26, 0.1) 0px 8px 24px, rgba(17, 57, 26, 0.1) 0px 16px 56px;
+}
+.login-sign-box{
+	width: 340px;
+	box-shadow: rgba(10, 100, 43, 0.25) 0px 50px 100px -20px, rgba(0, 30, 0, 0.3) 0px 30px 60px -30px, rgba(105, 193, 142, 0.35) 0px -2px 6px 0px inset;
 }

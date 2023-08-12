@@ -12,8 +12,8 @@ export function SolutionCard(props) {
 
 
 	return (
-
-		<div className={"bg-white px-3 pb-3 rounded-xl min-w-[300px] max-w-[1000px]" + space + props.className} style={props.style}>
+		
+		<div className={"bg-white px-3 pb-3 m-3 rounded-xl min-w-[300px] max-w-[1000px]" + space + props.className} style={props.style}>
 
 			<div className="flex justify-between items-center">
 				<div className={"relative bg-white w-fit -translate-y-1/3 py-1 px-2 rounded-md" + space + props.titleClassName} style={props.titleStyle}>{props.title}</div>
