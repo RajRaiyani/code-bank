@@ -10,6 +10,7 @@ import MainApp from './Layouts/MainApp';
 
 import Home from './pages/Home';
 import LogIn from './pages/Authentication/LogIn';
+import SignIn from './pages/Authentication/SignIn';
 import QuestionById from './pages/QuestionById';
 import Contact from './pages/Contact/Contact';
 import About from './pages/About/About';
@@ -36,7 +37,7 @@ const appRouter = createBrowserRouter([
     ],
   },
   {path:"/LogIn",element:<LogIn />},
- 
+  {path:"/SignIn",element:<SignIn />},
   {
     path:"/admin",
     element:<Suspense><AdminApp /></Suspense>,

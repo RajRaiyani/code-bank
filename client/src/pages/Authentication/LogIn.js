@@ -26,7 +26,7 @@ const LogIn = () => {
 				cookie.set("username", res.username, {
 				  expires: new Date().getTime() + 2 * 1000 * 3600,
 				});
-				navigate("/user/home");
+				navigate("/");
 			  }
 			  if (res.role === "admin") {
 				cookie.set("username", res.username+" admin", {
@@ -70,7 +70,7 @@ const LogIn = () => {
 		// </>
 		<>
 			<div className="static">
-				<div className="absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 login-sign-box">
+				<div className="absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 w-[340px] gc-shadow-14 rounded-lg">
 					<div className="flex justify-center pb-2 pt-6">
 						<img src="/assets/images/GreenCode_Logo_main.png" width={200} alt="logo of gree-bank"></img>
 					</div>
@@ -100,7 +100,7 @@ const LogIn = () => {
 						</div>
 						<div className="pb-3">
 							<span className="pl-4" style={{ opacity: "0.4" }} >Don't have account ?</span>
-							<Link to="/SignIn" className="ml-2 gc-text-green underline decoration-wavy decoration-auto gc-hover-text-black">
+							<Link to="/SignIn" className="ml-2 gc-text-green gc-hover-text-black">
 								SignIn
 							</Link>
 						</div>
