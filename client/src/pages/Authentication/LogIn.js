@@ -29,7 +29,7 @@ const LogIn = () => {
 				navigate("/");
 			  }
 			  if (res.role === "admin") {
-				cookie.set("username", res.username+" admin", {
+				cookie.set("username", res.username +" admin", {
 				  expires: new Date().getTime() + 2 * 1000 * 3600,
 				});
 				cookie.set("adminToken", res.token, {
@@ -56,18 +56,7 @@ const LogIn = () => {
 
 	
 	return(
-		// <>
-		// <form>
-		// 	{message}
-		// 	<input type="text" placeholder="Username" name="email"  onChange={handleData}/>
-		// 	<br/>
-		// 	<input type="password" placeholder="Password"  name="password" onChange={handleData}/>
-		// 	<input type="submit" onClick={login} />
-		// 	<Link to="/signup">Sign Up</Link>
-		// </form>
 
-
-		// </>
 		<>
 			<div className="static">
 				<div className="absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 w-[340px] gc-shadow-14 rounded-lg">

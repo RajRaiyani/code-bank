@@ -21,7 +21,6 @@ const useGetQuestionDataById = (id)=>{
             .then((res) => {
                 if (res.status === "OK") {
                     setData(res.data);
-                    console.log(res.data);
                 } else if (res.status === "EXPIRED_TOKEN") {
                     navigate("/login");
                 } else {
