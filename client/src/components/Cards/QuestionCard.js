@@ -15,10 +15,10 @@ export const QuestionCard = (props)=>{
 	function AdminControls(){
 		if(!props.admin)return(<></>);
 		return(
-		<>
-			<MdOutlineDeleteForever onClick={props.onDelete} className="text-red-500 text-3xl relative z-10" />
-			<FiEdit onClick={props.onEdit} className="text-2xl relative z-10" />
-		</>
+		<div className="flex items-center">
+			<MdOutlineDeleteForever onClick={props.onDelete} className="text-red-500 text-3xl mx-2 hover:scale-110" />
+			<FiEdit onClick={props.onEdit} className="text-2xl mx-2 hover:scale-110" />
+		</div>
 		)
 	}
 
@@ -29,7 +29,7 @@ export const QuestionCard = (props)=>{
 		if(questionLevel==="easy")return(<FaCircle className="gc-text-green" />);
 	}
 	
-	var titleClass = props.admin?"max-w-[80%]":"max-w-[90%]";
+	var titleClass = props.admin?"max-w-[70%]":"max-w-[90%]";
 
 	return(
 		<div className={"flex max-w-[1000px] justify-between items-center border rounded-lg px-3 py-1 bg-white"+space+props.className} style={props.style}>
@@ -46,3 +46,5 @@ export const QuestionCard = (props)=>{
 		</div>
 	);
 }
+
+export default QuestionCard;
