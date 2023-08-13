@@ -117,7 +117,7 @@ exports.commentOnQuestion = async (req, res) => {
 exports.getAllUsers = async (req, res) => {
 
 	try {
-		var data = await User.find({}, { email: 1, name: 1, role: 1 });
+		var data = await User.find({}, { email: 1, username: 1, role: 1 });
 		res.json({ status: "OK", data });
 	} catch (error) {
 		res.json({ status: "X", message: "something went wrong while fetching the users.", error });
