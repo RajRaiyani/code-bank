@@ -6,7 +6,6 @@ import { useState } from "react";
 import Cookies from "js-cookie";
 import CommentCard from "../components/Cards/CommentCard";
 import postComment from "../utilities/APIcalls/postComment";
-import deleteSolution from "../utilities/APIcalls/deleteSolution.ja";
 
 const styleForSolution = {
 	boxShadow: "0px 5px 15px 0px rgba(50, 130, 50, 0.35)"
