@@ -55,7 +55,7 @@ const Home = () => {
 
 	const printdata=filterdata.map((data,index)=>{
 	return(
-			<Link to={`/Question/${data._id}`} key={index}>
+			<Link to={`/question/${data._id}`} key={index}>
 			<QuestionCard className="my-3 gc-shadow-23" number={data.number} title={data.title} likes={data.likes} level={data.level} />
 			</Link>
 	);

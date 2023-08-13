@@ -14,7 +14,6 @@ async function postComment(id, comment, callback)
     }).then((res) => res.json())
         .then((res) => {
             if (res.status === "OK") {
-
                 response = res.data;
             } else{
                 callback(res)

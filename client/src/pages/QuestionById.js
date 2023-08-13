@@ -41,19 +41,19 @@ const QuestionById = () => {
 	}
 	const Comment=()=>{
 
-		const [coments,setcommet]=useState(data.comments);
+		const [comments,setcommet]=useState(data.comments);
 		const [commentMessage ,setcommetMessage]=useState("");
 
 		async function sendData()
+		{ if(commentMessage!=="")
 		{
-
-			var newComment = await postComment(id,commentMessage,(res)=>{if(res!=undefined){navigate("/login")}})
-			newComment.user = {"username":newComment.username}
-			console.log(newComment)
-			console.log(coments[0])
-			
-			setcommet([newComment,...coments]);
+			var newComment = await postComment(id,commentMessage,(res)=>{if(res!==undefined){navigate("/login")}})
+			newComment.user = {_id:newComment.user_id,"username":newComment.username}
+			delete newComment.username 
+			delete newComment.user_id 
+			setcommet([newComment,...comments]);
 			setcommetMessage("");
+		}
 
 		}
 		
@@ -62,10 +62,10 @@ const QuestionById = () => {
 			<div className="text-xl mt-2 flex items-center"><span className="flex items-center me-2 justify-center h-10 w-10 rounded-full border-4 gc-border-green text-center text-2xl font-bold align-middle ">{Cookies.get("username")[0].toUpperCase()}</span>{Cookies.get("username")}</div>
 			<div className="flex items-center mt-2 "><input type="text" value={commentMessage} className="w-full border-b gc-border-black  p-2 " placeholder="Write a comment" onChange={(e)=>{setcommetMessage(e.target.value)}}/><button className="gc-bg-green ms-4 text-white w-[110px] p-2 border rounded-lg hover:scale-110 duration-300" onClick={()=>{sendData()}}>POST</button></div>
 			<div className="overflow-y-auto sm:mt-8 sm:ms-10 sm:me-10 h-[50vh]">
-			{coments.map((e,index)=>{
+			{comments.map((e,index)=>{
 					const date=new Date(e.date);
 		
-					return <CommentCard userName={e.user.username} className="m-2 mb-3 border-0 border-t border-s gc-border-green rounded-lg" comment={e.data} date={date.toDateString()} key={index}  />
+					return <CommentCard username={e.user.username} className="m-2 mb-3 border-0 border-t border-s gc-border-green rounded-lg" comment={e.data} date={date.toDateString()} key={index}  />
 				})
 			}
 			</div>
