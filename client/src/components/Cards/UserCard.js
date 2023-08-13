@@ -5,7 +5,7 @@ import { MdDeleteForever } from "react-icons/md"
 import { BiSolidUser } from "react-icons/bi"
 
 
-const User = (props) => {
+export function UserCard(props) {
 	const space = " ";
 	const [menuState, setManuState] = useState(false);
 
@@ -38,4 +38,4 @@ const User = (props) => {
 	)
 }
 
-export default User;
+export default UserCard;
