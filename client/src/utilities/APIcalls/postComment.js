@@ -18,7 +18,6 @@ async function postComment(id, comment, callback)
             } else{
                 callback(res)
             }
-           
         })
         .catch((e) => {
             console.log(e);
