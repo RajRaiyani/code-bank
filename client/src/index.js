@@ -27,6 +27,7 @@ const Question = lazy(()=>import("./pages/Admin/Question/Question"));
 const User = lazy(()=>import("./pages/Admin/User/User"));
 const AddEditQuestion = lazy(()=>import("./pages/Admin/Question/AddEditQuestion"));
 const AddEditSolution = lazy(()=>import("./pages/Admin/Question/Solution/AddEditSolution"));
+const Other = lazy(()=>import("./pages/Admin/Other/Other"));
 
 
 const appRouter = createBrowserRouter([
@@ -49,6 +50,7 @@ const appRouter = createBrowserRouter([
       {path:"",element:<Dashboard />},
       {path:"question",element:<Question />},
       {path:"user",element:<User />},
+      {path:"other",element:<Other />},
       {path:"question/add",element:<AddEditQuestion edit={false} />},
       {path:"question/:id",element:<QuestionById admin />},
       {path:"question/:id/edit",element:<AddEditQuestion edit />},
