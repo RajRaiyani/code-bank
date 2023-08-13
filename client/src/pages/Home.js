@@ -1,5 +1,3 @@
-
-
 import { Link } from "react-router-dom";
 import { QuestionCard } from "../components/Cards/QuestionCard";
 import QuestionCount from "../components/Cards/QuestionCount";
@@ -7,10 +5,9 @@ import useGetAllQuestions from "../hooks/useGetAllQuestions";
 import { useState } from "react";
 import useGetAllCategories from "../hooks/useGetAllCategories";
 const LevelFillter = (arg) => {	
-
 	return (
 		<>
-		<select className="border gc-border-green ms-4 mt-8 rounded-md text-lg" onChange={(e)=>{arg.setlevel(e.target.value)}} >
+		<select className="border gc-border-green ms-12 mt-4 rounded-md text-lg" onChange={(e)=>{arg.setlevel(e.target.value)}} >
 			<option value="">Level</option>
 			<option value="Easy" >Easy</option>
 			<option value="Medium">Medium</option>
@@ -23,7 +20,7 @@ const CategoryFillter = (arg) => {
 
 	return(
 		<>
-		<select className="border gc-border-green ms-4 mt-8 rounded-md text-lg" onChange={(e)=>{arg.setcategory(e.target.value)}} >
+		<select className="border gc-border-green ms-4 mt-4 rounded-md text-lg" onChange={(e)=>{arg.setcategory(e.target.value)}} >
 		<option value="">Categories</option>
 			{Allcatagoies.map((data,index)=>{
 				return(
@@ -62,21 +59,21 @@ const Home = () => {
 	})
 	return(
 		<>
-			<LevelFillter setlevel={setlevel}/>
+			<LevelFillter setlevel={setlevel} />
 		<CategoryFillter setcategory={setcategory}/>
-		<div className="flex">
+		<div className="flex ">
 
-		<div className="w-3/4  mx-4 my-2 p-3 gc-shadow-25 rounded ">
+		<div className="w-3/4  mx-4 my-2 p-3 gc-shadow-25 rounded mt-4">
 		{printdata}
 		</div>
-		<QuestionCount className="m-4" count={getAllData.length} Easy={Easy.length} Medium={Medium.length} Hard={Hard.length}/>
+		<QuestionCount  className="m-4" count={getAllData.length}  Easy={Easy.length} Medium={Medium.length} Hard={Hard.length}/>
 		</div>
 		{/* <Link to="/Question/3423344">
 			<QuestionCard onDelete={deleteQuestion} onEdit={editQuestion} admin={true} className="my-3 gc-shadow-23" number="43" title="This is the sort title for question......." likes="3434" level="hard" />
 			</Link>
 			<QuestionCard className="my-3 gc-shadow-23" number="43" title="This is the sort title for question......." likes="3434" level="Easy" />
 
-		<Link to="admin">Admin</Link> */}
+		<Link to="admin">Admin</Link> */}	
 		</>
 	)
 }

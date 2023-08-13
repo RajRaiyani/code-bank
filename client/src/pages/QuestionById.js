@@ -1,4 +1,4 @@
-import { useParams , useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { SolutionCard } from "../components/Cards/SolutionCard";
 import useGetQuestionDataById from "../hooks/useGetQuestionByID";
 import { FaCircle } from "react-icons/fa";
@@ -6,6 +6,7 @@ import { useState } from "react";
 import Cookies from "js-cookie";
 import CommentCard from "../components/Cards/CommentCard";
 import postComment from "../utilities/APIcalls/postComment";
+import deleteSolution from "../utilities/APIcalls/deleteSolution.ja";
 
 const styleForSolution = {
 	boxShadow: "0px 5px 15px 0px rgba(50, 130, 50, 0.35)"
@@ -13,17 +14,35 @@ const styleForSolution = {
 const styleForSolutionTitle = {
 	boxShadow: "0px 5px 15px 0px rgba(50, 130, 50, 0.35)"
 }
-const QuestionById = () => {
+const QuestionById = (props) => {
 	const { id } = useParams();
-	const [data] = useGetQuestionDataById(id);
+	const [data , setData] = useGetQuestionDataById(id);
 	const [togal, settogal] = useState(true);
-	const navigate=useNavigate();
-	
-	const printSolution = data.solutions.map((e, index) => {
+	const navigate = useNavigate();
+
+	function deleteSolu (id) {
+		// deleteSolution(id, () => {
+		// 	navigate("/login");
+		// })
+		setData(data.solutions.filter((e) => e._id !== id));
+
+	}
+	var printSolution;
+	if(data.solutions!==undefined)
+	{
+	 printSolution = data.solutions.map((e, index) => {
 		return (
-			<SolutionCard style={styleForSolution} titleStyle={styleForSolutionTitle} title={e.title} solution={e.code} language={e.language} key={index} className="my-6" />
+			<div key={index}>
+			{props.admin === true ? <>
+				<SolutionCard admin={props.admin} style={styleForSolution} titleStyle={styleForSolutionTitle} title={e.title} solution={e.code} language={e.language} onDelete={()=>{deleteSolu(e._id)}} className="my-6" />
+
+			</>:<>
+			<SolutionCard style={styleForSolution} titleStyle={styleForSolutionTitle} title={e.title} solution={e.code} language={e.language}  className="my-6" />
+			</>}
+			</div>
 		)
 	})
+}
 	function Level(arg) {
 		if (arg.level === undefined) return (<></>);
 		var questionLevel = arg.level.toLowerCase();
@@ -39,51 +58,53 @@ const QuestionById = () => {
 			</>
 		)
 	}
-	const Comment=()=>{
+	const Comment = () => {
 
-		const [comments,setcommet]=useState(data.comments);
-		const [commentMessage ,setcommetMessage]=useState("");
+		const [comments, setcommet] = useState(data.comments);
+		const [commentMessage, setcommetMessage] = useState("");
 
-		async function sendData()
-		{ if(commentMessage!=="")
-		{
-			var newComment = await postComment(id,commentMessage,(res)=>{if(res!==undefined){navigate("/login")}})
-			newComment.user = {_id:newComment.user_id,"username":newComment.username}
-			delete newComment.username 
-			delete newComment.user_id 
-			setcommet([newComment,...comments]);
-			setcommetMessage("");
-		}
-
-		}
-		
-		return(
-			<>
-			<div className="text-xl mt-2 flex items-center"><span className="flex items-center me-2 justify-center h-10 w-10 rounded-full border-4 gc-border-green text-center text-2xl font-bold align-middle ">{Cookies.get("username")[0].toUpperCase()}</span>{Cookies.get("username")}</div>
-			<div className="flex items-center mt-2 "><input type="text" value={commentMessage} className="w-full border-b gc-border-black  p-2 " placeholder="Write a comment" onChange={(e)=>{setcommetMessage(e.target.value)}}/><button className="gc-bg-green ms-4 text-white w-[110px] p-2 border rounded-lg hover:scale-110 duration-300" onClick={()=>{sendData()}}>POST</button></div>
-			<div className="overflow-y-auto sm:mt-8 sm:ms-10 sm:me-10 h-[50vh]">
-			{comments.map((e,index)=>{
-					const date=new Date(e.date);
-		
-					return <CommentCard username={e.user.username} className="m-2 mb-3 border-0 border-t border-s gc-border-green rounded-lg" comment={e.data} date={date.toDateString()} key={index}  />
-				})
+		async function sendData() {
+			if (commentMessage !== "") {
+				var newComment = await postComment(id, commentMessage, (res) => { if (res !== undefined) { navigate("/login") } })
+				newComment.user = { _id: newComment.user_id, "username": newComment.username }
+				delete newComment.username
+				delete newComment.user_id
+				setcommet([newComment, ...comments]);
+				setcommetMessage("");
 			}
-			</div>
+		}
+
+		return (
+			<>
+				<div className="text-xl mt-2 flex items-center"><span className="flex items-center me-2 justify-center h-10 w-10 rounded-full border-4 gc-border-green text-center text-2xl font-bold align-middle ">{Cookies.get("username")[0].toUpperCase()}</span>{Cookies.get("username")}</div>
+				<div className="flex items-center mt-2 "><input type="text" value={commentMessage} className="w-full border-b gc-border-black  p-2 " placeholder="Write a comment" onChange={(e) => { setcommetMessage(e.target.value) }} /><button className="gc-bg-green ms-4 text-white w-[110px] p-2 border rounded-lg hover:scale-110 duration-300" onClick={() => { sendData() }}>POST</button></div>
+				<div className="overflow-y-auto sm:mt-8 sm:ms-10 sm:me-10 h-[50vh]">
+					{comments.map((e, index) => {
+						const date = new Date(e.date);
+
+						return (
+							<div key={index} >
+								{props.admin === true ? <><CommentCard admin username={e.user.username} className="m-2 mb-3 border-0 border-t border-s gc-border-green rounded-lg" comment={e.data} date={date.toDateString()} key={index} /></> : <><CommentCard username={e.user.username} className="m-2 mb-3 border-0 border-t border-s gc-border-green rounded-lg" comment={e.data} date={date.toDateString()} />
+								</>}
+							</div>)
+					})
+					}
+				</div>
 			</>
 		)
 
-		}
+	}
 	return (<>
 		<div className="md:flex my-2">
 			<div className="md:w-1/2 mx-4 my-2 p-4 rounded">
 				<button className={`btn rounded-l-lg  p-2 text-white ${togal === true ? "bg-[#7cc529] border gc-border-green" : " gc-text-black hover:bg-[#7cc529] hover:text-white border gc-border-green   "} `} onClick={() => { settogal(true) }}>Discription</button>
 				<button className={`btn rounded-r-lg  p-2 ms-1 text-white ${togal === false ? "bg-[#7cc529] border gc-border-green" : "gc-text-black hover:bg-[#7cc529] hover:text-white border gc-border-green "} `} onClick={() => { settogal(false) }}>Comments</button>
 				<div className="mt-4">
-				<span className=" text-2xl font-bold">{data.number}</span>
-				<span className="text-xl p-2 font-light">{data.title}</span>
-				<div className="flex "><Level level={data.level} />level</div>
-			</div>
-				{togal === true ? <Discription /> : <><Comment/></>}
+					<span className=" text-2xl font-bold">{data.number}</span>
+					<span className="text-xl p-2 font-light">{data.title}</span>
+					<div className="flex "><Level level={data.level} />level</div>
+				</div>
+				{togal === true ? <Discription /> : <><Comment /></>}
 			</div>
 			<div className="md:w-1/2 h-[85vh]  mx-4 my-2 p-4 rounded overflow-auto gc-shadow-25 ">{printSolution}</div>
 		</div>
