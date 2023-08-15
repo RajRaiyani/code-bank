@@ -6,12 +6,16 @@ import { useState } from "react";
 import Cookies from "js-cookie";
 import CommentCard from "../components/Cards/CommentCard";
 import postComment from "../utilities/APIcalls/postComment";
+import deleteSolution from "../utilities/APIcalls/deleteSolution";
 
 const styleForSolution = {
 	boxShadow: "0px 5px 15px 0px rgba(50, 130, 50, 0.35)"
 }
 const styleForSolutionTitle = {
 	boxShadow: "0px 5px 15px 0px rgba(50, 130, 50, 0.35)"
+}
+const styleForCommentCard={
+	boxShadow: "0px 2px 1px 0px rgba(0, 30, 0, 0.09), 0px 4px 2px 0px rgba(0, 30, 0, 0.09), 0px 8px 4px 0px rgba(0, 30, 0, 0.09), 0px 16px 8px 0px rgba(0, 30, 0, 0.09), 0px 32px 16px 0px rgba(0, 30, 0, 0.09)"
 }
 const QuestionById = (props) => {
 	const { id } = useParams();
@@ -20,26 +24,15 @@ const QuestionById = (props) => {
 	const navigate = useNavigate();
 
 	function deleteSolu (id) {
-		// deleteSolution(id, () => {
-		// 	navigate("/login");
-		// })
-		setData(data.solutions.filter((e) => e._id !== id));
+		deleteSolution(id, ()=>{navigate("/login")});
+		setData(data.solutions.filter((e)=>e._id!==id));
 
 	}
 	var printSolution;
 	if(data.solutions!==undefined)
 	{
 	 printSolution = data.solutions.map((e, index) => {
-		return (
-			<div key={index}>
-			{props.admin === true ? <>
-				<SolutionCard admin={props.admin} style={styleForSolution} titleStyle={styleForSolutionTitle} title={e.title} solution={e.code} language={e.language} onDelete={()=>{deleteSolu(e._id)}} className="my-6" />
-
-			</>:<>
-			<SolutionCard style={styleForSolution} titleStyle={styleForSolutionTitle} title={e.title} solution={e.code} language={e.language}  className="my-6" />
-			</>}
-			</div>
-		)
+		return (<SolutionCard admin={props.admin} style={styleForSolution} titleStyle={styleForSolutionTitle} title={e.title} solution={e.code} language={e.language} onDelete={()=>{deleteSolu(e._id)}} className="my-6" key={index}/>)
 	})
 }
 	function Level(arg) {
@@ -52,15 +45,14 @@ const QuestionById = (props) => {
 
 	const Discription = () => {
 		return (
-			<>
 				<div className="w-full md:h-[70vh] border gc-border-green p-4 rounded-md">{data.question}</div>
-			</>
 		)
 	}
 	const Comment = () => {
 
 		const [comments, setcommet] = useState(data.comments);
 		const [commentMessage, setcommetMessage] = useState("");
+		console.log(comments);
 
 		async function sendData() {
 			if (commentMessage !== "") {
@@ -80,12 +72,8 @@ const QuestionById = (props) => {
 				<div className="overflow-y-auto sm:mt-8 sm:ms-10 sm:me-10 h-[50vh]">
 					{comments.map((e, index) => {
 						const date = new Date(e.date);
-
-						return (
-							<div key={index} >
-								{props.admin === true ? <><CommentCard admin username={e.user.username} className="m-2 mb-3 border-0 border-t border-s gc-border-green rounded-lg" comment={e.data} date={date.toDateString()} key={index} /></> : <><CommentCard username={e.user.username} className="m-2 mb-3 border-0 border-t border-s gc-border-green rounded-lg" comment={e.data} date={date.toDateString()} />
-								</>}
-							</div>)
+						return<CommentCard admin={props.admin} username={e.user.username} className="m-2 mb-3 border-0 border-t border-s gc-border-green rounded-lg" comment={e.data} date={date.toDateString()} key={index}  style={styleForCommentCard} />
+							
 					})
 					}
 				</div>
@@ -105,7 +93,9 @@ const QuestionById = (props) => {
 				</div>
 				{togal === true ? <Discription /> : <><Comment /></>}
 			</div>
-			<div className="md:w-1/2 h-[85vh]  mx-4 my-2 p-4 rounded overflow-auto gc-shadow-25 ">{printSolution}</div>
+			<div className="md:w-1/2 h-[85vh]  mx-4 my-2 p-4 rounded overflow-auto gc-shadow-25 ">
+				<button className="border gc-brder-green bg-green-800 text-white p-2" onClick={()=>{console.log("hiit")}}>+</button>
+				{printSolution}</div>
 		</div>
 	</>
 	);
