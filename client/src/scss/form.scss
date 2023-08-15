@@ -1,2 +1,22 @@
 @import "./variable.scss";
+@import "./common.scss";
 
+input{
+	@apply border;
+	@apply gc-border-green;
+	@apply rounded;
+	@apply gc-text-black;
+	&:focus{
+		outline: 1px solid $gc-color-green;
+	}
+}
+
+select{
+	@apply w-fit;
+	@apply bg-white;
+	@apply gc-border-green;
+	box-shadow: none;
+	&:focus{
+		outline: 2px solid $gc-color-green;
+	}
+}

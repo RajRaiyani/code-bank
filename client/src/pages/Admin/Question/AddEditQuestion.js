@@ -1,28 +1,40 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import "./../../../scss/form.scss";
 
 
 
 
 
 const AddEditQuestion = (props) => {
+
+	
+	// useEffect(()=>{
+	
+	// },[])
 	
 	const formSchema = {
-		number:undefined,
+		number:"",
 		title:"",
 		question:"",
-		categories:[],
-		level:undefined
-
+		level:""
 	}
 
 	const [formData,setFormData] = useState(formSchema);
 
+
+
 	function handleInput(event){
-		
+		let name = event.target.name;
+		let value = event.target.value;
+		setFormData({...formData,[name]:value})
+	}
+	function formControl(name){
+		return {name:name,onChange:handleInput,value:formData[name]}
 	}
 
 	function submitFormData(event){
-
+		event.preventDefault();
+		console.log(formData);
 	}
 
 	return (
@@ -31,10 +43,19 @@ const AddEditQuestion = (props) => {
 			
 			<form onSubmit={submitFormData} className="flex flex-col">
 
-				<input type="number" onChange={handleInput} placeholder="Number" />
-				<input type="text" onChange={handleInput} placeholder="Title" />
-				<input type="text" onChange={handleInput} placeholder="Question" />
+				<input type="number" {...formControl("number")} placeholder="Number"  />
+				<input type="text" {...formControl("title")} placeholder="Title" />
+				<input type="text" {...formControl("question")} placeholder="Question" />
+				<select {...formControl("level")}>
+					<option>Level</option>
+					<option value="easy">Easy</option>
+					<option value="medium">Midium</option>
+					<option value="hard">Hard</option>
+				</select>
 				
+
+
+				<input type="submit" />
 			</form>
 		</div>
 	)

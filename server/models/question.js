@@ -20,7 +20,7 @@ const schema = new mongoose.Schema({
 	},
 	level:{
 		type:String,
-		enum:["Hard","Medium","Easy"]
+		enum:["hard","medium","easy"]
 	},
 })
 
