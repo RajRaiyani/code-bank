@@ -28,7 +28,7 @@ const LogIn = () => {
 				});
 				navigate("/");
 			  }
-			  if (res.role === "admin") {
+			  else if (res.role === "admin") {
 				cookie.set("username", res.username +" admin", {
 				  expires: new Date().getTime() + 2 * 1000 * 3600,
 				});

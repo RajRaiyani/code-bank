@@ -1,10 +1,18 @@
 import Footer from "../components/Footer";
 import AdminHeader from "../components/AdminHeader";
 import AdminSidebar from "../components/AdminSidebar";
-import { Outlet } from "react-router-dom";
-import { useState } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import Cookies from "js-cookie";
 
 const AdminApp = ()=>{
+	const navigate=useNavigate();
+	useEffect(()=>{
+		if(!Cookies.get("adminToken"))
+		{
+navigate("/login");
+		}
+	})
 
 	const [sidebarState,setSidebarState] = useState(true);
 
