@@ -54,7 +54,7 @@ const appRouter = createBrowserRouter([
       {path:"question/add",element:<AddEditQuestion edit={false} />},
       {path:"question/:id",element:<QuestionById admin />},
       {path:"question/:id/edit",element:<AddEditQuestion edit />},
-      {path:"solution/add",element:<AddEditSolution edit={false} />},
+      {path:"solution/:id/add",element:<AddEditSolution edit={false} />},
       {path:"solution/:id/edit",element:<AddEditSolution edit />},
     ] 
   },
