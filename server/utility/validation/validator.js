@@ -12,7 +12,7 @@ const validator = {
 		return Info[property];
 	},
 	validateLevel: function (level) {
-		if (level === "Hard" || level === "Medium" || level === "Easy") return true;
+		if (level === "hard" || level === "medium" || level === "easy") return true;
 		return false;
 	},
 
