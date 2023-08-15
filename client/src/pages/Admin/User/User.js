@@ -8,6 +8,7 @@ const User = () => {
 	var UserCardprint;
 	if(user!==undefined)
 	{
+
 	 UserCardprint = user.map((e, index) => {
 		return(
 			<div key={index} >

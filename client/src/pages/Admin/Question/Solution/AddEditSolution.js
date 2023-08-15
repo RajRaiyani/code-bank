@@ -1,7 +1,29 @@
+import { useState } from "react";
+import useGetAllLanguages from "../../../../hooks/useGetAllLanguages";
+import { useNavigate, useParams } from "react-router-dom";
+import addSolution from "../../../../utilities/APIcalls/addSolution";
 
 
 const AddEditSolution = (props) => {
-	
+    const { id } = useParams();
+	const navigate=useNavigate();
+	var [languages] = useGetAllLanguages();
+	var [data, setData] = useState({question_id: id});
+	var [message,setMessage]=useState("");
+
+	function Languages() {
+		return languages.map(e => (
+			<option key={e} value={e}>{e}</option>
+		))
+	}
+	function handleChange(e) {
+		setData({ ...data, [e.target.name]: e.target.value });
+	}
+	async function sendData(id)
+	{
+		
+		await addSolution(data,setMessage,()=>{navigate(`/admin/question/${id}`)},()=>{navigate("/login")})
+	}
 	return (
 		<div>
 			<h1>Add and Edit Solution Page</h1>
@@ -9,26 +31,23 @@ const AddEditSolution = (props) => {
 
 
 			<div className="container " style={{ marginTop: "2rem" }}>
-          <h1>Add solution</h1>
-          <h3 className="text-danger">{message}</h3>
-		  <label for="language" className="form-label"> Select Languages :</label>
+          <h4>Add solution</h4>
+          <h3 >{message}</h3>
+		   Select Languages :
           <select
-			className="form-select mb-3"
+		  className="border gc-border-green  rounded-sm"
             name="language"
             id="language"
             value={data.language}
             onChange={handleChange}
           >
-            <option disabled selected hidden>
-              select language
-            </option>
+            
             <Languages />
           </select>
-		  <label for="formGroupExampleInput" className="form-label">
+		  <br/>
               Enter a Tile :
-            </label>
-              <input
-			  	rows={4}
+              <textarea
+			  	cols={50}
                 className="form-control mb-3"
                 type="text"
           name="title"
@@ -36,20 +55,17 @@ const AddEditSolution = (props) => {
           onChange={handleChange}
               />
           <div className="mb-3">
-            <label for="formGroupExampleInput" className="form-label">
               Enter a Solution :
-            </label>
           
               <textarea
 			  	rows={4}
-                className="form-control mb-3"
                 id="formGroupExampleInput"
                 type="text"
           name="code"
           placeholder="<code>"
           onChange={handleChange}
               />
-              <button className="btn btn-primary" onClick={submit}>
+              <button className="border gc-border-green" onClick={()=>{sendData(id)}}>
                 Add Solution
               </button>
           </div>

@@ -23,9 +23,17 @@ const QuestionById = (props) => {
 	const [togal, settogal] = useState(true);
 	const navigate = useNavigate();
 
-	function deleteSolu (id) {
-		deleteSolution(id, ()=>{navigate("/login")});
-		setData(data.solutions.filter((e)=>e._id!==id));
+	async function deleteSolu (id) {
+		const confirmDelete = window.confirm('Are you sure you want to delete?');
+		if (confirmDelete) {
+		  
+		
+		await deleteSolution(id, ()=>{navigate("/login")});
+		let temp = {...data}
+		temp.solutions= data.solutions.filter((e)=>e._id!==id)
+		setData(temp);
+		console.log(data)
+		}
 
 	}
 	var printSolution;
@@ -94,7 +102,7 @@ const QuestionById = (props) => {
 				{togal === true ? <Discription /> : <><Comment /></>}
 			</div>
 			<div className="md:w-1/2 h-[85vh]  mx-4 my-2 p-4 rounded overflow-auto gc-shadow-25 ">
-				<button className="border gc-brder-green bg-green-800 text-white p-2" onClick={()=>{console.log("hiit")}}>+</button>
+				<button className="border gc-brder-green bg-green-800 text-white p-2" onClick={()=>{navigate(`/admin/solution/${id}/add`)}}>+</button>
 				{printSolution}</div>
 		</div>
 	</>

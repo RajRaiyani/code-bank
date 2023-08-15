@@ -1,19 +1,25 @@
-function addSolution()
+import Cookies from "js-cookie";
+
+async function addSolution(data ,setMessage , callbackforok , callbackforexpire )
 	{
-		fetch("http://localhost:3007/api/v1/admin/solution/add", {
+	await	fetch("http://localhost:3007/api/v1/admin/solution/add", {
 			method: "POST",
 			headers: {
 				'Content-Type': 'application/json',
 				"token": Cookies.get("adminToken")
 			},
-			body: JSON.stringify({question_id:data.question_id , language:data.language , code:data.code , title:data.title})
+			body: JSON.stringify(data)
 		}).then((res) => (res.json()))
 			.then((res) => {
 				if (res.status === "OK") {
-					setMessage("add solution succesfully");
-          
-				} else {
-					console.log(res);
+          callbackforok();
+				} 
+                else if (res.status==="EXPIRED_TOKEN")
+                {
+                 setMessage(res.message);
+                 callbackforexpire();   
+                }
+                else {
 					setMessage(res.message);
 				}
 			})

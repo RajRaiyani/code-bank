@@ -1,7 +1,7 @@
 import Cookies from "js-cookie";
 
-function deleteQuestionById(id , callback) {
-    fetch("http://localhost:3007/api/v1/admin/question/delete/", {
+async function deleteQuestionById(id , callback) {
+  await  fetch("http://localhost:3007/api/v1/admin/question/delete/", {
       method: "DELETE",
       headers: {
         'Content-Type': 'application/json',
