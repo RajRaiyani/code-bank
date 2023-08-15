@@ -120,6 +120,7 @@ exports.editQuestion = async (req, res) => {
 			data.categories = categories;
 		}
 		if (level && level !== data.level) {
+			level = level.toLowerCase();
 			if (!Validator.validateLevel(level))
 				return res.json({ status: "INVALID", message: "Question's level is not valid" });
 			data.level = level;
