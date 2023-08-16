@@ -1,11 +1,12 @@
 import { useState } from "react";
-import "./../../../scss/form.scss";
+
 
 import useGetAllCategories from "../../../hooks/useGetAllCategories";
 
 import { useForm } from "react-hook-form";
 import useGetQuestionDataById from "../../../hooks/useGetQuestionByID";
 import { useParams } from "react-router-dom";
+import useGetAllLanguages from "../../../hooks/useGetAllLanguages";
 
 
 
@@ -15,31 +16,16 @@ const AddEditQuestion = (props) => {
 
 	const [solutionCount, setSolutionCount] = useState(1);
 	const params = useParams();
+	const [allCategories] = useGetAllCategories();
+	const [languages] = useGetAllLanguages();
 	const [questionData] =  useGetQuestionDataById(params.id,!props.edit);
+
+	var {number,title,question,level,categories} = questionData;
+
+	var values={number,title,question,level,categories};
 	
 	
-	console.log(questionData);
-
-	
-
-	delete questionData.solutions;
-	delete questionData.__v;
-	delete questionData._id;
-	delete questionData.comments;
-	delete questionData.isLiked;
-	delete questionData.likes
-
-
-	// var defaultValues = questionData;
-	
-
-	const [categories] = useGetAllCategories();
-
-	const { register, handleSubmit } = useForm({
-		values:questionData
-	});
-
-
+	const { register, handleSubmit } = useForm({values});
 
 
 	function submitForm(data) {
@@ -48,13 +34,21 @@ const AddEditQuestion = (props) => {
 
 
 	function Categories() {
-		return categories.map((val, index) => (
+		return allCategories.map((val, index) => (
 			<span key={index}>
 				<label>{val}</label>
 				<input type="checkbox" {...register("categories")} value={val} />
 			</span>
-
 		));
+	}
+	
+	function SelectLanguage(props){
+		return(
+			<select {...register(props.name)}>
+				<option>Language</option>
+				{languages.map((lng,index)=><option key={index} value={lng}>{lng}</option>) }
+			</select>
+		)
 	}
 
 	function SolutionForm() {
@@ -63,11 +57,10 @@ const AddEditQuestion = (props) => {
 			arr.push((
 				<span key={i}>
 					<input type="text" {...register("solutions."+i+".title")} placeholder="title" />
-					<input type="text" {...register("solutions."+i+".language")} placeholder="language" />
+					<SelectLanguage name={"solutions."+i+".language"} />
 					<input type="text" {...register("solutions."+i+".code")} placeholder="code" />
 				</span>
 			))
-
 		}
 		return arr;
 	}
@@ -93,11 +86,6 @@ const AddEditQuestion = (props) => {
 				<Categories />
 				{!props.edit && <SolutionForm />}
 				
-
-
-
-
-
 				<input type="submit" />
 			</form>
 		</div>

@@ -34,7 +34,7 @@ const Header = (props) => {
 						</div>
 					</Link> :
 					<div>
-						<div onClick={() => setPmState(pri => !pri)} className="flex mx-2 items-center justify-center text-center h-8 w-8 rounded-full border-[3px] gc-border-green gc-text-black text-lg">{props.username[0]}</div>
+						<div onClick={() => setPmState(pri => !pri)} className="flex mx-2 items-center justify-center text-center h-8 w-8 rounded-full border-[3px] gc-border-green gc-text-black text-lg">{props.username.toUpperCase()[0]}</div>
 						{pmState === true && <ProfileMenu />}
 					</div>
 			}
