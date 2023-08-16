@@ -8,6 +8,7 @@ import CommentCard from "../components/Cards/CommentCard";
 import postComment from "../utilities/APIcalls/postComment";
 import deleteSolution from "../utilities/APIcalls/deleteSolution";
 import deleteComment from "../utilities/APIcalls/deteleComment";
+import LikeCard from "../components/Cards/LikeCard";
 
 const styleForSolution = {
 	boxShadow: "0px 5px 15px 0px rgba(50, 130, 50, 0.35)"
@@ -41,7 +42,7 @@ const QuestionById = (props) => {
 	if(data.solutions!==undefined)
 	{
 	 printSolution = data.solutions.map((e, index) => {
-		return (<SolutionCard admin={props.admin} style={styleForSolution} titleStyle={styleForSolutionTitle} title={e.title} solution={e.code} language={e.language} onDelete={()=>{deleteSolu(e._id)}} className="my-6" key={index}/>)
+		return (<SolutionCard admin={props.admin} style={styleForSolution} titleStyle={styleForSolutionTitle} title={e.title} solution={e.code} language={e.language} onDelete={()=>{deleteSolu(e._id)}} className="my-6" key={index} onCopy={()=>{navigator.clipboard.writeText(e.code)}}/>)
 	})
 }
 	function Level(arg) {
@@ -100,6 +101,7 @@ const QuestionById = (props) => {
 		)
 
 	}
+	const [isLiked , setIsLiked]=useState(data.isLiked)
 	return (<>
 		<div className="md:flex my-2">
 			<div className="md:w-1/2 mx-4 my-2 p-4 rounded">
@@ -108,7 +110,11 @@ const QuestionById = (props) => {
 				<div className="mt-4">
 					<span className=" text-2xl font-bold">{data.number}</span>
 					<span className="text-xl p-2 font-light">{data.title}</span>
-					<div className="flex "><Level level={data.level} />level</div>
+					<div className="flex justify-between "><div>
+						<Level level={data.level} />
+						level</div>
+					<div><LikeCard likes={data.likes} setLiked={setIsLiked} status={data.isLiked} status1={isLiked}/></div>
+					</div>
 				</div>
 				{togal === true ? <Discription /> : <><Comment /></>}
 			</div>
