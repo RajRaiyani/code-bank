@@ -11,7 +11,7 @@ async function deleteQuestionById(id , callback) {
     }).then(res => res.json())
       .then(res => {
         if (res.status === "OK") {
-            console.log(res);
+            
         }
         else {
             callback();

@@ -5,7 +5,8 @@ import useGetAllCategories from "../../../hooks/useGetAllCategories";
 
 import { useForm } from "react-hook-form";
 import useGetQuestionDataById from "../../../hooks/useGetQuestionByID";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import addQuestion from "../../../utilities/APIcalls/addQuestion";
 
 
 
@@ -14,10 +15,10 @@ import { useParams } from "react-router-dom";
 const AddEditQuestion = (props) => {
 
 	const [solutionCount, setSolutionCount] = useState(1);
+	const navigate=useNavigate();
 	const params = useParams();
 	const [questionData] =  useGetQuestionDataById(params.id,!props.edit);
-	
-	
+	const [message, setMessage] = useState("");
 
 	delete questionData.solutions;
 	delete questionData.__v;
@@ -40,7 +41,7 @@ const AddEditQuestion = (props) => {
 
 
 	function submitForm(data) {
-		console.log(data);
+		addQuestion(data ,setMessage, ()=>{navigate("/login")} ,()=>{navigate("/admin/question")});
 	}
 
 
@@ -73,6 +74,7 @@ const AddEditQuestion = (props) => {
 
 	return (
 		<div>
+			<span className="text-red-500">{message}</span>
 			{props.edit ? <h1>Edit Question</h1> : <h1>Add Question</h1>}
 			<button className="border-4" onClick={() => setSolutionCount(p =>p+1)}>add Solution</button>
 
