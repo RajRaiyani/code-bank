@@ -18,6 +18,9 @@ const AddEditQuestion = (props) => {
 	const [questionData] =  useGetQuestionDataById(params.id,!props.edit);
 	
 	
+	console.log(questionData);
+
+	
 
 	delete questionData.solutions;
 	delete questionData.__v;
