@@ -7,6 +7,7 @@ import Cookies from "js-cookie";
 import CommentCard from "../components/Cards/CommentCard";
 import postComment from "../utilities/APIcalls/postComment";
 import deleteSolution from "../utilities/APIcalls/deleteSolution";
+import deleteComment from "../utilities/APIcalls/deteleComment";
 
 const styleForSolution = {
 	boxShadow: "0px 5px 15px 0px rgba(50, 130, 50, 0.35)"
@@ -73,6 +74,16 @@ const QuestionById = (props) => {
 			}
 		}
 
+		async function deleteCommentData(id) {
+			const confirmDelete = window.confirm('Are you sure you want to delete this comment?');
+		if (confirmDelete) {
+		  await deleteComment(id, ()=>{navigate("/login")});
+		  let temp = [...comments];
+		  temp = temp.filter((e)=>e._id!==id)
+		  setcommet(temp);
+		}
+		}
+
 		return (
 			<>
 				<div className="text-xl mt-2 flex items-center"><span className="flex items-center me-2 justify-center h-10 w-10 rounded-full border-4 gc-border-green text-center text-2xl font-bold align-middle ">{Cookies.get("username")[0].toUpperCase()}</span>{Cookies.get("username")}</div>
@@ -80,7 +91,7 @@ const QuestionById = (props) => {
 				<div className="overflow-y-auto sm:mt-8 sm:ms-10 sm:me-10 h-[50vh]">
 					{comments.map((e, index) => {
 						const date = new Date(e.date);
-						return<CommentCard admin={props.admin} username={e.user.username} className="m-2 mb-3 border-0 border-t border-s gc-border-green rounded-lg" comment={e.data} date={date.toDateString()} key={index}  style={styleForCommentCard} />
+						return<CommentCard admin={props.admin} username={e.user.username} className="m-2 mb-3 border-0 border-t border-s gc-border-green rounded-lg" comment={e.data} date={date.toDateString()} key={index}  style={styleForCommentCard} onDelete={()=>{deleteCommentData(e._id)}}/>
 							
 					})
 					}
