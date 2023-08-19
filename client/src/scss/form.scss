@@ -1,7 +1,7 @@
 @import "./variable.scss";
 @import "./common.scss";
 
-input{
+input,textarea{
 	@apply border;
 	@apply gc-border-green;
 	@apply rounded;
@@ -11,11 +11,8 @@ input{
 	}
 }
 
+
 select{
-	@apply w-fit;
-	@apply bg-white;
-	@apply gc-border-green;
-	box-shadow: none;
 	&:focus{
 		outline: 2px solid $gc-color-green;
 	}

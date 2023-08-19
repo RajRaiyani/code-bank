@@ -41,7 +41,12 @@ const AddEditQuestion = (props) => {
 
 
 	function submitForm(data) {
+		if(!props.edit)
 		addQuestion(data ,setMessage, ()=>{navigate("/login")} ,()=>{navigate("/admin/question")});
+	else
+	{
+		console.log(data);
+	}
 	}
 
 

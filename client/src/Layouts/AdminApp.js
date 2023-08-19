@@ -5,6 +5,8 @@ import { Outlet, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 
+import "./../scss/form.scss";
+
 const AdminApp = ()=>{
 	const navigate=useNavigate();
 	useEffect(()=>{
