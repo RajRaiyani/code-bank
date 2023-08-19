@@ -10,7 +10,7 @@ router.route("/question/:id").get(isLoggedIn,getOneQuestion);
 router.route("/question/:id/like").put(isLoggedIn,likeQuestion);
 router.route("/question/:id/comment").post(isLoggedIn,commentOnQuestion);
 
-router.route("/solution/:id").get(getSolutionById);
+router.route("/solution/:id").get(isLoggedIn,getSolutionById);
 
 router.route("/user").get(isLoggedIn,getAllUsers);
 
