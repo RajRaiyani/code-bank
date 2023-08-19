@@ -1,15 +1,12 @@
 import { useState } from "react";
-import { useParams } from "react-router-dom";
-
-
-
-
-import { useForm } from "react-hook-form";
+import "./../../../scss/form.scss";
 
 import useGetAllCategories from "../../../hooks/useGetAllCategories";
-import useGetAllLanguages from "../../../hooks/useGetAllLanguages";
 
+import { useForm } from "react-hook-form";
 import useGetQuestionDataById from "../../../hooks/useGetQuestionByID";
+import { useNavigate, useParams } from "react-router-dom";
+import addQuestion from "../../../utilities/APIcalls/addQuestion";
 
 
 
@@ -18,50 +15,62 @@ import useGetQuestionDataById from "../../../hooks/useGetQuestionByID";
 const AddEditQuestion = (props) => {
 
 	const [solutionCount, setSolutionCount] = useState(1);
+	const navigate=useNavigate();
 	const params = useParams();
-	const [allCategories] = useGetAllCategories();
-	const [languages] = useGetAllLanguages();
-	const [questionData] = useGetQuestionDataById(params.id, !props.edit);
+	const [questionData] =  useGetQuestionDataById(params.id,!props.edit);
+	const [message, setMessage] = useState("");
 
-	var { number, title, question, level, categories } = questionData;
-	var values = { number, title, question, level, categories };
+	delete questionData.solutions;
+	delete questionData.__v;
+	delete questionData._id;
+	delete questionData.comments;
+	delete questionData.isLiked;
+	delete questionData.likes
 
-	const { register, handleSubmit } = useForm({ values });
+
+	// var defaultValues = questionData;
+	
+
+	const [categories] = useGetAllCategories();
+
+	const { register, handleSubmit } = useForm({
+		values:questionData
+	});
+
+
 
 
 	function submitForm(data) {
+		if(!props.edit)
+		addQuestion(data ,setMessage, ()=>{navigate("/login")} ,()=>{navigate("/admin/question")});
+	else
+	{
 		console.log(data);
+	}
 	}
 
 
 	function Categories() {
-		return allCategories.map((val, index) => (
+		return categories.map((val, index) => (
 			<span key={index}>
 				<label>{val}</label>
 				<input type="checkbox" {...register("categories")} value={val} />
 			</span>
-		));
-	}
 
-	function SelectLanguage(props) {
-		return (
-			<select {...register(props.name)}>
-				<option>Language</option>
-				{languages.map((lng, index) => <option key={index} value={lng}>{lng}</option>)}
-			</select>
-		)
+		));
 	}
 
 	function SolutionForm() {
 		let arr = []
 		for (let i = 0; i < solutionCount; i++) {
 			arr.push((
-				<div className="flex flex-col border p-2 rounded-md" key={i}>
-					<input type="text" {...register("solutions." + i + ".title")} placeholder="title" />
-					<SelectLanguage name={"solutions." + i + ".language"} />
-					<textarea rows={10} {...register("solutions." + i + ".code")} placeholder="code"></textarea>
-				</div>
+				<span key={i}>
+					<input type="text" {...register("solutions."+i+".title")} placeholder="title" />
+					<input type="text" {...register("solutions."+i+".language")} placeholder="language" />
+					<input type="text" {...register("solutions."+i+".code")} placeholder="code" />
+				</span>
 			))
+
 		}
 		return arr;
 	}
@@ -70,48 +79,31 @@ const AddEditQuestion = (props) => {
 
 	return (
 		<div>
-			<h1 className="text-3xl text-center">{props.edit ? "Edit Question" : "Add Question"}</h1>
+			<span className="text-red-500">{message}</span>
+			{props.edit ? <h1>Edit Question</h1> : <h1>Add Question</h1>}
+			<button className="border-4" onClick={() => setSolutionCount(p =>p+1)}>add Solution</button>
+
+			<form onSubmit={handleSubmit(submitForm)} className="flex flex-col">
+
+				<input type="number" {...register("number")} placeholder="Number" />
+				<input type="text" {...register("title")} placeholder="Title" />
+				<input type="text" {...register("question")} placeholder="Question" />
+				<select {...register("level")}>
+					<option>Level</option>
+					<option value="easy">Easy</option>
+					<option value="medium">Midium</option>
+					<option value="hard">Hard</option>
+				</select>
+				<Categories />
+				{!props.edit && <SolutionForm />}
+				
 
 
-			<div className="flex justify-center">
-
-				<div className="w-1/2">
-					<form onSubmit={handleSubmit(submitForm)} className="flex flex-col">
-						<div className="flex justify-between">
-							<input className="" type="number" {...register("number")} placeholder="Number" />
-							<select {...register("level")}>
-								<option>Level</option>
-								<option value="easy">Easy</option>
-								<option value="medium">Midium</option>
-								<option value="hard">Hard</option>
-							</select>
-						</div>
 
 
 
-
-						<input type="text" {...register("title")} placeholder="Title" />
-						<textarea {...register("question")} rows={5} placeholder="Question"></textarea>
-
-						<div className="flex justify-between">
-							<div className="flex flex-col p-2 w-1/4">
-								<Categories />
-							</div>
-							<div className="flex flex-col w-full">
-							<button className="w-fit ms-auto m-2 p-2 gc-border-green gc-hover-bg-green border rounded" onClick={() => setSolutionCount(p => p + 1)}>Add Solution</button>
-								{!props.edit && <SolutionForm />}
-							</div>
-						</div>
-
-
-						<input type="submit" />
-					</form>
-
-				</div>
-
-			</div>
-
-
+				<input type="submit" />
+			</form>
 		</div>
 	)
 }

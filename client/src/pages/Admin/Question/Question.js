@@ -48,9 +48,12 @@ const Home = () => {
 
 	function deleteQuestion(e, id, callback) {
 		e.preventDefault();
-		console.log(id, callback)
+		const confirm = window.confirm("Are you sure you want to delete this question?");
+		if (confirm) 
+{
 		deleteQuestionById(id, callback);
 		setData(getAllData.filter((e) => e._id !== id));
+}
 	}
 
 	if (level !== "" && category !== "") {
