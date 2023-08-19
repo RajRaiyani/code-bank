@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import useGetQuestionDataById from "../../../hooks/useGetQuestionByID";
 import { useNavigate, useParams } from "react-router-dom";
 import addQuestion from "../../../utilities/APIcalls/addQuestion";
-
+import editQuestion from "../../../utilities/APIcalls/editQuestion";
 
 
 
@@ -40,12 +40,15 @@ const AddEditQuestion = (props) => {
 
 
 
-	function submitForm(data) {
+	async function submitForm(data) {
 		if(!props.edit)
-		addQuestion(data ,setMessage, ()=>{navigate("/login")} ,()=>{navigate("/admin/question")});
+		await addQuestion(data ,setMessage, ()=>{navigate("/login")} ,()=>{navigate("/admin/question")});
 	else
 	{
-		console.log(data);
+		data.question_id=params.id;
+		console.log(data)
+
+		await editQuestion(data ,setMessage, ()=>{navigate("/login")} ,()=>{navigate("/admin/question")});
 	}
 	}
 
