@@ -4,6 +4,17 @@ const Validator = require("./../../utility/validation/validator");
 
 const Storage = require("./../../utility/memory/storage");
 
+exports.getSolutionById = async (req, res) => {
+	var { id } = req.params;
+
+	try {
+		var data = await Solution.findOne({ _id: id });
+		res.json({ status: "OK", data });
+	} catch (error) {
+		res.json({ status: "X", message: "somethin went wrong while fetching one Solution", error });
+	}
+}
+
 exports.addSolution = async (req, res) => {
 	var { question_id, title, language, code } = req.body;
 
