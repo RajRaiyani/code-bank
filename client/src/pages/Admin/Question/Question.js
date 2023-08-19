@@ -6,9 +6,7 @@ import { QuestionCard } from "../../../components/Cards/QuestionCard";
 import useGetAllQuestions from "../../../hooks/useGetAllQuestions";
 import useGetAllCategories from "../../../hooks/useGetAllCategories";
 import deleteQuestionById from "../../../utilities/APIcalls/deleteQuestion";
-function editQuestion(e, id) {
-	
-}
+
 
 
 const LevelFillter = (arg) => {

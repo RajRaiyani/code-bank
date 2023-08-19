@@ -1,17 +1,13 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { QuestionCard } from "../components/Cards/QuestionCard";
 import QuestionCount from "../components/Cards/QuestionCount";
 import useGetAllQuestions from "../hooks/useGetAllQuestions";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useGetAllCategories from "../hooks/useGetAllCategories";
+import searchQuestion from "../utilities/APIcalls/searchButton";
 
-// const serachSdow = {
-// 	boxShadow: "3px 3px 6px 0px #BEDBC8 inset",
-
-// 	boxShadow: " -3px -3px 6px 1px #FFFFFF80 inset"
-
-// }
 const LevelFillter = (arg) => {
+
 	return (
 		<>
 			<select className="border gc-border-green ms-12 mt-4 rounded-md text-lg" onChange={(e) => { arg.setlevel(e.target.value) }} >
@@ -45,24 +41,45 @@ const Home = () => {
 	const Easy = getAllData.filter((e) => e.level === "easy");
 	const Medium = getAllData.filter((e) => e.level === "medium");
 	const Hard = getAllData.filter((e) => e.level === "hard");
+	const [searchdata,setsearchdata]=useState("");
+	const [fitterdata , setfillter]=useState([]);
+
+	useEffect(()=>{
+
+		setfillter(getAllData)
 	if (level !== "" && category !== "") {
-		var filterdata = level && category ? getAllData.filter((e) => e.level === level && e.categories.includes(category)) : getAllData;
+		 setfillter([...getAllData.filter((e) => e.level === level && e.categories.includes(category))])
 	}
 	else if (level !== "") {
-		filterdata = level ? getAllData.filter((e) => e.level === level) : getAllData;
+		setfillter([...getAllData.filter((e) => e.level === level)] )
 
 	}
-	else {
-		filterdata = category ? getAllData.filter((e) => e.categories.includes(category)) : getAllData;
-	}
+	else if (category!==""){
+		setfillter([...getAllData.filter((e) => e.categories.includes(category)) ])
 
-	const printdata = filterdata.map((data, index) => {
+	}},[level,category,getAllData])
+
+	const printdata = fitterdata.map((data, index) => {
 		return (
 			<Link to={`/question/${data._id}`} key={index}>
 				<QuestionCard className="my-3 gc-shadow-23" number={data.number} title={data.title} likes={data.likes} level={data.level} />
 			</Link>
 		);
 	})
+	function handeldata(e)
+	{
+		setsearchdata(e.target.value)
+		if(e.target.value=="")
+		{
+			setfillter([...getAllData]);
+		}
+		
+	}
+	const navigate=useNavigate();
+	async function searchData()
+	{
+		await searchQuestion(searchdata,setfillter,()=>{navigate("/login")})
+	}
 	return (
 		<>
 			<div className="flex justify-between items-center w-3/4">
@@ -72,8 +89,8 @@ const Home = () => {
 				</div>
 				<div className="h-[100%] pt-2 ">
 					<div className="flex  justify-end h-[50px] items-center border gc-border-green rounded gap-2  gc-shadow-25"  >
-						<input type="text" className="border-0 outline-none h-[70%]  focus:outline-none rounded  pl-2 bg-inherit" placeholder="" />
-						<div>button</div>
+						<input type="text" className="border-0 outline-none h-[70%]  focus:outline-none rounded  pl-2 bg-inherit" placeholder="" onChange={(e)=>handeldata(e)} />
+						<div onClick={()=>{searchData()}}> onbutton</div>
 					</div>
 				</div>
 			</div>
