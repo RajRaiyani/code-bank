@@ -1,67 +1,25 @@
-// import Cookies from "js-cookie";
-// import { useState } from "react";
-// import { AiOutlineHeart } from "react-icons/ai";
-// import { useNavigate, useParams } from "react-router-dom";
-
-// const LikeCard = (props) => {
-//     const { id } = useParams();
-//     const [liked, setLiked] = useState(props.status);
-//     const [nolike, setnolike] = useState(props.likes);
-//     const navigate = useNavigate();
-    
-
-
-
-//     const handleLike = () => {
-//         if (liked) {
-//             setnolike(nolike - 1);
-//         }
-//         else {
-//             setnolike(nolike + 1);
-//         }
-//         fetch("http://localhost:3007/api/v1/home/question/" + id + "/like", {
-//             method: "PUT",
-//             headers: {
-//                 "Content-Type": "application/json",
-//                 token: Cookies.get("userToken"),
-//             },
-//         })
-//             .then((res) => res.json())
-//             .then((res) => {
-//                 if (res.status === "OK") {
-//                     setLiked(res.like);
-//                 } else if (res.status === "EXPIRED_TOKEN") {
-//                     navigate("/login");
-//                 } else {
-//                     console.log(res);
-//                 }
-//             })
-//             .catch((e) => console.log("error : " + e));
-
-//     };
-
-//     return (
-//         <>
-//         <div className="text-center me-2">
-// 				<AiOutlineHeart  className="mx-auto text-xl gc-text-green"  onClick={handleLike}/>
-// 				<div className="text-sm">{nolike}</div>
-// 			</div>
-//         </>
-//     )
-// };
-
-// export default LikeCard;
 import Cookies from "js-cookie";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 function LikeCard(props) {
     const navigate = useNavigate();
     const { id } = useParams();
 
+    
     const [liked, setLiked] = useState(props.status);
     const [message, setMessage] = useState("");
-    const [nolike, setnolike] = useState(props.nolike);
+    const [nolike, setnolike] = useState(props.likes);
+
+    useEffect(()=>{
+        setLiked(props.status);
+        setnolike(props.likes)
+    },[props.status,props.likes])
+
+    console.log(liked)
+    console.log(nolike)
+
+
     const handleLike = () => {
         if (liked) {
             setnolike(nolike - 1);
@@ -93,6 +51,7 @@ function LikeCard(props) {
     return (
         <>
             <div >
+               
                 {liked === true ?
                     <>
                         <div className="" onClick={handleLike}>

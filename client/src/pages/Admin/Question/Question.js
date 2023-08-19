@@ -7,8 +7,7 @@ import useGetAllQuestions from "../../../hooks/useGetAllQuestions";
 import useGetAllCategories from "../../../hooks/useGetAllCategories";
 import deleteQuestionById from "../../../utilities/APIcalls/deleteQuestion";
 function editQuestion(e, id) {
-	e.preventDefault();
-	console.log("edit")
+	
 }
 
 
@@ -69,7 +68,8 @@ const Home = () => {
 	const printdata = filterdata.map((data, index) => {
 		return (
 			<Link to={`/admin/Question/${data._id}`} key={index}>
-				<QuestionCard className="my-3 gc-shadow-23" onEdit={editQuestion} onDelete={(e) => { deleteQuestion(e, data._id, () => { navigate("/login") }) }} number={data.number} admin={true} title={data.title} likes={data.likes} level={data.level} />
+				<QuestionCard className="my-3 gc-shadow-23" onEdit={(e)=>{e.preventDefault();
+	navigate(`/admin/question/${data._id}/edit`);}} onDelete={(e) => { deleteQuestion(e, data._id, () => { navigate("/login") }) }}  number={data.number} admin={true} title={data.title} likes={data.likes} level={data.level} />
 			</Link>
 		);
 	})
