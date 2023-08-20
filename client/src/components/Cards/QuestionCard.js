@@ -32,7 +32,7 @@ export const QuestionCard = (props)=>{
 	var titleClass = props.admin?"max-w-[70%]":"max-w-[90%]";
 
 	return(
-		<div className={"flex max-w-[1000px] justify-between items-center border rounded-lg px-3 py-1 bg-white"+space+props.className} style={props.style}>
+		<div className={"flex max-w-[1200px] justify-between items-center border rounded-lg px-3 py-1 bg-white"+space+props.className} style={props.style}>
 			<div className={titleClass}>
 				<div className="truncate"><span className="me-2 text-lg font-bold">{props.number}</span>{props.title}</div>
 				<div className="text-sm flex items-center"><Level />&nbsp;Level</div>
