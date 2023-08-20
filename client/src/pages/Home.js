@@ -59,17 +59,21 @@ const Home = () => {
 
 	}},[level,category,getAllData])
 
-	const printdata = fitterdata.map((data, index) => {
+	var printdata
+	if(fitterdata!==undefined)
+	{
+	 printdata = fitterdata.map((data, index) => {
 		return (
 			<Link to={`/question/${data._id}`} key={index}>
 				<QuestionCard className="my-3 gc-shadow-23" number={data.number} title={data.title} likes={data.likes} level={data.level} />
 			</Link>
 		);
 	})
+}
 	function handeldata(e)
 	{
 		setsearchdata(e.target.value)
-		if(e.target.value=="")
+		if(e.target.value==="")
 		{
 			setfillter([...getAllData]);
 		}
@@ -103,12 +107,6 @@ const Home = () => {
 				</div>
 				<QuestionCount className="m-4" count={getAllData.length} Easy={Easy.length} Medium={Medium.length} Hard={Hard.length} />
 			</div>
-			{/* <Link to="/Question/3423344">
-			<QuestionCard onDelete={deleteQuestion} onEdit={editQuestion} admin={true} className="my-3 gc-shadow-23" number="43" title="This is the sort title for question......." likes="3434" level="hard" />
-			</Link>
-			<QuestionCard className="my-3 gc-shadow-23" number="43" title="This is the sort title for question......." likes="3434" level="Easy" />
-
-		<Link to="admin">Admin</Link> */}
 		</>
 	)
 }

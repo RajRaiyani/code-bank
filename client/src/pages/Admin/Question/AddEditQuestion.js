@@ -83,7 +83,7 @@ const AddEditQuestion = (props) => {
 	return (
 		<div>
 			<span className="text-red-500">{message}</span>
-			{props.edit ? <h1>Edit Question</h1> : <h1>Add Question</h1>}
+			{props.edit ? <h1 >Edit Question</h1> : <h1>Add Question</h1>}
 			<button className="border-4" onClick={() => setSolutionCount(p =>p+1)}>add Solution</button>
 
 			<form onSubmit={handleSubmit(submitForm)} className="flex flex-col">

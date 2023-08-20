@@ -16,8 +16,7 @@ function LikeCard(props) {
         setnolike(props.likes)
     },[props.status,props.likes])
 
-    console.log(liked)
-    console.log(nolike)
+
 
 
     const handleLike = () => {
@@ -51,6 +50,7 @@ function LikeCard(props) {
     return (
         <>
             <div >
+                {message}
                
                 {liked === true ?
                     <>

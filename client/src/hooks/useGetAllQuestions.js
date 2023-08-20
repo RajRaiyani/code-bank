@@ -1,10 +1,10 @@
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
-function useGetAllQuestions () {
+ function useGetAllQuestions () {
 	const [getAllData, setAllData] = useState([]);
 
-	useEffect(() => {
-		fetch(`${process.env.REACT_APP_SERVER_URL}/api/v1/home/question`, {
+	 useEffect(() => {
+		 fetch(`${process.env.REACT_APP_SERVER_URL}/api/v1/home/question`, {
 			method: "GET",
 			headers: {
 				'Content-Type': 'application/json',
