@@ -24,7 +24,7 @@ const QuestionById = (props) => {
 	const { id } = useParams();
 	const [data , setData,solution,setsolution] = useGetQuestionDataById(id);
 	const [togal, settogal] = useState(true);
-	const [language, setlanguage] = useGetAllLanguages();
+	const [language] = useGetAllLanguages();
 	const navigate = useNavigate();
 	console.log(solution)
 
