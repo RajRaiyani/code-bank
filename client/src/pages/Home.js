@@ -83,7 +83,7 @@ const Home = () => {
 					</div>
 
 					<div className="flex p-1 max-w-sm justify-between border gc-border-green items-center rounded gc-shadow-62"  >
-						<input type="text" placeholder="Search..." className="outline-none w-full h-[100%] px-1 text-sm focus:outline-none rounded bg-inherit" onChange={(e) => handeldata(e)} />
+						<input type="text" placeholder="Search..." className="outline-none border-none w-full h-[100%] px-1 text-sm focus:outline-none rounded bg-inherit" onChange={(e) => handeldata(e)} />
 						<button className="gc-bg-green p-1 rounded-md h-full hover:scale-90 duration-200"><FiSearch className="text-lg text-white font-extrabold" onClick={() => { searchData() }} /></button>
 					</div>
 
