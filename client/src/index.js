@@ -16,6 +16,7 @@ import Contact from './pages/Contact/Contact';
 import About from './pages/About/About';
 
 import Exampal from './pages/Exampal';
+import Try from './try';
 
 
 
@@ -58,7 +59,7 @@ const appRouter = createBrowserRouter([
       {path:"solution/:id/edit",element:<AddEditSolution edit />},
     ] 
   },
-  {path:"/exampal",element:<Exampal />},
+  {path:"/exampal",element:<Try />},
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

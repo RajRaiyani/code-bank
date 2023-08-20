@@ -1,18 +1,17 @@
 import { useEffect,useState } from "react";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
-const useGetQuestionDataById = (id,disable)=>{
+const useGetSolutionById = (id,disable)=>{
 
 
-    const [getData, setData] = useState({ comments: [], solutions:[]});
+    const [getData, setData] = useState();
     const [getError,setError]=useState({});
-    const [solution, setSolution] = useState([]);
     const navigate = useNavigate();
 
     useEffect(()=>{
        
         if(!disable){
-            fetch(`${process.env.REACT_APP_SERVER_URL}/api/v1/home/question/` + id, {
+            fetch(`${process.env.REACT_APP_SERVER_URL}/api/v1/home/solution/` + id, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -23,7 +22,6 @@ const useGetQuestionDataById = (id,disable)=>{
                 .then((res) => {
                     if (res.status === "OK") {
                         setData(res.data);
-                        setSolution(res.data.solutions);
                     } else if (res.status === "EXPIRED_TOKEN") {
                         navigate("/login");
                     } else {
@@ -36,6 +34,6 @@ const useGetQuestionDataById = (id,disable)=>{
   
     },[id,navigate,disable]);
 
-    return [getData,setData,solution,setSolution,getError,setError];
+    return [getData,setData,getError,setError];
 }
-export default useGetQuestionDataById;
+export default useGetSolutionById;

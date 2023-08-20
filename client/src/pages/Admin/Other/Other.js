@@ -24,8 +24,11 @@ const Other = () => {
 		}
 
 		function handleAdd(data){
+			if(data!=="")
+			{
 			addInList("language" , data ,setMessage , ()=>{navigate("/login")} )
 			setLanguage([...language,data])
+			}
 		}
 		const printLanguage= language.map((e,index)=>{
 			return(
@@ -66,8 +69,10 @@ const Other = () => {
 			}
 		}
 		function handleAdd(data){
+			if(data!==""){
 			addInList("category" , data ,setMessage , ()=>{navigate("/login")} )
 			setCategory([...category,data])
+			}
 		}
 
 		const printcategory= category.map((e,index)=>{

@@ -9,6 +9,7 @@ import postComment from "../utilities/APIcalls/postComment";
 import deleteSolution from "../utilities/APIcalls/deleteSolution";
 import deleteComment from "../utilities/APIcalls/deteleComment";
 import LikeCard from "../components/Cards/LikeCard";
+import useGetAllLanguages from "../hooks/useGetAllLanguages";
 
 const styleForSolution = {
 	boxShadow: "0px 5px 15px 0px rgba(50, 130, 50, 0.35)"
@@ -21,9 +22,11 @@ const styleForCommentCard={
 }
 const QuestionById = (props) => {
 	const { id } = useParams();
-	const [data , setData] = useGetQuestionDataById(id);
+	const [data , setData,solution,setsolution] = useGetQuestionDataById(id);
 	const [togal, settogal] = useState(true);
+	const [language, setlanguage] = useGetAllLanguages();
 	const navigate = useNavigate();
+	console.log(solution)
 
 	async function deleteSolu (id) {
 		const confirmDelete = window.confirm('Are you sure you want to delete?');
@@ -38,13 +41,12 @@ const QuestionById = (props) => {
 		}
 
 	}
-	var printSolution;
-	if(data.solutions!==undefined)
-	{
-	 printSolution = data.solutions.map((e, index) => {
-		return (<SolutionCard admin={props.admin} style={styleForSolution} titleStyle={styleForSolutionTitle} title={e.title} solution={e.code} language={e.language} onDelete={()=>{deleteSolu(e._id)}} className="my-6" key={index} onCopy={()=>{navigator.clipboard.writeText(e.code)}}/>)
+	 
+	
+	var printSolution = solution.map((e, index) => {
+		return (<SolutionCard onEdit={()=>{navigate(`/admin/solution/${e._id}/edit`)}} admin={props.admin} style={styleForSolution} titleStyle={styleForSolutionTitle} title={e.title} solution={e.code} language={e.language} onDelete={()=>{deleteSolu(e._id)}} className="my-6" key={index} onCopy={()=>{navigator.clipboard.writeText(e.code)}}/>)
 	})
-}
+
 	function Level(arg) {
 		if (arg.level === undefined) return (<></>);
 		var questionLevel = arg.level.toLowerCase();
@@ -62,7 +64,6 @@ const QuestionById = (props) => {
 
 		const [comments, setcommet] = useState(data.comments);
 		const [commentMessage, setcommetMessage] = useState("");
-		console.log(comments);
 
 		async function sendData() {
 			if (commentMessage !== "") {
@@ -101,6 +102,25 @@ const QuestionById = (props) => {
 		)
 
 	}
+	const Language = () => {
+		function fileterLanguage(e)
+		{
+			if(e!=="")
+			{
+				setsolution(data.solutions.filter((e1)=>e1.language===e));
+			}
+		}
+
+		return (
+			<>
+				<select className="border gc-border-green ms-12 mt-4 rounded-md text-lg" onChange={(e)=>{fileterLanguage(e.target.value)}} >
+					<option value="">Language</option>
+					{language.map((e, index) => {
+						return (<option value={e} key={index}>{e}</option>)
+					})}
+				</select>		</>
+		)
+	}
 	const [isLiked , setIsLiked]=useState(data.isLiked)
 	return (<>
 		<div className="md:flex my-2">
@@ -118,10 +138,15 @@ const QuestionById = (props) => {
 				</div>
 				{togal === true ? <Discription /> : <><Comment /></>}
 			</div>
-			<div className="md:w-1/2 h-[85vh]  mx-4 my-2 p-4 rounded overflow-auto gc-shadow-25 ">
+			<div className="md:w-1/2 ">
+				<Language/>
+			<div className="h-[85vh]  mx-4 my-2 p-4 rounded overflow-auto gc-shadow-25 ">
+				
 				<button className="border gc-brder-green bg-green-800 text-white p-2" onClick={()=>{navigate(`/admin/solution/${id}/add`)}}>+</button>
 				{printSolution}</div>
 		</div>
+		</div>
+
 	</>
 	);
 }
