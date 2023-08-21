@@ -15,7 +15,6 @@ import QuestionById from './pages/QuestionById';
 import Contact from './pages/Contact/Contact';
 import About from './pages/About/About';
 
-import Exampal from './pages/Exampal';
 import Try from './try';
 
 
@@ -37,13 +36,14 @@ const appRouter = createBrowserRouter([
     element:<MainApp />,
     children:[
       {path:"/",element:<Home />},
-      {path:"/question/:id",element:<QuestionById admin={false} />},
-      {path:"/contact",element:<Contact />},
-      {path:"/about",element:<About />},
+      {path:"/question/:id",element:<QuestionById admin={false} />}
+      
     ],
   },
   {path:"/LogIn",element:<LogIn />},
   {path:"/SignIn",element:<SignIn />},
+  {path:"/contact",element:<Contact />},
+  {path:"/about",element:<About />},
   {
     path:"/admin",
     element:<Suspense><AdminApp /></Suspense>,
