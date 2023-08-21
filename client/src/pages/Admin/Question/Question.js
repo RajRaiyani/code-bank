@@ -6,7 +6,7 @@ import { QuestionCard } from "../../../components/Cards/QuestionCard";
 import useGetAllQuestions from "../../../hooks/useGetAllQuestions";
 import useGetAllCategories from "../../../hooks/useGetAllCategories";
 import deleteQuestionById from "../../../utilities/APIcalls/deleteQuestion";
-import searchQuestion from "../../../utilities/APIcalls/searchButton";
+import searchQuestion from "../../../utilities/APIcalls/searchQuestion";
 import { FiSearch } from "react-icons/fi";
 import { SiAddthis } from "react-icons/si";
 

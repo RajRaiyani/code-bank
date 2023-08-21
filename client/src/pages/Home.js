@@ -4,7 +4,7 @@ import QuestionCount from "../components/Cards/QuestionCount";
 import useGetAllQuestions from "../hooks/useGetAllQuestions";
 import { useEffect, useState } from "react";
 import useGetAllCategories from "../hooks/useGetAllCategories";
-import searchQuestion from "../utilities/APIcalls/searchButton";
+import searchQuestion from "../utilities/APIcalls/searchQuestion";
 
 import { FiSearch } from "react-icons/fi";
 
