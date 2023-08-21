@@ -17,7 +17,7 @@ function App() {
   return (
     <>
       <div className="md:h-screen md:w-screen md:flex md:flex-col md:justify-between gc-text-black">
-        <Header loginStatus={logInStatus} username={Cookies.get("username")} />
+        <Header loginStatus={logInStatus} username={Cookies.get("username")} onLogOut={()=>{Cookies.remove("userToken");Cookies.remove("adminToken");setLogInStatus(false)}} />
         <div className="w-full h-full">
           <Outlet />
         </div>

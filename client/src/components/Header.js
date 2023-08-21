@@ -18,7 +18,7 @@ const Header = (props) => {
 
 	const ProfileMenu = () => (
 		<div className="absolute -translate-x-1/2 mt-1 p-1 rounded-md border gc-border-green bg-white ">
-			<button className="gc-hover-text-green p-1">Log&nbsp;out</button>
+			<button className="gc-hover-text-green p-1" onClick={props.onLogOut}>Log&nbsp;out</button>
 		</div>
 	)
 
