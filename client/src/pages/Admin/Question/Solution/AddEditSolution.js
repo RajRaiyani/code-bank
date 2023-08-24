@@ -1,4 +1,4 @@
-import {  useState } from "react";
+import { useState } from "react";
 import useGetAllLanguages from "../../../../hooks/useGetAllLanguages";
 import { useNavigate, useParams } from "react-router-dom";
 import addSolution from "../../../../utilities/APIcalls/addSolution";
@@ -21,9 +21,8 @@ const AddEditSolution = (props) => {
     setData({ ...data, [e.target.name]: e.target.value });
   }
   async function sendData(id) {
-    if (!props.edit)
-    {
-    data.question_id = id;
+    if (!props.edit) {
+      data.question_id = id;
 
       await addSolution(data, setMessage, () => { navigate(`/admin/question/${id}`) }, () => { navigate("/login") })
     }
@@ -33,55 +32,59 @@ const AddEditSolution = (props) => {
     }
   }
   return (
-    <div>
+    <>
 
       <h1 className="text-center "> <span className="m-3 underline font-2">{!props.edit ? "Add " : "Edit "}Solution Page</span></h1>
 
 
-      <div className="container " style={{ marginTop: "2rem" }}>
-        <h3 >{message}</h3>
-        Select Languages :
-        <select
-          className="border gc-border-green  rounded-sm"
-          name="language"
-          id="language"
-          onChange={handleChange}
-          value={data !== undefined ? data.language : ""}
-        >
-
-          <Languages />
-        </select>
-        <br />
-        Enter a Tile :
-        <textarea
-          cols={50}
-
-          className="form-control mb-3"
-          type="text"
-          name="title"
-          value={data !== undefined ? data.title : ""}
-
-          placeholder="brute force approach"
-          onChange={handleChange}
-        />
-        <div className="mb-3">
-          Enter a Solution :
-
+      <h3 >{message}</h3>
+      <div className="container text-center">
+        <div>
           <textarea
-            rows={4}
-            id="formGroupExampleInput"
+            cols={50}
+
+            className="form-control mb-3"
             type="text"
-            name="code"
-            value={data !== undefined ? data.code : ""}
-            placeholder="<code>"
+            name="title"
+            value={data !== undefined ? data.title : ""}
+
+            placeholder="brute force approach"
             onChange={handleChange}
           />
-          <button className="border gc-border-green" onClick={() => { sendData(id) }}>
-           {!props.edit ? "Add " : "Edit "} Solution
-          </button>
         </div>
-      </div>
-    </div>
+
+          <div>
+            <select
+              className="border gc-border-green  rounded-lg p-1"
+              name="language"
+              id="language"
+              onChange={handleChange}
+              value={data !== undefined ? data.language : ""}
+            >
+
+              <Languages />
+            </select>
+          </div>
+          <div>
+            <textarea
+              rows={4}
+            cols={50}
+
+              id="formGroupExampleInput"
+              type="text"
+              name="code"
+              value={data !== undefined ? data.code : ""}
+              placeholder="<code>"
+              onChange={handleChange}
+            />
+          </div>
+
+        <button className="border gc-border-green gc-bg-green p-2 rounded-lg text-white" onClick={() => { sendData(id) }}>
+          {!props.edit ? "Add " : "Edit "} Solution
+        </button>
+        </div>
+
+    </>
   )
 }
 
