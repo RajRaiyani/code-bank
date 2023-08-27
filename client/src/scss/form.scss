@@ -6,6 +6,7 @@ input,textarea{
 	@apply gc-border-green;
 	@apply rounded;
 	@apply gc-text-black;
+	accent-color: $gc-color-green;
 	&:focus{
 		outline: 1px solid $gc-color-green;
 	}
