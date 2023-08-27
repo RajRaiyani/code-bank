@@ -31,7 +31,7 @@ const AddEditQuestion = (props) => {
 
 	// var defaultValues = questionData;
 
-	const [allLanguages, setAllLanguages] = useGetAllLanguages();
+	const [allLanguages] = useGetAllLanguages();
 
 
 	const [categories] = useGetAllCategories();

@@ -42,7 +42,6 @@ const Other = () => {
 		})
 		return (
 			<>
-				<div className="text-red-500 m-3">{message}</div>
 				<br />
 				<div>
 					<div className="flex my-2">
@@ -67,7 +66,7 @@ const Other = () => {
 			const confim = window.confirm("are you sure you want to delete this cataogry?")
 			if (confim) {
 				deleteInList("category", e, setMessage, () => { navigate("/login") })
-				setCategory(language.filter((el) => { return el !== e }))
+				setCategory(category.filter((el) => { return el !== e }))
 			}
 		}
 		function handleAdd(data) {
@@ -105,11 +104,14 @@ const Other = () => {
 		)
 	}
 
-	return (
+	return (<>
+				<div className="text-red-500 m-3">{message}</div>
+
 		<div className="flex">
 			<Language />
 			<Catagories />
 		</div>
+		</>
 	)
 }
 
