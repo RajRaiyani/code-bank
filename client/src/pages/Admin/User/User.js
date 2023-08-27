@@ -5,13 +5,12 @@ import { useNavigate } from "react-router-dom";
 import deleteUser from "../../../utilities/APIcalls/deleteUser";
 
 const User = () => {
-	 const [user, setUser] = useGetAllUser();
-	 const navigate=useNavigate();
+	const [user, setUser] = useGetAllUser();
+	const navigate = useNavigate();
 
-	async function changerole(id)
-	{
-		await changeUserRole(id,()=>{navigate("/login")});
-		var temp=[...user];
+	async function changerole(id) {
+		await changeUserRole(id, () => { navigate("/login") });
+		var temp = [...user];
 		setUser(temp.map((e) => {
 			if (e._id === id) {
 				if (e.role === "user") {
@@ -27,36 +26,32 @@ const User = () => {
 			return e;
 		}))
 	}
-	async function deleteData(id)
-	{	
+
+	async function deleteData(id) {
 		console.log(id);
-	const confirmDelete = window.confirm('Are you sure you want to delete this user?');
-	if (confirmDelete) {
-		deleteUser(id,()=>{navigate("/login")});
-		var temp=[...user];
-		setUser(temp.filter((e)=>{return e._id!==id}));
+		const confirmDelete = window.confirm('Are you sure you want to delete this user?');
+		if (confirmDelete) {
+			deleteUser(id, () => { navigate("/login") });
+			var temp = [...user];
+			setUser(temp.filter((e) => { return e._id !== id }));
+		}
 	}
-}
 
-	var admindetails , userdetails;
-	if(user!==undefined)
-	{
 
-		admindetails = user.map((e, index) => {
-		if(e.role==="admin")
-		return(<UserCard onRoleChange={()=>{changerole(e._id)}} username={e.username} email={e.email} role={e.role} key={index} onDelete={()=>{deleteData(e._id)}}/>	)
-	})
-	userdetails = user.map((e, index) => {
-		if(e.role!=="admin")
-		return(<UserCard onRoleChange={()=>{changerole(e._id)}} username={e.username} email={e.email} role={e.role} key={index} onDelete={()=>{deleteData(e._id)}} />	)
-	})
+	function PrintUser(data) {
+		return data.map((val, index) => <UserCard className="m-1 w-full gc-shadow-22" onRoleChange={() => { changerole(val._id) }} username={val.username} email={val.email} role={val.role} key={index} onDelete={() => { deleteData(val._id) }} />)
+	}
 
-}
-	return(
-		<div className="ms-10 overflow-y-auto h-full p-2 gc-shadow-14-normal max-w-[550px]">
-			{admindetails }
-			{userdetails}
-		</div>
+	return (
+		<>
+			<h2 className="text-3xl m-2 text-center">Users</h2>
+			<div className="flex flex-col items-center w-full max-h-[80vh] overflow-y-auto">
+
+				{PrintUser(user.filter(val => val.role === "admin"))}
+				{PrintUser(user.filter(val => val.role !== "admin"))}
+
+			</div>
+		</>
 	)
 }
 
