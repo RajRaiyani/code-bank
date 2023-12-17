@@ -18,11 +18,8 @@ exports.getOneUser = async (req,res)=>{
 exports.changeRole = async (req,res)=>{
 	try{
 		var data = await User.findOne({_id:req.params.id});
-		if(data.role === "user"){
-			data.role = "admin";
-		}else{
-			data.role = "user";
-		}
+		var {newrole}=req.body;
+		data.role=newrole;
 		await data.save();
 		res.json({status:"OK",data});
 	}catch(error){

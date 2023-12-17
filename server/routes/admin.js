@@ -3,7 +3,7 @@ const router  = express.Router();
 
 const isAdminLoggedIn = require("./../middlewares/isAdminLoggedIn");
 const {getAllQuestions, getOneQuestion} = require("./../controllers/homeController");
-const {addQuestion, deleteQuestion,editQuestion}  = require("./../controllers/admin/questionController");
+const {addQuestion, deleteQuestion,editQuestion, allpendingQuestion, approveorpendingQuestion}  = require("./../controllers/admin/questionController");
 const { addSolution, deleteSolution, editSolution } = require("./../controllers/admin/solutionController");
 const { getOneUser, changeRole, deleteUser } = require("../controllers/admin/userController");
 const { createList, addInList, removeFromeList, deleteList } = require("../controllers/admin/listController");
@@ -37,6 +37,12 @@ router.route("/list/create/:name").post(createList);
 router.route("/list/alter/:name/add/:item").put(addInList);
 router.route("/list/alter/:name/remove/:item").put(isAdminLoggedIn,removeFromeList);
 router.route("/list/delete/:name").delete(isAdminLoggedIn,deleteList);
+
+
+//version 2
+
+router.route("/pendingQuestion").get(isAdminLoggedIn , allpendingQuestion);
+router.route("/changeisAccepted").put(isAdminLoggedIn,approveorpendingQuestion);
 
 
 

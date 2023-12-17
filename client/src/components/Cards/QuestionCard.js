@@ -6,9 +6,8 @@ import { FiEdit } from "react-icons/fi"
 
 
 export const QuestionCard = (props) => {
-
 	var space = " ";
-
+	console.log(props)
 	function AdminControls() {
 		if (!props.admin) return (<></>);
 		return (
@@ -18,7 +17,32 @@ export const QuestionCard = (props) => {
 			</div>
 		)
 	}
+	function mangeClickWhenUpdateIsAccepted(e)
+	{
+		e.stopPropagation();
+		const confirm = window.confirm("Are you sure you want to change the state of question");
+		if(confirm)
+		props.changestate();
+	}
+	function UserControls() {
+		if(props.superuser===true)
+		{
+			return (
+				<div className="flex ms-5 items-center">
+					{props.status ? <button className="px-2  text-blue-500 " >Approve</button>:<button className="text-red-500" >Pending</button>}
 
+					</div>
+			)
+		}
+		else if(props.aprovebutton ==="true" || props.admin===true)
+		{
+			return(
+				<>
+					{!props.status ? <button className="px-2 bg-blue-500 ml-5 py-1 text-white rounded-lg" onClick={(e)=>{mangeClickWhenUpdateIsAccepted(e)}}>Approve</button>:<button className="bg-red-500 px-2 py-1 text-white rounded-lg" onClick={(e)=>{mangeClickWhenUpdateIsAccepted(e)}}>Pending</button>}
+				</>
+			)
+		}
+	}
 	function Level() {
 		var questionLevel = props.level.toLowerCase();
 		if (questionLevel === "hard") return (<FaCircle className="text-red-600" />);
@@ -36,10 +60,14 @@ export const QuestionCard = (props) => {
 			</div>
 			<div className="flex">
 				<div className="text-center">
-					<AiOutlineHeart className="mx-auto text-xl gc-text-green" />
+					{props.status!==false && props.admin ? <><AiOutlineHeart className="mx-auto text-xl gc-text-green" />
 					<div className="text-sm">{props.likes}</div>
+					</>
+					:null}
+					
 				</div>
 				<AdminControls />
+				<UserControls />
 			</div>
 
 		</div>

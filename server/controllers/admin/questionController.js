@@ -4,6 +4,7 @@ const Solution = require("./../../models/solution");
 const Validator = require("./../../utility/validation/validator");
 
 const Storage = require("./../../utility/memory/storage");
+const question = require("./../../models/question");
 
 
 
@@ -12,6 +13,7 @@ const Storage = require("./../../utility/memory/storage");
 
 exports.addQuestion = async (req, res) => {
 	var { number, title, question, categories, level, solutions } = req.body;
+	var {user_id}=req.user_id;
 
 	if (!(title && question && categories && level && solutions) || solutions.length === 0)
 		return res.json({ status: "MISSING_FIELD", message: "all fileds are required." });
@@ -45,7 +47,7 @@ exports.addQuestion = async (req, res) => {
 	}
 
 	try {
-		var data = await Question.create({ number, title, question, categories, level });
+		var data = await Question.create({ number, title, question, categories, level ,isAccpeted:true , user_id});
 		for (let sol of solutions) {
 			let { language, title, code } = sol;
 			await Solution.create({ question_id: data._id, language, title, code });
@@ -135,3 +137,33 @@ exports.editQuestion = async (req, res) => {
 }
 
 // ===========================================================================
+
+
+//====================================== version 2 ======================================
+
+exports.allpendingQuestion = async (req,res)=>{
+	try{
+		var data = await Question.find({isAccpeted:false}).populate("user_id");
+	}
+	catch(error)
+	{
+		return res.json({ status: "X", message: "somethin went wrong while updating question (2).", error });
+	}
+	return res.json({ status: "OK", data });
+
+}
+
+exports.approveorpendingQuestion=async(req,res)=>{
+	var {id}=req.body;
+
+	try
+	{
+		var data= await question.findById({_id:id});
+		data.isAccpeted=!data.isAccpeted;
+		data.save();
+	}
+	catch(error)
+	{
+		console.log(error);
+	}
+}

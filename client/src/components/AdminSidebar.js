@@ -27,6 +27,9 @@ const AdminSidebar = (props)=>{
         <Link to="/admin/user" style={buttonStyle} className={commonClass}>
           <HiOutlineUserCircle className="text-3xl" />&nbsp;&nbsp;User
         </Link>
+        {/* <Link to="/admin/questionRequest" style={buttonStyle} className={commonClass}>
+          &nbsp;&nbsp;{ true? "<> Question":null}
+        </Link> */}
         <Link to="/admin/other" style={buttonStyle} className={commonClass}>
           <GrApps className="text-2xl" />
         </Link>

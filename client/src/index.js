@@ -14,50 +14,63 @@ import SignIn from './pages/Authentication/SignIn';
 import QuestionById from './pages/QuestionById';
 import Contact from './pages/Contact/Contact';
 import About from './pages/About/About';
+import QuestionResult from './pages/user/questionResult';
+import QuestionByIdUser from './pages/user/userquestionById';
+import QuestionAddByUser from './pages/Admin/Question/QuestionPeding';
+import BlogEditor from './pages/try.js';
 
 
 
 
 
 
-const AdminApp = lazy(()=>import("./Layouts/AdminApp"));
-const Dashboard = lazy(()=>import("./pages/Admin/Dashboard/Dashboard"))
-const Question = lazy(()=>import("./pages/Admin/Question/Question"));
-const User = lazy(()=>import("./pages/Admin/User/User"));
-const AddEditQuestion = lazy(()=>import("./pages/Admin/Question/AddEditQuestion"));
-const AddEditSolution = lazy(()=>import("./pages/Admin/Question/Solution/AddEditSolution"));
-const Other = lazy(()=>import("./pages/Admin/Other/Other"));
+const AdminApp = lazy(() => import("./Layouts/AdminApp"));
+const Dashboard = lazy(() => import("./pages/Admin/Dashboard/Dashboard"))
+const Question = lazy(() => import("./pages/Admin/Question/Question"));
+const User = lazy(() => import("./pages/Admin/User/User"));
+const AddEditQuestion = lazy(() => import("./pages/Admin/Question/AddEditQuestion"));
+const AddEditSolution = lazy(() => import("./pages/Admin/Question/Solution/AddEditSolution"));
+const Other = lazy(() => import("./pages/Admin/Other/Other"));
 
 
 const appRouter = createBrowserRouter([
   {
-    path:"/",
-    element:<MainApp />,
-    children:[
-      {path:"/",element:<Home />},
-      {path:"/question/:id",element:<QuestionById admin={false} />}
-      
+    path: "/",
+    element: <MainApp />,
+    children: [
+      { path: "/", element: <Home /> },
+      { path: "/question/:id", element: <QuestionById admin={false} /> },
+      { path: "/user/question", element: <QuestionResult></QuestionResult> },
+      { path: "/user/question/add", element: <AddEditQuestion edit={false} role="user" /> },
+      { path: "/user/question/:id", element: <QuestionByIdUser User="true" /> },
+      { path: "/try", element: <BlogEditor /> }
+
+
+
     ],
   },
-  {path:"/LogIn",element:<LogIn />},
-  {path:"/SignIn",element:<SignIn />},
-  {path:"/contact",element:<Contact />},
-  {path:"/about",element:<About />},
+  { path: "/LogIn", element: <LogIn /> },
+  { path: "/SignIn", element: <SignIn /> },
+  { path: "/contact", element: <Contact /> },
+  { path: "/about", element: <About /> },
   {
-    path:"/admin",
-    element:<Suspense><AdminApp /></Suspense>,
-    children:[
-      {path:"",element:<Dashboard />},
-      {path:"question",element:<Question />},
-      {path:"user",element:<User />},
-      {path:"other",element:<Other />},
-      {path:"question/add",element:<AddEditQuestion edit={false} />},
-      {path:"question/:id",element:<QuestionById admin />},
-      {path:"question/:id/edit",element:<AddEditQuestion edit />},
-      {path:"solution/:id/add",element:<AddEditSolution edit={false} />},
-      {path:"solution/:id/edit",element:<AddEditSolution edit />},
-    ] 
+    path: "/admin",
+    element: <Suspense><AdminApp /></Suspense>,
+    children: [
+      { path: "", element: <Dashboard /> },
+      { path: "question", element: <Question /> },
+      { path: "user", element: <User /> },
+      { path: "other", element: <Other /> },
+      { path: "question/add", element: <AddEditQuestion edit={false} /> },
+      { path: "question/:id", element: <QuestionById admin /> },
+      { path: "question/:id/edit", element: <AddEditQuestion edit /> },
+      { path: "solution/:id/add", element: <AddEditSolution edit={false} /> },
+      { path: "solution/:id/edit", element: <AddEditSolution edit /> },
+      { path: "questionRequest", element: <QuestionAddByUser /> },
+    ]
   },
+
+
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

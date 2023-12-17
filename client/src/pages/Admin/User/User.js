@@ -1,34 +1,17 @@
 import useGetAllUser from "../../../hooks/useGetAllUser";
 import UserCard from "../../../components/Cards/UserCard";
-import changeUserRole from "../../../utilities/APIcalls/changeUserRole";
 import { useNavigate } from "react-router-dom";
 import deleteUser from "../../../utilities/APIcalls/deleteUser";
 
+
 const User = () => {
 	const [user, setUser] = useGetAllUser();
+	const [tempdata ]=useGetAllUser();
 	const navigate = useNavigate();
 
-	async function changerole(id) {
-		await changeUserRole(id, () => { navigate("/login") });
-		var temp = [...user];
-		setUser(temp.map((e) => {
-			if (e._id === id) {
-				if (e.role === "user") {
-					e.role = "admin";
-					return e;
-				}
-				else {
-					e.role = "user";
-					return e;
-
-				}
-			}
-			return e;
-		}))
-	}
+	
 
 	async function deleteData(id) {
-		console.log(id);
 		const confirmDelete = window.confirm('Are you sure you want to delete this user?');
 		if (confirmDelete) {
 			deleteUser(id, () => { navigate("/login") });
@@ -39,17 +22,27 @@ const User = () => {
 
 
 	function PrintUser(data) {
-		return data.map((val, index) => <UserCard className="m-1 w-full gc-shadow-22" onRoleChange={() => { changerole(val._id) }} username={val.username} email={val.email} role={val.role} key={index} onDelete={() => { deleteData(val._id) }} />)
+		return data.map((val, index) => <UserCard className="m-1 w-full gc-shadow-22" user={user} id={val._id} setUser={setUser} username={val.username} email={val.email} role={val.role} key={index} onDelete={() => { deleteData(val._id) }} />)
+	}
+
+	function searchUser(i)
+	{
+		setUser(user.filter((e)=>{return e.username.includes(i.target.value) || e.email.includes(i.target.value)}))
 	}
 
 	return (
 		<>
 			<h2 className="text-3xl m-2 text-center">Users</h2>
-			<div className="flex flex-col items-center w-full max-h-[80vh] overflow-y-auto">
-
+			<div><input type="text" className="px-2 w-[25vw] h-[7vh] text-3xl ml-[11vw]" onKeyDown={(e)=>{
+				if(e.key==="Backspace")
+				{setUser(tempdata)}}} onChange={(e)=>{searchUser(e)}}/></div>
+			<div className="flex">
+			<div className="flex flex-col justify-between items-center w-[50vw] max-h-[72vh] overflow-y-auto">
 				{PrintUser(user.filter(val => val.role === "admin"))}
-				{PrintUser(user.filter(val => val.role !== "admin"))}
-
+				{PrintUser(user.filter(val => val.role === "superuser"))}
+				{PrintUser(user.filter(val => val.role === "user"))}
+			</div>
+			
 			</div>
 		</>
 	)
