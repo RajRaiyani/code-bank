@@ -9,6 +9,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import addQuestion from "../../../utilities/APIcalls/addQuestion";
 import editQuestion from "../../../utilities/APIcalls/editQuestion";
 import useGetAllLanguages from "../../../hooks/useGetAllLanguages"
+import addQuestionByUser from "../../../utilities/APIcalls/addQuestionByUser";
 
 
 
@@ -44,14 +45,27 @@ const AddEditQuestion = (props) => {
 
 
 	async function submitForm(data) {
-		if (!props.edit)
-			await addQuestion(data, setMessage, () => { navigate("/login") }, () => { navigate("/admin/question") });
-		else {
-			data.question_id = params.id;
-			console.log(data)
+		
+		
+			if(props.role==="user")
+			{
+				console.log("user")
+				await addQuestionByUser(data, setMessage, () => { navigate("/login") }, () => { navigate("/") });
+				return;
+			}
+			else
+			{
+				if (!props.edit)
+				await addQuestion(data, setMessage, () => { navigate("/login") }, () => { navigate("/admin/question") });
+			else {
+				data.question_id = params.id;
+				console.log(data)
+	
+				await editQuestion(data, setMessage, () => { navigate("/login") }, () => { navigate("/admin/question") });
+			}
+			}
+		
 
-			await editQuestion(data, setMessage, () => { navigate("/login") }, () => { navigate("/admin/question") });
-		}
 	}
 
 
@@ -90,7 +104,7 @@ const AddEditQuestion = (props) => {
 
 
 	return (
-		<div>
+		<div className="overflow-x-auto h-[90vh] w-[100%]">
 			<span className="text-red-500">{message}</span>
 			<h1 className="text-center text-2xl p-2">{props.edit ? "Edit Question" : "Add Question"}</h1>
 
@@ -102,7 +116,7 @@ const AddEditQuestion = (props) => {
 					<div className="flex justify-between">
 						<input className="m-1" type="number" {...register("number")} placeholder="Number" />
 						<select className="m-1" {...register("level")}>
-							<option>Level</option>
+							<option disabled>Level</option>
 							<option value="easy">Easy</option>
 							<option value="medium">Midium</option>
 							<option value="hard">Hard</option>

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { useEffect, useState } from "react";
+import Cookies from "js-cookie";
 
 
 
@@ -24,6 +25,13 @@ const Header = (props) => {
 
 	const Menu = () => (
 		<div className="text-sm flex justify-around items-center  ">
+			<Link to="/userList"><div className="p-1 mx-3 gc-hover-text-green hover:scale-110 duration-300">UserList</div></Link>
+			{
+				Cookies.get("superuserToken")!==undefined?
+				<Link to="/user/question"><div className="p-1 mx-3 gc-hover-text-green hover:scale-110 duration-300">Your Question</div></Link>:
+				null
+			}
+			
 			<Link to="/about"><div className="p-1 mx-3 gc-hover-text-green hover:scale-110 duration-300">About</div></Link>
 			<Link to="/contact"><div className="p-1 mx-3 gc-hover-text-green hover:scale-110 duration-300">Contact</div></Link>
 			{

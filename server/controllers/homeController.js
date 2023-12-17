@@ -21,7 +21,7 @@ exports.getAllQuestions = async (req, res) => {
 		if (search && search.length>0)
 			var data = await searchQuestions(decodeURIComponent(search));
 		else
-			var data = await Question.find({}).sort({ number: 1 });
+			var data = await Question.find({isAccpeted:true}).sort({ number: 1 });
 
 	} catch (error) {
 		return res.json({ status: "X", message: "something went wrong." })

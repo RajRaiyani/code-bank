@@ -40,6 +40,16 @@ const LogIn = () => {
 				});
 				navigate("/admin");
 			  }
+			  else if(res.role==="superuser")
+			  {
+				cookie.set("username", res.username , {
+					expires: new Date().getTime() + 2 * 1000 * 3600,
+				  });
+				  cookie.set("superuserToken", res.token, {
+					expires: new Date().getTime() + 2 * 1000 * 3600,
+				  });
+				  navigate("/");
+			  }
 			}
 			setMessage(res.message);
 		  })

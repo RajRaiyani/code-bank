@@ -1,6 +1,6 @@
 
 
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { QuestionCard } from "../../../components/Cards/QuestionCard";
 import useGetAllQuestions from "../../../hooks/useGetAllQuestions";
@@ -9,6 +9,7 @@ import deleteQuestionById from "../../../utilities/APIcalls/deleteQuestion";
 import searchQuestion from "../../../utilities/APIcalls/searchQuestion";
 import { FiSearch } from "react-icons/fi";
 import { SiAddthis } from "react-icons/si";
+import updateQuesionisAccepted from "../../../utilities/APIcalls/updateQuestionisaccepted";
 
 
 
@@ -24,6 +25,8 @@ const Home = () => {
 
 	const [filteredQuestions, setFilteredQuestions] = useState([]);
 	const [displayQuestion, setDisplayQuestion] = useState([]);
+
+	const[message,setMessage]=useState();
 
 	const navigate = useNavigate();
 
@@ -62,10 +65,15 @@ const Home = () => {
 		await searchQuestion(searchString, setFilteredQuestions, () => { navigate("/login") })
 	}
 
-
+	async function changestate(id){
+		setAllQuestion([...allQuestions.filter((i)=>{
+			return i._id!==id
+		})])
+		await updateQuesionisAccepted(id,setMessage,()=>{navigate("/login")})
+}
 	return (
 		<div className="w-[100%] p-5">
-
+			{message}
 				<div className="flex justify-between items-center">
 
 					<div className="flex justify-around md:justify-start">
@@ -86,6 +94,9 @@ const Home = () => {
 						<input type="text" placeholder="Search..." className="outline-none border-none w-full h-[100%] px-1 text-sm focus:outline-none rounded bg-inherit" onChange={(e) => handeldata(e)} />
 						<button className="gc-bg-green p-1 rounded-md h-full hover:scale-90 duration-200"><FiSearch className="text-lg text-white font-extrabold" onClick={() => { searchData() }} /></button>
 					</div>
+					<div>
+						<Link to="/admin/questionRequest"><span className="px-2 py-2 border rounded-lg text-white gc-bg-green hover:text-lg">pedning</span></Link>
+					</div>
 
 					<SiAddthis className="gc-text-green text-3xl hover:scale-110" onClick={()=>navigate("/admin/question/add")} />
 					
@@ -96,9 +107,11 @@ const Home = () => {
 					{displayQuestion.map((data, index) =>
 
 							<QuestionCard key={index} admin className="my-3 gc-shadow-23 w-full mx-auto" 
+							status={data.isAccpeted}
 							onEdit={() =>navigate(`/admin/question/${data._id}/edit`)} 
 							onClick={()=>navigate(`/admin/Question/${data._id}`)} 
-							onDelete={() =>{deleteQuestion(data._id, () => navigate("/login"))}} number={data.number} title={data.title} likes={data.likes} level={data.level} />
+							onDelete={() =>{deleteQuestion(data._id, () => navigate("/login"))}} 
+							changestate={()=>{changestate(data._id)}} number={data.number} title={data.title} likes={data.likes} level={data.level} />
 
 					)}
 				</div>

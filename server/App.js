@@ -25,11 +25,15 @@ const authentication = require("./routes/authentication");
 const admin = require("./routes/admin");
 const home = require("./routes/home");
 const test = require("./routes/test");
+const user=require("./routes/user");
 
 app.use("/api/v1/home", home);
 app.use("/api/v1/authentication", authentication);
 app.use("/api/v1/admin", admin);
 app.use("/api/v1/test", test);
+app.use("/api/v2/user",user);
+app.use("/api/v2/admin",admin);
+
 
 module.exports = app;
 

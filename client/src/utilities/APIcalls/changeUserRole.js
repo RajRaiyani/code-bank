@@ -1,12 +1,13 @@
 import Cookies from "js-cookie";
-async function changeUserRole(id,callback)
+async function changeUserRole(id,newrole,callback)
 {
     await fetch("http://localhost:3007/api/v1/admin/user/" + id + "/changeRole", {
         method: "PUT",
         headers: {
             'Content-Type': 'application/json',
             "token": Cookies.get("adminToken")
-        }
+        },
+        body:JSON.stringify({newrole:newrole})
     }).then(res => res.json())
         .then(res => {
             if (res.status === "OK") {

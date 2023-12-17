@@ -22,6 +22,14 @@ const schema = new mongoose.Schema({
 		type:String,
 		enum:["hard","medium","easy"]
 	},
+	isAccpeted:{
+		type:Boolean,
+		default:true
+	},
+	user_id:{
+		type:mongoose.Schema.Types.ObjectId,
+		ref:"user"
+	}
 })
 
 module.exports = mongoose.model("question",schema);
