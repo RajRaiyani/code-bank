@@ -17,7 +17,10 @@ import About from './pages/About/About';
 import QuestionResult from './pages/user/questionResult';
 import QuestionByIdUser from './pages/user/userquestionById';
 import QuestionAddByUser from './pages/Admin/Question/QuestionPeding';
-import BlogEditor from './pages/try.js';
+import BlogEditor from './pages/Blog/AddBlog.js';
+import BlogHome from './pages/Blog/BlogHome.js';
+import BlogById from './pages/Blog/BlogById.js';
+// import MarkdownEditor from './try.js';
 
 
 
@@ -43,7 +46,14 @@ const appRouter = createBrowserRouter([
       { path: "/user/question", element: <QuestionResult></QuestionResult> },
       { path: "/user/question/add", element: <AddEditQuestion edit={false} role="user" /> },
       { path: "/user/question/:id", element: <QuestionByIdUser User="true" /> },
-      { path: "/try", element: <BlogEditor /> }
+      { path: "/blog", element: <BlogHome /> },
+     
+
+      { path: "/blog/add", element: <BlogEditor /> },
+      { path: "/blog/:id", element: <BlogById /> }
+
+
+
 
 
 
@@ -52,7 +62,7 @@ const appRouter = createBrowserRouter([
   { path: "/LogIn", element: <LogIn /> },
   { path: "/SignIn", element: <SignIn /> },
   { path: "/contact", element: <Contact /> },
-  { path: "/about", element: <About /> },
+  { path: "/about", element: <About/>  },
   {
     path: "/admin",
     element: <Suspense><AdminApp /></Suspense>,

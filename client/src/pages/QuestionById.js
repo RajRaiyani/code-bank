@@ -80,7 +80,7 @@ const QuestionById = (props) => {
 
 	const Discription = () => {
 		return (
-				<div className="w-full md:h-[70vh] border gc-border-green p-4 rounded-md">{data.question}</div>
+				<div className="w-full overflow-auto md:h-[65vh] border gc-border-green p-4 rounded-md">{data.question}</div>
 		)
 	}
 	const Comment = () => {
@@ -120,6 +120,7 @@ const QuestionById = (props) => {
 							
 					})
 					}
+					
 				</div>
 			</>
 		)
@@ -145,7 +146,7 @@ const QuestionById = (props) => {
 	const [isLiked , setIsLiked]=useState(data.isLiked)
 	return (<>
 		<div className="md:flex my-2">
-			<div className="md:w-1/2 mx-4 my-2 p-4 rounded">
+			<div className="md:w-1/2 mx-4 my-2 p-2 rounded h-[85vh]">
 				<button className={`btn rounded-l-lg  p-2 text-white ${togal === true ? "bg-[#7cc529] border gc-border-green" : " gc-text-black hover:bg-[#7cc529] hover:text-white border gc-border-green   "} `} onClick={() => { settogal(true) }}>Discription</button>
 				<button className={`btn rounded-r-lg  p-2 ms-1 text-white ${togal === false ? "bg-[#7cc529] border gc-border-green" : "gc-text-black hover:bg-[#7cc529] hover:text-white border gc-border-green "} `} onClick={() => { settogal(false) }}>Comments</button>
 				<div className="mt-4">
@@ -157,12 +158,14 @@ const QuestionById = (props) => {
 					<div><LikeCard likes={data.likes} setLiked={setIsLiked} status={data.isLiked} status1={isLiked}/></div>
 					</div>
 				</div>
+				<div >
 				{togal === true ? <Discription /> : <><Comment /></>}
+				</div>
 			</div>
 			<div className="md:w-1/2 ">
 				<div className="flex justify-end mr-8"><Language/></div>
-			<div className="h-[85vh]  mx-4 my-2 p-4 rounded overflow-auto gc-shadow-25 ">
-				{props.admin && <SiAddthis className="gc-text-green text-3xl hover:scale-110" onClick={()=>{navigate(`/admin/solution/${id}/add`)}} />}
+			<div className="h-[79vh] w-[37vw]  mx-4 my-2 p-4 rounded overflow-auto gc-shadow-25 ">
+				{props.admin && <SiAddthis className="gc-text-green text-3xl  hover:scale-110" onClick={()=>{navigate(`/admin/solution/${id}/add`)}} />}
 				{printSolution}</div>
 		</div>
 		</div>

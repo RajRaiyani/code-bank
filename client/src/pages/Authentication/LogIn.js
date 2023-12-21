@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import cookie from "js-cookie";
+import Cookies from "js-cookie";
 
 
 const LogIn = () => {
   const [message, setMessage] = useState("");
   var navigate = useNavigate();
-
+	console.log(Cookies.get("userToken"))
 	function login(e){
 		e.preventDefault();
 		fetch("http://localhost:3007/api/v1/authentication/LogIn", {

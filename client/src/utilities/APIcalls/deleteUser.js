@@ -1,6 +1,6 @@
 import Cookies from "js-cookie";
 
-async function deleteUser(id,callback) {
+async function deleteUser(id,setMessage,callback) {
 
     await fetch("http://localhost:3007/api/v1/admin/user/" + id + "/delete", {
         method: "DELETE",
@@ -11,11 +11,17 @@ async function deleteUser(id,callback) {
     }).then(res => res.json())
         .then(res => {
             if (res.status === "OK") {
+               
+                setMessage(res.message)
+                setTimeout(()=>{
+                    setMessage("")
+                },2000)
             }
             else if (res.status === "EXPIRED_TOKEN") {
                 callback();
             }
             else {
+                setMessage(res.message)
                 callback();
             }
         })
