@@ -5,12 +5,8 @@ const schema = new mongoose.Schema({
 		type: mongoose.Schema.Types.ObjectId,
 		ref:"user"
 	},
+	blog_id:mongoose.Schema.Types.ObjectId,
 	data:String,
-	likes:{
-		type:Number,
-		default:0	
-	},
-	title:String,
 	date:{
 		type : Date,
 		require : true,
@@ -18,4 +14,4 @@ const schema = new mongoose.Schema({
 	}
 })
 
-module.exports = mongoose.model("blog",schema);
+module.exports = mongoose.model("blogcomment",schema);
