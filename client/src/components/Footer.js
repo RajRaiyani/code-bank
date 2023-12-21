@@ -1,7 +1,7 @@
 const Footer = ()=>{
 	return(
 		<footer className="text-center border gc-border-green p-1">
-			R.P.Raiyani
+			Harshil L. Vasoya
 		</footer>
 	)
 }

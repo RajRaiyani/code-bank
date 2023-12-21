@@ -1,6 +1,8 @@
 
 const Question = require("./../../models/question");
 const Solution = require("./../../models/solution");
+const Like = require("./../../models/like");
+
 const Validator = require("./../../utility/validation/validator");
 
 const Storage = require("./../../utility/memory/storage");
@@ -13,15 +15,15 @@ const question = require("./../../models/question");
 
 exports.addQuestion = async (req, res) => {
 	var { number, title, question, categories, level, solutions } = req.body;
-	var {user_id}=req.user_id;
+	var user_id=req.user_id;
 
 	if (!(title && question && categories && level && solutions) || solutions.length === 0)
 		return res.json({ status: "MISSING_FIELD", message: "all fileds are required." });
 
 	categories = [...new Set(categories)];
 
-	if (!Validator.validate("question", question))
-		return res.json({ status: "INVALID", message: "Question is not valid" });
+	// if (!Validator.validate("question", question))
+	// 	return res.json({ status: "INVALID", message: "Question is not valid" });
 	if (!Validator.validate("questionTitle", title))
 		return res.json({ status: "INVALID", message: "Question's Title is not valid" });
 	if (!Validator.validateLevel(level))
@@ -47,7 +49,7 @@ exports.addQuestion = async (req, res) => {
 	}
 
 	try {
-		var data = await Question.create({ number, title, question, categories, level ,isAccpeted:true , user_id});
+		var data = await Question.create({ number, title, question, categories, level ,isAccpeted:true ,user_id});
 		for (let sol of solutions) {
 			let { language, title, code } = sol;
 			await Solution.create({ question_id: data._id, language, title, code });
@@ -71,6 +73,7 @@ exports.deleteQuestion = async (req, res) => {
 	try {
 		await Solution.deleteMany({ question_id });
 		await Question.deleteOne({ _id: question_id });
+		await Like.deleteMany({question_id:question_id})
 		res.json({ status: "OK" });
 
 	} catch (error) {

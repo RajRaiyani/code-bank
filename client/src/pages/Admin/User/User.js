@@ -2,11 +2,13 @@ import useGetAllUser from "../../../hooks/useGetAllUser";
 import UserCard from "../../../components/Cards/UserCard";
 import { useNavigate } from "react-router-dom";
 import deleteUser from "../../../utilities/APIcalls/deleteUser";
+import { useState } from "react";
 
 
 const User = () => {
 	const [user, setUser] = useGetAllUser();
 	const [tempdata ]=useGetAllUser();
+	const [message , setMessage]=useState("");
 	const navigate = useNavigate();
 
 	
@@ -14,7 +16,7 @@ const User = () => {
 	async function deleteData(id) {
 		const confirmDelete = window.confirm('Are you sure you want to delete this user?');
 		if (confirmDelete) {
-			deleteUser(id, () => { navigate("/login") });
+			deleteUser(id,setMessage ,  () => { navigate("/login") });
 			var temp = [...user];
 			setUser(temp.filter((e) => { return e._id !== id }));
 		}
@@ -32,8 +34,9 @@ const User = () => {
 
 	return (
 		<>
+		<span className="text-red-500">{message}</span>
 			<h2 className="text-3xl m-2 text-center">Users</h2>
-			<div><input type="text" className="px-2 w-[25vw] h-[7vh] text-3xl ml-[11vw]" onKeyDown={(e)=>{
+			<div><input type="text" className="px-2 w-[25vw] h-[7vh] text-3xl ml-[11vw]" placeholder="Search User" onKeyDown={(e)=>{
 				if(e.key==="Backspace")
 				{setUser(tempdata)}}} onChange={(e)=>{searchUser(e)}}/></div>
 			<div className="flex">

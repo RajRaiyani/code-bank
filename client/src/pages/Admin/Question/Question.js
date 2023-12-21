@@ -103,7 +103,7 @@ const Home = () => {
 
 				</div>
 
-				<div className="p-3 gc-shadow-25 rounded mt-4">
+				<div className="p-3 gc-shadow-25 overflow-y-auto h-[76vh] rounded mt-4">
 					{displayQuestion.map((data, index) =>
 
 							<QuestionCard key={index} admin className="my-3 gc-shadow-23 w-full mx-auto" 

@@ -3,6 +3,7 @@ import QuestionCard from "../../../components/Cards/QuestionCard";
 import useGetAllPendingQuestion from "../../../hooks/useGetAllPedningQuestion";
 import updateQuesionisAccepted from "../../../utilities/APIcalls/updateQuestionisaccepted";
 import { useState } from "react";
+import deleteQuestionById from "../../../utilities/APIcalls/deleteQuestion";
 
 function QuestionAddByUser()
 {
@@ -23,12 +24,20 @@ function QuestionAddByUser()
                 data.map((e, index) =>
                 <span onClick={()=>{(navigate("/admin/question/"+e._id))}}>
                     <QuestionCard
-                     className="my-3 gc-shadow-23" number={e.number} title={e.title} likes={e.likes} level={e.level} status={e.isAccpeted} key={index} aprovebutton="true" changestate={(i)=>{changestate(e._id)}}/>
+							onDelete={() =>{deleteQuestion(e._id, () => navigate("/login"))}} 
+                            className="my-3 gc-shadow-23" number={e.number} title={e.title} likes={e.likes} level={e.level} status={e.isAccpeted} key={index} aprovebutton="true" changestate={(i)=>{changestate(e._id)}} />
                      </span>
         )}
         </>
         )
     }
+    async function deleteQuestion(id, callback) {
+		const confirm = window.confirm("Are you sure you want to delete this question?");
+		if (confirm) {
+			await deleteQuestionById(id, callback);
+			setData(data.filter((e) => e._id !== id));
+		}
+	}
     
     return(
         <>
