@@ -3,7 +3,7 @@ import Blog from "../../components/Cards/BlogCard";
 import useGetAllBlogs from "../../hooks/useGetAllBlogs";
 import deleteBlogByid from "../../utilities/APIcalls/deleteBlog";
 
-function BlogHome()
+function BlogHome(props)
 {
     const [data,setData]=useGetAllBlogs();
     const [tempdata]=useGetAllBlogs();
@@ -26,6 +26,15 @@ function BlogHome()
 
     await deleteBlogByid(id,()=>{navigate("/login")})
     }
+    function navigatefun(id)
+    {
+        console.log(id)
+        if(props.admin)
+        return navigate("/admin/blog/"+id)
+
+        navigate("/blog/"+id);
+
+    }
     return(
         <>
         <div className="w-[70%] text-right">
@@ -39,7 +48,7 @@ function BlogHome()
         <div className="overflow-y-auto h-[84vh]  gc-shadow-22 w-[71vw] m-auto">
         {data? data.map((e)=>{
             return(
-            <Blog  title={e.title} date={e.date} likes={e.likes} username={e.user_id.username} Blogid={e._id} user_id={e.user_id._id} ondelete={()=>{deleteBlog(e._id)}} onClick={()=>{navigate("/blog/"+e._id)}} key={e._id}/>
+            <Blog admin={props.admin} title={e.title} date={e.date} likes={e.likes} username={e.user_id.username} Blogid={e._id} user_id={e.user_id._id} ondelete={()=>{deleteBlog(e._id)}} onClick={()=>{navigatefun(e._id)}} key={e._id}/>
             )
         }):null
 

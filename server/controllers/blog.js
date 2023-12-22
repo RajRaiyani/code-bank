@@ -3,6 +3,7 @@
 const blog = require("../models/blog");
 const bloglike = require("../models/bloglike");
 const blogcomment =require("../models/blogcomment");
+const User = require("../models/user");
 
 exports.postBlog=async (req,res)=>{
     var {title,data}=req.body;
@@ -38,10 +39,13 @@ exports.getAllBlog=async (req,res)=>{
 }
 
 exports.getBlogById=async (req,res)=>{
-    var data=await blog.findOne({ _id: req.params.id }, {}).populate("user_id");
+    var data , comment;
     var isLiked=false;
 
     try{
+     data=await blog.findOne({ _id: req.params.id }, {}).populate("user_id");
+     comment= await blogcomment.find({blog_id:req.params.id},{}).populate("user_id");
+
         if(!data)
         return res.json({ status: "NOT_EXIST", message: "blog does not exist." })
 
@@ -52,7 +56,7 @@ exports.getBlogById=async (req,res)=>{
         return res.json({ status: "X", message: "something went wrong while getting Blog.", error })
 
     }
-	res.json({ status: "OK", data:{data , isLiked}});
+	res.json({ status: "OK", data:{data , isLiked  , comment}});
 }
 
 exports.deleteBlog=async (req,res)=>{
@@ -116,4 +120,38 @@ exports.likeBlog = async (req, res) => {
 	}
 	res.json({ status: "OK", like });
 
+}
+
+exports.commentOnBlog = async (req, res) => {
+	var data = req.body.data;
+	var blog_id = req.params.id;
+	var user_id = req.user_id;
+	if (!(blog_id && user_id && data)) {
+		return res.json({ status: "MISSING_FIELD", message: "either question Id or user Id is missing." });
+	}
+	try {
+		var username = await User.findOne({ _id: user_id }, { username: 1, _id: 0 });
+		if (!username)
+			return res.json({ status: "NOT_EXIST", message: "User does not exist." });
+		var result = await blogcomment.create({ user_id, blog_id, data });
+
+		res.json({ status: "OK", data: { ...result._doc, username: username.username } });
+	} catch (error) {
+		return res.json({ status: "X", message: "something went wrong while commenting on question.", error })
+	}
+}
+
+exports.deleteBlogComment = async (req,res) => {
+var comment_id = req.body.comment_id;
+
+	if (!comment_id) return res.json({ status: "MISSING_FIELD", message: "all fileds are required." });
+
+	try {
+		var data = await blogcomment.findOneAndRemove({ _id: comment_id });
+	} catch (error) {
+		return res.json({ status: "X", message: "something went wront while deleting comment.", error });
+	}
+
+	if (!data) return res.json({ status: "NOT_EXIST", message: "Comment does not exist." });
+	res.json({ status: "OK", data });
 }

@@ -1,9 +1,11 @@
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function useGetBlogById(id)
 {
     const [data , setData]=useState({});
+    const navigate=useNavigate();
     useEffect(() => {
         fetch(`${process.env.REACT_APP_SERVER_URL}/api/v2/blog/`+id, {
            method: "GET",
@@ -16,6 +18,9 @@ function useGetBlogById(id)
                if (res.status === "OK") {
                 setData(res.data);
                }
+               else if (res.status === "EXPIRED_TOKEN") {
+                navigate("/login");
+            }
                else{
                    console.log(res);
                }

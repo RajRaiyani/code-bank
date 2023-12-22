@@ -75,6 +75,7 @@ exports.deleteQuestion = async (req, res) => {
 		await Question.deleteOne({ _id: question_id });
 		await Like.deleteMany({question_id:question_id})
 		res.json({ status: "OK" });
+		Storage.lastQuestionNumber--;
 
 	} catch (error) {
 		return res.json({ status: "X", message: "something went wrong while deleting question.", error });

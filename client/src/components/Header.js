@@ -26,6 +26,8 @@ const Header = (props) => {
 	const Menu = () => (
 		<div className="text-sm flex justify-around items-center  ">
 			<Link to="/userList"><div className="p-1 mx-3 gc-hover-text-green hover:scale-110 duration-300">UserList</div></Link>
+			<Link to="/blog"><div className="p-1 mx-3 gc-hover-text-green hover:scale-110 duration-300">Blog</div></Link>
+
 			{
 				Cookies.get("superuserToken")!==undefined?
 				<Link to="/user/question"><div className="p-1 mx-3 gc-hover-text-green hover:scale-110 duration-300">Your Question</div></Link>:

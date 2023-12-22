@@ -86,9 +86,26 @@
 
 @media only screen and (max-width: 767px) {
 	/* Styles specific to mobile devices with a maximum width of 767px */
-	.blogdatabyid {
+	.display_none {
 	  display: none;
 	}
   
 	/* Other mobile-specific styles */
+  }
+  @media (max-width: 768px) {
+	.mobile-only {
+	  display: block;
+	}
+	.desktop-only {
+	  display: none;
+	}
+  }
+
+  @media (min-width: 769px) {
+	.mobile-only {
+	  display: none;
+	}
+	.desktop-only {
+	  display: block;
+	}
   }

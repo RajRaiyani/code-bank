@@ -41,7 +41,7 @@ const formattedDate = date.toLocaleDateString('en-US', options);
             <div className="px-2 text-xs text-center">
             <AiOutlineHeart className="mx-auto text-xl gc-text-green" />{props.likes}
             </div>
-            {Cookies.get("adminToken") ? <MdOutlineDeleteForever onClick={(e)=>{
+            {props.admin ? <MdOutlineDeleteForever onClick={(e)=>{
                 e.stopPropagation()
                 const check=window.confirm("are you sure to delet this blog?")
                 if(check)
