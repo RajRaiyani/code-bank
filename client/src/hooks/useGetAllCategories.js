@@ -1,7 +1,8 @@
 import Cookies from "js-cookie";
 import { useState , useEffect } from "react";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 function useGetAllCategories() {
+    const navigate=useNavigate();
   const [arrayValues, setArrayValues] = useState([]);
      useEffect(() => {
     fetch("http://localhost:3007/api/v1/home/list/get/category", {
@@ -16,13 +17,13 @@ function useGetAllCategories() {
                 setArrayValues(res.data.list);
             }
             else if (res.status === "EXPIRED_TOKEN") {
-                Navigate("/login");
+                navigate("/login");
             }
            
         })
         .catch(e => console.log("error : " + e));
 
-}, [])
+}, [navigate])
     return [arrayValues, setArrayValues];
 }
 export default useGetAllCategories;

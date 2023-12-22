@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import {RxDashboard} from "react-icons/rx";
 import {FaQuestion} from "react-icons/fa";
 import {HiOutlineUserCircle} from "react-icons/hi";
+import { IoMdPaper } from 'react-icons/io';
+
 import {GrApps} from "react-icons/gr";
 
 const buttonStyle = {
@@ -27,9 +29,9 @@ const AdminSidebar = (props)=>{
         <Link to="/admin/user" style={buttonStyle} className={commonClass}>
           <HiOutlineUserCircle className="text-3xl" />&nbsp;&nbsp;User
         </Link>
-        {/* <Link to="/admin/questionRequest" style={buttonStyle} className={commonClass}>
-          &nbsp;&nbsp;{ true? "<> Question":null}
-        </Link> */}
+        <Link to="/admin/blog" style={buttonStyle} className={commonClass}>
+          <IoMdPaper className="text-3xl" />&nbsp;&nbsp;Blog
+        </Link>
         <Link to="/admin/other" style={buttonStyle} className={commonClass}>
           <GrApps className="text-2xl" />
         </Link>

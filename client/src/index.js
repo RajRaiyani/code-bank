@@ -77,6 +77,10 @@ const appRouter = createBrowserRouter([
       { path: "solution/:id/add", element: <AddEditSolution edit={false} /> },
       { path: "solution/:id/edit", element: <AddEditSolution edit /> },
       { path: "questionRequest", element: <QuestionAddByUser /> },
+      { path: "blog", element: <BlogHome admin={true}/> },
+      { path: "blog/:id", element: <BlogById admin={true}/> }
+
+
     ]
   },
 
