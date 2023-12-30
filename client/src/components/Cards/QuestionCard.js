@@ -38,8 +38,10 @@ export const QuestionCard = (props) => {
 		{
 			return(
 				<>
-					{!props.status ? <button className="px-2 bg-blue-500 ml-5 py-1 text-white rounded-lg" onClick={(e)=>{mangeClickWhenUpdateIsAccepted(e)}}>Approve</button>:<button className="bg-red-500 px-2 py-1 text-white rounded-lg" onClick={(e)=>{mangeClickWhenUpdateIsAccepted(e)}}>Pending</button>}
-				<MdOutlineDeleteForever onClick={(e)=>{e.stopPropagation(); props.onDelete && props.onDelete();}} className="text-red-500 text-3xl mx-2 hover:scale-110" />
+					{!props.status ? 
+					<><button className="px-2 bg-blue-500 ml-5 py-1 text-white rounded-lg" onClick={(e)=>{mangeClickWhenUpdateIsAccepted(e)}}>Approve</button>
+					<MdOutlineDeleteForever onClick={(e)=>{e.stopPropagation(); props.onDelete && props.onDelete();}} className="text-red-500 text-3xl mx-2 hover:scale-110" /></>:<button className="bg-red-500 px-2 py-1 text-white rounded-lg" onClick={(e)=>{mangeClickWhenUpdateIsAccepted(e)}}>Pending</button>}
+				
 
 				</>
 			)

@@ -27,9 +27,8 @@ function BlogById(props) {
             // setCommet([...comment , data]);
             if (commentvalue !== "") {
                 var newComment = await postBlogComment(id, commentvalue, (res) => { if (res !== undefined) { navigate("/login") } })
-                newComment.user = { _id: newComment.user_id, "username": newComment.username }
+                newComment.user_id= { _id: newComment.user_id, "username": newComment.username }
                 delete newComment.username
-                delete newComment.user_id
                 setCommet([...comment, newComment]);
                 setCommentvalue("");
             }
@@ -54,7 +53,7 @@ function BlogById(props) {
                 <div className='m-2 overflow-auto h-[70vh]'>
                 {comment? comment.map((e, index) => {
                     const date = new Date(e.date);
-                    return <CommentCard username={e.user_id.username} admin={props.admin} className="m-2 mb-3 border-0 border-t border-s gc-border-green rounded-lg" comment={e.data} date={date.toDateString()} key={index} style={styleForCommentCard} onDelete={() => { deleteCommentData(e._id) }} />
+                    return <CommentCard id={e.user_id? e.user_id._id:null} username={e.user_id ? e.user_id.username:null} admin={props.admin} className="m-2 mb-3 border-0 border-t border-s gc-border-green rounded-lg" comment={e.data} date={date.toDateString()} key={index} style={styleForCommentCard} onDelete={() => { deleteCommentData(e._id) }} />
 
                 }):null
                 }
@@ -91,13 +90,13 @@ function BlogById(props) {
 
                     </div>
                 </div>
-                {props.admin !=true ?
+                {props.admin !==true ?
                 <div className="w-[32vw]  max-h-[89vh] h-auto desktop-only ">
                     <CommentDisplay />
                 </div>
                 :null}   
             </div>
-            {props.admin !=true ? <div className=' mobile-only m-2'>
+            {props.admin !==true ? <div className=' mobile-only m-2'>
                 <CommentDisplay />
 
             </div>:

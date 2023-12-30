@@ -20,11 +20,15 @@ function BlogHome(props)
 
     async function deleteBlog(id)
     {
+        const confirm=window.confirm("are you sure you want to delete this blog")
+        if(confirm)
+        {
         setData([...data.filter((e)=>{
             return e._id!==id
         })])
 
     await deleteBlogByid(id,()=>{navigate("/login")})
+        }
     }
     function navigatefun(id)
     {

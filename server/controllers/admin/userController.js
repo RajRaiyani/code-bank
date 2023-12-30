@@ -39,7 +39,7 @@ exports.changeRole = async (req,res)=>{
 exports.deleteUser = async (req,res)=>{
 	try{
 
-		var userdata= await User.find({_id:req.params.id});
+		var userdata= await User.findOne({_id:req.params.id});
 		if(userdata.role==="user")
 		{
 
@@ -64,4 +64,22 @@ exports.deleteUser = async (req,res)=>{
 	}catch(error){
 		res.json({status:"X",message:"somethin went wrong while deleting User",error});
 	}
+}
+
+exports.getAllDetailsofUser = async (req,res)=>{
+
+	try{
+	var questiondata= await question.find({user_id:req.params.id});
+	var blogdata= await blog.find({user_id:req.params.id});
+	var commentdata= await comment.find({user_id:req.params.id});
+	var blogcommentdata= await blogcomment.find({user_id:req.params.id});
+	var userdata= await User.findOne({_id:req.params.id});
+		return res.json({status:"OK",data:{questiondata,blogdata,commentdata,blogcommentdata , userdata}});
+}
+	catch(error)
+	{
+		return res.json({status:"X",message:"something went wrong while fetching data",error});
+	}
+	
+
 }

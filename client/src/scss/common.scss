@@ -93,6 +93,19 @@
 	/* Other mobile-specific styles */
   }
   @media (max-width: 768px) {
+	.header-portion
+	{
+		overflow-x: auto;
+	}
+	.userProfileButton
+	{
+		display: block;
+		padding: 2;
+	}
+	.buttonwith{
+		width: 25vw;
+	}
+	
 	.mobile-only {
 	  display: block;
 	}
@@ -102,6 +115,7 @@
   }
 
   @media (min-width: 769px) {
+	
 	.mobile-only {
 	  display: none;
 	}
@@ -109,3 +123,5 @@
 	  display: block;
 	}
   }
+
+
