@@ -25,8 +25,8 @@ exports.addSolution = async (req, res) => {
 		if (! await Question.exists({ _id: question_id }))
 			return res.json({ status: "NOT_EXIST", message: "No question exists for this solution." });
 
-		if (!Validator.validate("solutionTitle", title))
-			return res.json({ status: "INVALID", message: "Solution's Title is not valid." });
+		// if (!Validator.validate("solutionTitle", title))
+		// 	return res.json({ status: "INVALID", message: "Solution's Title is not valid." });
 		if (!Validator.validateLanguage(language))
 			return res.json({ status: "INVALID", message: "Solution's Language is not valid." });
 

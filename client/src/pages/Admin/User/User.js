@@ -13,7 +13,8 @@ const User = () => {
 
 	
 
-	async function deleteData(id) {
+	async function deleteData(id , e) {
+		e.stopPropagation();
 		const confirmDelete = window.confirm('Are you sure you want to delete this user?');
 		if (confirmDelete) {
 			deleteUser(id,setMessage ,  () => { navigate("/login") });
@@ -24,7 +25,7 @@ const User = () => {
 
 
 	function PrintUser(data) {
-		return data.map((val, index) => <UserCard className="m-1 w-full gc-shadow-22" user={user} id={val._id} setUser={setUser} username={val.username} email={val.email} role={val.role} key={index} onDelete={() => { deleteData(val._id) }} />)
+		return data.map((val, index) => <UserCard admin={true} className="m-1 w-full gc-shadow-22" user={user} id={val._id} setUser={setUser} username={val.username} email={val.email} role={val.role} key={index} onNavigate={()=>{navigate("/admin/user/"+val._id)}} onDelete={(e) => { deleteData(val._id , e) }} />)
 	}
 
 	function searchUser(i)

@@ -20,11 +20,10 @@ import QuestionAddByUser from './pages/Admin/Question/QuestionPeding';
 import BlogEditor from './pages/Blog/AddBlog.js';
 import BlogHome from './pages/Blog/BlogHome.js';
 import BlogById from './pages/Blog/BlogById.js';
+import UserProfile from './pages/Admin/User/UserProfile.js';
+import UserList from './pages/UserProfile.js';
+import Users from './pages/Users.js';
 // import MarkdownEditor from './try.js';
-
-
-
-
 
 
 const AdminApp = lazy(() => import("./Layouts/AdminApp"));
@@ -47,10 +46,12 @@ const appRouter = createBrowserRouter([
       { path: "/user/question/add", element: <AddEditQuestion edit={false} role="user" /> },
       { path: "/user/question/:id", element: <QuestionByIdUser User="true" /> },
       { path: "/blog", element: <BlogHome /> },
-     
-
       { path: "/blog/add", element: <BlogEditor /> },
-      { path: "/blog/:id", element: <BlogById /> }
+      { path: "/blog/:id", element: <BlogById /> },
+      {path:"users",element:<Users/>},
+      {path:"/user/:id",element:<UserList/>},
+  { path: "/about", element: <About/>  },
+
 
 
 
@@ -62,7 +63,6 @@ const appRouter = createBrowserRouter([
   { path: "/LogIn", element: <LogIn /> },
   { path: "/SignIn", element: <SignIn /> },
   { path: "/contact", element: <Contact /> },
-  { path: "/about", element: <About/>  },
   {
     path: "/admin",
     element: <Suspense><AdminApp /></Suspense>,
@@ -70,6 +70,8 @@ const appRouter = createBrowserRouter([
       { path: "", element: <Dashboard /> },
       { path: "question", element: <Question /> },
       { path: "user", element: <User /> },
+      { path: "user/:id", element: <UserProfile /> },
+
       { path: "other", element: <Other /> },
       { path: "question/add", element: <AddEditQuestion edit={false} /> },
       { path: "question/:id", element: <QuestionById admin /> },

@@ -116,7 +116,7 @@ const QuestionById = (props) => {
 				<div className="overflow-y-auto sm:mt-8 sm:ms-10 sm:me-10 h-[50vh]">
 					{comments.map((e, index) => {
 						const date = new Date(e.date);
-						return<CommentCard admin={props.admin} username={e.user.username} className="m-2 mb-3 border-0 border-t border-s gc-border-green rounded-lg" comment={e.data} date={date.toDateString()} key={index}  style={styleForCommentCard} onDelete={()=>{deleteCommentData(e._id)}}/>
+						return<CommentCard id={e.user._id} admin={props.admin} username={e.user.username} className="m-2 mb-3 border-0 border-t border-s gc-border-green rounded-lg" comment={e.data} date={date.toDateString()} key={index}  style={styleForCommentCard} onDelete={()=>{deleteCommentData(e._id)}}/>
 							
 					})
 					}
@@ -164,7 +164,7 @@ const QuestionById = (props) => {
 			</div>
 			<div className="md:w-1/2 ">
 				<div className="flex justify-end mr-8"><Language/></div>
-			<div className="h-[79vh] w-[37vw]  mx-4 my-2 p-4 rounded overflow-auto gc-shadow-25 ">
+			<div className="h-[79vh] min-w-[37vw]  mx-4 my-2 p-4 rounded overflow-auto gc-shadow-25 ">
 				{props.admin && <SiAddthis className="gc-text-green text-3xl  hover:scale-110" onClick={()=>{navigate(`/admin/solution/${id}/add`)}} />}
 				{printSolution}</div>
 		</div>

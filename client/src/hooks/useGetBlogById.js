@@ -26,7 +26,7 @@ function useGetBlogById(id)
                }
            })
            .catch(e => console.log("error : " + e));
-   }, [id]);
+   }, [id , navigate]);
    return [data , setData];
 }
 

@@ -115,8 +115,10 @@ const QuestionByIdUser = (props) => {
 				<div className="flex items-center mt-2 "><input type="text" value={commentMessage} className="w-full border-b gc-border-black  p-2 " placeholder="Write a comment" onChange={(e) => { setcommetMessage(e.target.value) }} /><button className="gc-bg-green ms-4 text-white w-[110px] p-2 border rounded-lg hover:scale-110 duration-300" onClick={() => { sendData() }}>POST</button></div>
 				<div className="overflow-y-auto sm:mt-8 sm:ms-10 sm:me-10 h-[50vh]">
 					{comments.map((e, index) => {
+						console.log(e)
+
 						const date = new Date(e.date);
-						return<CommentCard  username={e.user.username} className="m-2 mb-3 border-0 border-t border-s gc-border-green rounded-lg" comment={e.data} date={date.toDateString()} key={index}  style={styleForCommentCard} onDelete={()=>{deleteCommentData(e._id)}}/>
+						return<CommentCard id={e ? e.user._id:null} username={e.user.username} className="m-2 mb-3 border-0 border-t border-s gc-border-green rounded-lg" comment={e.data} date={date.toDateString()} key={index}  style={styleForCommentCard} onDelete={()=>{deleteCommentData(e._id)}}/>
 							
 					})
 					}

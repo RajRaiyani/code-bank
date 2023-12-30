@@ -1,4 +1,3 @@
-import Cookies from "js-cookie";
 import { AiOutlineHeart } from "react-icons/ai"
 import { MdOutlineDeleteForever } from "react-icons/md"
 
