@@ -1,7 +1,7 @@
 import Cookies from "js-cookie";
 
 function deleteInList(list, value ,setMessage, callback ) {
-    fetch(`http://localhost:3007/api/v1/admin/list/alter/${list}/remove/${value}` , {
+    fetch(`${process.env.REACT_APP_SERVER_URL}api/v1/admin/list/alter/${list}/remove/${value}` , {
             method: "PUT",
             headers: {
                 'Content-Type': 'application/json',
@@ -27,7 +27,7 @@ function deleteInList(list, value ,setMessage, callback ) {
 
 function addInList(list, value ,setMessage, callback ) {
 
-    fetch(`http://localhost:3007/api/v1/admin/list/alter/${list}/add/${value}` , {
+    fetch(`${process.env.REACT_APP_SERVER_URL}api/v1/admin/list/alter/${list}/add/${value}` , {
         method: "PUT",
         headers: {
             'Content-Type': 'application/json',

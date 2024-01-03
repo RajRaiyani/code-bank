@@ -6,7 +6,7 @@ function useGetAllBlogs() {
   const navigate=useNavigate();
 
      useEffect(() => {
-    fetch(`http://localhost:3007/api/v2/blog/AllBlog`, {
+    fetch(`${process.env.REACT_APP_SERVER_URL}api/v2/blog/AllBlog`, {
         method: "GET",
         headers: {
             'Content-Type': 'application/json',

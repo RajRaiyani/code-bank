@@ -19,7 +19,7 @@ function addBlog(title, data , setMessage , callback)
     }
     
 
-    fetch(`http://localhost:3007/api/v2/blog/add` , {
+    fetch(`${process.env.REACT_APP_SERVER_URL}api/v2/blog/add` , {
         method: "POST",
         headers: {
             'Content-Type': 'application/json',

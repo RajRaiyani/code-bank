@@ -2,7 +2,7 @@ import Cookies from "js-cookie";
 
 async function searchQuestion(data ,setData,callback)
 {
-    await fetch(`http://localhost:3007/api/v1/home/question?search=${encodeURIComponent(data)}`, {
+    await fetch(`${process.env.REACT_APP_SERVER_URL}api/v1/home/question?search=${encodeURIComponent(data)}`, {
         method: "GET",
         headers: {
             'Content-Type': 'application/json',

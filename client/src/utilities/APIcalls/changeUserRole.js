@@ -1,7 +1,7 @@
 import Cookies from "js-cookie";
 async function changeUserRole(id,newrole,callback)
 {
-    await fetch("http://localhost:3007/api/v1/admin/user/" + id + "/changeRole", {
+    await fetch(`${process.env.REACT_APP_SERVER_URL}api/v1/admin/user/` + id + "/changeRole", {
         method: "PUT",
         headers: {
             'Content-Type': 'application/json',

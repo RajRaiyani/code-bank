@@ -1,7 +1,7 @@
 import Cookies from 'js-cookie';
 function addQuestionByUser(data,setMessage, callback,callback2)
 {
-    fetch("http://localhost:3007/api/v2/user/addQuestion", {
+    fetch(`${process.env.REACT_APP_SERVER_URL}api/v2/user/addQuestion`, {
 			method: "POST",
 			headers: {
 				'Content-Type': 'application/json',

@@ -5,7 +5,7 @@ function useGetAllLanguages() {
     const navigate=useNavigate()
   const [arrayValues, setArrayValues] = useState([]);
      useEffect(() => {
-    fetch("http://localhost:3007/api/v1/home/list/get/language", {
+    fetch(`${process.env.REACT_APP_SERVER_URL}api/v1/home/list/get/language`, {
         method: "GET",
         headers: {
             'Content-Type': 'application/json',
