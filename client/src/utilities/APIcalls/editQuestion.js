@@ -2,7 +2,7 @@ import Cookies from 'js-cookie';
 
 function editQuestion(data , setMessage,callback,callback2){
 
-    fetch("http://localhost:3007/api/v1/admin/question/edit", {
+    fetch(`${process.env.REACT_APP_SERVER_URL}api/v1/admin/question/edit`, {
 			method: "PUT",
 			headers: {
 				'Content-Type': 'application/json',

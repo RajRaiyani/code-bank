@@ -7,7 +7,7 @@ function useGetBlogById(id)
     const [data , setData]=useState({});
     const navigate=useNavigate();
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_SERVER_URL}/api/v2/blog/`+id, {
+        fetch(`${process.env.REACT_APP_SERVER_URL}api/v2/blog/`+id, {
            method: "GET",
            headers: {
                'Content-Type': 'application/json',

@@ -1,7 +1,7 @@
 import Cookies from 'js-cookie';
 function updateQuesionisAccepted(id,setMessage, callback)
 {
-    fetch("http://localhost:3007/api/v2/admin/changeisAccepted", {
+    fetch(`${process.env.REACT_APP_SERVER_URL}api/v2/admin/changeisAccepted`, {
 			method: "PUT",
 			headers: {
 				'Content-Type': 'application/json',

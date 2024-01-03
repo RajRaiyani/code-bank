@@ -4,7 +4,7 @@ async function postComment(id, comment, callback)
 {
 
     var response ;
-    await fetch("http://localhost:3007/api/v1/home/question/" + id + "/comment", {
+    await fetch(`${process.env.REACT_APP_SERVER_URL}api/v1/home/question/` + id + "/comment", {
         method: "POST",
         headers: {
             'Content-Type': 'application/json',

@@ -7,7 +7,7 @@ function useGetAlldataByUser(id)
     const [data, setData] = useState({}); 
     const navigate=useNavigate();
     useEffect(() => {
-		fetch("http://localhost:3007/api/v2/user/userdeatails/"+id, {
+		fetch(`${process.env.REACT_APP_SERVER_URL}api/v2/user/userdeatails/`+id, {
 			method: "GET",
 			headers: {
 				'Content-Type': 'application/json',

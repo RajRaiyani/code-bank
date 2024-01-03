@@ -12,7 +12,7 @@ const useGetQuestionDataById = (id,disable)=>{
     useEffect(()=>{
        
         if(!disable){
-            fetch(`${process.env.REACT_APP_SERVER_URL}/api/v1/home/question/` + id, {
+            fetch(`${process.env.REACT_APP_SERVER_URL}api/v1/home/question/` + id, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",

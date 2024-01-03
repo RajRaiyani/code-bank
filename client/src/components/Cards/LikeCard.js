@@ -26,7 +26,7 @@ function LikeCard(props) {
         else {
             setnolike(nolike + 1);
         }
-        fetch("http://localhost:3007/api/v1/home/question/" + id + "/like", {
+        fetch(`${process.env.REACT_APP_SERVER_URL}api/v1/home/question/` + id + "/like", {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -58,7 +58,7 @@ function LikeCard(props) {
         else {
             setnolike(nolike + 1);
         }
-        fetch("http://localhost:3007/api/v2/blog/like/" + id , {
+        fetch(`${process.env.REACT_APP_SERVER_URL}api/v2/blog/like/` + id , {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

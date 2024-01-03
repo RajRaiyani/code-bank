@@ -32,7 +32,7 @@ const SignIn = () => {
 		}
 		else
 		 {
-		  fetch("http://localhost:3007/api/v1/authentication/SignIn", {
+		  fetch(`${process.env.REACT_APP_SERVER_URL}api/v1/authentication/SignIn`, {
 			method: "POST",
 			headers: {
 			  "Content-Type": "application/json",

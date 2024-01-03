@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 	const navigate=useNavigate();
 
 	 useEffect(() => {
-		 fetch(`${process.env.REACT_APP_SERVER_URL}/api/v1/home/question`, {
+		 fetch(`${process.env.REACT_APP_SERVER_URL}api/v1/home/question`, {
 			method: "GET",
 			headers: {
 				'Content-Type': 'application/json',

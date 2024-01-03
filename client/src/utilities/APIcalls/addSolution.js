@@ -2,7 +2,7 @@ import Cookies from "js-cookie";
 
 async function addSolution(data ,setMessage , callbackforok , callbackforexpire )
 	{
-	await	fetch("http://localhost:3007/api/v1/admin/solution/add", {
+	await	fetch(`${process.env.REACT_APP_SERVER_URL}api/v1/admin/solution/add`, {
 			method: "POST",
 			headers: {
 				'Content-Type': 'application/json',

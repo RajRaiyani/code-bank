@@ -1,7 +1,7 @@
 import Cookies from "js-cookie";
 
 async function deleteBlogByid(id , callback) {
-  await  fetch("http://localhost:3007/api/v2/blog/delete/", {
+  await  fetch(`${process.env.REACT_APP_SERVER_URL}api/v2/blog/delete/`, {
       method: "DELETE",
       headers: {
         'Content-Type': 'application/json',

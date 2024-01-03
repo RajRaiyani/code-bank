@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 async function postBlogComment(id, comment, callback)
 {
     var responce;
-    await fetch("http://localhost:3007/api/v2/blog/addcomment/" + id , {
+    await fetch(`${process.env.REACT_APP_SERVER_URL}api/v2/blog/addcomment/` + id , {
         method: "POST",
         headers: {
             'Content-Type': 'application/json',

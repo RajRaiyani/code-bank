@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 async function editSolution(data,setMessage,callback,callback2)
 {
     
-        fetch("http://localhost:3007/api/v1/admin/solution/edit", {
+        fetch( `${process.env.REACT_APP_SERVER_URL}api/v1/admin/solution/edit`, {
                 method: "PUT",
                 headers: {
                     'Content-Type': 'application/json',

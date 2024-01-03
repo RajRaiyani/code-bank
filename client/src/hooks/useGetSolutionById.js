@@ -11,7 +11,7 @@ const useGetSolutionById = (id,disable)=>{
     useEffect(()=>{
        
         if(!disable){
-            fetch(`${process.env.REACT_APP_SERVER_URL}/api/v1/home/solution/` + id, {
+            fetch(`${process.env.REACT_APP_SERVER_URL}api/v1/home/solution/` + id, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",

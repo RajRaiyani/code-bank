@@ -8,7 +8,7 @@ const LogIn = () => {
   var navigate = useNavigate();
 	function login(e){
 		e.preventDefault();
-		fetch("http://localhost:3007/api/v1/authentication/LogIn", {
+		fetch(`${process.env.REACT_APP_SERVER_URL}api/v1/authentication/LogIn`, {
 		  method: "POST",
 		  headers: {
 			"Content-Type": "application/json",
