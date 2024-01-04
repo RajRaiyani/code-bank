@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 	const [getAllData, setAllData] = useState([]);
     const navigate=useNavigate()
 	 useEffect(() => {
-		 fetch(`${process.env.REACT_APP_SERVER_URL}/api/v2/admin/pendingQuestion`, {
+		 fetch(`${process.env.REACT_APP_SERVER_URL}api/v2/admin/pendingQuestion`, {
 			method: "GET",
 			headers: {
 				'Content-Type': 'application/json',
