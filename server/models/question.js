@@ -30,11 +30,19 @@ const schema = new mongoose.Schema({
 		type:mongoose.Schema.Types.ObjectId,
 		ref:"user"
 	},
+	isDeleted:{
+		type:Boolean,
+		default:false
+	},
+	updateDBy:{
+		type: mongoose.Schema.Types.ObjectId,
+		ref:"user"
+	},
 	date:{
 		type : Date,
 		require : true,
 		default : Date.now
 	}
-})
+} ,{ timestamps: true })
 
 module.exports = mongoose.model("question",schema);

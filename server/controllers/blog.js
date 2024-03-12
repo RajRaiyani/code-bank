@@ -23,7 +23,7 @@ exports.postBlog=async (req,res)=>{
 }
 
 exports.getAllBlog=async (req,res)=>{
-    var data=await blog.find().populate("user_id");
+    var data=await blog.find({ isDeleted: false }).populate("user_id");
  
     try{
         if(!data)
@@ -63,12 +63,14 @@ exports.deleteBlog=async (req,res)=>{
     var {blog_id}=req.body;
     var data;
     try{
-        data=await blog.deleteOne({_id:blog_id});
-        await bloglike.deleteMany({blog_id:blog_id});
-        await blogcomment.deleteMany({blog_id:blog_id});
+        data = await blog.findByIdAndUpdate(blog_id, {isDeleted:true , deletedBy:req.user_id} );
+        // console.log(data);
+        // data=await blog.deleteOne({_id:blog_id});
+        // await bloglike.deleteMany({blog_id:blog_id});
+        // await blogcomment.deleteMany({blog_id:blog_id});
         
     }
-    catch{
+    catch(error){
         return res.json({ status: "X", message: "something went wrong while deleting Blog.", error })
         
     }
@@ -147,7 +149,7 @@ var comment_id = req.body.comment_id;
 	if (!comment_id) return res.json({ status: "MISSING_FIELD", message: "all fileds are required." });
 
 	try {
-		var data = await blogcomment.findOneAndRemove({ _id: comment_id });
+		var data = await blogcomment.findOneAndRemove({ _id: comment_id  });
 	} catch (error) {
 		return res.json({ status: "X", message: "something went wront while deleting comment.", error });
 	}

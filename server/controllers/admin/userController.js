@@ -26,10 +26,14 @@ exports.changeRole = async (req,res)=>{
 	try{
 		var data = await User.findOne({_id:req.params.id});
 		var {newrole}=req.body;
-		data.role=newrole;
-		await data.save();
+
+		var data = await User.findByIdAndUpdate(req.params.id , {updateDBy:req.params.id , role:newrole});
+
+		// data.updateDBy=req.user._id;
 		res.json({status:"OK",data});
+
 	}catch(error){
+
 		res.json({status:"X",message:"somethin went wrong while changing User's role",error});
 	}
 }
@@ -43,7 +47,8 @@ exports.deleteUser = async (req,res)=>{
 		if(userdata.role==="user")
 		{
 
-		var data = await User.findOneAndRemove({_id:req.params.id});
+		// var data = await User.findOneAndRemove({_id:req.params.id});
+		var data = await User.findByIdAndUpdate(req.params.id , {updateDBy:req.params.id , isDeleted:true});
 		 await question.deleteMany({user_id:req.params.id});
 		 await blog.deleteMany({user_id:req.params.id});
 		 await comment.deleteMany({user_id:req.params.id});

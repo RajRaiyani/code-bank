@@ -11,10 +11,18 @@ const schema = new mongoose.Schema({
 		type:String,
 		required:[true,"Title of solution is required."]
 	},
+	isDeleted:{
+		type:Boolean,
+		default:false
+	},
+	updateDBy:{
+		type: mongoose.Schema.Types.ObjectId,
+		ref:"user"
+	},
 	code:{
 		type:String,
 		required:[true,"code is required."]
 	}
-})
+} , { timestamps: true })
 
 module.exports = mongoose.model("solution",schema);

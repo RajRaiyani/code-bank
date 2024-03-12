@@ -16,8 +16,16 @@ const schema = new mongoose.Schema({
 	role:{
 		type:String,
 		default:"user"
+	},
+	updateDBy:{
+		type: mongoose.Schema.Types.ObjectId,
+		ref:"user"
+	},
+	isDeleted:{
+		type:Boolean,
+		default:false
 	}
-})
+} , { timestamps: true })
 
 schema.pre("save", async function(next){
 	if (!this.isModified("password")) {

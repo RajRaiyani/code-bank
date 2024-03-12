@@ -43,7 +43,8 @@ exports.deleteSolution = async (req, res) => {
 	if (!solution_id) return res.json({ status: "MISSING", message: "solution_id is missing." });
 
 	try {
-		await Solution.deleteOne({ _id: solution_id });
+		// await Solution.deleteOne({ _id: solution_id });
+		await Solution.findByIdAndUpdate(solution_id, { isDeleted: true , updateDBy:req.user_id });
 
 		res.json({ status: "OK" })
 
@@ -79,6 +80,7 @@ exports.editSolution = async (req, res) => {
 
 	try {
 		await data.save();
+		await Solution.findByIdAndUpdate(solution_id, { updateDBy:req.user_id });
 		res.json({ status: "OK" });
 	} catch (error) {
 		res.json({ status: "X", message: "something went wrong while updating solution (2)", error });

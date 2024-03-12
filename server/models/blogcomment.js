@@ -12,6 +12,6 @@ const schema = new mongoose.Schema({
 		require : true,
 		default : Date.now
 	}
-})
+});
 
 module.exports = mongoose.model("blogcomment",schema);
