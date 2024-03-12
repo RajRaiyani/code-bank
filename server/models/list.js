@@ -6,6 +6,6 @@ const schema = new mongoose.Schema({
 		unique:true	
 	},
 	list:[String],
-})
+}, { timestamps: true })
 
 module.exports = mongoose.model("list",schema);

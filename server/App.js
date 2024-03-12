@@ -1,19 +1,13 @@
-
 // Configuration
 require("dotenv").config();
+
 const Storage = require("./utility/memory/storage");
+
 require("./config/database").connect(async ()=>await Storage.reloade());
-
-
-
-
-
-
 
 // Main Imports
 const express = require("express");
 const cors = require("cors");
-
 
 const app = express();
 app.use(cors());
@@ -28,19 +22,15 @@ const test = require("./routes/test");
 const user=require("./routes/user");
 const blog=require("./routes/blog");
 
-
 app.use("/api/v1/home", home);
 app.use("/api/v1/authentication", authentication);
 app.use("/api/v1/admin", admin);
 app.use("/api/v1/test", test);
 
-
 // -----------------------version 2 ------------------
 app.use("/api/v2/user",user);
 app.use("/api/v2/admin",admin);
 app.use("/api/v2/blog",blog);
-
-
 
 module.exports = app;
 

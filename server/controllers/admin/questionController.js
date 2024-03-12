@@ -49,7 +49,7 @@ exports.addQuestion = async (req, res) => {
 	}
 
 	try {
-		var data = await Question.create({ number, title, question, categories, level ,isAccpeted:true ,user_id});
+		var data = await Question.create({ number, title, question, categories, level ,isAccpeted:true ,user_id });
 		for (let sol of solutions) {
 			let { language, title, code } = sol;
 			await Solution.create({ question_id: data._id, language, title, code });
@@ -71,11 +71,15 @@ exports.deleteQuestion = async (req, res) => {
 		return res.json({ status: "MISSING_FIELD", message: "Question ID is required." });
 
 	try {
-		await Solution.deleteMany({ question_id });
-		await Question.deleteOne({ _id: question_id });
-		await Like.deleteMany({question_id:question_id})
-		res.json({ status: "OK" });
-		Storage.lastQuestionNumber--;
+		await Solution.findByIdAndUpdate({ question_id }, { isDeleted: true , updateDBy:req.user_id });
+		await Question.findByIdAndUpdate({ _id: question_id }, { isDeleted: true , updateDBy:req.user_id }); 
+
+		// await Solution.deleteMany({ question_id });
+		// await Question.deleteOne({ _id: question_id });
+		// await Comment.deleteMany({ question_id: question_id });
+		// await Like.deleteMany({question_id:question_id})
+		// res.json({ status: "OK" });
+		// Storage.lastQuestionNumber--;
 
 	} catch (error) {
 		return res.json({ status: "X", message: "something went wrong while deleting question.", error });
@@ -133,6 +137,7 @@ exports.editQuestion = async (req, res) => {
 		}
 
 		await data.save();
+		await Question.findByIdAndUpdate({ _id: question_id }, { updateDBy:req.user_id });
 
 		res.json({ status: "OK", data });
 	} catch (error) {
@@ -165,6 +170,7 @@ exports.approveorpendingQuestion=async(req,res)=>{
 		var data= await question.findById({_id:id});
 		data.isAccpeted=!data.isAccpeted;
 		data.save();
+		// await question.findByIdAndUpdate({_id:id},{updateDBy:req.user_id});
 	}
 	catch(error)
 	{

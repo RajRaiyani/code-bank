@@ -15,7 +15,15 @@ const schema = new mongoose.Schema({
 		type : Date,
 		require : true,
 		default : Date.now
+	},
+	isDeleted:{
+		type:Boolean,
+		default:false
+	},
+	deletedBy:{
+		type: mongoose.Schema.Types.ObjectId,
+		ref:"user"
 	}
-})
+},{ timestamps: true })
 
 module.exports = mongoose.model("blog",schema);
