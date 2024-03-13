@@ -95,7 +95,7 @@ const Home = () => {
 						<button className="gc-bg-green p-1 rounded-md h-full hover:scale-90 duration-200"><FiSearch className="text-lg text-white font-extrabold" onClick={() => { searchData() }} /></button>
 					</div>
 					<div>
-						<Link to="/admin/questionRequest"><span className="px-2 py-2 border rounded-lg text-white gc-bg-green hover:text-lg">pedning</span></Link>
+						<Link to="/admin/questionRequest"><span className="px-2 py-2 border rounded-lg text-white gc-bg-green hover:text-lg">pending</span></Link>
 					</div>
 
 					<SiAddthis className="gc-text-green text-3xl hover:scale-110" onClick={()=>navigate("/admin/question/add")} />

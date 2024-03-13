@@ -11,7 +11,7 @@ router.route("/question/:id/like").put(isLoggedIn,likeQuestion);
 router.route("/question/:id/comment").post(isLoggedIn,commentOnQuestion);
 
 router.route("/solution/:id").get(isLoggedIn,getSolutionById);
-
+// console.log("hitt")
 router.route("/user").get(isLoggedIn,getAllUsers);
 
 router.route("/list/get/").get(getAllLists);

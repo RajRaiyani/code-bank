@@ -9,8 +9,9 @@ const useGetSolutionById = (id,disable)=>{
     const navigate = useNavigate();
 
     useEffect(()=>{
-       
-        if(!disable){
+    console.log("hiit")
+
+        if(disable){
             fetch(`${process.env.REACT_APP_SERVER_URL}api/v1/home/solution/` + id, {
                 method: "GET",
                 headers: {
@@ -20,6 +21,7 @@ const useGetSolutionById = (id,disable)=>{
             })
                 .then((res) => res.json())
                 .then((res) => {
+                    console.log(res);
                     if (res.status === "OK") {
                         setData(res.data);
                     } else if (res.status === "EXPIRED_TOKEN") {

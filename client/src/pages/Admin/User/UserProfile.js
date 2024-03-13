@@ -192,7 +192,7 @@ function UserProfile() {
                 null}
                 <div className="flex justify-between m-10 mb-2">
                     <div className="gc-bg-green px-2 py-2 text-white border rounded-lg min-w-[6vw] text-center"><button onClick={questionState}>Questions</button></div>
-                    <div className="gc-bg-green px-2 py-2 text-white border rounded-lg min-w-[6vw] text-center"><button onClick={commentState}>Comments</button></div>
+                    <div className="gc-bg-green px-2 py-2 text-white border rounded-lg min-w-[6vw] text-center"><button onClick={commentState}>Question's Comments</button></div>
                     <div className="gc-bg-green px-2 py-2 text-white border rounded-lg min-w-[6vw] text-center"><button onClick={blogState}>Blogs</button></div>
                     <div className="gc-bg-green px-2 py-2 text-white border rounded-lg min-w-[6vw] text-center"><button onClick={blogcommentState}>BlogCommets</button></div>
 

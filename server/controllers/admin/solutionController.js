@@ -6,7 +6,6 @@ const Storage = require("./../../utility/memory/storage");
 
 exports.getSolutionById = async (req, res) => {
 	var { id } = req.params;
-
 	try {
 		var data = await Solution.findOne({ _id: id });
 		res.json({ status: "OK", data });

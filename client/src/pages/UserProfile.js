@@ -16,6 +16,8 @@ const styleForCommentCard={
 
 function UserProfile() {
     const { id } = useParams();
+    const navigate=useNavigate();
+
 
     const [data] = useGetAlldataByUser(id);
     const [question , setQuestion]=useState(true);
@@ -23,7 +25,6 @@ function UserProfile() {
     const [blog , setBlog]=useState(false);
     const [blogcomment , setBlogcomment]=useState(false);
 
-    const navigate=useNavigate();
 
 
      function questionState(){
@@ -136,7 +137,7 @@ function UserProfile() {
                 null}
                 <div className="userProfileButton flex justify-between m-10 mb-2">
                     <div className="buttonwith gc-bg-green px-2 py-2 text-white border rounded-lg w-[10vw] text-center"><button onClick={questionState}>Questions</button></div>
-                    <div className="buttonwith gc-bg-green px-2 py-2 text-white border rounded-lg w-[10vw] text-center"><button onClick={commentState}>Comments</button></div>
+                    <div className="buttonwith gc-bg-green px-2 py-2 text-white border rounded-lg w-[10vw] text-center"><button onClick={commentState}>Question's Comments</button></div>
                     <div className="buttonwith gc-bg-green px-2 py-2 text-white border rounded-lg w-[10vw] text-center"><button onClick={blogState}>Blogs</button></div>
                     <div className="buttonwith gc-bg-green px-2 py-2 text-white border rounded-lg w-[10vw] text-center"><button onClick={blogcommentState}>BlogCommets</button></div>
 

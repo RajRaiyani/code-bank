@@ -118,7 +118,7 @@ const AddEditQuestion = (props) => {
 						<select className="m-1" {...register("level")}>
 							<option disabled>Level</option>
 							<option value="easy">Easy</option>
-							<option value="medium">Midium</option>
+							<option value="medium">Medium</option>
 							<option value="hard">Hard</option>
 						</select>
 					</div>
