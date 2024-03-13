@@ -23,6 +23,7 @@ import BlogById from './pages/Blog/BlogById.js';
 import UserProfile from './pages/Admin/User/UserProfile.js';
 import UserList from './pages/UserProfile.js';
 import Users from './pages/Users.js';
+import History from './pages/History/History.js';
 // import MarkdownEditor from './try.js';
 
 
@@ -77,10 +78,12 @@ const appRouter = createBrowserRouter([
       { path: "question/:id", element: <QuestionById admin /> },
       { path: "question/:id/edit", element: <AddEditQuestion edit /> },
       { path: "solution/:id/add", element: <AddEditSolution edit={false} /> },
-      { path: "solution/:id/edit", element: <AddEditSolution edit /> },
+      { path: "solution/:id/edit", element: <AddEditSolution edit={true} /> },
       { path: "questionRequest", element: <QuestionAddByUser /> },
       { path: "blog", element: <BlogHome admin={true}/> },
-      { path: "blog/:id", element: <BlogById admin={true}/> }
+      { path: "blog/:id", element: <BlogById admin={true}/> },
+      { path: "history", element: <History /> }
+
 
 
     ]

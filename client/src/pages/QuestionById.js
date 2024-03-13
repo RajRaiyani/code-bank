@@ -28,6 +28,8 @@ const QuestionById = (props) => {
 	const [filltersol , setFillersol]=useState([]);
 	const [seleclanguae , setselectlangugae]=useState("");
 
+	const navigate = useNavigate();
+
 	useEffect(()=>{
 		
 		setFillersol([...solution]);
@@ -35,7 +37,10 @@ const QuestionById = (props) => {
 		{
 			setFillersol(pri=>[...pri.filter((e1)=>{return e1.language===seleclanguae})]);
 		}
-		
+		if(data.isAccpeted===false && props.admin ===false)
+		{
+			navigate("/");
+		}
 	},[seleclanguae,solution])
 
 	useEffect(()=>{
@@ -47,7 +52,6 @@ const QuestionById = (props) => {
 		setlanguage(Array.from(languageSet))
 		setselectlangugae(solution.length ? solution[0].language : "")
 	},[data , solution])
-	const navigate = useNavigate();
 
 	async function deleteSolu (id) {
 		if(solution.length===1)
@@ -63,6 +67,7 @@ const QuestionById = (props) => {
 		await deleteSolution(id, ()=>{navigate("/login")});
 		let temp = {...data}
 		temp.solutions= data.solutions.filter((e)=>e._id!==id)
+		console.log(temp);
 		setData(temp);
 		}
 	}
@@ -146,8 +151,8 @@ const QuestionById = (props) => {
 	const [isLiked , setIsLiked]=useState(data.isLiked)
 	return (<>
 		<div className="md:flex my-2">
-			<div className="md:w-1/2 mx-4 my-2 p-2 rounded h-[85vh]">
-				<button className={`btn rounded-l-lg  p-2 text-white ${togal === true ? "bg-[#7cc529] border gc-border-green" : " gc-text-black hover:bg-[#7cc529] hover:text-white border gc-border-green   "} `} onClick={() => { settogal(true) }}>Discription</button>
+			<div className="md:w-1/2 mx-4 my-2 p-2 rounded min-h-fit">
+				<button className={`btn rounded-l-lg  p-2 text-white ${togal === true ? "bg-[#7cc529] border gc-border-green" : " gc-text-black hover:bg-[#7cc529] hover:text-white border gc-border-green   "} `} onClick={() => { settogal(true) }}>Description</button>
 				<button className={`btn rounded-r-lg  p-2 ms-1 text-white ${togal === false ? "bg-[#7cc529] border gc-border-green" : "gc-text-black hover:bg-[#7cc529] hover:text-white border gc-border-green "} `} onClick={() => { settogal(false) }}>Comments</button>
 				<div className="mt-4">
 					<span className=" text-2xl font-bold">{data.number}</span>

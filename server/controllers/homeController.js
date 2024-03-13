@@ -21,9 +21,11 @@ exports.getAllQuestions = async (req, res) => {
 		if (search && search.length>0)
 			var data = await searchQuestions(decodeURIComponent(search));
 		else
-			var data = await Question.find({isAccpeted:true}).sort({ number: 1 });
+			var data = await Question.find({$and:[{isDeleted:false} ,{isAccpeted:true }]}).sort({ number: 1 });
 
 	} catch (error) {
+		console.log(error);
+
 		return res.json({ status: "X", message: "something went wrong." })
 	}
 
@@ -35,10 +37,10 @@ exports.getAllQuestions = async (req, res) => {
 
 exports.getOneQuestion = async (req, res) => {
 	try {
-		var data = await Question.findOne({ _id: req.params.id }, {});
+		var data = await Question.findOne({ _id: req.params.id }, { isDeleted: false});
 		if (!data) return res.json({ status: "NOT_EXIST", message: "question does not exist." });
 
-		var solutions = await Solution.find({ question_id: req.params.id }, { question_id: 0 });
+		var solutions = await Solution.find({ question_id: req.params.id  }, { question_id: 0  , isDeleted:false});
 		var comments = (await Comment.find({ question_id: req.params.id }).populate({ path: "user_id", select: "_id username" }));
 		comments = comments.map(element => {
 			element = element._doc;

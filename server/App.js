@@ -21,6 +21,7 @@ const home = require("./routes/home");
 const test = require("./routes/test");
 const user=require("./routes/user");
 const blog=require("./routes/blog");
+const history=require("./routes/history");
 
 app.use("/api/v1/home", home);
 app.use("/api/v1/authentication", authentication);
@@ -31,6 +32,8 @@ app.use("/api/v1/test", test);
 app.use("/api/v2/user",user);
 app.use("/api/v2/admin",admin);
 app.use("/api/v2/blog",blog);
+app.use("/api/v2/history",history);
+
 
 module.exports = app;
 

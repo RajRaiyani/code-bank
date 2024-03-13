@@ -10,7 +10,8 @@ const AddEditSolution = (props) => {
   const { id } = useParams();
   const navigate = useNavigate();
   var [languages] = useGetAllLanguages();
-  var [data, setData] = useGetSolutionById(id, !props.edit);
+  var [data, setData] = useGetSolutionById(id, props.edit);
+  // console.log(data)
   var [message, setMessage] = useState("");
   function Languages() {
     return languages.map(e => (
@@ -46,7 +47,7 @@ const AddEditSolution = (props) => {
             className="form-control mb-3"
             type="text"
             name="title"
-            value={data !== undefined ? data.title : ""}
+            value={data ? data.title : ""}
 
             placeholder="brute force approach"
             onChange={handleChange}

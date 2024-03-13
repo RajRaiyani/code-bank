@@ -3,6 +3,7 @@ import {RxDashboard} from "react-icons/rx";
 import {FaQuestion} from "react-icons/fa";
 import {HiOutlineUserCircle} from "react-icons/hi";
 import { IoMdPaper } from 'react-icons/io';
+import { FaHistory } from 'react-icons/fa';
 
 import {GrApps} from "react-icons/gr";
 
@@ -21,7 +22,7 @@ const AdminSidebar = (props)=>{
     <div className="h-full p-2 py-5 flex flex-col justify-between items-center gc-shadow-25 min-w-[300px] w-1/4">
       <div className="w-[70%]">
         <Link to="/admin" style={buttonStyle} className={commonClass}>
-          <RxDashboard />&nbsp;&nbsp;DashBoard
+          <RxDashboard />&nbsp;&nbsp;Dashboard
         </Link>
         <Link to="/admin/question" style={buttonStyle} className={commonClass}>
           <FaQuestion />&nbsp;&nbsp;Question
@@ -31,6 +32,9 @@ const AdminSidebar = (props)=>{
         </Link>
         <Link to="/admin/blog" style={buttonStyle} className={commonClass}>
           <IoMdPaper className="text-3xl" />&nbsp;&nbsp;Blog
+        </Link>
+        <Link to="/admin/history" style={buttonStyle} className={commonClass}>
+          <FaHistory className="text-3xl" />&nbsp;&nbsp;History
         </Link>
         <Link to="/admin/other" style={buttonStyle} className={commonClass}>
           <GrApps className="text-2xl" />

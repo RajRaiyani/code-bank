@@ -71,17 +71,18 @@ exports.deleteQuestion = async (req, res) => {
 		return res.json({ status: "MISSING_FIELD", message: "Question ID is required." });
 
 	try {
-		await Solution.findByIdAndUpdate({ question_id }, { isDeleted: true , updateDBy:req.user_id });
-		await Question.findByIdAndUpdate({ _id: question_id }, { isDeleted: true , updateDBy:req.user_id }); 
+		// await Solution.findByIdAndUpdate({ question_id }, { isDeleted: true , updateDBy:req.user_id });
+		await Question.updateOne({ _id: question_id }, { isDeleted: true , updateDBy:req.user_id }); 
 
 		// await Solution.deleteMany({ question_id });
 		// await Question.deleteOne({ _id: question_id });
 		// await Comment.deleteMany({ question_id: question_id });
 		// await Like.deleteMany({question_id:question_id})
-		// res.json({ status: "OK" });
+		res.json({ status: "OK" });
 		// Storage.lastQuestionNumber--;
 
 	} catch (error) {
+		console.log(error);
 		return res.json({ status: "X", message: "something went wrong while deleting question.", error });
 	}
 }

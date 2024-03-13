@@ -6,6 +6,7 @@ const User = require("./../../models/user");
 const blogcomment = require("../../models/blogcomment");
 const bloglike = require("../../models/bloglike");
 const like=require("../../models/like");
+const { use } = require("../../routes/history");
 
 
 // ===================================================
@@ -13,7 +14,9 @@ const like=require("../../models/like");
 exports.getOneUser = async (req,res)=>{
 
 	try{
-		var data = await User.findOne({_id:req.params.id});
+		var data = await User.findOne({ _id:req.params.id , isDeleted:false});
+		console.log(data);
+
 		res.json({status:"OK",data});
 	}catch(error){
 		res.json({status:"X",message:"somethin went wrong while fetching one user",error});
@@ -49,12 +52,12 @@ exports.deleteUser = async (req,res)=>{
 
 		// var data = await User.findOneAndRemove({_id:req.params.id});
 		var data = await User.findByIdAndUpdate(req.params.id , {updateDBy:req.params.id , isDeleted:true});
-		 await question.deleteMany({user_id:req.params.id});
-		 await blog.deleteMany({user_id:req.params.id});
-		 await comment.deleteMany({user_id:req.params.id});
-		 await blogcomment.deleteMany({user_id:req.params.id});
-		 await bloglike.deleteMany({user_id:req.params.id});
-		 await like.deleteMany({user_id:req.params.id});
+		//  await question.Many({user_id:req.params.id});
+		//  await blog.deleteMany({user_id:req.params.id});
+		//  await comment.deleteMany({user_id:req.params.id});
+		//  await blogcomment.deleteMany({user_id:req.params.id});
+		//  await bloglike.deleteMany({user_id:req.params.id});
+		//  await like.deleteMany({user_id:req.params.id});
 		}
 		else
 		{
@@ -74,12 +77,23 @@ exports.deleteUser = async (req,res)=>{
 exports.getAllDetailsofUser = async (req,res)=>{
 
 	try{
-	var questiondata= await question.find({user_id:req.params.id});
-	var blogdata= await blog.find({user_id:req.params.id});
-	var commentdata= await comment.find({user_id:req.params.id});
-	var blogcommentdata= await blogcomment.find({user_id:req.params.id});
-	var userdata= await User.findOne({_id:req.params.id});
-		return res.json({status:"OK",data:{questiondata,blogdata,commentdata,blogcommentdata , userdata}});
+	var userdata= await User.findOne({_id:req.params.id , isDeleted:false});
+
+		if(userdata)
+		{
+			var questiondata= await question.find({user_id:req.params.id });
+			var blogdata= await blog.find({user_id:req.params.id});
+			var commentdata= await comment.find({user_id:req.params.id});
+			var blogcommentdata= await blogcomment.find({user_id:req.params.id});
+				return res.json({status:"OK",data:{questiondata,blogdata,commentdata,blogcommentdata , userdata}});
+		}
+		else{
+			return res.json({status:"NOT_EXIST",message:"User does not exist."});
+		
+		}
+
+
+	
 }
 	catch(error)
 	{
