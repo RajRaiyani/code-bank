@@ -1,5 +1,7 @@
 const app = require("./App");
-
+app.get('/',async(req,res)=>{
+    res.json('server is running');
+});
 app.listen(process.env.SERVER_PORT,()=>{
 	console.log("\n------------------START-----------------------\n",)
 	console.log(
