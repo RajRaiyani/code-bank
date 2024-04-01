@@ -30,7 +30,7 @@ exports.changeRole = async (req,res)=>{
 		var data = await User.findOne({_id:req.params.id});
 		var {newrole}=req.body;
 
-		var data = await User.findByIdAndUpdate(req.params.id , {updateDBy:req.params.id , role:newrole});
+		var data = await User.findByIdAndUpdate(req.params.id , {updateDBy:req.user_id , role:newrole});
 
 		// data.updateDBy=req.user._id;
 		res.json({status:"OK",data});
@@ -51,7 +51,7 @@ exports.deleteUser = async (req,res)=>{
 		{
 
 		// var data = await User.findOneAndRemove({_id:req.params.id});
-		var data = await User.findByIdAndUpdate(req.params.id , {updateDBy:req.params.id , isDeleted:true});
+		var data = await User.findByIdAndUpdate(req.params.id , {updateDBy:req.user_id , isDeleted:true});
 		//  await question.Many({user_id:req.params.id});
 		//  await blog.deleteMany({user_id:req.params.id});
 		//  await comment.deleteMany({user_id:req.params.id});
