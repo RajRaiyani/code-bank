@@ -1,6 +1,5 @@
-
 import { marked } from 'marked';
-
+import { BiCopy } from "react-icons/bi";
 import useGetBlogById from "../../hooks/useGetBlogById";
 import LikeCard from "../../components/Cards/LikeCard";
 import { useNavigate, useParams } from "react-router-dom";
@@ -79,6 +78,7 @@ function BlogById(props) {
                                 {databyid.data !== undefined ? databyid.data.title : null}</div>
                             {databyid.data !== undefined ?
                                 <div className="m-2 mx-auto p-3 shadow-lg bg-gray-100 min-h-[20vh] max-h-[67vh] overflow-auto w-[65vw]">
+                                    <div className="flex justify-end mr-2" > < BiCopy  className='relative translate-y-2 text-3xl hover:scale-110 duration-200 gc-text-green' onClick={()=>{navigator.clipboard.writeText(databyid.data.data)}}/> </div>
                                     <div dangerouslySetInnerHTML={{ __html: marked(databyid.data.data) }}></div>
                                 </div > : null}
 
